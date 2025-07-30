@@ -1,5 +1,5 @@
 import Hello from "@/components/home/hello";
-import StravaActivities from "@/components/home/strava";
+import SpotifyRecentlyPlayed from "@/components/home/spotify";
 
 export default function Home() {
   return (
@@ -7,8 +7,11 @@ export default function Home() {
       {/* Hero Section */}
       <Hello />
       
+      {/* Spotify Recently Played Section */}
+      <SpotifyRecentlyPlayed />
+      
       {/* Strava Activities Section */}
-      <StravaActivities />
+
     </div>
   );
 }

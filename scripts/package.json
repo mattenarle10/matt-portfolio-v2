@@ -1,0 +1,7 @@
+{
+  "name": "spotify-token-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Scripts to handle Spotify authentication",
+  "private": true
+}
