@@ -172,12 +172,12 @@ export function useSpotify() {
 
   // Get recently played tracks
   useEffect(() => {
-    // Skip if no token or already fetching
+    // Skip if already fetching
     if (!token || tokenLoading || fetchingRecentRef.current) return;
     
     // Mark as fetching to prevent duplicate requests
     fetchingRecentRef.current = true;
-
+    
     const fetchRecentTracks = async () => {
       try {        
         // Don't set loading state if we already have cached data
@@ -243,12 +243,11 @@ export function useSpotify() {
     };
 
     fetchRecentTracks();
-  }, [token, tokenLoading, recentTracks.length]);
+  }, [token, tokenLoading]); // Remove recentTracks.length to prevent circular dependency
 
   // Get top tracks using our API endpoint
   useEffect(() => {
-    // Skip if already fetching
-    if (fetchingTopRef.current) return;
+    if (!token || tokenLoading || fetchingTopRef.current) return;
     
     // Mark as fetching to prevent duplicate requests
     fetchingTopRef.current = true;
@@ -304,7 +303,7 @@ export function useSpotify() {
     };
 
     fetchTopTracks();
-  }, [topTracks.length]);
+  }, [token, tokenLoading]); // Remove topTracks.length to prevent circular dependency
 
   // Cleanup effect - prevent memory leaks and state updates after unmount
   useEffect(() => {

@@ -16,16 +16,47 @@ const SpotifyRecentlyPlayed = () => {
   const [displayTrack, setDisplayTrack] = useState<SpotifyTrack | null>(null);
   const [tracksList, setTracksList] = useState<SpotifyTrack[]>([]);
   const tracksRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Effect to detect mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Effect to update displayed tracks when switching between recent and top
   useEffect(() => {
-    // Select which set of tracks to display
+    // Force a re-render when switching between lists
     if (activeList === 'top' && topTracks && topTracks.length > 0) {
-      setDisplayTrack(topTracks[0]);
-      setTracksList(topTracks.slice(1, 5)); // Show 4 additional tracks
+      // Clear current tracks first to ensure UI updates
+      setDisplayTrack(null);
+      setTracksList([]);
+      
+      // Small timeout to ensure state update and animation
+      setTimeout(() => {
+        setDisplayTrack(topTracks[0]);
+        setTracksList(topTracks.slice(1, 5)); // Show 4 additional tracks
+      }, 50);
     } else if (recentTracks && recentTracks.length > 0) {
-      setDisplayTrack(recentTracks[0]);
-      setTracksList(recentTracks.slice(1, 5)); // Show 4 additional tracks
+      // Clear current tracks first to ensure UI updates
+      setDisplayTrack(null);
+      setTracksList([]);
+      
+      // Small timeout to ensure state update and animation
+      setTimeout(() => {
+        setDisplayTrack(recentTracks[0]);
+        setTracksList(recentTracks.slice(1, 5)); // Show 4 additional tracks
+      }, 50);
     }
   }, [activeList, recentTracks, topTracks]);
 
@@ -107,7 +138,7 @@ const SpotifyRecentlyPlayed = () => {
                     <Spotify 
                       link={displayTrack.externalUrl}
                       width="100%"
-                      height="352"
+                      height={isMobile ? "200" : "352"}
                       className="w-full rounded-md overflow-hidden mb-1"
                     />
                   </div>

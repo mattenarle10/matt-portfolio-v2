@@ -1,23 +1,50 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/styles/theme';
 import { SunIcon, MoonIcon } from '@/styles/icons';
+import MobileNav from './mobile-nav';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
+  const [isMobile, setIsMobile] = useState(false);
+  
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
+  
+  // Check if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Listen for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
+  // Return mobile nav on smaller screens
+  if (isMobile) {
+    return <MobileNav />;
+  }
+  
+  // Desktop navigation
   return (
-    <nav className="fixed w-full top-0 z-50 bg-white dark:bg-[#0a0a0a] shadow-sm transition-colors duration-300">
+    <nav className="fixed w-full top-0 z-50 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-sm shadow-sm transition-colors duration-300">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 w-full">
           {/* Logo */}
@@ -42,7 +69,7 @@ const Navbar = () => {
                   {isActive && (
                     <motion.div 
                       layoutId="nav-underline"
-                      className="absolute h-0.5 bg-blue-500 dark:bg-blue-400 left-0 right-0 bottom-0"
+                      className="absolute h-[1px] bg-blue-500 dark:bg-blue-400 left-0 right-0 bottom-0"
                       transition={{ 
                         type: 'spring', 
                         stiffness: 380, 
@@ -71,7 +98,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      
     </nav>
   );
 };
