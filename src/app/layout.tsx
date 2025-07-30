@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Matt Enarle | Portfolio',
+  title: 'Matt Enarle',
   description: 'Personal portfolio of Matt Enarle, software engineer',
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white pt-16 min-h-screen flex flex-col`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white pt-14 min-h-screen flex flex-col`}>
         <ThemeProvider>
           <Navbar />
           <main className="flex-grow">

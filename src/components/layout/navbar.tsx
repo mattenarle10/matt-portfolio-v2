@@ -1,39 +1,63 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/styles/theme';
 import { MenuIcon, CloseIcon, SunIcon, MoonIcon } from '@/styles/icons';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const pathname = usePathname();
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+  ];
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-white dark:bg-gray-900 shadow-sm transition-colors duration-300">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Changed from max-w-7xl to max-w-3xl for more centralized layout */}
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
-              Matt Enarle
+    <nav className="fixed w-full top-0 z-50 bg-white dark:bg-[#0a0a0a] shadow-sm transition-colors duration-300">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 w-full">
+          {/* Logo */}
+          <div className="flex items-center flex-none">
+            <Link href="/" className="flex items-center h-8" aria-label="Home">
+              <Image src="/2.png" alt="Matt Enarle Logo" height={32} width={96} style={{height:32, width:'auto'}} priority />
             </Link>
           </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-              Home
-            </Link>
-            <Link href="/about" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-              Contact
-            </Link>
+
+          {/* Centered Nav Links with animated underline */}
+          <div className="flex-1 flex justify-center items-center space-x-8">
+            {navLinks.map(({ href, label }) => {
+              const isActive = pathname === href;
+              return (
+                <div key={href} className="relative">
+                  <Link
+                    href={href}
+                    className="px-3 py-1.5 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200 font-light inline-block"
+                  >
+                    {label}
+                  </Link>
+                  {isActive && (
+                    <motion.div 
+                      layoutId="nav-underline"
+                      className="absolute h-0.5 bg-blue-500 dark:bg-blue-400 left-0 right-0 bottom-0"
+                      transition={{ 
+                        type: 'spring', 
+                        stiffness: 380, 
+                        damping: 30
+                      }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Theme Toggle */}
+          <div className="flex items-center flex-none">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -46,65 +70,9 @@ const Navbar = () => {
               )}
             </button>
           </div>
-          
-          {/* Mobile menu button */}
-          <div className="flex md:hidden items-center">
-            <button
-              onClick={toggleTheme}
-              className="p-2 mr-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? (
-                <SunIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-              ) : (
-                <MoonIcon className="h-5 w-5 text-gray-600" />
-              )}
-            </button>
-            <button
-              onClick={toggleMenu}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? (
-                <CloseIcon className="h-6 w-6" />
-              ) : (
-                <MenuIcon className="h-6 w-6" />
-              )}
-            </button>
-          </div>
         </div>
       </div>
       
-      {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Added container for consistent width */}
-            <div className="py-2 space-y-1">
-              <Link 
-                href="/" 
-                className="block py-2 text-base font-medium text-center text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                href="/about" 
-                className="block py-2 text-base font-medium text-center text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                href="/contact" 
-                className="block py-2 text-base font-medium text-center text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };
