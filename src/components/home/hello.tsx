@@ -36,9 +36,9 @@ const Hello = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.8 }}
-          className="text-base md:text-md text-gray-600 dark:text-gray-300 mb-4 leading-relaxed font-light">
+          className="text-base md:text-md text-black dark:text-gray-300 mb-4 leading-relaxed font-light">
           cloud engineer by day, endurance athlete by night, mba + startup in between — 
-          <span className="text-blue-500 dark:text-blue-400 font-normal">the ultimate side quest</span>
+          <span className="text-blue-500 dark:text-blue-400 font-bold">the ultimate side quest</span>
         </motion.p>
         
         <motion.div 
@@ -49,7 +49,7 @@ const Hello = () => {
         >
           <motion.a 
             href="#" 
-            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-light text-base border-b border-transparent hover:border-blue-500 dark:hover:border-blue-400 pb-0.5 transition-all duration-200 flex items-center gap-1"
+            className="text-blue-300 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-light text-base border-b border-transparent hover:border-blue-500 dark:hover:border-blue-400 pb-0.5 transition-all duration-200 flex items-center gap-1"
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             target="_blank"
@@ -60,7 +60,7 @@ const Hello = () => {
           </motion.a>
           <motion.a 
             href="#" 
-            className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 font-light text-base border-b border-transparent hover:border-gray-600 dark:hover:border-gray-300 pb-0.5 transition-all duration-200 flex items-center gap-1"
+            className="text-black hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 font-light text-base border-b border-transparent hover:border-gray-600 dark:hover:border-gray-300 pb-0.5 transition-all duration-200 flex items-center gap-1"
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             target="_blank"

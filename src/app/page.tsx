@@ -1,5 +1,6 @@
 import Hello from "@/components/home/hello";
 import SpotifyRecentlyPlayed from "@/components/home/spotify";
+import { StravaActivity } from "@/components/home/strava";
 
 export default function Home() {
   return (
@@ -7,10 +8,15 @@ export default function Home() {
       {/* Hero Section */}
       <Hello />
       
-      {/* Spotify Recently Played Section */}
-      <SpotifyRecentlyPlayed />
-      
       {/* Strava Activities Section */}
+      <div className="mt-6">
+        <StravaActivity />
+      </div>
+      
+      {/* Spotify Recently Played Section */}
+      <div className="mt-6">
+        <SpotifyRecentlyPlayed />
+      </div>
 
     </div>
   );
