@@ -30,6 +30,11 @@ type SpotifyTrack = {
   };
 };
 
+type SpotifyRecentlyPlayedItem = {
+  track: SpotifyTrack;
+  played_at: string;
+};
+
 type SpotifyTopTracksResponse = {
   items: SpotifyTrack[];
 };
@@ -95,10 +100,10 @@ export async function GET() {
         const recentData = await recentResponse.json();
         
         if (recentData && recentData.items && recentData.items.length > 0) {
-          tracks = recentData.items.map((item: any) => ({
+          tracks = recentData.items.map((item: SpotifyRecentlyPlayedItem) => ({
             id: item.track.id,
             name: item.track.name,
-            artists: item.track.artists.map((artist: any) => artist.name),
+            artists: item.track.artists.map((artist: { name: string }) => artist.name),
             albumName: item.track.album.name,
             albumArt: item.track.album.images[0]?.url || '',
             playedAt: item.played_at,

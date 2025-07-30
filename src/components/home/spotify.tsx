@@ -4,16 +4,17 @@ import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Spotify } from 'react-spotify-embed';
 import { useSpotify } from '@/app/api/spotify/useSpotify';
+import type { SpotifyTrack } from '@/app/api/spotify/useSpotify';
 import FadeIn from '../utils/FadeIn';
-import { theme } from '../utils/theme';
+
 
 
 
 const SpotifyRecentlyPlayed = () => {
   const { recentTracks, topTracks, isLoading, error } = useSpotify();
   const [activeList, setActiveList] = useState<'recent' | 'top'>('recent');
-  const [displayTrack, setDisplayTrack] = useState<any>(null);
-  const [tracksList, setTracksList] = useState<any[]>([]);
+  const [displayTrack, setDisplayTrack] = useState<SpotifyTrack | null>(null);
+  const [tracksList, setTracksList] = useState<SpotifyTrack[]>([]);
   const tracksRef = useRef<HTMLDivElement>(null);
 
   // Effect to update displayed tracks when switching between recent and top

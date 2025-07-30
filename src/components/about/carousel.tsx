@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import Image from 'next/image';
 
 export interface CarouselItem {
   id: string;
@@ -100,7 +101,7 @@ const Carousel: React.FC<CarouselProps> = ({
         clearInterval(autoPlayRef.current);
       }
     };
-  }, [autoPlay, interval, items.length, currentIndex]);
+  }, [autoPlay, interval, items.length, currentIndex, goNext]);
 
   // Touch handlers for swipe support
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -186,10 +187,12 @@ const Carousel: React.FC<CarouselProps> = ({
               {/* Image if provided */}
               {items[currentIndex].image && (
                 <div className="w-full h-48 overflow-hidden">
-                  <img 
+                  <Image 
                     src={items[currentIndex].image} 
                     alt={items[currentIndex].title}
                     className="w-full h-full object-cover"
+                    width={600}
+                    height={300}
                   />
                 </div>
               )}

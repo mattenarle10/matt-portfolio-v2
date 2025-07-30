@@ -46,7 +46,7 @@ type SpotifyTopTracksResponse = {
 };
 
 // Type for our component to use
-interface SpotifyTrack {
+export interface SpotifyTrack {
   id: string;
   name: string;
   artists: string[];
@@ -243,7 +243,7 @@ export function useSpotify() {
     };
 
     fetchRecentTracks();
-  }, [token, tokenLoading]);
+  }, [token, tokenLoading, recentTracks.length]);
 
   // Get top tracks using our API endpoint
   useEffect(() => {
@@ -304,7 +304,7 @@ export function useSpotify() {
     };
 
     fetchTopTracks();
-  }, []);
+  }, [topTracks.length]);
 
   // Cleanup effect - prevent memory leaks and state updates after unmount
   useEffect(() => {

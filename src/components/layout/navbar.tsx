@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/styles/theme';
-import { MenuIcon, CloseIcon, SunIcon, MoonIcon } from '@/styles/icons';
+import { SunIcon, MoonIcon } from '@/styles/icons';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();

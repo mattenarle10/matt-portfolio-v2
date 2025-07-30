@@ -14,7 +14,8 @@ const lightTheme = {
   accent: '#2563eb', // Blue accent color
 };
 
-const darkTheme = {
+// Used for reference/documentation purposes
+const _darkTheme = {
   nav: {
     bubble: 'rgba(30, 41, 59, 0.8)', // Subtle dark blue
     text: '#f1f5f9',
