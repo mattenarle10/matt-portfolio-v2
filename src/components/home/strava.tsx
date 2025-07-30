@@ -174,7 +174,7 @@ export function StravaActivity() {
                   </p>
                 ) : (
                   activities.length > 0 ? (
-                    <div className="divide-y divide-black/15 dark:divide-white/15 -mx-3 rounded-md overflow-hidden">
+                    <div className="divide-y divide-black/15 dark:divide-white/15">
                       <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
                         <span className="font-light text-sm text-black dark:text-white">Recent Activities</span>
                         <span className="flex gap-1 ml-2">
@@ -203,7 +203,7 @@ export function StravaActivity() {
                             </span>
                           </div>
 
-                          <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-xs font-light mt-1">
+                          <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-xs font-light">
                             <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
                               <span className="font-light">{activity.distance.toFixed(1)} <span className="text-black dark:text-white/60">km</span></span>
                             </div>
