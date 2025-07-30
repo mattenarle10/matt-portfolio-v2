@@ -61,10 +61,11 @@ export async function GET(request: Request) {
     
     // Return the activities as JSON
     return NextResponse.json(activities);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in activities endpoint:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json(
-      { error: `Failed to fetch activities: ${error.message}` },
+      { error: `Failed to fetch activities: ${errorMessage}` },
       { status: 500 }
     );
   }

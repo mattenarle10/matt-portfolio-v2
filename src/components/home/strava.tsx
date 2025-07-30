@@ -13,13 +13,10 @@ export function StravaActivity() {
         month: 'short',
         day: 'numeric',
       }).format(date);
-    } catch (e) {
+    } catch (_) {
       return 'recently';
     }
   };
-
-  // Get most recent activity
-  const recentActivity = activities && activities.length > 0 ? activities[0] : null;
 
   return (
     <div className="flex flex-col space-y-2">

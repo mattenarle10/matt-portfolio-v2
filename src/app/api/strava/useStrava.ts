@@ -252,6 +252,7 @@ export function useStrava() {
     // Run both fetches
     fetchRecentActivities();
     fetchAthleteStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // No dependencies since we're using our server endpoints now
 
   // Cleanup effect

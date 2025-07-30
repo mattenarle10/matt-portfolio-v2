@@ -75,10 +75,11 @@ export async function GET() {
     
     // Return the stats as JSON
     return NextResponse.json(stats);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in stats endpoint:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json(
-      { error: `Failed to fetch athlete stats: ${error.message}` },
+      { error: `Failed to fetch stats: ${errorMessage}` },
       { status: 500 }
     );
   }
