@@ -16,7 +16,9 @@ const SpotifyRecentlyPlayed = () => {
   const [tracksList, setTracksList] = useState<any[]>([]);
   const tracksRef = useRef<HTMLDivElement>(null);
 
+  // Effect to update displayed tracks when switching between recent and top
   useEffect(() => {
+    // Select which set of tracks to display
     if (activeList === 'top' && topTracks && topTracks.length > 0) {
       setDisplayTrack(topTracks[0]);
       setTracksList(topTracks.slice(1, 5)); // Show 4 additional tracks

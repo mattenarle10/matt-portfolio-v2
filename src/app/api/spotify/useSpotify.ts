@@ -161,45 +161,34 @@ export function useSpotify() {
     fetchRecentTracks();
   }, [token, tokenLoading]);
 
-  // Get top tracks
+  // Get top tracks using our API endpoint
   useEffect(() => {
-    if (!token || tokenLoading) return;
-
     const fetchTopTracks = async () => {
       try {
-        const response = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
+        // Use our API endpoint instead of calling Spotify directly
+        const response = await fetch('/api/spotify/top-tracks', {
+          cache: 'no-store',
+          next: { revalidate: 0 }
         });
         
         if (!response.ok) {
-          throw new Error('Failed to fetch top tracks');
+          throw new Error(`Failed to fetch top tracks: ${response.status}`);
         }
         
-        const data = await response.json() as SpotifyTopTracksResponse;
-        
-        if (data && data.items) {
-          const tracks = data.items.map((item) => ({
-            id: item.id,
-            name: item.name,
-            artists: item.artists.map((artist) => artist.name),
-            albumName: item.album.name,
-            albumArt: item.album.images[0]?.url || '',
-            playedAt: '',  // Top tracks don't have played_at timestamp
-            previewUrl: item.preview_url,
-            externalUrl: item.external_urls.spotify,
-          }));
-          setTopTracks(tracks);
+        const tracks = await response.json();
+        if (!Array.isArray(tracks)) {
+          console.error('Top tracks response is not an array:', tracks);
+          return;
         }
+        
+        setTopTracks(tracks);
       } catch (err) {
         console.error('Error fetching top tracks:', err);
-        // We don't set the main error for top tracks as it's less critical
       }
     };
 
     fetchTopTracks();
-  }, [token, tokenLoading]);
+  }, []);
 
   return {
     currentTrack,
