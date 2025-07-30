@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const Hello = () => {
   const [text, setText] = useState('');
-  const fullText = 'hello, Matt here';
+  const fullText = 'hello... Matt here!';
   
   useEffect(() => {
     let currentIndex = 0;
