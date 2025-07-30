@@ -50,6 +50,18 @@ body {
   color: black !important;
 }
 
+/* Force white text in mobile menu */
+.mobile-menu-overlay a,
+.mobile-menu-overlay button,
+.mobile-menu-overlay span {
+  color: white !important;
+}
+
+/* Make hamburger X white in light mode when menu is open */
+.mobile-menu-open .hamburger-line {
+  background-color: white !important;
+}
+
 /* Fix hamburger icon color */
 :root:not(.dark) .bg-black {
   background-color: black !important;

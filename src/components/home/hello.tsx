@@ -66,7 +66,7 @@ const Hello = () => {
             <ArrowUpRight className="w-3.5 h-3.5" />
           </motion.a>
           <motion.a 
-            href="#" 
+            href="/resume.pdf" 
             className="text-black hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 font-light text-base border-b border-transparent hover:border-gray-600 dark:hover:border-gray-300 pb-0.5 transition-all duration-200 flex items-center gap-1"
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}

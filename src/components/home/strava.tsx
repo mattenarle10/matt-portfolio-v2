@@ -82,7 +82,7 @@ export function StravaActivity() {
                             <Activity className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
                           <div>
-                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">Last 4 weeks</p>
+                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">Last 8 weeks</p>
                             <div className="flex items-baseline gap-1">
                               <span className="text-orange-600 dark:text-orange-400 text-xs font-light">{stats.recentRuns.distance.toFixed(1)}</span>
                               <span className="text-black dark:text-white/70">km</span>
