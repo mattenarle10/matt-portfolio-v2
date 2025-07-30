@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Heart } from 'lucide-react';
 
 const Hello = () => {
   const [text, setText] = useState('');
@@ -38,7 +38,14 @@ const Hello = () => {
           transition={{ delay: 1.8, duration: 0.8 }}
           className="text-base md:text-md text-black dark:text-gray-300 mb-4 leading-relaxed font-light">
           cloud engineer by day, endurance athlete by night, mba + startup in between — 
-          <span className="text-blue-500 dark:text-blue-400">the ultimate side quest</span>
+          <span className="text-blue-500 dark:text-blue-400">the ultimate side quest</span>. also a <a 
+            href="https://www.instagram.com/heartescaro/" 
+            className="text-pink-500 hover:text-pink-600 dark:text-pink-400 dark:hover:text-pink-300 inline-flex items-center gap-0.5 border-b border-transparent hover:border-pink-500 dark:hover:border-pink-400 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @heartescaro <Heart className="w-3 h-3 inline" />
+          </a> stan.
         </motion.p>
         
         <motion.div 
@@ -69,6 +76,7 @@ const Hello = () => {
             Resume
             <ArrowUpRight className="w-3.5 h-3.5" />
           </motion.a>
+          
         </motion.div>
       </div>
     </section>
