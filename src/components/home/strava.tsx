@@ -1,6 +1,7 @@
 'use client';
 
 import { useStrava } from '@/app/api/strava/useStrava';
+import { ArrowUpRight, Activity, Calendar, Timer, TrendingUp, Bike, Dumbbell, Waves } from 'lucide-react';
 
 export function StravaActivity() {
   const { activities, stats, isLoading, statsLoading, error, statsError } = useStrava();
@@ -19,60 +20,103 @@ export function StravaActivity() {
   };
 
   return (
-    <div className="flex flex-col space-y-2">
-      <div className="flex items-center space-x-2">
-        <svg viewBox="0 0 24 24" className="h-4 w-4 text-orange-500" fill="currentColor">
-          <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
-        </svg>
-        <h2 className="text-base font-light text-gray-700 dark:text-gray-300">Strava</h2>
+    <div className="flex flex-col space-y-4">
+      {/* Header */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-orange-500" fill="currentColor">
+              <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+            </svg>
+            <h2 className="text-lg font-light text-black dark:text-white">Strava</h2>
+          </div>
+          <a
+            href="https://www.strava.com/athletes/mattenarle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-black dark:text-white/70 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 flex items-center gap-1"          >
+            View Profile
+            <ArrowUpRight className="h-3 w-3" />
+          </a>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Stats card */}
-        <div className="overflow-hidden rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm md:col-span-1">
-          <div className="p-3">
+        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-3">
             {statsLoading ? (
               <>
-                <div className="font-light text-sm text-gray-800 dark:text-gray-100 border-b border-gray-100 dark:border-gray-800 pb-1 mb-2">Run Stats</div>
-                <div className="flex flex-col gap-2 mt-2">
-                  <div className="h-3 w-1/2 bg-gray-100 dark:bg-gray-800 rounded animate-pulse"></div>
-                  <div className="h-3 w-2/3 bg-gray-100 dark:bg-gray-800 rounded animate-pulse"></div>
-                  <div className="h-3 w-1/2 bg-gray-100 dark:bg-gray-800 rounded animate-pulse"></div>
+                <div className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">Run Stats</div>
+                <div className="space-y-3 mt-3">
+                  <div className="flex items-center gap-2">
+                    <div className="h-6 w-6 rounded-full bg-white dark:bg-black/90 animate-pulse"></div>
+                    <div className="h-3 w-24 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-6 w-6 rounded-full bg-white dark:bg-black/90 animate-pulse"></div>
+                    <div className="h-3 w-24 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-6 w-6 rounded-full bg-white dark:bg-black/90 animate-pulse"></div>
+                    <div className="h-3 w-24 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                  </div>
                 </div>
               </>
             ) : (
               <>
                 {statsError ? (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-light">
+                  <p className="text-sm text-black/70 dark:text-white/70 font-light">
                     Unable to load stats
                   </p>
                 ) : (
                   stats && (
                     <>
-                      <h3 className="font-light text-sm text-gray-800 dark:text-gray-100 border-b border-gray-100 dark:border-gray-800 pb-1 mb-2">
+                      <h3 className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">
                         Run Stats
                       </h3>
 
-                      <div className="space-y-1 text-xs font-light">
-                        <div>
-                          <p className="text-gray-600 dark:text-gray-300">
-                            <span className="text-gray-500 dark:text-gray-400">4 weeks:</span> {stats.recentRuns.distance.toFixed(1)} km
-                            <span className="text-gray-400 dark:text-gray-500 ml-1">({stats.recentRuns.count} runs)</span>
-                          </p>
+                      <div className="grid grid-cols-1 gap-3 text-xs font-light mt-3">
+                        <div className="flex items-center gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-2.5" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                            <Activity className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
+                          </div>
+                          <div>
+                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">Last 4 weeks</p>
+                            <div className="flex items-baseline gap-1">
+                              <span className="text-orange-600 dark:text-orange-400 text-xs font-light">{stats.recentRuns.distance.toFixed(1)}</span>
+                              <span className="text-black dark:text-white/70">km</span>
+                              <span className="text-black dark:text-white/60 ml-1 text-[10px]">({stats.recentRuns.count} runs)</span>
+                            </div>
+                          </div>
                         </div>
 
-                        <div>
-                          <p className="text-gray-600 dark:text-gray-300">
-                            <span className="text-gray-500 dark:text-gray-400">2025:</span> {stats.ytdRuns.distance.toFixed(1)} km
-                            <span className="text-gray-400 dark:text-gray-500 ml-1">({stats.ytdRuns.count} runs)</span>
-                          </p>
+                        <div className="flex items-center gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-2.5" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                            <Calendar className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
+                          </div>
+                          <div>
+                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">2025 Year to Date</p>
+                            <div className="flex items-baseline gap-1">
+                              <span className="text-orange-600 dark:text-orange-400 text-xs font-light">{stats.ytdRuns.distance.toFixed(1)}</span>
+                              <span className="text-black dark:text-white/70">km</span>
+                              <span className="text-black dark:text-white/60 ml-1 text-[10px]">({stats.ytdRuns.count} runs)</span>
+                            </div>
+                          </div>
                         </div>
 
-                        <div>
-                          <p className="text-gray-600 dark:text-gray-300">
-                            <span className="text-gray-500 dark:text-gray-400">All-time:</span> {stats.allTimeRuns.distance.toFixed(1)} km
-                            <span className="text-gray-400 dark:text-gray-500 ml-1">({stats.allTimeRuns.count} runs)</span>
-                          </p>
+                        <div className="flex items-center gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-2.5" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                            <TrendingUp className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
+                          </div>
+                          <div>
+                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">All Time</p>
+                            <div className="flex items-baseline gap-1">
+                              <span className="text-orange-600 dark:text-orange-400 text-xs font-light">{stats.allTimeRuns.distance.toFixed(1)}</span>
+                              <span className="text-black dark:text-white/70">km</span>
+                              <span className="text-black dark:text-white/60 ml-1 text-[10px]">({stats.allTimeRuns.count} runs)</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </>
@@ -84,67 +128,105 @@ export function StravaActivity() {
         </div>
 
         {/* Recent activities */}
-        <div className="overflow-hidden rounded-md border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm md:col-span-2">
+        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-2 transition-all duration-300 hover:shadow-md" style={{ background: 'var(--color-background)' }}>
           <div className="p-3">
             {isLoading ? (
               <>
-                <div className="font-light text-sm text-gray-800 dark:text-gray-100 border-b border-gray-100 dark:border-gray-800 pb-1 mb-2">Recent Activities</div>
-                <div className="flex flex-col gap-2 mt-2">
-                  <div className="h-3 w-3/4 bg-gray-100 dark:bg-gray-800 rounded animate-pulse"></div>
-                  <div className="h-3 w-1/2 bg-gray-100 dark:bg-gray-800 rounded animate-pulse"></div>
-                  <div className="h-3 w-2/3 bg-gray-100 dark:bg-gray-800 rounded animate-pulse"></div>
+                <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+  <span className="font-light text-sm text-black dark:text-white">Recent Activities</span>
+  <span className="flex gap-1 ml-2">
+    <Waves className="h-4 w-4 text-orange-500" />
+    <Bike className="h-4 w-4 text-orange-500" />
+    <Activity className="h-4 w-4 text-orange-500" />
+    <Dumbbell className="h-4 w-4 text-orange-500" />
+  </span>
+</div>
+                <div className="space-y-4 mt-3">
+                  <div className="border-b border-white/10 dark:border-black/10 pb-3">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="h-4 w-32 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                      <div className="h-3 w-16 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                    </div>
+                    <div className="flex gap-2 mt-2">
+                      <div className="h-6 w-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                      <div className="h-6 w-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                      <div className="h-6 w-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                    </div>
+                  </div>
+                  <div className="border-b border-white/10 dark:border-black/10 pb-3">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="h-4 w-40 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                      <div className="h-3 w-16 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                    </div>
+                    <div className="flex gap-2 mt-2">
+                      <div className="h-6 w-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                      <div className="h-6 w-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                      <div className="h-6 w-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                    </div>
+                  </div>
                 </div>
               </>
             ) : (
               <>
                 {error ? (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-light">
+                  <p className="text-sm text-black/70 dark:text-white/70 font-light">
                     Unable to load activities
                   </p>
                 ) : (
                   activities.length > 0 ? (
-                    <div className="space-y-3">
-                      <h3 className="font-light text-sm text-gray-800 dark:text-gray-100 border-b border-gray-100 dark:border-gray-800 pb-1 mb-2">
-                        Recent Activities
-                      </h3>
+                    <div className="divide-y divide-black/15 dark:divide-white/15 -mx-3 rounded-md overflow-hidden">
+                      <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+                        <span className="font-light text-sm text-black dark:text-white">Recent Activities</span>
+                        <span className="flex gap-1 ml-2">
+                          <Waves className="h-4 w-4 text-orange-500" />
+                          <Bike className="h-4 w-4 text-orange-500" />
+                          <Activity className="h-4 w-4 text-orange-500" />
+                          <Dumbbell className="h-4 w-4 text-orange-500" />
+                        </span>
+                      </div>
                       
                       {activities.map((activity) => (
-                        <div key={activity.id} className="border-b last:border-b-0 border-gray-100 dark:border-gray-800 pb-3 last:pb-0">
-                          <div className="flex justify-between items-start">
-                            <h4 className="font-light text-sm text-gray-800 dark:text-gray-100">
-                              {activity.name}
-                            </h4>
-                            <span className="text-xs text-gray-500 dark:text-gray-400 font-light">
+                        <div key={activity.id} className="py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex items-center gap-1.5">
+                              {activity.type === 'Run' && <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
+                              {activity.type === 'Ride' && <Bike className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
+                              {activity.type === 'Swim' && <Waves className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
+                              {activity.type === 'WeightTraining' && <Dumbbell className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
+                              {!['Run', 'Ride', 'Swim', 'WeightTraining'].includes(activity.type) && <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
+                              <h4 className="font-light text-sm text-black dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
+                                {activity.name}
+                              </h4>
+                            </div>
+                            <span className="text-xs text-black dark:text-white/70 font-light px-1.5 py-0.5 rounded-sm">
                               {formatDate(activity.date)}
                             </span>
                           </div>
 
-                          <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs font-light mt-1">
-                            <div className="flex items-center text-gray-600 dark:text-gray-300">
-                              <span>{activity.distance.toFixed(1)} km</span>
+                          <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-xs font-light mt-1">
+                            <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                              <span className="font-light">{activity.distance.toFixed(1)} <span className="text-black dark:text-white/60">km</span></span>
                             </div>
 
-                            <div className="flex items-center text-gray-600 dark:text-gray-300">
-                              <span>• {activity.movingTime} min</span>
+                            <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                              <span>{activity.movingTime} <span className="text-black dark:text-white/60">min</span></span>
                             </div>
 
-                            <div className="flex items-center text-gray-600 dark:text-gray-300">
-                              <span>• {activity.elevationGain} m</span>
+                            <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                              <span>{activity.elevationGain} <span className="text-black dark:text-white/60">m</span></span>
                             </div>
 
                             {activity.averageHeartrate && (
-                              <div className="flex items-center text-gray-600 dark:text-gray-300">
-                                <span>• {Math.round(activity.averageHeartrate)} bpm</span>
+                              <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                                <span>{Math.round(activity.averageHeartrate)} <span className="text-black dark:text-white/60">bpm</span></span>
                               </div>
                             )}
                           </div>
-
-                          {/* Removed map display for now */}
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 font-light">
+                    <p className="text-sm text-black/70 dark:text-white/70 font-light">
                       No recent activities found
                     </p>
                   )

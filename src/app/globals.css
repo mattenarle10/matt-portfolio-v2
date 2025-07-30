@@ -39,20 +39,7 @@ body {
   transition-duration: 200ms;
 }
 
-/* Override media queries for dark mode */
-@media (prefers-color-scheme: dark) {
-  :root:not(.dark) .dark\:text-white {
-    color: inherit !important;
-  }
-  
-  :root:not(.dark) .dark\:bg-white {
-    background-color: inherit !important;
-  }
-  
-  :root:not(.dark) .dark\:bg-\[\#0a0a0a\] {
-    background-color: inherit !important;
-  }
-}
+
 
 /* Ensure dark mode classes work properly */
 .dark .text-black {

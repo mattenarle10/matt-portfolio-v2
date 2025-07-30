@@ -21,7 +21,7 @@ const Hello = () => {
     return () => clearInterval(typingInterval);
   }, []);
   return (
-    <section className="pt-4 pb-12 md:pt-6 md:pb-16">
+    <section className="pt-4 pb-6 md:pt-6 md:pb-8">
       <div className="text-left md:max-w-2xl">
         <h1 className="text-3xl md:text-4xl font-light mb-4 tracking-tight">
           <span>{text}</span>
@@ -38,7 +38,7 @@ const Hello = () => {
           transition={{ delay: 1.8, duration: 0.8 }}
           className="text-base md:text-md text-black dark:text-gray-300 mb-4 leading-relaxed font-light">
           cloud engineer by day, endurance athlete by night, mba + startup in between — 
-          <span className="text-blue-500 dark:text-blue-400 font-bold">the ultimate side quest</span>
+          <span className="text-blue-500 dark:text-blue-400">the ultimate side quest</span>
         </motion.p>
         
         <motion.div 
