@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@/styles/theme';
+import { useTheme } from '@/components/context/ThemeContext';
 import { SunIcon, MoonIcon } from '@/styles/icons';
 
 // Minimal hamburger menu icon component
@@ -13,7 +13,7 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
   return (
     <div className="relative w-5 h-5">
       <motion.span
-        className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 dark:bg-gray-200"
+        className="absolute top-1/2 left-0 w-full h-[1px] bg-black dark:bg-white"
         animate={{
           rotate: isOpen ? 45 : 0,
           y: isOpen ? 0 : -4,
@@ -21,7 +21,7 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       />
       <motion.span
-        className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 dark:bg-gray-200"
+        className="absolute top-1/2 left-0 w-full h-[1px] bg-black dark:bg-white"
         animate={{
           opacity: isOpen ? 0 : 1,
           x: isOpen ? 8 : 0,
@@ -29,7 +29,7 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       />
       <motion.span
-        className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 dark:bg-gray-200"
+        className="absolute top-1/2 left-0 w-full h-[1px] bg-black dark:bg-white"
         animate={{
           rotate: isOpen ? -45 : 0,
           y: isOpen ? 0 : 4,
@@ -70,13 +70,17 @@ const MobileNav = () => {
 
   return (
     <>
-      <nav className="fixed w-full top-0 z-50 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-sm shadow-sm transition-colors duration-300">
+      <nav className="w-full z-50 bg-transparent transition-colors duration-300 pt-3 pb-1">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 w-full">
-            {/* Logo */}
+            {/* Logo - different image based on theme */}
             <div className="flex items-center">
-              <Link href="/" className="flex items-center h-8" aria-label="Home">
-                <Image src="/2.png" alt="Matt Enarle Logo" height={28} width={84} style={{height:28, width:'auto'}} priority />
+              <Link href="/" className="flex items-center h-7" aria-label="Home">
+                {theme === 'dark' ? (
+                  <Image src="/2.png" alt="Matt Enarle Logo" height={28} width={84} style={{height:28, width:'auto'}} priority />
+                ) : (
+                  <Image src="/1.png" alt="Matt Enarle Logo" height={28} width={84} style={{height:28, width:'auto'}} priority />
+                )}
               </Link>
             </div>
 
@@ -100,7 +104,7 @@ const MobileNav = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-sm flex flex-col justify-center items-center"
+            className="fixed inset-0 z-40 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-sm flex flex-col justify-center items-center"
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -123,7 +127,7 @@ const MobileNav = () => {
                   >
                     <Link
                       href={href}
-                      className={`px-3 py-1.5 text-lg font-light ${isActive ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300'} transition-colors duration-200`}
+                      className="px-3 py-1.5 text-lg font-light text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
                     >
                       {label}
                     </Link>
@@ -152,14 +156,14 @@ const MobileNav = () => {
               >
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center space-x-3 px-3 py-1.5 text-lg font-light text-gray-600 dark:text-gray-300 transition-colors duration-200"
+                  className="flex items-center space-x-3 px-3 py-1.5 text-lg font-light text-black dark:text-gray-300 transition-colors duration-200"
                   aria-label="Toggle theme"
                 >
                   <span>{theme === 'dark' ? 'Light' : 'Dark'} mode</span>
                   {theme === 'dark' ? (
-                    <SunIcon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                    <SunIcon className="h-5 w-5 text-gray-300" />
                   ) : (
-                    <MoonIcon className="h-5 w-5 text-gray-600" />
+                    <MoonIcon className="h-5 w-5 text-black" />
                   )}
                 </button>
               </motion.div>
