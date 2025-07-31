@@ -1,6 +1,7 @@
 import Gallery from '@/components/about/gallery';
 import Experiences from '@/components/about/experiences';
 import Hobbies from '@/components/about/hobbies';
+import Education from '@/components/about/education';
 
 export default function About() {
   return (
@@ -14,6 +15,10 @@ export default function About() {
       
       <section className="mt-30 md:mt-0">
         <Experiences />
+      </section>
+      
+      <section>
+        <Education />
       </section>
       
       <section>
