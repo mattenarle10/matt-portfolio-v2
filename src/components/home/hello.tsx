@@ -55,7 +55,7 @@ const Hello = () => {
           transition={{ delay: 2.2, duration: 0.8 }}
         >
           <motion.a 
-            href="#" 
+            href="/projects" 
             className="text-blue-300 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-light text-base border-b border-transparent hover:border-blue-500 dark:hover:border-blue-400 pb-0.5 transition-all duration-200 flex items-center gap-1"
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
