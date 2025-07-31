@@ -20,31 +20,29 @@ export function StravaActivity() {
   };
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-3 md:space-y-4">
       {/* Header */}
-      <div className="mb-4">
+      <div className="mb-2 md:mb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" className="h-5 w-5 text-orange-500" fill="currentColor">
-              <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
-            </svg>
-            <h2 className="text-lg font-light text-black dark:text-white">Strava</h2>
+
+            <h2 className="text-base md:text-lg font-light text-black dark:text-white">Latest Stats</h2>
           </div>
           <a
             href="https://www.strava.com/athletes/mattenarle"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-black dark:text-white/70 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 flex items-center gap-1"          >
-            View Profile
+            View My Strava 
             <ArrowUpRight className="h-3 w-3" />
           </a>
         </div>
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
         {/* Stats card */}
-        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-3">
+        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-2 md:p-3">
             {statsLoading ? (
               <>
                 <div className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">Run Stats</div>
@@ -76,9 +74,9 @@ export function StravaActivity() {
                         Run Stats
                       </h3>
 
-                      <div className="grid grid-cols-1 gap-3 text-xs font-light mt-3">
-                        <div className="flex items-center gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-2.5" style={{ background: 'var(--color-background)' }}>
-                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                      <div className="grid grid-cols-1 gap-2 md:gap-3 text-xs font-light mt-2 md:mt-3">
+                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1.5 md:p-2.5" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
                             <Activity className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
                           <div>
@@ -91,8 +89,8 @@ export function StravaActivity() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-2.5" style={{ background: 'var(--color-background)' }}>
-                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1.5 md:p-2.5" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
                             <Calendar className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
                           <div>
@@ -105,8 +103,8 @@ export function StravaActivity() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-2.5" style={{ background: 'var(--color-background)' }}>
-                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1.5 md:p-2.5" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
                             <TrendingUp className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
                           <div>
@@ -128,8 +126,7 @@ export function StravaActivity() {
         </div>
 
         {/* Recent activities */}
-        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-2 transition-all duration-300 hover:shadow-md" style={{ background: 'var(--color-background)' }}>
-          <div className="p-3">
+        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-2 transition-all duration-300 hover:shadow-md" style={{ background: 'var(--color-background)' }}>          <div className="p-2 md:p-3">
             {isLoading ? (
               <>
                 <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
@@ -186,15 +183,15 @@ export function StravaActivity() {
                       </div>
                       
                       {activities.map((activity) => (
-                        <div key={activity.id} className="py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group" style={{ background: 'var(--color-background)' }}>
-                          <div className="flex justify-between items-start mb-2">
+                        <div key={activity.id} className="py-2 md:py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group" style={{ background: 'var(--color-background)' }}>
+                          <div className="flex justify-between items-start mb-1 md:mb-2">
                             <div className="flex items-center gap-1.5">
                               {activity.type === 'Run' && <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
                               {activity.type === 'Ride' && <Bike className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
                               {activity.type === 'Swim' && <Waves className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
                               {activity.type === 'WeightTraining' && <Dumbbell className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
                               {!['Run', 'Ride', 'Swim', 'WeightTraining'].includes(activity.type) && <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />}
-                              <h4 className="font-light text-sm text-black dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
+                              <h4 className="font-light text-xs md:text-sm text-black dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
                                 {activity.name}
                               </h4>
                             </div>
@@ -203,21 +200,21 @@ export function StravaActivity() {
                             </span>
                           </div>
 
-                          <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-xs font-light">
-                            <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                          <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-[10px] md:text-xs font-light">
+                            <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
                               <span className="font-light">{activity.distance.toFixed(1)} <span className="text-black dark:text-white/60">km</span></span>
                             </div>
 
-                            <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                            <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
                               <span>{activity.movingTime} <span className="text-black dark:text-white/60">min</span></span>
                             </div>
 
-                            <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                            <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
                               <span>{activity.elevationGain} <span className="text-black dark:text-white/60">m</span></span>
                             </div>
 
                             {activity.averageHeartrate && (
-                              <div className="flex items-center text-black dark:text-white px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                              <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
                                 <span>{Math.round(activity.averageHeartrate)} <span className="text-black dark:text-white/60">bpm</span></span>
                               </div>
                             )}

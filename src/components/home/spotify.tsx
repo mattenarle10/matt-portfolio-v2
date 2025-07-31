@@ -122,10 +122,10 @@ const SpotifyRecentlyPlayed = () => {
       
       {/* Main Content */}
       {!isLoading && !error && (
-        <div className="flex flex-col md:flex-row md:gap-6">
+        <div className="flex flex-col md:flex-row md:gap-6 space-y-0">
           {/* Featured Track Card - Left Side */}
           {displayTrack && (
-            <div className="w-full md:w-2/5 mb-4 md:mb-0">
+            <div className="w-full md:w-2/5 mb-0 md:mb-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={displayTrack.externalUrl}
@@ -139,7 +139,7 @@ const SpotifyRecentlyPlayed = () => {
                       link={displayTrack.externalUrl}
                       width="100%"
                       height={isMobile ? "200" : "352"}
-                      className="w-full rounded-md overflow-hidden mb-1"
+                      className="w-full rounded-md overflow-hidden mb-0"
                     />
                   </div>
                 </motion.div>
@@ -157,7 +157,10 @@ const SpotifyRecentlyPlayed = () => {
                 exit={{ opacity: 0, y: -5 }}
                 transition={{ duration: 0.15 }}
               >
-                <div className="grid grid-cols-1 gap-3 pt-1">
+                <div className="grid grid-cols-1 gap-3 pt-0 md:pt-1">
+                  {isMobile && tracksList.length > 0 && (
+                    <div className="text-xs text-gray-500 font-light mb-1 mt-0">More tracks</div>
+                  )}
                   {tracksList.map((track, index) => (
                     <FadeIn key={`${track.id}-${index}`} delay={0.03 * index}>
                       <Spotify 
