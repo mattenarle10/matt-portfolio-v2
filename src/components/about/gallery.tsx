@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 const Gallery = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [imageZIndexes, setImageZIndexes] = useState([1, 2, 3, 4]);
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -25,7 +26,40 @@ const Gallery = () => {
         .sort(() => Math.random() - 0.5);
       setImageZIndexes(shuffled);
     }
+  }, [isMobile, imageZIndexes]);
+  
+  // Handle click outside to reset active image
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.gallery-image')) {
+        setActiveImageIndex(null);
+      }
+    };
+    
+    if (isMobile) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, [isMobile]);
+  
+  // Handle image click for mobile
+  const handleImageClick = (index: number) => {
+    if (isMobile) {
+      setActiveImageIndex(activeImageIndex === index ? null : index);
+      
+      // Update z-index to bring selected image to front
+      if (activeImageIndex !== index) {
+        const newZIndexes = [...imageZIndexes];
+        const currentIndex = newZIndexes.indexOf(Math.max(...newZIndexes));
+        [newZIndexes[currentIndex], newZIndexes[index]] = [newZIndexes[index], newZIndexes[currentIndex]];
+        setImageZIndexes(newZIndexes);
+      }
+    }
+  };
 
   const images = [
     {
