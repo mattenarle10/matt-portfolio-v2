@@ -1,9 +1,48 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { YoutubeIcon, FitnessIcon, CodeIcon, CoffeeIcon } from '@/styles/icons';
 
 const Hobbies = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeHobbyIndex, setActiveHobbyIndex] = useState<number | null>(null);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  // Handle click outside to reset active hobby
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.hobby-item')) {
+        setActiveHobbyIndex(null);
+      }
+    };
+    
+    if (isMobile) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMobile]);
+  
+  // Handle hobby click for mobile
+  const handleHobbyClick = (index: number) => {
+    if (isMobile) {
+      setActiveHobbyIndex(activeHobbyIndex === index ? null : index);
+    }
+  };
   const hobbies = [
     {
       title: "Brain-Rot",
@@ -39,22 +78,28 @@ const Hobbies = () => {
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: isMobile && activeHobbyIndex === index ? 1.02 : 1,
+              x: isMobile && activeHobbyIndex === index ? 2 : 0
+            }}
             transition={{ delay: index * 0.1 }}
-            className="group relative pl-8"
-            whileHover={{ scale: 1.02, x: 2 }}
+            className="hobby-item group relative pl-8"
+            whileHover={!isMobile ? { scale: 1.02, x: 2 } : undefined}
+            onClick={() => handleHobbyClick(index)}
           >
             {/* Icon */}
-            <div className="absolute left-0 top-0.5 group-hover:scale-110 transition-transform duration-300">
+            <div className={`absolute left-0 top-0.5 transition-transform duration-300 ${(isMobile && activeHobbyIndex === index) || (!isMobile && 'group-hover:scale-110')}`}>
               {hobby.icon}
             </div>
             
             {/* Content */}
             <div>
-              <h3 className={`font-medium text-sm group-hover:${hobby.iconColor} transition-colors duration-300`}>
+              <h3 className={`font-medium text-sm transition-colors duration-300 ${(isMobile && activeHobbyIndex === index) || (!isMobile && 'group-hover:') ? hobby.iconColor : ''}`}>
                 {hobby.title}
               </h3>
-              <p className="text-xs font-light mt-1 opacity-80 group-hover:opacity-100 transition-all duration-300">
+              <p className={`text-xs font-light mt-1 transition-all duration-300 ${(isMobile && activeHobbyIndex === index) || (!isMobile && 'group-hover:opacity-100') ? 'opacity-100' : 'opacity-80'}`}>
                 {hobby.description}
               </p>
             </div>
