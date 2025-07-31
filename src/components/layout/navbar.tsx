@@ -17,7 +17,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/projects', label: 'Projects' },
   ];
   
   // Check if we're on mobile
