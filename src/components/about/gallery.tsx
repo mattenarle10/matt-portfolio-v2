@@ -1,15 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useDragControls } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Gallery = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
-  const [imageZIndexes, setImageZIndexes] = useState([1, 2, 3, 4]);
-  const [imagePositions, setImagePositions] = useState<Array<{x: number, y: number}>>([]);
+  const [imageOrder, setImageOrder] = useState([0, 1, 2, 3]);
   const [isDragging, setIsDragging] = useState(false);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  
+  // Refs for image elements to detect overlaps
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -21,11 +25,14 @@ const Gallery = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Randomize z-indexes on client-side only
   useEffect(() => {
     if (isMobile) {
-      const shuffled = [1, 2, 3, 4].sort(() => Math.random() - 0.5);
-      setImageZIndexes(shuffled);
+      // Randomize image order on mobile
+      const shuffled = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+      setImageOrder(shuffled);
+    } else {
+      // Reset to default order on desktop
+      setImageOrder([0, 1, 2, 3]);
     }
   }, [isMobile]);
   
@@ -49,7 +56,7 @@ const Gallery = () => {
   
   // Handle image click for mobile
   const handleImageClick = (index: number) => {
-    if (isMobile) {
+    if (isMobile && !isDragging) {
       // If clicking the same image, deactivate it
       if (activeImageIndex === index) {
         setActiveImageIndex(null);
@@ -58,6 +65,58 @@ const Gallery = () => {
         setActiveImageIndex(index);
       }
     }
+  };
+  
+  // Handle drag start
+  const handleDragStart = (index: number) => {
+    setIsDragging(true);
+    setDraggedIndex(index);
+  };
+  
+  // Handle drag end
+  const handleDragEnd = (index: number, info: { offset: { x: number; y: number } }) => {
+    setIsDragging(false);
+    
+    // Find which image we're hovering over
+    if (draggedIndex !== null) {
+      const draggedRect = imageRefs.current[index]?.getBoundingClientRect();
+      
+      if (draggedRect) {
+        const centerX = draggedRect.left + draggedRect.width / 2 + info.offset.x;
+        const centerY = draggedRect.top + draggedRect.height / 2 + info.offset.y;
+        
+        // Find which image we're hovering over
+        let targetIndex = -1;
+        imageRefs.current.forEach((ref, i) => {
+          if (i !== index && ref) {
+            const rect = ref.getBoundingClientRect();
+            if (
+              centerX >= rect.left &&
+              centerX <= rect.right &&
+              centerY >= rect.top &&
+              centerY <= rect.bottom
+            ) {
+              targetIndex = i;
+            }
+          }
+        });
+        
+        // Swap positions if we found a target
+        if (targetIndex !== -1) {
+          const newOrder = [...imageOrder];
+          const draggedOrderIndex = imageOrder.indexOf(index);
+          const targetOrderIndex = imageOrder.indexOf(targetIndex);
+          
+          // Swap the positions
+          [newOrder[draggedOrderIndex], newOrder[targetOrderIndex]] = 
+            [newOrder[targetOrderIndex], newOrder[draggedOrderIndex]];
+          
+          setImageOrder(newOrder);
+        }
+      }
+    }
+    
+    setDraggedIndex(null);
   };
 
   const images = [
@@ -92,37 +151,52 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="relative h-[280px] md:h-[260px] my-4 mx-auto max-w-[340px] md:max-w-[600px]">
-      {images.map((image, index) => (
-        <motion.div 
-          key={index}
-          className="absolute cursor-pointer"
-          style={{
-            rotate: isMobile && activeImageIndex === index ? '0deg' : image.rotate,
-            zIndex: isMobile && activeImageIndex === index ? 10 : (isMobile ? imageZIndexes[index] : index + 1),
-            ...(isMobile ? {
-              top: image.mobilePosition.top,
-              left: image.mobilePosition.left,
-              width: '65%',
-              maxWidth: '180px',
-              transform: activeImageIndex === index ? 'scale(1.05)' : 'scale(1)'
-            } : {
-              left: `${index * 22}%`,
-              top: `${index % 2 === 0 ? 5 : 0}%`,
-              width: '70%',
-              maxWidth: '180px'
-            }),
-            transition: 'transform 0.3s ease, rotate 0.3s ease'
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.15 }}
-          whileHover={!isMobile ? { 
-            rotate: '0deg', 
-            scale: 1.05, 
-            zIndex: 10,
-            transition: { duration: 0.2 }
-          } : undefined}
+    <div ref={containerRef} className="relative h-[280px] md:h-[260px] my-4 mx-auto max-w-[340px] md:max-w-[600px]">
+      {imageOrder.map((orderIndex, i) => {
+        const image = images[orderIndex];
+        return (
+          <motion.div 
+            key={orderIndex}
+            ref={(el) => { imageRefs.current[orderIndex] = el; }}
+            className="gallery-image absolute cursor-pointer"
+            style={{
+              rotate: isMobile && activeImageIndex === orderIndex ? '0deg' : image.rotate,
+              zIndex: isMobile && activeImageIndex === orderIndex ? 10 : (isMobile ? i + 1 : orderIndex + 1),
+              ...(isMobile ? {
+                top: image.mobilePosition.top,
+                left: image.mobilePosition.left,
+                width: '65%',
+                maxWidth: '180px',
+                transform: activeImageIndex === orderIndex ? 'scale(1.05)' : 'scale(1)'
+              } : {
+                left: `${orderIndex * 22}%`,
+                top: `${orderIndex % 2 === 0 ? 5 : 0}%`,
+                width: '70%',
+                maxWidth: '180px'
+              }),
+              transition: isDragging && draggedIndex === orderIndex ? 'none' : 'transform 0.3s ease, rotate 0.3s ease, top 0.3s ease, left 0.3s ease'
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: i * 0.15 }}
+            whileHover={!isMobile ? { 
+              rotate: '0deg', 
+              scale: 1.05, 
+              zIndex: 10,
+              transition: { duration: 0.2 }
+            } : undefined}
+            drag={isMobile}
+            dragConstraints={{
+              top: -50,
+              left: -50,
+              right: 50,
+              bottom: 50
+            }}
+            dragElastic={0.1}
+            dragMomentum={false}
+            onDragStart={() => handleDragStart(orderIndex)}
+            onDragEnd={(_, info) => handleDragEnd(orderIndex, info)}
+            onClick={() => handleImageClick(orderIndex)}
         >
           <div className="relative aspect-[3/4] shadow-sm rounded-md overflow-hidden border border-white/50">
             <Image 
@@ -137,7 +211,8 @@ const Gallery = () => {
             </div>
           </div>
         </motion.div>
-      ))}
+      );
+      })}
     </div>
   );
 };
