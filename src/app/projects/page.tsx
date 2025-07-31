@@ -77,16 +77,16 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="group relative"
+              className="group relative cursor-zoom-in"
               whileHover={{ y: -1 }}
+              onMouseMove={(e) => handleMouseMove(e, project.image)}
+              onMouseLeave={handleMouseLeave}
             >
               {/* Project card with hover effect */}
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Small image with cursor-following magnify effect */}
                 <div 
                   className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-sm border border-transparent group-hover:border-gray-200 dark:group-hover:border-gray-800 transition-all duration-300"
-                  onMouseMove={(e) => handleMouseMove(e, project.image)}
-                  onMouseLeave={handleMouseLeave}
                 >
                   <Image 
                     src={project.image} 
