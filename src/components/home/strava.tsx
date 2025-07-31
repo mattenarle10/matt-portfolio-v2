@@ -100,7 +100,7 @@ export function StravaActivity() {
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-5">
         {/* Stats card */}
         <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-2 md:p-3">
             {statsLoading ? (

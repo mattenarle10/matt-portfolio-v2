@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useDragControls } from 'framer-motion';
 
 const Gallery = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [imageZIndexes, setImageZIndexes] = useState([1, 2, 3, 4]);
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const [imageZIndexes, setImageZIndexes] = useState([1, 2, 3, 4]);
+  const [imagePositions, setImagePositions] = useState<Array<{x: number, y: number}>>([]);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -22,11 +24,10 @@ const Gallery = () => {
   // Randomize z-indexes on client-side only
   useEffect(() => {
     if (isMobile) {
-      const shuffled = [...imageZIndexes]
-        .sort(() => Math.random() - 0.5);
+      const shuffled = [1, 2, 3, 4].sort(() => Math.random() - 0.5);
       setImageZIndexes(shuffled);
     }
-  }, [isMobile, imageZIndexes]);
+  }, [isMobile]);
   
   // Handle click outside to reset active image
   useEffect(() => {
@@ -49,14 +50,12 @@ const Gallery = () => {
   // Handle image click for mobile
   const handleImageClick = (index: number) => {
     if (isMobile) {
-      setActiveImageIndex(activeImageIndex === index ? null : index);
-      
-      // Update z-index to bring selected image to front
-      if (activeImageIndex !== index) {
-        const newZIndexes = [...imageZIndexes];
-        const currentIndex = newZIndexes.indexOf(Math.max(...newZIndexes));
-        [newZIndexes[currentIndex], newZIndexes[index]] = [newZIndexes[index], newZIndexes[currentIndex]];
-        setImageZIndexes(newZIndexes);
+      // If clicking the same image, deactivate it
+      if (activeImageIndex === index) {
+        setActiveImageIndex(null);
+      } else {
+        // Otherwise activate the new image
+        setActiveImageIndex(index);
       }
     }
   };
@@ -99,29 +98,31 @@ const Gallery = () => {
           key={index}
           className="absolute cursor-pointer"
           style={{
-            rotate: image.rotate,
-            zIndex: isMobile ? imageZIndexes[index] : index + 1,
+            rotate: isMobile && activeImageIndex === index ? '0deg' : image.rotate,
+            zIndex: isMobile && activeImageIndex === index ? 10 : (isMobile ? imageZIndexes[index] : index + 1),
             ...(isMobile ? {
               top: image.mobilePosition.top,
               left: image.mobilePosition.left,
               width: '65%',
-              maxWidth: '180px'
+              maxWidth: '180px',
+              transform: activeImageIndex === index ? 'scale(1.05)' : 'scale(1)'
             } : {
               left: `${index * 22}%`,
               top: `${index % 2 === 0 ? 5 : 0}%`,
               width: '70%',
               maxWidth: '180px'
-            })
+            }),
+            transition: 'transform 0.3s ease, rotate 0.3s ease'
           }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: index * 0.15 }}
-          whileHover={{ 
+          whileHover={!isMobile ? { 
             rotate: '0deg', 
             scale: 1.05, 
             zIndex: 10,
             transition: { duration: 0.2 }
-          }}
+          } : undefined}
         >
           <div className="relative aspect-[3/4] shadow-sm rounded-md overflow-hidden border border-white/50">
             <Image 
