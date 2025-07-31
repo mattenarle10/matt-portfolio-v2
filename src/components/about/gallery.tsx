@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 const Gallery = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [imageZIndexes, setImageZIndexes] = useState([1, 2, 3, 4]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -17,21 +18,28 @@ const Gallery = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Randomize z-indexes on client-side only
+  useEffect(() => {
+    if (isMobile) {
+      const shuffled = [...imageZIndexes]
+        .sort(() => Math.random() - 0.5);
+      setImageZIndexes(shuffled);
+    }
+  }, [isMobile]);
+
   const images = [
     {
       src: '/about/matt-grad.png',
       alt: 'Matt at graduation',
       description: 'Graduation day - ready to take on new challenges!',
       rotate: '-3deg',
-      zIndex: Math.floor(Math.random() * 4) + 1,
-      mobilePosition: { top: '5%', left: '4%' }
+      mobilePosition: { top: '5%', left: '0%' }
     },
     {
       src: '/about/matt-heart.png',
       alt: 'Matt with Heart',
       description: 'Spending quality time with the people who matter most',
       rotate: '2deg',
-      zIndex: Math.floor(Math.random() * 4) + 1,
       mobilePosition: { top: '2%', left: '40%' }
     },
     {
@@ -39,7 +47,6 @@ const Gallery = () => {
       alt: 'Matt running',
       description: 'Finding peace and pushing limits through running',
       rotate: '-2deg',
-      zIndex: Math.floor(Math.random() * 4) + 1,
       mobilePosition: { top: '45%', left: '5%' }
     },
     {
@@ -47,7 +54,6 @@ const Gallery = () => {
       alt: 'Matt in Vietnam',
       description: 'Exploring new cultures and creating memories abroad',
       rotate: '3deg',
-      zIndex: Math.floor(Math.random() * 4) + 1,
       mobilePosition: { top: '42%', left: '45%' }
     }
   ];
@@ -60,7 +66,7 @@ const Gallery = () => {
           className="absolute cursor-pointer"
           style={{
             rotate: image.rotate,
-            zIndex: image.zIndex,
+            zIndex: isMobile ? imageZIndexes[index] : index + 1,
             ...(isMobile ? {
               top: image.mobilePosition.top,
               left: image.mobilePosition.left,
