@@ -1,6 +1,7 @@
 import Hello from "@/components/home/hello";
 import SpotifyRecentlyPlayed from "@/components/home/spotify";
 import { StravaActivity } from "@/components/home/strava";
+import FadeIn from "@/components/utils/FadeIn";
 
 export default function Home() {
   return (
@@ -8,16 +9,19 @@ export default function Home() {
       {/* Hero Section */}
       <Hello />
       
-      {/* Strava Activities Section */}
-      <div className="mt-6">
-        <StravaActivity />
-      </div>
+      {/* Strava Activities Section - Animated with delay */}
+      <FadeIn delay={2.6} y={30}>
+        <div className="mt-6">
+          <StravaActivity />
+        </div>
+      </FadeIn>
       
-      {/* Spotify Recently Played Section */}
-      <div className="mt-6">
-        <SpotifyRecentlyPlayed />
-      </div>
-
+      {/* Spotify Recently Played Section - Animated with longer delay */}
+      <FadeIn delay={3.0} y={30}>
+        <div className="mt-6">
+          <SpotifyRecentlyPlayed />
+        </div>
+      </FadeIn>
     </div>
   );
 }

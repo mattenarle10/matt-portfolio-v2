@@ -244,7 +244,7 @@ export function StravaActivity() {
                         </span>
                       </div>
                       
-                      {activities.map((activity) => (
+                      {activities.map((activity: ActivityData) => (
                         <div key={activity.id} className="py-2 md:py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group" style={{ background: 'var(--color-background)' }}>
                           <div className="flex justify-between items-start mb-1 md:mb-2">
                             <div className="flex items-center gap-1.5">
