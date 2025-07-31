@@ -6,12 +6,59 @@ import { Spotify } from 'react-spotify-embed';
 import { useSpotify } from '@/app/api/spotify/useSpotify';
 import type { SpotifyTrack } from '@/app/api/spotify/useSpotify';
 import FadeIn from '../utils/FadeIn';
-
-
-
+import { useGlobalState } from '@/components/context/GlobalStateContext';
 
 const SpotifyRecentlyPlayed = () => {
-  const { recentTracks, topTracks, isLoading, error } = useSpotify();
+  // Get global state
+  const globalState = useGlobalState();
+  
+  // Initialize local state
+  const [localRecentTracks, setLocalRecentTracks] = useState<SpotifyTrack[]>([]);
+  const [localTopTracks, setLocalTopTracks] = useState<SpotifyTrack[]>([]);
+  const [localIsLoading, setLocalIsLoading] = useState(true);
+  const [localError, setLocalError] = useState<string | null>(null);
+  
+  // Initialize from global state if available
+  useEffect(() => {
+    if (globalState.spotifyLoaded) {
+      setLocalRecentTracks(globalState.recentTracks);
+      setLocalTopTracks(globalState.topTracks);
+      setLocalIsLoading(false);
+    }
+  }, [globalState.spotifyLoaded]);
+  
+  // Always fetch from API to ensure we have data
+  const { recentTracks: apiRecentTracks, topTracks: apiTopTracks, isLoading: apiLoading, error: apiError } = useSpotify();
+  
+  // Update local state when API data changes
+  useEffect(() => {
+    // Update local state whenever we get new API data
+    if (apiRecentTracks.length > 0) {
+      setLocalRecentTracks(apiRecentTracks);
+      setLocalIsLoading(false);
+    }
+    
+    if (apiTopTracks.length > 0) {
+      setLocalTopTracks(apiTopTracks);
+      setLocalIsLoading(false);
+    }
+    
+    // Save to global state if we have both types of data
+    if (apiRecentTracks.length > 0 && apiTopTracks.length > 0) {
+      globalState.setSpotifyData(apiRecentTracks, apiTopTracks);
+    }
+    
+    if (apiError) {
+      setLocalError(apiError);
+    }
+  }, [apiRecentTracks, apiTopTracks, apiError, globalState]);
+  
+  // Use local state for component rendering
+  const recentTracks = localRecentTracks;
+  const topTracks = localTopTracks;
+  const isLoading = localIsLoading;
+  const error = localError;
+  
   const [activeList, setActiveList] = useState<'recent' | 'top'>('recent');
   const [displayTrack, setDisplayTrack] = useState<SpotifyTrack | null>(null);
   const [tracksList, setTracksList] = useState<SpotifyTrack[]>([]);

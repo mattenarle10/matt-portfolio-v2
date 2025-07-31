@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import './globals.css';
 import { ThemeProvider } from '@/components/context/ThemeContext';
+import { GlobalStateProvider } from '@/components/context/GlobalStateContext';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 
@@ -29,11 +30,13 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}>
         <ThemeProvider>
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
+          <GlobalStateProvider>
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </GlobalStateProvider>
         </ThemeProvider>
       </body>
     </html>

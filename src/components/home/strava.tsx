@@ -1,10 +1,72 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useStrava } from '@/app/api/strava/useStrava';
+import type { ActivityData, StatsData } from '@/app/api/strava/useStrava';
 import { ArrowUpRight, Activity, Calendar, Timer, TrendingUp, Bike, Dumbbell, Waves } from 'lucide-react';
+import { useGlobalState } from '@/components/context/GlobalStateContext';
 
 export function StravaActivity() {
-  const { activities, stats, isLoading, statsLoading, error, statsError } = useStrava();
+  // Get global state
+  const globalState = useGlobalState();
+  
+  // Initialize local state
+  const [localActivities, setLocalActivities] = useState<ActivityData[]>([]);
+  const [localStats, setLocalStats] = useState<StatsData | null>(null);
+  const [localIsLoading, setLocalIsLoading] = useState(true);
+  const [localStatsLoading, setLocalStatsLoading] = useState(true);
+  const [localError, setLocalError] = useState<string | null>(null);
+  const [localStatsError, setLocalStatsError] = useState<string | null>(null);
+  
+  // Initialize from global state if available
+  useEffect(() => {
+    if (globalState.stravaLoaded) {
+      setLocalActivities(globalState.stravaActivities);
+      setLocalStats(globalState.stravaStats);
+      setLocalIsLoading(false);
+      setLocalStatsLoading(false);
+    }
+  }, [globalState.stravaLoaded]);
+  
+  // Always fetch from API to ensure we have data
+  const { 
+    activities: apiActivities, 
+    stats: apiStats, 
+    isLoading: apiLoading, 
+    statsLoading: apiStatsLoading, 
+    error: apiError, 
+    statsError: apiStatsError 
+  } = useStrava();
+  
+  // Update local state when API data changes
+  useEffect(() => {
+    // Update local state whenever we get new API data
+    if (apiActivities.length > 0) {
+      setLocalActivities(apiActivities);
+      setLocalIsLoading(false);
+    }
+    
+    if (apiStats) {
+      setLocalStats(apiStats);
+      setLocalStatsLoading(false);
+    }
+    
+    // Save to global state if we have both types of data
+    if (apiActivities.length > 0 && apiStats) {
+      globalState.setStravaData(apiActivities, apiStats);
+    }
+    
+    if (apiError) setLocalError(apiError);
+    if (apiStatsError) setLocalStatsError(apiStatsError);
+  }, [apiActivities, apiStats, apiError, apiStatsError, globalState]);
+  
+  // Use local state for component rendering
+  const activities = localActivities;
+  const stats = localStats;
+  const isLoading = localIsLoading;
+  const statsLoading = localStatsLoading;
+  const error = localError;
+  const statsError = localStatsError;
 
   // Helper function to format date
   const formatDate = (dateString: string) => {
