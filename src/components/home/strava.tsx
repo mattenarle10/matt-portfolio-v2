@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useStrava } from '@/app/api/strava/useStrava';
 import type { ActivityData, StatsData } from '@/app/api/strava/useStrava';
-import { ArrowUpRight, Activity, Calendar, Timer, TrendingUp, Bike, Dumbbell, Waves } from 'lucide-react';
+import { ArrowUpRight, Activity, Calendar, TrendingUp, Bike, Dumbbell, Waves } from 'lucide-react';
 import { useGlobalState } from '@/components/context/GlobalStateContext';
 
 export function StravaActivity() {
@@ -26,14 +26,12 @@ export function StravaActivity() {
       setLocalIsLoading(false);
       setLocalStatsLoading(false);
     }
-  }, [globalState.stravaLoaded]);
+  }, [globalState.stravaLoaded, globalState.stravaActivities, globalState.stravaStats]);
   
   // Always fetch from API to ensure we have data
   const { 
     activities: apiActivities, 
     stats: apiStats, 
-    isLoading: apiLoading, 
-    statsLoading: apiStatsLoading, 
     error: apiError, 
     statsError: apiStatsError 
   } = useStrava();
@@ -76,7 +74,7 @@ export function StravaActivity() {
         month: 'short',
         day: 'numeric',
       }).format(date);
-    } catch (_) {
+    } catch {
       return 'recently';
     }
   };

@@ -9,15 +9,15 @@ export default function Home() {
       {/* Hero Section */}
       <Hello />
       
-      {/* Strava Activities Section - Animated with delay */}
-      <FadeIn delay={2.6} y={30}>
+      {/* Strava Activities Section - Animated with faster delay */}
+      <FadeIn delay={1.2} y={24} duration={0.5}>
         <div className="mt-6">
           <StravaActivity />
         </div>
       </FadeIn>
       
-      {/* Spotify Recently Played Section - Animated with longer delay */}
-      <FadeIn delay={3.0} y={30}>
+      {/* Spotify Recently Played Section - Animated with faster delay */}
+      <FadeIn delay={1.5} y={24} duration={0.5}>
         <div className="mt-6">
           <SpotifyRecentlyPlayed />
         </div>

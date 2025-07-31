@@ -68,7 +68,7 @@ export default function Projects() {
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
         <h1 className="text-xl md:text-xl font-bold mb-1">Projects</h1>
-        <p className='text-xs font-light mb-6'>things I've built</p>
+        <p className="text-xs font-light mb-6">things I&apos;ve built</p>
 
         <div className="space-y-10">
           {displayedProjects.map((project: Project, index: number) => (

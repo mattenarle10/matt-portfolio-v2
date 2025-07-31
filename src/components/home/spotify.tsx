@@ -25,10 +25,10 @@ const SpotifyRecentlyPlayed = () => {
       setLocalTopTracks(globalState.topTracks);
       setLocalIsLoading(false);
     }
-  }, [globalState.spotifyLoaded]);
+  }, [globalState.spotifyLoaded, globalState.recentTracks, globalState.topTracks]);
   
   // Always fetch from API to ensure we have data
-  const { recentTracks: apiRecentTracks, topTracks: apiTopTracks, isLoading: apiLoading, error: apiError } = useSpotify();
+  const { recentTracks: apiRecentTracks, topTracks: apiTopTracks, error: apiError } = useSpotify();
   
   // Update local state when API data changes
   useEffect(() => {
