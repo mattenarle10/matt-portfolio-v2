@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import './globals.css';
+import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from '@/components/context/ThemeContext';
 import { GlobalStateProvider } from '@/components/context/GlobalStateContext';
 import Navbar from '@/components/layout/navbar';
@@ -36,6 +37,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <Analytics />
           </GlobalStateProvider>
         </ThemeProvider>
       </body>
