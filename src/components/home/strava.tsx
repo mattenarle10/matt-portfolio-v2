@@ -100,9 +100,9 @@ export function StravaActivity() {
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
         {/* Stats card */}
-        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-2 md:p-3">
+        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md md:h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-2 md:p-3">
             {statsLoading ? (
               <>
                 <div className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">Run Stats</div>
@@ -134,8 +134,8 @@ export function StravaActivity() {
                         Run Stats
                       </h3>
 
-                      <div className="grid grid-cols-1 gap-2 md:gap-3 text-xs font-light mt-2 md:mt-3">
-                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1.5 md:p-2.5" style={{ background: 'var(--color-background)' }}>
+                      <div className="grid grid-cols-1 gap-1.5 md:gap-3 text-xs font-light mt-1 md:mt-3">
+                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5" style={{ background: 'var(--color-background)' }}>
                           <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
                             <Activity className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
@@ -149,7 +149,7 @@ export function StravaActivity() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1.5 md:p-2.5" style={{ background: 'var(--color-background)' }}>
+                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5" style={{ background: 'var(--color-background)' }}>
                           <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
                             <Calendar className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
@@ -163,7 +163,7 @@ export function StravaActivity() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1.5 md:p-2.5" style={{ background: 'var(--color-background)' }}>
+                        <div className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5" style={{ background: 'var(--color-background)' }}>
                           <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
                             <TrendingUp className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
                           </div>
