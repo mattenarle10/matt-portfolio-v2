@@ -46,7 +46,7 @@ export default function Projects() {
 
   const computeTooltipPosition = (e: React.MouseEvent, text?: string) => {
     const margin = 12;
-    const estimatedWidth = 200; // rough width to avoid overflow
+    const estimatedWidth = 160;
     const estimatedHeight = 28;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -54,15 +54,10 @@ export default function Projects() {
     let x = e.clientX + margin;
     let y = e.clientY + margin;
 
-    // Flip horizontally if overflowing right edge
-    if (x + estimatedWidth > vw - 8) x = e.clientX - estimatedWidth - margin;
-    // Clamp horizontally
-    if (x < 8) x = 8;
-
-    // Flip vertically if overflowing bottom edge
-    if (y + estimatedHeight > vh - 8) y = e.clientY - estimatedHeight - margin;
-    // Clamp vertically
-    if (y < 8) y = 8;
+    // If overflowing right edge, place on the left side of the cursor
+    if (x + estimatedWidth > vw - 8) x = Math.max(8, e.clientX - estimatedWidth - margin);
+    // If overflowing bottom edge, place above the cursor
+    if (y + estimatedHeight > vh - 8) y = Math.max(8, e.clientY - estimatedHeight - margin);
 
     return { x, y, text };
   };
@@ -129,9 +124,10 @@ export default function Projects() {
       {/* Tooltip for action icons */}
       {tooltip.show && (
         <motion.div
-          className="fixed z-50 pointer-events-none px-2 py-1 text-[10px] rounded-sm border border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-black/60 backdrop-blur-sm shadow-sm"
-          initial={{ opacity: 0, x: tooltip.x, y: tooltip.y }}
-          animate={{ opacity: 1, x: tooltip.x, y: tooltip.y }}
+          className="fixed z-50 pointer-events-none px-2 py-1 text-[10px] rounded-sm border border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-black/60 backdrop-blur-sm shadow-sm whitespace-nowrap max-w-[200px]"
+          style={{ left: tooltip.x, top: tooltip.y }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.2 }}
         >
           {tooltip.text}
