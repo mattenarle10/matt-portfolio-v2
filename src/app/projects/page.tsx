@@ -11,6 +11,8 @@ export default function Projects() {
   const [showAll, setShowAll] = useState(false);
   const [magnifyPosition, setMagnifyPosition] = useState({ x: 0, y: 0, show: false });
   const [activeImageSrc, setActiveImageSrc] = useState<string>('');
+  const [isHoveringLink, setIsHoveringLink] = useState(false);
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; show: boolean; text: string }>({ x: 0, y: 0, show: false, text: '' });
   
   // Sort projects by date (newest first)
   const sortedProjects = [...projectData].sort((a, b) => {
@@ -26,6 +28,7 @@ export default function Projects() {
   const displayedProjects = showAll ? sortedProjects : sortedProjects.slice(0, 5);
   
   const handleMouseMove = (e: React.MouseEvent, imageSrc: string) => {
+    if (isHoveringLink) return;
     // Calculate position for the magnifying bubble
     setMagnifyPosition({
       x: e.clientX,
@@ -37,12 +40,64 @@ export default function Projects() {
   
   const handleMouseLeave = () => {
     setMagnifyPosition(prev => ({ ...prev, show: false }));
+    setIsHoveringLink(false);
+    setTooltip(prev => ({ ...prev, show: false }));
+  };
+
+  const computeTooltipPosition = (e: React.MouseEvent, text?: string) => {
+    const margin = 12;
+    const estimatedWidth = 200; // rough width to avoid overflow
+    const estimatedHeight = 28;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    let x = e.clientX + margin;
+    let y = e.clientY + margin;
+
+    // Flip horizontally if overflowing right edge
+    if (x + estimatedWidth > vw - 8) x = e.clientX - estimatedWidth - margin;
+    // Clamp horizontally
+    if (x < 8) x = 8;
+
+    // Flip vertically if overflowing bottom edge
+    if (y + estimatedHeight > vh - 8) y = e.clientY - estimatedHeight - margin;
+    // Clamp vertically
+    if (y < 8) y = 8;
+
+    return { x, y, text };
+  };
+
+  const showTooltip = (e: React.MouseEvent, text: string) => {
+    setIsHoveringLink(true);
+    const pos = computeTooltipPosition(e, text);
+    setTooltip({ x: pos.x, y: pos.y, show: true, text: pos.text ?? text });
+  };
+
+  const updateTooltip = (e: React.MouseEvent) => {
+    const pos = computeTooltipPosition(e);
+    setTooltip(prev => ({ ...prev, x: pos.x, y: pos.y }));
+  };
+
+  const hideTooltip = () => {
+    setIsHoveringLink(false);
+    setTooltip(prev => ({ ...prev, show: false }));
+  };
+
+  const getDemoLabel = (href: string) => {
+    try {
+      const url = new URL(href);
+      const host = url.hostname;
+      if (host.includes('sites.google.com') || host.includes('amplifyapp.com')) return 'Open site';
+      return 'Open demo';
+    } catch {
+      return 'Open demo';
+    }
   };
   
   return (
     <div className="relative">
       {/* Magnifying bubble that follows cursor */}
-      {magnifyPosition.show && (
+      {magnifyPosition.show && !isHoveringLink && (
         <motion.div 
           className="fixed w-32 h-32 rounded-full overflow-hidden pointer-events-none border border-gray-200 dark:border-gray-800 z-50 shadow-sm"
            initial={{ 
@@ -68,6 +123,18 @@ export default function Projects() {
               sizes="128px"
             />
           </div>
+        </motion.div>
+      )}
+
+      {/* Tooltip for action icons */}
+      {tooltip.show && (
+        <motion.div
+          className="fixed z-50 pointer-events-none px-2 py-1 text-[10px] rounded-sm border border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-black/60 backdrop-blur-sm shadow-sm"
+          initial={{ opacity: 0, x: tooltip.x, y: tooltip.y }}
+          animate={{ opacity: 1, x: tooltip.x, y: tooltip.y }}
+          transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.2 }}
+        >
+          {tooltip.text}
         </motion.div>
       )}
       
@@ -115,7 +182,10 @@ export default function Projects() {
                                 key={i}
                                 href={link} 
                                 target="_blank" 
-                                className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300"
+                                className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                                onMouseEnter={(e) => showTooltip(e, 'Open project in GitHub')}
+                                onMouseMove={updateTooltip}
+                                onMouseLeave={hideTooltip}
                                 title={`GitHub Repository ${i + 1}`}
                               >
                                 <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -128,7 +198,10 @@ export default function Projects() {
                           <Link 
                             href={project.github} 
                             target="_blank" 
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300"
+                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            onMouseEnter={(e) => showTooltip(e, 'Open project in GitHub')}
+                            onMouseMove={updateTooltip}
+                            onMouseLeave={hideTooltip}
                             title="GitHub Repository"
                           >
                             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -143,7 +216,10 @@ export default function Projects() {
                       <Link 
                         href={project.demo} 
                         target="_blank" 
-                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300"
+                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                        onMouseEnter={(e) => showTooltip(e, getDemoLabel(project.demo as string))}
+                        onMouseMove={updateTooltip}
+                        onMouseLeave={hideTooltip}
                         title="Live Demo"
                       >
                         <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -157,7 +233,10 @@ export default function Projects() {
                       <Link 
                         href={project.pdf} 
                         target="_blank" 
-                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300"
+                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                        onMouseEnter={(e) => showTooltip(e, 'Open PDF')}
+                        onMouseMove={updateTooltip}
+                        onMouseLeave={hideTooltip}
                         title="PDF Document"
                       >
                         <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -174,7 +253,10 @@ export default function Projects() {
                       <Link 
                         href={project.manual} 
                         target="_blank" 
-                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300"
+                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                        onMouseEnter={(e) => showTooltip(e, 'Open manual')}
+                        onMouseMove={updateTooltip}
+                        onMouseLeave={hideTooltip}
                         title="Manual"
                       >
                         <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
