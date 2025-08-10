@@ -45,7 +45,12 @@ export default function Projects() {
       {magnifyPosition.show && (
         <motion.div 
           className="fixed w-32 h-32 rounded-full overflow-hidden pointer-events-none border border-gray-200 dark:border-gray-800 z-50 shadow-sm"
-          initial={{ opacity: 0, scale: 0.8 }}
+           initial={{ 
+             opacity: 0, 
+             scale: 0.8,
+             x: magnifyPosition.x - 64,
+             y: magnifyPosition.y - 64
+           }}
           animate={{ 
             opacity: 1, 
             scale: 1,
