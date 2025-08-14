@@ -60,8 +60,7 @@ const socials: SocialItem[] = [
 export default function Socials() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
-      <h1 className="text-xl md:text-xl font-bold mb-1">Contact</h1>
-      <p className="text-xs font-light mb-6">connect with me</p>
+      <p className="text-xs font-light mb-6">connect with me here!</p>
 
       <div className="grid grid-cols-2 gap-4 md:gap-6">
         {socials.map((item) => (

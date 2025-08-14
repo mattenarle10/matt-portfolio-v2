@@ -18,6 +18,7 @@ const Navbar = () => {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/projects', label: 'Projects' },
+    { href: '/contact', label: 'Contact' },
   ];
   
   // Check if we're on mobile
