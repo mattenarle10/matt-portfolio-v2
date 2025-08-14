@@ -1,6 +1,7 @@
 "use client";
 
 import Socials from '@/components/contact/socials';
+import CalInline from '@/components/contact/cal';
 
 export default function ContactPage() {
   return (
@@ -8,6 +9,9 @@ export default function ContactPage() {
       <h1 className="text-2xl md:text-2xl font-bold mb-1">Contact</h1>
       <p className="font-light mb-6">let&apos;s connect</p>
       <Socials />
+      <div className="mt-8">
+        <CalInline />
+      </div>
     </div>
   );
 }
