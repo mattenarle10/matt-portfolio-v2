@@ -16,7 +16,7 @@ const EVENTS: EventDef[] = [
     key: "15",
     title: "Quick Chat",
     subtitle: "15 minutes",
-    blurb: "Say hi, ask anything, vibe check — low lift.",
+    blurb: "Say hi, ask anything, pitch your idea — low lift.",
     link: "mattenarle10/15min",
   },
   {
