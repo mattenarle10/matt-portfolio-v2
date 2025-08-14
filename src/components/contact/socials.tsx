@@ -37,10 +37,10 @@ const MailIcon = (
 
 const socials: SocialItem[] = [
   {
-    label: 'Email',
+    label: 'Email Me',
     href: 'mailto:matthew.enarle@outlook.com',
     icon: MailIcon,
-    subtext: 'matthew.enarle@outlook.com'
+    subtext: 'Tap to email'
   },
   {
     label: 'Instagram',
