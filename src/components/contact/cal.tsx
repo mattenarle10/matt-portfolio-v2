@@ -43,14 +43,14 @@ export default function CalInline() {
       {!active ? (
         <div className="w-full">
           <div className="mb-3 text-sm md:text-base font-medium tracking-tight opacity-90">Book a Call</div>
-          <div className="-mx-1 overflow-x-auto">
-            <div className="px-1 flex gap-3 md:gap-4">
+          <div className="-mx-1">
+            <div className="px-1 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
               {EVENTS.map((e) => (
                 <button
                   key={e.key}
                   type="button"
                   onClick={() => setActive(e)}
-                  className="group min-w-[240px] md:min-w-0 md:flex-1 text-left rounded-md border card-border px-4 py-3 md:px-5 md:py-4 transition-transform transition-colors duration-300 hover:translate-x-0.5 hover:bg-black/5 dark:hover:bg-white/5 hover:shadow-sm focus:outline-none focus:ring-0"
+                  className="group w-full text-left rounded-md border card-border px-4 py-3 md:px-5 md:py-4 transition-transform transition-colors duration-300 hover:translate-x-0.5 hover:bg-black/5 dark:hover:bg-white/5 hover:shadow-sm focus:outline-none focus:ring-0"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex flex-col">
