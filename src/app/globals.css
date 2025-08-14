@@ -70,3 +70,24 @@ body {
 .dark .bg-black {
   background-color: white !important;
 }
+
+/* Card border utility to guarantee consistent borders across themes */
+.card-border {
+  /* Light mode: softer light-gray look */
+  border-color: rgba(0, 0, 0, 0.22) !important;
+}
+.card-border:hover,
+.card-border:focus,
+.card-border:focus-visible {
+  border-color: rgba(0, 0, 0, 0.35) !important;
+  outline: none !important;
+}
+.dark .card-border {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+.dark .card-border:hover,
+.dark .card-border:focus,
+.dark .card-border:focus-visible {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  outline: none !important;
+}
