@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About | Matt Enarle',
+  description: 'About Matt Enarle — background, experience, education, and hobbies.',
 };
 
 export default function About() {
