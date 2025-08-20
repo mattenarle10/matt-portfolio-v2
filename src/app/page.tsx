@@ -2,6 +2,11 @@ import Hello from "@/components/home/hello";
 import SpotifyRecentlyPlayed from "@/components/home/spotify";
 import { StravaActivity } from "@/components/home/strava";
 import FadeIn from "@/components/utils/FadeIn";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Matt Enarle",
+};
 
 export default function Home() {
   return (
