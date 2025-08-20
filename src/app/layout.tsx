@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mattenarle.vercel.app'),
   title: 'Matt Enarle',
   description: 'Personal portfolio of Matt Enarle, software engineer',
 };
