@@ -2,6 +2,16 @@ import { Project } from '@/lib/project';
 
 export const projectData: Project[] = [
   {
+    title: "Ark Institute",
+    slug: "ark",
+    date: "August 2025",
+    description: "An SSG for a TESDA-accredited school with custom domain and Google Workspace, built with Next.js, GSAP, and Framer Motion.",
+    image: "/projects/Projects_Ark.png",
+    github: "https://github.com/mattenarle10/ark-institute",
+    demo: "https://www.arkinstitutebc.com/",
+    technologies: ["Next.js", "GSAP", "Framer Motion"]
+  },
+  {
     title: "SHEA-A (School Health Emergency Alert - Application)",
     slug: "shea-a",
     date: "January 2025 - March 2025",
