@@ -5,8 +5,8 @@ import Education from '@/components/about/education';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About | Matt Enarle',
-  description: 'About Matt Enarle — background, experience, education, and hobbies.',
+  title: 'About',
+  description: 'About Matt Enarle — experience at eCloudvalley, education, hobbies, and contact.',
 };
 
 export default function About() {

@@ -19,8 +19,47 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mattenarle.vercel.app'),
-  title: 'Matt Enarle',
-  description: 'Personal portfolio of Matt Enarle, software engineer',
+  title: {
+    default: 'Matt Enarle',
+    template: '%s | Matt Enarle',
+  },
+  description: 'Matt Enarle — Cloud Engineer and endurance athlete. Projects, resume, and contact.',
+  applicationName: 'Matt Enarle',
+  alternates: {
+    canonical: 'https://mattenarle.vercel.app',
+  },
+  openGraph: {
+    title: 'Matt Enarle',
+    description: 'Cloud Engineer and endurance athlete. Projects, resume, and contact.',
+    url: 'https://mattenarle.vercel.app',
+    siteName: 'Matt Enarle',
+    images: [
+      {
+        url: 'https://mattenarle.vercel.app/twitter-img.png',
+        alt: 'Matt Enarle',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Matt Enarle',
+    description: 'Cloud Engineer and endurance athlete. Projects, resume, and contact.',
+    images: ['https://mattenarle.vercel.app/twitter-img.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: [
+    'Matt Enarle',
+    'Cloud Engineer',
+    'Software Engineer',
+    'Portfolio',
+    'Projects',
+    'Resume',
+  ],
+  authors: [{ name: 'Matt Enarle', url: 'https://mattenarle.vercel.app' }],
 };
 
 export default function RootLayout({
@@ -39,6 +78,44 @@ export default function RootLayout({
             </main>
             <Footer />
             <Analytics />
+            {/* JSON-LD: Person */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'Person',
+                  name: 'Matt Enarle',
+                  url: 'https://mattenarle.vercel.app',
+                  jobTitle: 'Cloud Engineer',
+                  image: 'https://mattenarle.vercel.app/about/matt-grad.png',
+                  sameAs: [
+                    'https://github.com/mattenarle',
+                    'https://www.linkedin.com/in/mattenarle',
+                  ],
+                  description:
+                    'Cloud Engineer and endurance athlete. Projects, resume, and contact.',
+                }),
+              }}
+            />
+            {/* JSON-LD: WebSite with SearchAction (helps sitelinks search box) */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'WebSite',
+                  name: 'Matt Enarle',
+                  url: 'https://mattenarle.vercel.app',
+                  potentialAction: {
+                    '@type': 'SearchAction',
+                    target:
+                      'https://mattenarle.vercel.app/?q={search_term_string}',
+                    'query-input': 'required name=search_term_string',
+                  },
+                }),
+              }}
+            />
           </GlobalStateProvider>
         </ThemeProvider>
       </body>

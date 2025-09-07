@@ -5,8 +5,8 @@ import FadeIn from "@/components/utils/FadeIn";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home | Matt Enarle",
-  description: "Software engineer — projects, work, and ways to get in touch.",
+  title: "Home",
+  description: "Cloud Engineer — projects, work, and ways to get in touch.",
 };
 
 export default function Home() {
