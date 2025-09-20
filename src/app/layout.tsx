@@ -77,7 +77,7 @@ export default async function RootLayout({
         <ClientThemeProvider initialTheme={cookieTheme}>
           <GlobalStateProvider>
             <Navbar />
-            <main className="flex-grow">
+            <main className="flex-grow min-h-[60vh]">
               {children}
             </main>
             <Footer />
