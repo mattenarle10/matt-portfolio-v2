@@ -32,6 +32,9 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Reserve scrollbar gutter to prevent horizontal layout shift on first paint */
+html { scrollbar-gutter: stable; }
+
 /* Refined transitions for theme switching */
 .transition-theme {
   transition-property: background-color, border-color, color, fill, stroke;

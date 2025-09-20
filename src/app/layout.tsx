@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import './globals.css';
 import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from '@/components/context/ThemeContext';
+import { ThemeProvider as ClientThemeProvider } from '@/components/context/ThemeContext';
 import { GlobalStateProvider } from '@/components/context/GlobalStateContext';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
@@ -62,15 +63,18 @@ export const metadata: Metadata = {
   authors: [{ name: 'Matt Enarle', url: 'https://mattenarle.vercel.app' }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const cookieTheme = cookieStore.get('theme')?.value === 'light' ? 'light' : 'dark';
+  const isDark = cookieTheme === 'dark';
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${isDark ? 'dark' : ''}`}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}>
-        <ThemeProvider>
+        <ClientThemeProvider initialTheme={cookieTheme}>
           <GlobalStateProvider>
             <Navbar />
             <main className="flex-grow">
@@ -117,7 +121,7 @@ export default function RootLayout({
               }}
             />
           </GlobalStateProvider>
-        </ThemeProvider>
+        </ClientThemeProvider>
       </body>
     </html>
   );

@@ -38,40 +38,27 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 });
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Initialize theme from localStorage or system preference
-  const [theme, setTheme] = useState<ThemeMode>('light');
-  
-  // Effect to initialize theme from localStorage or system preference
+export const ThemeProvider: React.FC<{ children: React.ReactNode; initialTheme?: ThemeMode }> = ({ children, initialTheme = 'dark' }) => {
+  const [theme, setTheme] = useState<ThemeMode>(initialTheme);
+
+  // Sync document class and persistence whenever theme changes
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
-    let initialTheme: ThemeMode = 'light';
-
-    if (savedTheme === 'dark') {
-      initialTheme = 'dark';
-    } else if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      initialTheme = 'dark';
-    }
-
-    setTheme(initialTheme);
-
-    if (initialTheme === 'dark') {
-      document.documentElement.classList.add('dark');
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
     }
-  }, []);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {}
+    try {
+      document.cookie = `theme=${theme}; path=/; max-age=31536000; samesite=lax`;
+    } catch {}
+  }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
 
