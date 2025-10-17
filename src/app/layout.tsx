@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     canonical: 'https://mattenarle.com',
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: 'googlefde13a6e8c7fdcf6',
   },
   openGraph: {
     title: 'Matt Enarle | Cloud Engineer & Endurance Athlete',
