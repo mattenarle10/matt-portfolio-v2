@@ -76,7 +76,7 @@ const MobileNav = () => {
           <div className="flex items-center justify-between h-14 w-full">
             {/* Logo - different image based on theme */}
             <div className="flex items-center">
-              <Link href="/" className="flex items-center h-7" aria-label="Home">
+              <Link href="/" className="flex items-center h-7 w-21" aria-label="Home">
                 {theme === 'dark' ? (
                   <Image src="/2.png" alt="Matt Enarle Logo" height={28} width={84} style={{height:28, width:'auto'}} priority />
                 ) : (
