@@ -3,14 +3,14 @@ import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Selected projects by Matt Enarle — summaries, tech, and links.',
+  description: 'things I\'ve built — cloud infrastructure, web apps, and software engineering projects by Matt Enarle. AWS, React, Next.js, Python, and more.',
   alternates: { canonical: '/projects' },
   openGraph: {
-    title: 'Projects',
-    description: 'Selected projects by Matt Enarle — summaries, tech, and links.',
-    url: 'https://mattenarle.vercel.app/projects',
+    title: 'Projects | Matt Enarle',
+    description: 'things I\'ve built — cloud infrastructure, web apps, and software engineering projects by Matt Enarle.',
+    url: 'https://mattenarle.com/projects',
     images: [
-      { url: 'https://mattenarle.vercel.app/twitter-img.png', alt: 'Matt Enarle projects' },
+      { url: 'https://mattenarle.com/twitter-img.png', alt: 'Matt Enarle projects' },
     ],
   },
 };
@@ -25,8 +25,8 @@ export default function ProjectsLayout({ children }: { children: React.ReactNode
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mattenarle.vercel.app/' },
-            { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://mattenarle.vercel.app/projects' },
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mattenarle.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://mattenarle.com/projects' },
           ],
         }),
       }}

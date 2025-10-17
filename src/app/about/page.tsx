@@ -6,7 +6,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'About Matt Enarle — experience at eCloudvalley, education, hobbies, and contact.',
+  description: 'matthew enarle, basically — cloud engineer at eCloudvalley, endurance athlete, and startup enthusiast. Experience, education, and hobbies.',
+  openGraph: {
+    title: 'About | Matt Enarle',
+    description: 'matthew enarle, basically — cloud engineer at eCloudvalley, DLSU alum, endurance athlete, and startup enthusiast.',
+    url: 'https://mattenarle.com/about',
+  },
 };
 
 export default function About() {
