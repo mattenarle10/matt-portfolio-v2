@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Cloud Engineer — projects, work, and ways to get in touch.",
+  description: "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.",
 };
 
 export default function Home() {

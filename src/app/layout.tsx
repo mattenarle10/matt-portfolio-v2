@@ -21,34 +21,39 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mattenarle.vercel.app'),
+  metadataBase: new URL('https://mattenarle.com'),
   title: {
-    default: 'Matt Enarle',
+    default: 'Matt Enarle | Cloud Engineer & Endurance Athlete',
     template: '%s | Matt Enarle',
   },
-  description: 'Matt Enarle — Cloud Engineer and endurance athlete. Projects, resume, and contact.',
+  description: 'hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.',
   applicationName: 'Matt Enarle',
   alternates: {
-    canonical: 'https://mattenarle.vercel.app',
+    canonical: 'https://mattenarle.com',
+  },
+  verification: {
+    google: 'your-google-verification-code',
   },
   openGraph: {
-    title: 'Matt Enarle',
-    description: 'Cloud Engineer and endurance athlete. Projects, resume, and contact.',
-    url: 'https://mattenarle.vercel.app',
+    title: 'Matt Enarle | Cloud Engineer & Endurance Athlete',
+    description: 'hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest.',
+    url: 'https://mattenarle.com',
     siteName: 'Matt Enarle',
+    locale: 'en_US',
+    type: 'profile',
     images: [
       {
-        url: 'https://mattenarle.vercel.app/twitter-img.png',
+        url: 'https://mattenarle.com/twitter-img.png',
         alt: 'Matt Enarle',
       },
     ],
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Matt Enarle',
-    description: 'Cloud Engineer and endurance athlete. Projects, resume, and contact.',
-    images: ['https://mattenarle.vercel.app/twitter-img.png'],
+    title: 'Matt Enarle | Cloud Engineer & Endurance Athlete',
+    description: 'hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between.',
+    creator: '@yourtwitterhandle',
+    images: ['https://mattenarle.com/twitter-img.png'],
   },
   robots: {
     index: true,
@@ -56,13 +61,17 @@ export const metadata: Metadata = {
   },
   keywords: [
     'Matt Enarle',
+    'Matthew Enarle',
     'Cloud Engineer',
     'Software Engineer',
+    'Endurance Athlete',
+    'eCloudvalley',
     'Portfolio',
     'Projects',
-    'Resume',
+    'MBA',
+    'Startup',
   ],
-  authors: [{ name: 'Matt Enarle', url: 'https://mattenarle.vercel.app' }],
+  authors: [{ name: 'Matt Enarle', url: 'https://mattenarle.com' }],
 };
 
 export default async function RootLayout({
@@ -92,9 +101,9 @@ export default async function RootLayout({
                   '@context': 'https://schema.org',
                   '@type': 'Person',
                   name: 'Matt Enarle',
-                  url: 'https://mattenarle.vercel.app',
+                  url: 'https://mattenarle.com',
                   jobTitle: 'Cloud Engineer',
-                  image: 'https://mattenarle.vercel.app/about/matt-grad.png',
+                  image: 'https://mattenarle.com/about/matt-grad.png',
                   sameAs: [
                     'https://github.com/mattenarle',
                     'https://www.linkedin.com/in/mattenarle',
@@ -112,13 +121,53 @@ export default async function RootLayout({
                   '@context': 'https://schema.org',
                   '@type': 'WebSite',
                   name: 'Matt Enarle',
-                  url: 'https://mattenarle.vercel.app',
+                  url: 'https://mattenarle.com',
                   potentialAction: {
                     '@type': 'SearchAction',
                     target:
-                      'https://mattenarle.vercel.app/?q={search_term_string}',
+                      'https://mattenarle.com/?q={search_term_string}',
                     'query-input': 'required name=search_term_string',
                   },
+                }),
+              }}
+            />
+            {/* JSON-LD: ItemList for main navigation (helps sitelinks) */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'ItemList',
+                  itemListElement: [
+                    {
+                      '@type': 'SiteNavigationElement',
+                      position: 1,
+                      name: 'Home',
+                      description: 'Cloud engineer by day, endurance athlete by night',
+                      url: 'https://mattenarle.com/',
+                    },
+                    {
+                      '@type': 'SiteNavigationElement',
+                      position: 2,
+                      name: 'About',
+                      description: 'Experience, education, and hobbies',
+                      url: 'https://mattenarle.com/about',
+                    },
+                    {
+                      '@type': 'SiteNavigationElement',
+                      position: 3,
+                      name: 'Projects',
+                      description: 'Cloud infrastructure and software engineering projects',
+                      url: 'https://mattenarle.com/projects',
+                    },
+                    {
+                      '@type': 'SiteNavigationElement',
+                      position: 4,
+                      name: 'Contact',
+                      description: 'Get in touch via email, LinkedIn, GitHub, or book a call',
+                      url: 'https://mattenarle.com/contact',
+                    },
+                  ],
                 }),
               }}
             />
