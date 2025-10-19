@@ -34,6 +34,18 @@ export const metadata: Metadata = {
   verification: {
     google: 'googlefde13a6e8c7fdcf6',
   },
+  icons: {
+    icon: [
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/icon-dark-192.png', sizes: '192x192', type: 'image/png', media: '(prefers-color-scheme: dark)' },
+      { url: '/icon-dark-512.png', sizes: '512x512', type: 'image/png', media: '(prefers-color-scheme: dark)' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-icon-dark.png', sizes: '180x180', type: 'image/png', media: '(prefers-color-scheme: dark)' },
+    ],
+  },
   openGraph: {
     title: 'Matt Enarle | Cloud Engineer & Endurance Athlete',
     description: 'hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest.',
