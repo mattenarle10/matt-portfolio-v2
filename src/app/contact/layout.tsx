@@ -4,7 +4,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'let\'s connect — get in touch with Matt Enarle via email, LinkedIn, GitHub, or book a call. Available for consulting and collaboration.',
-  alternates: { canonical: '/contact' },
+  alternates: { canonical: 'https://mattenarle.com/contact' },
   openGraph: {
     title: 'Contact | Matt Enarle',
     description: 'let\'s connect — get in touch with Matt Enarle via email, LinkedIn, GitHub, or book a call.',

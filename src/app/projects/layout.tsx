@@ -4,7 +4,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title: 'Projects',
   description: 'things I\'ve built — cloud infrastructure, web apps, and software engineering projects by Matt Enarle. AWS, React, Next.js, Python, and more.',
-  alternates: { canonical: '/projects' },
+  alternates: { canonical: 'https://mattenarle.com/projects' },
   openGraph: {
     title: 'Projects | Matt Enarle',
     description: 'things I\'ve built — cloud infrastructure, web apps, and software engineering projects by Matt Enarle.',
