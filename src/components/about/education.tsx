@@ -52,7 +52,7 @@ const Education = () => {
     {
       school: "West Visayas State University",
       degree: "Bachelor's degree, Computer Science",
-      date: "Aug 2021 - Jun 2025",
+      date: "2021 - 2025",
       details: "Grade: 1.34 (Magna Cum Laude)"
     },
     {
