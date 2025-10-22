@@ -17,6 +17,15 @@ export function StravaActivity() {
   const [localStatsLoading, setLocalStatsLoading] = useState(true);
   const [localError, setLocalError] = useState<string | null>(null);
   const [localStatsError, setLocalStatsError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Track screen size
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Initialize from global state if available
   useEffect(() => {
@@ -99,8 +108,107 @@ export function StravaActivity() {
         </div>
       </div>
 
-      {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+      {/* Mobile: Combined Card */}
+      <div className="md:hidden">
+        <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm transition-all duration-300 hover:shadow-md" style={{ background: 'var(--color-background)' }}>
+          <div className="p-2">
+            {/* Stats Section - Compact */}
+            {statsLoading ? (
+              <div className="mb-3">
+                <div className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-2">Run Stats</div>
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="h-12 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                  <div className="h-12 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                  <div className="h-12 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                </div>
+              </div>
+            ) : (
+              stats && (
+                <div className="mb-3">
+                  <h3 className="font-light text-xs text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-2">
+                    Run Stats
+                  </h3>
+                  <div className="grid grid-cols-3 gap-1.5 text-[10px]">
+                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-md p-1.5 text-center">
+                      <div className="flex items-center justify-center mb-0.5">
+                        <Activity className="h-3 w-3 text-orange-500 dark:text-orange-400" />
+                      </div>
+                      <p className="text-black dark:text-white/60 uppercase tracking-wider mb-0.5 text-[9px]">8 Weeks</p>
+                      <p className="text-orange-600 dark:text-orange-400 font-medium">{stats.recentRuns.distance.toFixed(0)}<span className="text-[8px]">km</span></p>
+                    </div>
+                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-md p-1.5 text-center">
+                      <div className="flex items-center justify-center mb-0.5">
+                        <Calendar className="h-3 w-3 text-orange-500 dark:text-orange-400" />
+                      </div>
+                      <p className="text-black dark:text-white/60 uppercase tracking-wider mb-0.5 text-[9px]">YTD</p>
+                      <p className="text-orange-600 dark:text-orange-400 font-medium">{stats.ytdRuns.distance.toFixed(0)}<span className="text-[8px]">km</span></p>
+                    </div>
+                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-md p-1.5 text-center">
+                      <div className="flex items-center justify-center mb-0.5">
+                        <TrendingUp className="h-3 w-3 text-orange-500 dark:text-orange-400" />
+                      </div>
+                      <p className="text-black dark:text-white/60 uppercase tracking-wider mb-0.5 text-[9px]">All Time</p>
+                      <p className="text-orange-600 dark:text-orange-400 font-medium">{stats.allTimeRuns.distance.toFixed(0)}<span className="text-[8px]">km</span></p>
+                    </div>
+                  </div>
+                </div>
+              )
+            )}
+            
+            {/* Activity Section */}
+            {isLoading ? (
+              <div>
+                <div className="font-light text-xs text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-2">Recent Activities</div>
+                <div className="space-y-2">
+                  <div className="h-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                  <div className="h-14 bg-white dark:bg-black/90 animate-pulse rounded-sm"></div>
+                </div>
+              </div>
+            ) : (
+              activities.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-2">
+                    <span className="font-light text-xs text-black dark:text-white">Recent Activities</span>
+                    <span className="flex gap-0.5">
+                      <Waves className="h-3 w-3 text-orange-500" />
+                      <Bike className="h-3 w-3 text-orange-500" />
+                      <Activity className="h-3 w-3 text-orange-500" />
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                  {activities.slice(0, 2).map((activity: ActivityData) => (
+                    <div key={activity.id} className="py-1">
+                      <div className="flex justify-between items-start mb-1">
+                        <div className="flex items-center gap-1">
+                          {activity.type === 'Run' && <Activity className="h-3 w-3 text-orange-500 flex-shrink-0" />}
+                          {activity.type === 'Ride' && <Bike className="h-3 w-3 text-orange-500 flex-shrink-0" />}
+                          {activity.type === 'Swim' && <Waves className="h-3 w-3 text-orange-500 flex-shrink-0" />}
+                          {activity.type === 'WeightTraining' && <Dumbbell className="h-3 w-3 text-orange-500 flex-shrink-0" />}
+                          {!['Run', 'Ride', 'Swim', 'WeightTraining'].includes(activity.type) && <Activity className="h-3 w-3 text-orange-500 flex-shrink-0" />}
+                          <h4 className="font-light text-xs text-black dark:text-white">{activity.name}</h4>
+                        </div>
+                        <span className="text-[10px] text-black dark:text-white/70">{formatDate(activity.date)}</span>
+                      </div>
+                      <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-[10px]">
+                        <div className="px-1.5 py-0.5"><span>{activity.distance.toFixed(1)} <span className="text-black dark:text-white/60">km</span></span></div>
+                        <div className="px-1.5 py-0.5"><span>{activity.movingTime} <span className="text-black dark:text-white/60">min</span></span></div>
+                        <div className="px-1.5 py-0.5"><span>{activity.elevationGain} <span className="text-black dark:text-white/60">m</span></span></div>
+                        {activity.averageHeartrate && (
+                          <div className="px-1.5 py-0.5"><span>{Math.round(activity.averageHeartrate)} <span className="text-black dark:text-white/60">bpm</span></span></div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop: Separate Cards */}
+      <div className="hidden md:grid md:grid-cols-3 gap-4 md:gap-5">
         {/* Stats card */}
         <div className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md md:h-full" style={{ background: 'var(--color-background)' }}>          <div className="p-2 md:p-3">
             {statsLoading ? (
@@ -242,7 +350,7 @@ export function StravaActivity() {
                         </span>
                       </div>
                       
-                      {activities.map((activity: ActivityData) => (
+                      {activities.slice(0, isMobile ? 1 : activities.length).map((activity: ActivityData) => (
                         <div key={activity.id} className="py-2 md:py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group" style={{ background: 'var(--color-background)' }}>
                           <div className="flex justify-between items-start mb-1 md:mb-2">
                             <div className="flex items-center gap-1.5">

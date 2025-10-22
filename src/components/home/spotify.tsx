@@ -92,7 +92,8 @@ const SpotifyRecentlyPlayed = () => {
       // Small timeout to ensure state update and animation
       setTimeout(() => {
         setDisplayTrack(topTracks[0]);
-        setTracksList(topTracks.slice(1, 5)); // Show 4 additional tracks
+        const trackCount = isMobile ? 3 : 5; // 2 tracks on mobile, 4 on desktop
+        setTracksList(topTracks.slice(1, trackCount));
       }, 50);
     } else if (recentTracks && recentTracks.length > 0) {
       // Clear current tracks first to ensure UI updates
@@ -102,10 +103,11 @@ const SpotifyRecentlyPlayed = () => {
       // Small timeout to ensure state update and animation
       setTimeout(() => {
         setDisplayTrack(recentTracks[0]);
-        setTracksList(recentTracks.slice(1, 5)); // Show 4 additional tracks
+        const trackCount = isMobile ? 3 : 5; // 2 tracks on mobile, 4 on desktop
+        setTracksList(recentTracks.slice(1, trackCount));
       }, 50);
     }
-  }, [activeList, recentTracks, topTracks]);
+  }, [activeList, recentTracks, topTracks, isMobile]);
 
   const handleTabClick = (tab: 'recent' | 'top') => {
     if (activeList !== tab) {
@@ -185,7 +187,7 @@ const SpotifyRecentlyPlayed = () => {
                     <Spotify 
                       link={displayTrack.externalUrl}
                       width="100%"
-                      height={isMobile ? "200" : "352"}
+                      height={isMobile ? "172" : "352"}
                       className="w-full rounded-md overflow-hidden mb-0"
                     />
                   </div>
