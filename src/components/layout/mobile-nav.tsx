@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/components/context/ThemeContext';
-import { SunIcon, MoonIcon } from '@/styles/icons';
+import ThemeToggle from '@/components/utils/ThemeToggle';
 
 // Minimal hamburger menu icon component
 const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
@@ -41,7 +41,7 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
 };
 
 const MobileNav = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   
@@ -170,18 +170,7 @@ const MobileNav = () => {
                 transition={{ duration: 0.3, delay: 0.1 + navLinks.length * 0.1 }}
                 className="mt-2"
               >
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center space-x-3 px-3 py-1.5 text-lg font-light text-white transition-colors duration-200"
-                  aria-label="Toggle theme"
-                >
-                  <span className="text-white">{theme === 'dark' ? 'Light' : 'Dark'} mode</span>
-                  {theme === 'dark' ? (
-                    <SunIcon className="h-5 w-5 text-white" />
-                  ) : (
-                    <MoonIcon className="h-5 w-5 text-white" />
-                  )}
-                </button>
+                <ThemeToggle variant="mobile" />
               </motion.div>
             </motion.div>
           </motion.div>

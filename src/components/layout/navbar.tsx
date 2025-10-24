@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/components/context/ThemeContext';
-import { SunIcon, MoonIcon } from '@/styles/icons';
+import ThemeToggle from '@/components/utils/ThemeToggle';
 import MobileNav from './mobile-nav';
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const pathname = usePathname();
   
   const navLinks = [
@@ -71,17 +71,7 @@ const Navbar = () => {
 
             {/* Theme Toggle */}
             <div className="flex items-center flex-none">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <SunIcon className="h-5 w-5 text-gray-300" />
-                ) : (
-                  <MoonIcon className="h-5 w-5 text-black" />
-                )}
-              </button>
+              <ThemeToggle />
             </div>
           </div>
         </div>
