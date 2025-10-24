@@ -85,17 +85,30 @@ const MobileNav = () => {
               </Link>
             </div>
 
-            {/* Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <HamburgerIcon isOpen={isOpen} />
-            </button>
+            {/* Menu Button - Only show when menu is closed */}
+            {!isOpen && (
+              <button
+                onClick={() => setIsOpen(true)}
+                className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Open menu"
+              >
+                <HamburgerIcon isOpen={false} />
+              </button>
+            )}
           </div>
         </div>
       </nav>
+
+      {/* Close Button - Fixed position when menu is open */}
+      {isOpen && (
+        <button
+          onClick={() => setIsOpen(false)}
+          className="fixed top-6 right-4 z-50 p-1.5 rounded-full hover:bg-white/10 transition-colors"
+          aria-label="Close menu"
+        >
+          <HamburgerIcon isOpen={true} />
+        </button>
+      )}
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -106,6 +119,7 @@ const MobileNav = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 bg-black/95 dark:bg-[#0a0a0a]/95 backdrop-blur-sm flex flex-col justify-center items-center mobile-menu-overlay"
+            onClick={() => setIsOpen(false)}
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -113,6 +127,7 @@ const MobileNav = () => {
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.3, delay: 0.1 }}
               className="flex flex-col space-y-6 items-center"
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Navigation Links */}
               {navLinks.map(({ href, label }, index) => {
