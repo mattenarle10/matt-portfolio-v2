@@ -29,6 +29,8 @@ export default function Projects() {
   
   const handleMouseMove = (e: React.MouseEvent, imageSrc: string) => {
     if (isHoveringLink) return;
+    // Only show magnifying effect on desktop (768px and above)
+    if (window.innerWidth < 768) return;
     // Calculate position for the magnifying bubble
     setMagnifyPosition({
       x: e.clientX,
@@ -145,7 +147,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="group relative cursor-zoom-in"
+              className="group relative md:cursor-zoom-in"
               whileHover={{ y: -1 }}
               onMouseMove={(e) => handleMouseMove(e, project.image)}
               onMouseLeave={handleMouseLeave}
