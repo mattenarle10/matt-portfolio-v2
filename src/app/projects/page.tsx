@@ -363,7 +363,7 @@ export default function Projects() {
                     {project.technologies.map((tech: string) => (
                       <span 
                         key={tech} 
-                        className="text-[10px] px-1.5 py-0.5 border border-black/[0.08] dark:border-black/[0.25] rounded-full"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full ring-0 outline-none transition-colors border border-black/[0.12] dark:border-black/[0.36] group-hover:border-black/[0.20] dark:group-hover:border-black/[0.44] dark:bg-white/[0.04] dark:hover:bg-white/[0.07] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)]"
                       >
                         {tech}
                       </span>
