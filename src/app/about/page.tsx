@@ -2,18 +2,6 @@ import Gallery from '@/components/about/gallery';
 import Experiences from '@/components/about/experiences';
 import Hobbies from '@/components/about/hobbies';
 import Education from '@/components/about/education';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'About',
-  description: 'matthew enarle, basically — cloud engineer at eCloudvalley, endurance athlete, and startup enthusiast. Experience, education, and hobbies.',
-  alternates: { canonical: 'https://mattenarle.com/about' },
-  openGraph: {
-    title: 'About | Matt Enarle',
-    description: 'matthew enarle, basically — cloud engineer at eCloudvalley, DLSU alum, endurance athlete, and startup enthusiast.',
-    url: 'https://mattenarle.com/about',
-  },
-};
 
 export default function About() {
   return (
