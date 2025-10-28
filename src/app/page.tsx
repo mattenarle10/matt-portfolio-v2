@@ -7,6 +7,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Home",
   description: "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.",
+  alternates: {
+    canonical: 'https://www.mattenarle.com',
+  },
+  openGraph: {
+    url: 'https://www.mattenarle.com',
+  },
 };
 
 export default function Home() {
