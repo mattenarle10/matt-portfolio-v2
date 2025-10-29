@@ -142,9 +142,9 @@ const Gallery = () => {
       mobilePosition: { top: '45%', left: '5%' }
     },
     {
-      src: '/about/matt-viet.png',
-      alt: 'Matt in Vietnam',
-      description: 'Exploring new cultures and creating memories abroad',
+      src: '/about/matt-work.png',
+      alt: 'Matt at work',
+      description: 'Working hard to make a difference',
       rotate: '3deg',
       mobilePosition: { top: '42%', left: '45%' }
     }
