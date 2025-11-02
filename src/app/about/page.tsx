@@ -2,6 +2,7 @@ import Gallery from '@/components/about/gallery';
 import Experiences from '@/components/about/experiences';
 import Hobbies from '@/components/about/hobbies';
 import Education from '@/components/about/education';
+import Certifications from '@/components/about/certifications';
 
 export default function About() {
   return (
@@ -19,6 +20,10 @@ export default function About() {
       
       <section>
         <Education />
+      </section>
+      
+      <section>
+        <Certifications />
       </section>
       
       <section>
