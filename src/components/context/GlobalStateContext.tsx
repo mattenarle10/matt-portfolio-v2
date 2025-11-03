@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  createContext,
-  type ReactNode,
-  useContext,
-  useState,
-} from "react"
+import { createContext, type ReactNode, useContext, useState } from "react"
 import type { SpotifyTrack } from "@/app/api/spotify/useSpotify"
 import type { ActivityData, StatsData } from "@/app/api/strava/useStrava"
 

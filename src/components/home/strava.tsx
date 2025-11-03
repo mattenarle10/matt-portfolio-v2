@@ -321,97 +321,95 @@ export function StravaActivity() {
                   </div>
                 </div>
               </>
+            ) : statsError ? (
+              <p className="text-sm text-black/70 dark:text-white/70 font-light">
+                Unable to load stats
+              </p>
             ) : (
-                statsError ? (
-                  <p className="text-sm text-black/70 dark:text-white/70 font-light">
-                    Unable to load stats
-                  </p>
-                ) : (
-                  stats && (
-                    <>
-                      <h3 className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">
-                        Run Stats
-                      </h3>
+              stats && (
+                <>
+                  <h3 className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+                    Run Stats
+                  </h3>
 
-                      <div className="grid grid-cols-1 gap-1.5 md:gap-3 text-xs font-light mt-1 md:mt-3">
-                        <div
-                          className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
-                          style={{ background: "var(--color-background)" }}
-                        >
-                          <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
-                            <Activity className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
-                          </div>
-                          <div>
-                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">
-                              Last 8 weeks
-                            </p>
-                            <div className="flex items-baseline gap-1">
-                              <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
-                                {stats.recentRuns.distance.toFixed(1)}
-                              </span>
-                              <span className="text-black dark:text-white/70">
-                                km
-                              </span>
-                              <span className="text-black dark:text-white/60 ml-1 text-[10px]">
-                                ({stats.recentRuns.count} runs)
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div
-                          className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
-                          style={{ background: "var(--color-background)" }}
-                        >
-                          <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
-                            <Calendar className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
-                          </div>
-                          <div>
-                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">
-                              2025 Year to Date
-                            </p>
-                            <div className="flex items-baseline gap-1">
-                              <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
-                                {stats.ytdRuns.distance.toFixed(1)}
-                              </span>
-                              <span className="text-black dark:text-white/70">
-                                km
-                              </span>
-                              <span className="text-black dark:text-white/60 ml-1 text-[10px]">
-                                ({stats.ytdRuns.count} runs)
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div
-                          className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
-                          style={{ background: "var(--color-background)" }}
-                        >
-                          <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
-                            <TrendingUp className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
-                          </div>
-                          <div>
-                            <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">
-                              All Time
-                            </p>
-                            <div className="flex items-baseline gap-1">
-                              <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
-                                {stats.allTimeRuns.distance.toFixed(1)}
-                              </span>
-                              <span className="text-black dark:text-white/70">
-                                km
-                              </span>
-                              <span className="text-black dark:text-white/60 ml-1 text-[10px]">
-                                ({stats.allTimeRuns.count} runs)
-                              </span>
-                            </div>
-                          </div>
+                  <div className="grid grid-cols-1 gap-1.5 md:gap-3 text-xs font-light mt-1 md:mt-3">
+                    <div
+                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
+                      style={{ background: "var(--color-background)" }}
+                    >
+                      <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                        <Activity className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
+                      </div>
+                      <div>
+                        <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">
+                          Last 8 weeks
+                        </p>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
+                            {stats.recentRuns.distance.toFixed(1)}
+                          </span>
+                          <span className="text-black dark:text-white/70">
+                            km
+                          </span>
+                          <span className="text-black dark:text-white/60 ml-1 text-[10px]">
+                            ({stats.recentRuns.count} runs)
+                          </span>
                         </div>
                       </div>
-                    </>
-                  )
-                )
+                    </div>
+
+                    <div
+                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
+                      style={{ background: "var(--color-background)" }}
+                    >
+                      <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                        <Calendar className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
+                      </div>
+                      <div>
+                        <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">
+                          2025 Year to Date
+                        </p>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
+                            {stats.ytdRuns.distance.toFixed(1)}
+                          </span>
+                          <span className="text-black dark:text-white/70">
+                            km
+                          </span>
+                          <span className="text-black dark:text-white/60 ml-1 text-[10px]">
+                            ({stats.ytdRuns.count} runs)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
+                      style={{ background: "var(--color-background)" }}
+                    >
+                      <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
+                        <TrendingUp className="h-3.5 w-3.5 text-orange-500 dark:text-orange-400" />
+                      </div>
+                      <div>
+                        <p className="text-black dark:text-white/70 text-[10px] uppercase tracking-wider">
+                          All Time
+                        </p>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
+                            {stats.allTimeRuns.distance.toFixed(1)}
+                          </span>
+                          <span className="text-black dark:text-white/70">
+                            km
+                          </span>
+                          <span className="text-black dark:text-white/60 ml-1 text-[10px]">
+                            ({stats.allTimeRuns.count} runs)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )
             )}
           </div>
         </div>
@@ -461,111 +459,106 @@ export function StravaActivity() {
                   </div>
                 </div>
               </>
-            ) : (
-                error ? (
-                  <p className="text-sm text-black/70 dark:text-white/70 font-light">
-                    Unable to load activities
-                  </p>
-                ) : activities.length > 0 ? (
-                  <div className="divide-y divide-black/15 dark:divide-white/15">
-                    <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
-                      <span className="font-light text-sm text-black dark:text-white">
-                        Recent Activities
-                      </span>
-                      <span className="flex gap-1 ml-2">
-                        <Waves className="h-4 w-4 text-orange-500" />
-                        <Bike className="h-4 w-4 text-orange-500" />
-                        <Activity className="h-4 w-4 text-orange-500" />
-                        <Dumbbell className="h-4 w-4 text-orange-500" />
-                      </span>
-                    </div>
+            ) : error ? (
+              <p className="text-sm text-black/70 dark:text-white/70 font-light">
+                Unable to load activities
+              </p>
+            ) : activities.length > 0 ? (
+              <div className="divide-y divide-black/15 dark:divide-white/15">
+                <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+                  <span className="font-light text-sm text-black dark:text-white">
+                    Recent Activities
+                  </span>
+                  <span className="flex gap-1 ml-2">
+                    <Waves className="h-4 w-4 text-orange-500" />
+                    <Bike className="h-4 w-4 text-orange-500" />
+                    <Activity className="h-4 w-4 text-orange-500" />
+                    <Dumbbell className="h-4 w-4 text-orange-500" />
+                  </span>
+                </div>
 
-                    {activities
-                      .slice(0, isMobile ? 1 : activities.length)
-                      .map((activity: ActivityData) => (
-                        <div
-                          key={activity.id}
-                          className="py-2 md:py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group"
-                          style={{ background: "var(--color-background)" }}
-                        >
-                          <div className="flex justify-between items-start mb-1 md:mb-2">
-                            <div className="flex items-center gap-1.5">
-                              {activity.type === "Run" && (
-                                <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
-                              )}
-                              {activity.type === "Ride" && (
-                                <Bike className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
-                              )}
-                              {activity.type === "Swim" && (
-                                <Waves className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
-                              )}
-                              {activity.type === "WeightTraining" && (
-                                <Dumbbell className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
-                              )}
-                              {![
-                                "Run",
-                                "Ride",
-                                "Swim",
-                                "WeightTraining",
-                              ].includes(activity.type) && (
-                                <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
-                              )}
-                              <h4 className="font-light text-xs md:text-sm text-black dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
-                                {activity.name}
-                              </h4>
-                            </div>
-                            <span className="text-xs text-black dark:text-white/70 font-light px-1.5 py-0.5 rounded-sm">
-                              {formatDate(activity.date)}
+                {activities
+                  .slice(0, isMobile ? 1 : activities.length)
+                  .map((activity: ActivityData) => (
+                    <div
+                      key={activity.id}
+                      className="py-2 md:py-4 px-1 hover:bg-white/95 dark:hover:bg-black/80 transition-all duration-200 group"
+                      style={{ background: "var(--color-background)" }}
+                    >
+                      <div className="flex justify-between items-start mb-1 md:mb-2">
+                        <div className="flex items-center gap-1.5">
+                          {activity.type === "Run" && (
+                            <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
+                          )}
+                          {activity.type === "Ride" && (
+                            <Bike className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
+                          )}
+                          {activity.type === "Swim" && (
+                            <Waves className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
+                          )}
+                          {activity.type === "WeightTraining" && (
+                            <Dumbbell className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
+                          )}
+                          {!["Run", "Ride", "Swim", "WeightTraining"].includes(
+                            activity.type
+                          ) && (
+                            <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
+                          )}
+                          <h4 className="font-light text-xs md:text-sm text-black dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
+                            {activity.name}
+                          </h4>
+                        </div>
+                        <span className="text-xs text-black dark:text-white/70 font-light px-1.5 py-0.5 rounded-sm">
+                          {formatDate(activity.date)}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-[10px] md:text-xs font-light">
+                        <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                          <span className="font-light">
+                            {activity.distance.toFixed(1)}{" "}
+                            <span className="text-black dark:text-white/60">
+                              km
+                            </span>
+                          </span>
+                        </div>
+
+                        <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                          <span>
+                            {activity.movingTime}{" "}
+                            <span className="text-black dark:text-white/60">
+                              min
+                            </span>
+                          </span>
+                        </div>
+
+                        <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                          <span>
+                            {activity.elevationGain}{" "}
+                            <span className="text-black dark:text-white/60">
+                              m
+                            </span>
+                          </span>
+                        </div>
+
+                        {activity.averageHeartrate && (
+                          <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
+                            <span>
+                              {Math.round(activity.averageHeartrate)}{" "}
+                              <span className="text-black dark:text-white/60">
+                                bpm
+                              </span>
                             </span>
                           </div>
-
-                          <div className="flex flex-wrap divide-x divide-black/15 dark:divide-white/15 text-[10px] md:text-xs font-light">
-                            <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
-                              <span className="font-light">
-                                {activity.distance.toFixed(1)}{" "}
-                                <span className="text-black dark:text-white/60">
-                                  km
-                                </span>
-                              </span>
-                            </div>
-
-                            <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
-                              <span>
-                                {activity.movingTime}{" "}
-                                <span className="text-black dark:text-white/60">
-                                  min
-                                </span>
-                              </span>
-                            </div>
-
-                            <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
-                              <span>
-                                {activity.elevationGain}{" "}
-                                <span className="text-black dark:text-white/60">
-                                  m
-                                </span>
-                              </span>
-                            </div>
-
-                            {activity.averageHeartrate && (
-                              <div className="flex items-center text-black dark:text-white px-1.5 md:px-2 py-0.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20 transition-all duration-200">
-                                <span>
-                                  {Math.round(activity.averageHeartrate)}{" "}
-                                  <span className="text-black dark:text-white/60">
-                                    bpm
-                                  </span>
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <p className="text-sm text-black/70 dark:text-white/70 font-light">
-                    No recent activities found
-                  </p>
-                )
+                        )}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            ) : (
+              <p className="text-sm text-black/70 dark:text-white/70 font-light">
+                No recent activities found
+              </p>
             )}
           </div>
         </div>

@@ -96,30 +96,30 @@ const socials: SocialItem[] = [
 
 export default function Socials() {
   return (
-      <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
-        {socials.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 rounded-md border card-border ring-0 outline-none transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-0 px-3 py-2.5 md:px-5 md:py-4 w-full"
-            aria-label={item.label}
-            title={item.label}
-          >
-            <span className="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors duration-300">
-              {item.icon}
+    <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
+      {socials.map((item) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 rounded-md border card-border ring-0 outline-none transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-0 px-3 py-2.5 md:px-5 md:py-4 w-full"
+          aria-label={item.label}
+          title={item.label}
+        >
+          <span className="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors duration-300">
+            {item.icon}
+          </span>
+          <span className="flex flex-col leading-tight">
+            <span className="text-sm md:text-base font-medium tracking-tight">
+              {item.label}
             </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-sm md:text-base font-medium tracking-tight">
-                {item.label}
-              </span>
-              <span className="text-[11px] md:text-xs opacity-60">
-                {item.subtext}
-              </span>
+            <span className="text-[11px] md:text-xs opacity-60">
+              {item.subtext}
             </span>
-          </Link>
-        ))}
-      </div>
+          </span>
+        </Link>
+      ))}
+    </div>
   )
 }

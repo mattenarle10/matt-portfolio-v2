@@ -26,8 +26,8 @@ export default function Projects() {
   // Sort projects by date (newest first)
   const sortedProjects = [...projectData].sort((a, b) => {
     // Extract years for comparison
-    const yearA = parseInt(a.date.match(/\d{4}/)![0])
-    const yearB = parseInt(b.date.match(/\d{4}/)![0])
+    const yearA = parseInt(a.date.match(/\d{4}/)![0], 10)
+    const yearB = parseInt(b.date.match(/\d{4}/)![0], 10)
 
     // Sort by year descending
     return yearB - yearA
