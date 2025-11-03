@@ -47,12 +47,12 @@ html {
 }
 
 /* Ensure dark mode classes work properly */
-.dark .text-black {
-  color: white !important;
-}
-
 .text-black {
   color: black !important;
+}
+
+.dark .text-black {
+  color: white !important;
 }
 
 /* Force white text in mobile menu */
@@ -68,12 +68,12 @@ html {
 }
 
 /* Fix hamburger icon color */
-:root:not(.dark) .bg-black {
-  background-color: black !important;
-}
-
 .dark .bg-black {
   background-color: white !important;
+}
+
+:root:not(.dark) .bg-black {
+  background-color: black !important;
 }
 
 /* Card border utility to guarantee consistent borders across themes */
