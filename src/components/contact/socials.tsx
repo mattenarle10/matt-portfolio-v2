@@ -96,7 +96,6 @@ const socials: SocialItem[] = [
 
 export default function Socials() {
   return (
-    <>
       <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
         {socials.map((item) => (
           <Link
@@ -122,6 +121,5 @@ export default function Socials() {
           </Link>
         ))}
       </div>
-    </>
   )
 }
