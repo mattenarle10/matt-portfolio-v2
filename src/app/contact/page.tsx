@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import Socials from '@/components/contact/socials';
-import CalInline from '@/components/contact/cal';
+import CalInline from "@/components/contact/cal"
+import Socials from "@/components/contact/socials"
 
 export default function ContactPage() {
   return (
@@ -13,7 +13,5 @@ export default function ContactPage() {
         <CalInline />
       </div>
     </div>
-  );
+  )
 }
-
-
