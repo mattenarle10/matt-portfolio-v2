@@ -322,8 +322,7 @@ export function StravaActivity() {
                 </div>
               </>
             ) : (
-              <>
-                {statsError ? (
+                statsError ? (
                   <p className="text-sm text-black/70 dark:text-white/70 font-light">
                     Unable to load stats
                   </p>
@@ -412,8 +411,7 @@ export function StravaActivity() {
                       </div>
                     </>
                   )
-                )}
-              </>
+                )
             )}
           </div>
         </div>
@@ -464,8 +462,7 @@ export function StravaActivity() {
                 </div>
               </>
             ) : (
-              <>
-                {error ? (
+                error ? (
                   <p className="text-sm text-black/70 dark:text-white/70 font-light">
                     Unable to load activities
                   </p>
@@ -568,8 +565,7 @@ export function StravaActivity() {
                   <p className="text-sm text-black/70 dark:text-white/70 font-light">
                     No recent activities found
                   </p>
-                )}
-              </>
+                )
             )}
           </div>
         </div>
