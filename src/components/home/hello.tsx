@@ -2,7 +2,7 @@
 import { motion } from "framer-motion"
 import { ArrowUpRight, Heart } from "lucide-react"
 import Image from "next/image"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 const Hello = () => {
   const [text, setText] = useState("")
