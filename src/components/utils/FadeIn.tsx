@@ -1,38 +1,39 @@
-'use client';
+"use client"
 
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useAnimation, useInView } from "framer-motion"
+import type React from "react"
+import { useEffect, useRef } from "react"
 
 interface FadeInProps {
-  children: React.ReactNode;
-  delay?: number;
-  duration?: number;
-  className?: string;
-  y?: number;
-  x?: number;
-  once?: boolean;
+  children: React.ReactNode
+  delay?: number
+  duration?: number
+  className?: string
+  y?: number
+  x?: number
+  once?: boolean
 }
 
 const FadeIn: React.FC<FadeInProps> = ({
   children,
   delay = 0,
   duration = 0.5,
-  className = '',
+  className = "",
   y = 20,
   x = 0,
-  once = true
+  once = true,
 }) => {
-  const controls = useAnimation();
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once });
+  const controls = useAnimation()
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once })
 
   useEffect(() => {
     if (isInView) {
-      controls.start('visible');
+      controls.start("visible")
     } else if (!once) {
-      controls.start('hidden');
+      controls.start("hidden")
     }
-  }, [isInView, controls, once]);
+  }, [isInView, controls, once])
 
   return (
     <motion.div
@@ -41,22 +42,22 @@ const FadeIn: React.FC<FadeInProps> = ({
       animate={controls}
       variants={{
         hidden: { opacity: 0, y, x },
-        visible: { 
-          opacity: 1, 
-          y: 0, 
+        visible: {
+          opacity: 1,
+          y: 0,
           x: 0,
-          transition: { 
-            duration, 
+          transition: {
+            duration,
             delay,
-            ease: [0.25, 0.1, 0.25, 1.0] // Custom easing for subtle, refined motion
-          }
+            ease: [0.25, 0.1, 0.25, 1.0], // Custom easing for subtle, refined motion
+          },
         },
       }}
       className={className}
     >
       {children}
     </motion.div>
-  );
-};
+  )
+}
 
-export default FadeIn;
+export default FadeIn

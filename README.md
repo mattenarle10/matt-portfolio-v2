@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Mattenarle Portfolio v2
+
+A modern, sleek portfolio website built with Next.js 15, TypeScript, and Tailwind CSS.
+
+## Features
+
+- 🚀 Next.js 15 with App Router
+- 🎨 Tailwind CSS for styling
+- 📱 Responsive design
+- 🌙 Dark mode support
+- ⚡ Biome for linting and formatting
+- 🪝 Husky pre-commit hooks
+- 🎭 Framer Motion animations
+- 📊 Spotify and Strava integrations
+- 📅 Cal.com scheduling integration
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

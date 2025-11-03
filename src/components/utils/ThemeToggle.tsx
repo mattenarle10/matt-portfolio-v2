@@ -1,28 +1,30 @@
-'use client';
+"use client"
 
-import { motion } from 'framer-motion';
-import { useTheme } from '@/components/context/ThemeContext';
-import { SunIcon, MoonIcon } from '@/styles/icons';
+import { motion } from "framer-motion"
+import { useTheme } from "@/components/context/ThemeContext"
+import { MoonIcon, SunIcon } from "@/styles/icons"
 
 interface ThemeToggleProps {
-  variant?: 'default' | 'mobile';
+  variant?: "default" | "mobile"
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'default' }) => {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === 'dark';
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = "default" }) => {
+  const { theme, toggleTheme } = useTheme()
+  const isDark = theme === "dark"
 
-  if (variant === 'mobile') {
+  if (variant === "mobile") {
     // Mobile version - same toggle switch with label
     return (
       <div className="flex items-center space-x-3">
-        <span className="text-lg font-light text-white">{isDark ? 'Light' : 'Dark'} mode</span>
+        <span className="text-lg font-light text-white">
+          {isDark ? "Light" : "Dark"} mode
+        </span>
         <button
           onClick={toggleTheme}
           className="relative w-12 h-6 rounded-full border transition-colors duration-300 focus:outline-none ring-0"
           style={{
-            borderColor: 'rgba(255, 255, 255, 0.3)',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderColor: "rgba(255, 255, 255, 0.3)",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
           }}
           aria-label="Toggle theme"
         >
@@ -30,14 +32,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'default' }) => {
           <motion.div
             className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full shadow-sm flex items-center justify-center"
             style={{
-              backgroundColor: '#ffffff',
+              backgroundColor: "#ffffff",
             }}
             initial={false}
             animate={{
               x: isDark ? 24 : 0,
             }}
             transition={{
-              type: 'spring',
+              type: "spring",
               stiffness: 500,
               damping: 30,
             }}
@@ -51,7 +53,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'default' }) => {
           </motion.div>
         </button>
       </div>
-    );
+    )
   }
 
   // Desktop version - minimal animated toggle switch aligned with your design system
@@ -60,8 +62,12 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'default' }) => {
       onClick={toggleTheme}
       className="relative w-12 h-6 rounded-full border transition-colors duration-300 focus:outline-none ring-0"
       style={{
-        borderColor: isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.25)',
-        backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+        borderColor: isDark
+          ? "rgba(255, 255, 255, 0.25)"
+          : "rgba(0, 0, 0, 0.25)",
+        backgroundColor: isDark
+          ? "rgba(255, 255, 255, 0.08)"
+          : "rgba(0, 0, 0, 0.08)",
       }}
       aria-label="Toggle theme"
     >
@@ -69,14 +75,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'default' }) => {
       <motion.div
         className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full shadow-sm flex items-center justify-center"
         style={{
-          backgroundColor: isDark ? '#ffffff' : '#000000',
+          backgroundColor: isDark ? "#ffffff" : "#000000",
         }}
         initial={false}
         animate={{
           x: isDark ? 24 : 0,
         }}
         transition={{
-          type: 'spring',
+          type: "spring",
           stiffness: 500,
           damping: 30,
         }}
@@ -89,7 +95,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = 'default' }) => {
         )}
       </motion.div>
     </button>
-  );
-};
+  )
+}
 
-export default ThemeToggle;
+export default ThemeToggle
