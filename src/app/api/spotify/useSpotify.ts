@@ -210,7 +210,7 @@ export function useSpotify() {
 
         const data = await response.json()
 
-        if (data && data.items && isMounted.current) {
+        if (data?.items && isMounted.current) {
           const tracks = data.items.map((item: SpotifyRecentlyPlayedItem) => ({
             id: item.track.id,
             name: item.track.name,

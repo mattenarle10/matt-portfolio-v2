@@ -105,7 +105,7 @@ export async function GET() {
       if (recentResponse.ok) {
         const recentData = await recentResponse.json()
 
-        if (recentData && recentData.items && recentData.items.length > 0) {
+        if (recentData?.items && recentData.items.length > 0) {
           tracks = recentData.items.map((item: SpotifyRecentlyPlayedItem) => ({
             id: item.track.id,
             name: item.track.name,
