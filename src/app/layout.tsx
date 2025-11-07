@@ -155,8 +155,7 @@ export default async function RootLayout({
                   url: "https://mattenarle.com",
                   potentialAction: {
                     "@type": "SearchAction",
-                    target:
-                      "https://mattenarle.com/?q={search_term_string}",
+                    target: "https://mattenarle.com/?q={search_term_string}",
                     "query-input": "required name=search_term_string",
                   },
                 }),
