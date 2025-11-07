@@ -3,9 +3,9 @@ import type { MetadataRoute } from "next"
 const base = (() => {
   const env = process.env.NEXT_PUBLIC_SITE_URL
   try {
-    return env ? new URL(env).origin : "https://www.mattenarle.com"
+    return env ? new URL(env).origin : "https://mattenarle.com"
   } catch {
-    return "https://www.mattenarle.com"
+    return "https://mattenarle.com"
   }
 })()
 

@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.mattenarle.com"),
+  metadataBase: new URL("https://mattenarle.com"),
   title: {
     default: "Matt Enarle | Cloud Engineer & Endurance Athlete",
     template: "%s | Matt Enarle",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.",
   applicationName: "Matt Enarle",
   alternates: {
-    canonical: "https://www.mattenarle.com",
+    canonical: "https://mattenarle.com",
   },
   verification: {
     google: "googlefde13a6e8c7fdcf6",
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
     title: "Matt Enarle | Cloud Engineer & Endurance Athlete",
     description:
       "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest.",
-    url: "https://www.mattenarle.com",
+    url: "https://mattenarle.com",
     siteName: "Matt Enarle",
     locale: "en_US",
     type: "profile",
     images: [
       {
-        url: "https://www.mattenarle.com/twitter-img.png",
+        url: "https://mattenarle.com/twitter-img.png",
         alt: "Matt Enarle",
       },
     ],
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     description:
       "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between.",
     creator: "@yourtwitterhandle",
-    images: ["https://www.mattenarle.com/twitter-img.png"],
+    images: ["https://mattenarle.com/twitter-img.png"],
   },
   robots: {
     index: true,
@@ -101,7 +101,7 @@ export const metadata: Metadata = {
     "MBA",
     "Startup",
   ],
-  authors: [{ name: "Matt Enarle", url: "https://www.mattenarle.com" }],
+  authors: [{ name: "Matt Enarle", url: "https://mattenarle.com" }],
 }
 
 export default async function RootLayout({
@@ -132,9 +132,9 @@ export default async function RootLayout({
                   "@context": "https://schema.org",
                   "@type": "Person",
                   name: "Matt Enarle",
-                  url: "https://www.mattenarle.com",
+                  url: "https://mattenarle.com",
                   jobTitle: "Cloud Engineer",
-                  image: "https://www.mattenarle.com/about/matt-grad.png",
+                  image: "https://mattenarle.com/about/matt-grad.png",
                   sameAs: [
                     "https://github.com/mattenarle",
                     "https://www.linkedin.com/in/mattenarle",
@@ -152,11 +152,11 @@ export default async function RootLayout({
                   "@context": "https://schema.org",
                   "@type": "WebSite",
                   name: "Matt Enarle",
-                  url: "https://www.mattenarle.com",
+                  url: "https://mattenarle.com",
                   potentialAction: {
                     "@type": "SearchAction",
                     target:
-                      "https://www.mattenarle.com/?q={search_term_string}",
+                      "https://mattenarle.com/?q={search_term_string}",
                     "query-input": "required name=search_term_string",
                   },
                 }),
@@ -176,14 +176,14 @@ export default async function RootLayout({
                       name: "Home",
                       description:
                         "Cloud engineer by day, endurance athlete by night",
-                      url: "https://www.mattenarle.com/",
+                      url: "https://mattenarle.com/",
                     },
                     {
                       "@type": "SiteNavigationElement",
                       position: 2,
                       name: "About",
                       description: "Experience, education, and hobbies",
-                      url: "https://www.mattenarle.com/about",
+                      url: "https://mattenarle.com/about",
                     },
                     {
                       "@type": "SiteNavigationElement",
@@ -191,7 +191,7 @@ export default async function RootLayout({
                       name: "Projects",
                       description:
                         "Cloud infrastructure and software engineering projects",
-                      url: "https://www.mattenarle.com/projects",
+                      url: "https://mattenarle.com/projects",
                     },
                     {
                       "@type": "SiteNavigationElement",
@@ -199,7 +199,7 @@ export default async function RootLayout({
                       name: "Contact",
                       description:
                         "Get in touch via email, LinkedIn, GitHub, or book a call",
-                      url: "https://www.mattenarle.com/contact",
+                      url: "https://mattenarle.com/contact",
                     },
                   ],
                 }),

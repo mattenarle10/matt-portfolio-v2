@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "let's connect — get in touch with Matt Enarle via email, LinkedIn, GitHub, or book a call. Available for consulting and collaboration.",
-  alternates: { canonical: "https://www.mattenarle.com/contact" },
+  alternates: { canonical: "https://mattenarle.com/contact" },
   openGraph: {
     title: "Contact | Matt Enarle",
     description:
       "let's connect — get in touch with Matt Enarle via email, LinkedIn, GitHub, or book a call.",
-    url: "https://www.mattenarle.com/contact",
+    url: "https://mattenarle.com/contact",
     images: [
-      { url: "https://www.mattenarle.com/twitter-img.png", alt: "Matt Enarle" },
+      { url: "https://mattenarle.com/twitter-img.png", alt: "Matt Enarle" },
     ],
   },
 }
@@ -36,13 +36,13 @@ export default function ContactLayout({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://www.mattenarle.com/",
+                item: "https://mattenarle.com/",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Contact",
-                item: "https://www.mattenarle.com/contact",
+                item: "https://mattenarle.com/contact",
               },
             ],
           }),

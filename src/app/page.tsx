@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.",
   openGraph: {
-    url: "https://www.mattenarle.com",
+    url: "https://mattenarle.com",
   },
 }
 

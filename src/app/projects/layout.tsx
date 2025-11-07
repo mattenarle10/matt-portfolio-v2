@@ -5,15 +5,15 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "things I've built — cloud infrastructure, web apps, and software engineering projects by Matt Enarle. AWS, React, Next.js, Python, and more.",
-  alternates: { canonical: "https://www.mattenarle.com/projects" },
+  alternates: { canonical: "https://mattenarle.com/projects" },
   openGraph: {
     title: "Projects | Matt Enarle",
     description:
       "things I've built — cloud infrastructure, web apps, and software engineering projects by Matt Enarle.",
-    url: "https://www.mattenarle.com/projects",
+    url: "https://mattenarle.com/projects",
     images: [
       {
-        url: "https://www.mattenarle.com/twitter-img.png",
+        url: "https://mattenarle.com/twitter-img.png",
         alt: "Matt Enarle projects",
       },
     ],
@@ -39,13 +39,13 @@ export default function ProjectsLayout({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://www.mattenarle.com/",
+                item: "https://mattenarle.com/",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Projects",
-                item: "https://www.mattenarle.com/projects",
+                item: "https://mattenarle.com/projects",
               },
             ],
           }),

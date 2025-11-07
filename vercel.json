@@ -16,6 +16,17 @@
       "has": [
         {
           "type": "host",
+          "value": "www.mattenarle.com"
+        }
+      ],
+      "destination": "https://mattenarle.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
           "value": "mattenarle.vercel.app"
         }
       ],

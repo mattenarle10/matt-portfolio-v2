@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "matthew enarle, basically — cloud engineer at eCloudvalley, endurance athlete, and startup enthusiast. Experience, education, and hobbies.",
-  alternates: { canonical: "https://www.mattenarle.com/about" },
+  alternates: { canonical: "https://mattenarle.com/about" },
   openGraph: {
     title: "About | Matt Enarle",
     description:
       "matthew enarle, basically — cloud engineer at eCloudvalley, DLSU alum, endurance athlete, and startup enthusiast.",
-    url: "https://www.mattenarle.com/about",
+    url: "https://mattenarle.com/about",
     images: [
-      { url: "https://www.mattenarle.com/twitter-img.png", alt: "Matt Enarle" },
+      { url: "https://mattenarle.com/twitter-img.png", alt: "Matt Enarle" },
     ],
   },
 }
@@ -36,13 +36,13 @@ export default function AboutLayout({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://www.mattenarle.com/",
+                item: "https://mattenarle.com/",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "About",
-                item: "https://www.mattenarle.com/about",
+                item: "https://mattenarle.com/about",
               },
             ],
           }),
