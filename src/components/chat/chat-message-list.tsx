@@ -28,12 +28,12 @@ export function ChatMessageList({
 
   if (messages.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="text-center">
-          <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">
+      <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+        <div className="text-center max-w-sm">
+          <h3 className="text-base md:text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">
             Ask me anything about Matt!
           </h3>
-          <p className="text-sm opacity-70 mb-4 text-gray-700 dark:text-gray-300">
+          <p className="text-xs md:text-sm opacity-70 mb-4 text-gray-700 dark:text-gray-300">
             Try asking about his experience, projects, or hobbies
           </p>
           <div className="flex flex-col gap-2">
@@ -67,13 +67,13 @@ export function ChatMessageList({
   }
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">
       {messages.map((message) => (
         <ChatMessage key={message.id} message={message} />
       ))}
       {isLoading && (
-        <div className="flex gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden">
+        <div className="flex gap-2 md:gap-3">
+          <div className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full overflow-hidden">
             <Image
               src="/about/matt-viet.png"
               alt="Matt Enarle"
@@ -83,7 +83,7 @@ export function ChatMessageList({
             />
           </div>
           <div className="flex items-center">
-            <div className="rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-700">
+            <div className="rounded-lg px-3 py-2 md:px-4 bg-gray-100 dark:bg-gray-700">
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                 <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
