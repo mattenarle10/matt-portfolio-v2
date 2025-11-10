@@ -48,7 +48,7 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
           onKeyDown={handleKeyDown}
           placeholder="Ask me anything about Matt..."
           disabled={isLoading}
-          className="flex-1 resize-none rounded-lg px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 resize-none rounded-lg px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-black dark:focus:border-white disabled:opacity-50 disabled:cursor-not-allowed"
           rows={1}
           maxLength={1000}
         />
@@ -56,7 +56,7 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
           type="button"
           onClick={handleSend}
           disabled={!message.trim() || isLoading}
-          className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-black disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Send message"
         >
           <Send className="w-4 h-4" />

@@ -64,8 +64,8 @@ export function ChatDialog({
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500 dark:bg-blue-600 flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 rounded-full bg-black dark:bg-white flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-white dark:text-black" />
                 </div>
                 <div>
                   <h2 className="font-medium text-sm">Matt's AI Assistant</h2>

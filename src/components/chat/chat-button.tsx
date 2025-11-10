@@ -16,7 +16,7 @@ export function ChatButton({ isOpen, onClick }: ChatButtonProps) {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white shadow-lg flex items-center justify-center transition-colors"
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-black shadow-lg flex items-center justify-center transition-colors"
       aria-label={isOpen ? "Close chat" : "Open chat"}
     >
       <motion.div

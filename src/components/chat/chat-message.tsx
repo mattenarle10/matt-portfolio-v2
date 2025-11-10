@@ -20,13 +20,11 @@ export function ChatMessage({ message }: ChatMessageProps) {
     >
       <div
         className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-          isUser
-            ? "bg-blue-500 dark:bg-blue-600"
-            : "bg-gray-200 dark:bg-gray-700"
+          isUser ? "bg-black dark:bg-white" : "bg-gray-200 dark:bg-gray-700"
         }`}
       >
         {isUser ? (
-          <User className="w-4 h-4 text-white" />
+          <User className="w-4 h-4 text-white dark:text-black" />
         ) : (
           <Bot className="w-4 h-4 text-gray-700 dark:text-gray-300" />
         )}
@@ -38,7 +36,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         <div
           className={`rounded-lg px-4 py-2 ${
             isUser
-              ? "bg-blue-500 dark:bg-blue-600 text-white"
+              ? "bg-black dark:bg-white text-white dark:text-black"
               : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           }`}
         >
