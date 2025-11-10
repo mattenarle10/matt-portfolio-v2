@@ -1,6 +1,6 @@
 "use client"
 
-import { Loader2 } from "lucide-react"
+import { Bot } from "lucide-react"
 import { useEffect, useRef } from "react"
 import type { Message } from "@/lib/chat/types"
 import { ChatMessage } from "./chat-message"
@@ -11,7 +11,11 @@ interface ChatMessageListProps {
   onSendMessage?: (message: string) => void
 }
 
-export function ChatMessageList({ messages, isLoading, onSendMessage }: ChatMessageListProps) {
+export function ChatMessageList({
+  messages,
+  isLoading,
+  onSendMessage,
+}: ChatMessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -35,22 +39,24 @@ export function ChatMessageList({ messages, isLoading, onSendMessage }: ChatMess
           <div className="flex flex-col gap-2">
             <button
               type="button"
-              onClick={() => onSendMessage?.("What projects has Matt worked on?")}
-              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-gray-100"
+              onClick={() =>
+                onSendMessage?.("What projects has Matt worked on?")
+              }
+              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
             >
               What projects has Matt worked on?
             </button>
             <button
               type="button"
               onClick={() => onSendMessage?.("Tell me about Matt's experience")}
-              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-gray-100"
+              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
             >
               Tell me about Matt's experience
             </button>
             <button
               type="button"
               onClick={() => onSendMessage?.("What are Matt's hobbies?")}
-              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-gray-100"
+              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
             >
               What are Matt's hobbies?
             </button>
@@ -68,10 +74,10 @@ export function ChatMessageList({ messages, isLoading, onSendMessage }: ChatMess
       {isLoading && (
         <div className="flex gap-3">
           <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-            <Loader2 className="w-4 h-4 text-gray-700 dark:text-gray-300 animate-spin" />
+            <Bot className="w-4 h-4 text-gray-700 dark:text-gray-300" />
           </div>
           <div className="flex items-center">
-            <div className="rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-800">
+            <div className="rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-700">
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                 <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>

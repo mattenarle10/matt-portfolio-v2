@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Bot, User } from "lucide-react"
+import { Bot } from "lucide-react"
+import Image from "next/image"
 import type { Message } from "@/lib/chat/types"
 
 interface ChatMessageProps {
@@ -19,12 +20,18 @@ export function ChatMessage({ message }: ChatMessageProps) {
       className={`flex gap-3 ${isUser ? "flex-row-reverse" : "flex-row"}`}
     >
       <div
-        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-          isUser ? "bg-black dark:bg-white" : "bg-gray-200 dark:bg-gray-700"
+        className={`flex-shrink-0 w-8 h-8 rounded-full overflow-hidden ${
+          isUser ? "" : "bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
         }`}
       >
         {isUser ? (
-          <User className="w-4 h-4 !text-white dark:!text-black" />
+          <Image
+            src="/about/matt-viet.png"
+            alt="User"
+            width={32}
+            height={32}
+            className="object-cover w-full h-full"
+          />
         ) : (
           <Bot className="w-4 h-4 text-gray-700 dark:text-gray-300" />
         )}
@@ -35,16 +42,16 @@ export function ChatMessage({ message }: ChatMessageProps) {
       >
         <div
           className={`rounded-lg px-4 py-2 ${
-            isUser
-              ? "bg-black dark:bg-white"
-              : "bg-gray-100 dark:bg-gray-800"
+            isUser ? "bg-black dark:bg-white" : "bg-gray-100 dark:bg-gray-700"
           }`}
         >
-          <p className={`text-sm leading-relaxed whitespace-pre-wrap chat-message-text ${
-            isUser
-              ? "text-white dark:text-black"
-              : "text-gray-900 dark:text-gray-100"
-          }`}>
+          <p
+            className={`text-sm leading-relaxed whitespace-pre-wrap ${
+              isUser
+                ? "user-message-text"
+                : "assistant-message-text"
+            }`}
+          >
             {message.content}
           </p>
         </div>

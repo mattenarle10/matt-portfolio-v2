@@ -47,11 +47,16 @@ html {
 }
 
 /* Ensure dark mode classes work properly - but exclude chat messages */
-.text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(.bg-white p) {
+.text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(
+    .bg-white p
+  ) {
   color: black !important;
 }
 
-.dark .text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(.bg-white p) {
+.dark
+  .text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(
+    .bg-white p
+  ) {
   color: white !important;
 }
 
@@ -141,13 +146,50 @@ div.bg-black * .lucide {
   fill: none !important;
 }
 
-/* Specific rule for chat button icons */
-button[aria-label*="chat"] svg,
-button[aria-label*="chat"] .lucide,
-button[aria-label*="Close chat"] svg,
-button[aria-label*="Open chat"] svg {
+/* Specific rule for chat button icons - only for the floating button */
+button[aria-label*="Open chat"] svg,
+button[aria-label*="Open chat"] .lucide {
   color: white !important;
   stroke: white !important;
+  fill: none !important;
+}
+
+.dark button[aria-label*="Open chat"] svg,
+.dark button[aria-label*="Open chat"] .lucide {
+  color: black !important;
+  stroke: black !important;
+  fill: none !important;
+}
+
+/* Make X button white always - highest priority */
+button.chat-close-button svg,
+button.chat-close-button .lucide,
+button.chat-close-button svg.lucide,
+.chat-close-button > svg,
+.chat-close-button > .lucide,
+button.chat-close-button svg path,
+button.chat-close-button .lucide path {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+html.dark button.chat-close-button svg,
+html.dark button.chat-close-button .lucide,
+html.dark button.chat-close-button svg.lucide,
+html.dark .chat-close-button > svg,
+html.dark .chat-close-button > .lucide,
+html.dark button.chat-close-button svg path,
+html.dark button.chat-close-button .lucide path,
+.dark button.chat-close-button svg,
+.dark button.chat-close-button .lucide,
+.dark button.chat-close-button svg.lucide,
+.dark .chat-close-button > svg,
+.dark .chat-close-button > .lucide,
+.dark button.chat-close-button svg path,
+.dark button.chat-close-button .lucide path {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
   fill: none !important;
 }
 
@@ -168,28 +210,19 @@ button[aria-label*="Open chat"] svg {
   fill: none !important;
 }
 
-.dark button[aria-label*="chat"] svg,
-.dark button[aria-label*="chat"] .lucide,
-.dark button[aria-label*="Close chat"] svg,
-.dark button[aria-label*="Open chat"] svg {
-  color: black !important;
-  stroke: black !important;
-  fill: none !important;
-}
-
-/* Force chat message text colors - properly scoped */
-.chat-message-text.text-white {
+/* Chat message text colors */
+.user-message-text {
   color: white !important;
 }
 
-.dark .chat-message-text.text-black {
+.dark .user-message-text {
   color: black !important;
 }
 
-.chat-message-text.text-gray-900 {
+.assistant-message-text {
   color: rgb(17, 24, 39) !important;
 }
 
-.dark .chat-message-text.text-gray-100 {
+.dark .assistant-message-text {
   color: rgb(243, 244, 246) !important;
 }

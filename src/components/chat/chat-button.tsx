@@ -14,13 +14,13 @@ export function ChatButton({ isOpen, onClick }: ChatButtonProps) {
 
   useEffect(() => {
     const checkDarkMode = () => {
-      setIsDark(document.documentElement.classList.contains('dark'))
+      setIsDark(document.documentElement.classList.contains("dark"))
     }
     checkDarkMode()
     const observer = new MutationObserver(checkDarkMode)
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ["class"],
     })
     return () => observer.disconnect()
   }, [])
@@ -40,9 +40,21 @@ export function ChatButton({ isOpen, onClick }: ChatButtonProps) {
         transition={{ duration: 0.2 }}
       >
         {isOpen ? (
-          <X className="w-6 h-6" style={{ color: isDark ? 'black' : 'white', stroke: isDark ? 'black' : 'white' }} />
+          <X
+            className="w-6 h-6"
+            style={{
+              color: isDark ? "black" : "white",
+              stroke: isDark ? "black" : "white",
+            }}
+          />
         ) : (
-          <MessageCircle className="w-6 h-6" style={{ color: isDark ? 'black' : 'white', stroke: isDark ? 'black' : 'white' }} />
+          <MessageCircle
+            className="w-6 h-6"
+            style={{
+              color: isDark ? "black" : "white",
+              stroke: isDark ? "black" : "white",
+            }}
+          />
         )}
       </motion.div>
     </motion.button>

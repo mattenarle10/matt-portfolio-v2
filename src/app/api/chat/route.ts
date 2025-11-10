@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const model = genAI.getGenerativeModel({ 
+    const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash",
       generationConfig: {
         maxOutputTokens: 500,
@@ -43,18 +43,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: text })
   } catch (error) {
     console.error("Chat API error:", error)
-    
+
     // Log detailed error information
     if (error instanceof Error) {
       console.error("Error name:", error.name)
       console.error("Error message:", error.message)
       console.error("Error stack:", error.stack)
     }
-    
+
     return NextResponse.json(
-      { 
+      {
         error: "Failed to process message",
-        details: error instanceof Error ? error.message : "Unknown error"
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     )

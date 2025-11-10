@@ -32,7 +32,9 @@ export function ChatProvider() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.error || errorData.details || `HTTP ${response.status}`)
+        throw new Error(
+          errorData.error || errorData.details || `HTTP ${response.status}`
+        )
       }
 
       const data = await response.json()
@@ -54,7 +56,10 @@ export function ChatProvider() {
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: "assistant",
-        content: error instanceof Error ? `Error: ${error.message}` : "Sorry, I encountered an error. Please try again in a moment.",
+        content:
+          error instanceof Error
+            ? `Error: ${error.message}`
+            : "Sorry, I encountered an error. Please try again in a moment.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])

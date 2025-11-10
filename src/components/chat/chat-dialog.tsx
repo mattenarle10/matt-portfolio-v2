@@ -1,8 +1,9 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { Bot, X } from "lucide-react"
+import { X } from "lucide-react"
 import { useEffect } from "react"
+import Image from "next/image"
 import type { Message } from "@/lib/chat/types"
 import { ChatInput } from "./chat-input"
 import { ChatMessageList } from "./chat-message-list"
@@ -43,17 +44,6 @@ export function ChatDialog({
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/50 z-40"
-          />
-
-          {/* Dialog */}
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -64,31 +54,44 @@ export function ChatDialog({
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-black dark:bg-white flex items-center justify-center">
-                  <Bot className="w-5 h-5 !text-white dark:!text-black" />
+                <div className="w-8 h-8 rounded-full overflow-hidden relative">
+                  <Image
+                    src="/about/matt-viet.png"
+                    alt="Matt Enarle"
+                    width={32}
+                    height={32}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
                 <div>
-                  <h2 className="font-medium text-sm text-gray-900 dark:text-gray-100">Matt's AI Assistant</h2>
-                  <p className="text-xs opacity-60 text-gray-700 dark:text-gray-300">Ask me anything!</p>
+                  <h2 className="font-medium text-sm text-gray-900 dark:text-gray-100">
+                    Matt Enarle
+                  </h2>
+                  <p className="text-xs text-green-600 dark:text-green-400">
+                    Online
+                  </p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors chat-close-button"
                 aria-label="Close chat"
               >
-                <X className="w-5 h-5 text-gray-900 dark:text-gray-100" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Messages */}
-            <ChatMessageList messages={messages} isLoading={isLoading} onSendMessage={onSendMessage} />
+            <ChatMessageList
+              messages={messages}
+              isLoading={isLoading}
+              onSendMessage={onSendMessage}
+            />
 
             {/* Input */}
             <ChatInput onSend={onSendMessage} isLoading={isLoading} />
           </motion.div>
-        </>
       )}
     </AnimatePresence>
   )
