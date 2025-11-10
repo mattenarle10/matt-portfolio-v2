@@ -5,6 +5,7 @@ import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { GlobalStateProvider } from "@/components/context/GlobalStateContext"
 import { ThemeProvider as ClientThemeProvider } from "@/components/context/ThemeContext"
+import { ChatProvider } from "@/components/chat/chat-provider"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
 
@@ -124,6 +125,7 @@ export default async function RootLayout({
             <main className="flex-grow min-h-[60vh]">{children}</main>
             <Footer />
             <Analytics />
+            <ChatProvider />
             {/* JSON-LD: Person */}
             <script
               type="application/ld+json"
