@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import type { Message } from "@/lib/chat/types"
 import { ChatButton } from "./chat-button"
 import { ChatDialog } from "./chat-dialog"
-import type { Message } from "@/lib/chat/types"
 
 export function ChatProvider() {
   const [messages, setMessages] = useState<Message[]>([])
@@ -49,8 +49,7 @@ export function ChatProvider() {
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: "assistant",
-        content:
-          "Sorry, I encountered an error. Please try again in a moment.",
+        content: "Sorry, I encountered an error. Please try again in a moment.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -72,4 +71,3 @@ export function ChatProvider() {
     </>
   )
 }
-

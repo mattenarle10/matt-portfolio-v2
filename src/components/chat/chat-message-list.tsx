@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import { Loader2 } from "lucide-react"
-import { ChatMessage } from "./chat-message"
+import { useEffect, useRef } from "react"
 import type { Message } from "@/lib/chat/types"
+import { ChatMessage } from "./chat-message"
 
 interface ChatMessageListProps {
   messages: Message[]
@@ -81,4 +81,3 @@ export function ChatMessageList({ messages, isLoading }: ChatMessageListProps) {
     </div>
   )
 }
-

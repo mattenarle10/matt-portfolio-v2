@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect, type KeyboardEvent } from "react"
 import { Send } from "lucide-react"
+import { type KeyboardEvent, useEffect, useRef, useState } from "react"
 
 interface ChatInputProps {
   onSend: (message: string) => void
@@ -68,4 +68,3 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
     </div>
   )
 }
-

@@ -1,11 +1,11 @@
 "use client"
 
+import { AnimatePresence, motion } from "framer-motion"
+import { Bot, X } from "lucide-react"
 import { useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { X, Bot } from "lucide-react"
-import { ChatMessageList } from "./chat-message-list"
-import { ChatInput } from "./chat-input"
 import type { Message } from "@/lib/chat/types"
+import { ChatInput } from "./chat-input"
+import { ChatMessageList } from "./chat-message-list"
 
 interface ChatDialogProps {
   isOpen: boolean
@@ -93,4 +93,3 @@ export function ChatDialog({
     </AnimatePresence>
   )
 }
-

@@ -56,4 +56,3 @@ export function ChatMessage({ message }: ChatMessageProps) {
     </motion.div>
   )
 }
-

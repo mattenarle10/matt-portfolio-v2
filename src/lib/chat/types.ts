@@ -25,4 +25,3 @@ export interface ChatState {
   isOpen: boolean
   isLoading: boolean
 }
-

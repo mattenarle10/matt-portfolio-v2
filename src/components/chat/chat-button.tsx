@@ -32,4 +32,3 @@ export function ChatButton({ isOpen, onClick }: ChatButtonProps) {
     </motion.button>
   )
 }
-
