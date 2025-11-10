@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" })
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
     const chat = model.startChat({
       history: [
