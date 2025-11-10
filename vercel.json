@@ -20,8 +20,7 @@
         }
       ],
       "destination": "https://mattenarle.com/:path*",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/:path*",
@@ -32,8 +31,7 @@
         }
       ],
       "destination": "https://mattenarle.com/:path*",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     }
   ]
 }
