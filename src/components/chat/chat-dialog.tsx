@@ -50,7 +50,7 @@ export function ChatDialog({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/50 z-40"
           />
 
           {/* Dialog */}
@@ -65,11 +65,11 @@ export function ChatDialog({
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-black dark:bg-white flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-white dark:text-black" />
+                  <Bot className="w-5 h-5 !text-white dark:!text-black" />
                 </div>
                 <div>
-                  <h2 className="font-medium text-sm">Matt's AI Assistant</h2>
-                  <p className="text-xs opacity-60">Ask me anything!</p>
+                  <h2 className="font-medium text-sm text-gray-900 dark:text-gray-100">Matt's AI Assistant</h2>
+                  <p className="text-xs opacity-60 text-gray-700 dark:text-gray-300">Ask me anything!</p>
                 </div>
               </div>
               <button
@@ -78,12 +78,12 @@ export function ChatDialog({
                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 aria-label="Close chat"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 text-gray-900 dark:text-gray-100" />
               </button>
             </div>
 
             {/* Messages */}
-            <ChatMessageList messages={messages} isLoading={isLoading} />
+            <ChatMessageList messages={messages} isLoading={isLoading} onSendMessage={onSendMessage} />
 
             {/* Input */}
             <ChatInput onSend={onSendMessage} isLoading={isLoading} />

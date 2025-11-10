@@ -26,38 +26,36 @@ export async function POST(request: Request) {
       )
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
-
-    const chat = model.startChat({
-      history: [
-        {
-          role: "user",
-          parts: [{ text: PORTFOLIO_CONTEXT }],
-        },
-        {
-          role: "model",
-          parts: [
-            {
-              text: "I understand! I'm ready to answer questions about Matt Enarle's portfolio, experience, projects, and interests. How can I help you learn more about Matt?",
-            },
-          ],
-        },
-      ],
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash",
       generationConfig: {
         maxOutputTokens: 500,
         temperature: 0.7,
       },
     })
 
-    const result = await chat.sendMessage(message)
+    const prompt = `${PORTFOLIO_CONTEXT}\n\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
+
+    const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
 
     return NextResponse.json({ message: text })
   } catch (error) {
     console.error("Chat API error:", error)
+    
+    // Log detailed error information
+    if (error instanceof Error) {
+      console.error("Error name:", error.name)
+      console.error("Error message:", error.message)
+      console.error("Error stack:", error.stack)
+    }
+    
     return NextResponse.json(
-      { error: "Failed to process message" },
+      { 
+        error: "Failed to process message",
+        details: error instanceof Error ? error.message : "Unknown error"
+      },
       { status: 500 }
     )
   }

@@ -46,12 +46,12 @@ html {
   transition-duration: 200ms;
 }
 
-/* Ensure dark mode classes work properly */
-.text-black {
+/* Ensure dark mode classes work properly - but exclude chat messages */
+.text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(.bg-white p) {
   color: black !important;
 }
 
-.dark .text-black {
+.dark .text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(.bg-white p) {
   color: white !important;
 }
 
@@ -113,4 +113,83 @@ html {
 }
 .dark .image-border {
   border-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Chat button text visibility in light mode */
+.chat-button-text {
+  color: white !important;
+}
+.dark .chat-button-text {
+  color: black !important;
+}
+
+/* Force chat icons to be white in light mode when on black background */
+button.bg-black svg,
+button.bg-black .lucide,
+button.bg-black svg.lucide,
+div.bg-black svg,
+div.bg-black .lucide,
+div.bg-black svg.lucide,
+.bg-black svg.lucide,
+.bg-black .lucide,
+button.bg-black * svg,
+button.bg-black * .lucide,
+div.bg-black * svg,
+div.bg-black * .lucide {
+  color: white !important;
+  stroke: white !important;
+  fill: none !important;
+}
+
+/* Specific rule for chat button icons */
+button[aria-label*="chat"] svg,
+button[aria-label*="chat"] .lucide,
+button[aria-label*="Close chat"] svg,
+button[aria-label*="Open chat"] svg {
+  color: white !important;
+  stroke: white !important;
+  fill: none !important;
+}
+
+.dark button.bg-white svg,
+.dark button.bg-white .lucide,
+.dark button.bg-white svg.lucide,
+.dark div.bg-white svg,
+.dark div.bg-white .lucide,
+.dark div.bg-white svg.lucide,
+.dark .bg-white svg.lucide,
+.dark .bg-white .lucide,
+.dark button.bg-white * svg,
+.dark button.bg-white * .lucide,
+.dark div.bg-white * svg,
+.dark div.bg-white * .lucide {
+  color: black !important;
+  stroke: black !important;
+  fill: none !important;
+}
+
+.dark button[aria-label*="chat"] svg,
+.dark button[aria-label*="chat"] .lucide,
+.dark button[aria-label*="Close chat"] svg,
+.dark button[aria-label*="Open chat"] svg {
+  color: black !important;
+  stroke: black !important;
+  fill: none !important;
+}
+
+/* Force chat message text colors - properly scoped */
+.chat-message-text.text-white {
+  color: white !important;
+}
+
+.dark .chat-message-text.text-black {
+  color: black !important;
+}
+
+.chat-message-text.text-gray-900 {
+  color: rgb(17, 24, 39) !important;
+}
+
+.dark .chat-message-text.text-gray-100 {
+  color: rgb(243, 244, 246) !important;
 }

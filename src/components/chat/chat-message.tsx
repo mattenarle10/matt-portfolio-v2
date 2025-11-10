@@ -24,7 +24,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         }`}
       >
         {isUser ? (
-          <User className="w-4 h-4 text-white dark:text-black" />
+          <User className="w-4 h-4 !text-white dark:!text-black" />
         ) : (
           <Bot className="w-4 h-4 text-gray-700 dark:text-gray-300" />
         )}
@@ -36,15 +36,19 @@ export function ChatMessage({ message }: ChatMessageProps) {
         <div
           className={`rounded-lg px-4 py-2 ${
             isUser
-              ? "bg-black dark:bg-white text-white dark:text-black"
-              : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              ? "bg-black dark:bg-white"
+              : "bg-gray-100 dark:bg-gray-800"
           }`}
         >
-          <p className="text-sm leading-relaxed whitespace-pre-wrap">
+          <p className={`text-sm leading-relaxed whitespace-pre-wrap chat-message-text ${
+            isUser
+              ? "text-white dark:text-black"
+              : "text-gray-900 dark:text-gray-100"
+          }`}>
             {message.content}
           </p>
         </div>
-        <span className="text-[10px] opacity-50 mt-1">
+        <span className="text-[10px] text-gray-600 dark:text-gray-400 opacity-50 mt-1">
           {message.timestamp.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",

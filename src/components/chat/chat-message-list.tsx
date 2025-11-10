@@ -8,9 +8,10 @@ import { ChatMessage } from "./chat-message"
 interface ChatMessageListProps {
   messages: Message[]
   isLoading: boolean
+  onSendMessage?: (message: string) => void
 }
 
-export function ChatMessageList({ messages, isLoading }: ChatMessageListProps) {
+export function ChatMessageList({ messages, isLoading, onSendMessage }: ChatMessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -25,28 +26,31 @@ export function ChatMessageList({ messages, isLoading }: ChatMessageListProps) {
     return (
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="text-center">
-          <h3 className="text-lg font-medium mb-2">
+          <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">
             Ask me anything about Matt!
           </h3>
-          <p className="text-sm opacity-70 mb-4">
+          <p className="text-sm opacity-70 mb-4 text-gray-700 dark:text-gray-300">
             Try asking about his experience, projects, or hobbies
           </p>
           <div className="flex flex-col gap-2">
             <button
               type="button"
-              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              onClick={() => onSendMessage?.("What projects has Matt worked on?")}
+              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-gray-100"
             >
               What projects has Matt worked on?
             </button>
             <button
               type="button"
-              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              onClick={() => onSendMessage?.("Tell me about Matt's experience")}
+              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-gray-100"
             >
               Tell me about Matt's experience
             </button>
             <button
               type="button"
-              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              onClick={() => onSendMessage?.("What are Matt's hobbies?")}
+              className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-900 dark:text-gray-100"
             >
               What are Matt's hobbies?
             </button>
