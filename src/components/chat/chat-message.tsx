@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Bot } from "lucide-react"
+import { User } from "lucide-react"
 import Image from "next/image"
 import type { Message } from "@/lib/chat/types"
 
@@ -21,19 +21,21 @@ export function ChatMessage({ message }: ChatMessageProps) {
     >
       <div
         className={`flex-shrink-0 w-8 h-8 rounded-full overflow-hidden ${
-          isUser ? "" : "bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
+          isUser
+            ? "bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
+            : ""
         }`}
       >
         {isUser ? (
+          <User className="w-4 h-4 text-gray-700 dark:text-gray-300" />
+        ) : (
           <Image
             src="/about/matt-viet.png"
-            alt="User"
+            alt="Matt Enarle"
             width={32}
             height={32}
             className="object-cover w-full h-full"
           />
-        ) : (
-          <Bot className="w-4 h-4 text-gray-700 dark:text-gray-300" />
         )}
       </div>
 
@@ -47,9 +49,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         >
           <p
             className={`text-sm leading-relaxed whitespace-pre-wrap ${
-              isUser
-                ? "user-message-text"
-                : "assistant-message-text"
+              isUser ? "user-message-text" : "assistant-message-text"
             }`}
           >
             {message.content}

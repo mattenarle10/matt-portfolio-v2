@@ -1,7 +1,7 @@
 "use client"
 
-import { Bot } from "lucide-react"
 import { useEffect, useRef } from "react"
+import Image from "next/image"
 import type { Message } from "@/lib/chat/types"
 import { ChatMessage } from "./chat-message"
 
@@ -73,8 +73,14 @@ export function ChatMessageList({
       ))}
       {isLoading && (
         <div className="flex gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-            <Bot className="w-4 h-4 text-gray-700 dark:text-gray-300" />
+          <div className="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden">
+            <Image
+              src="/about/matt-viet.png"
+              alt="Matt Enarle"
+              width={32}
+              height={32}
+              className="object-cover w-full h-full"
+            />
           </div>
           <div className="flex items-center">
             <div className="rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-700">
