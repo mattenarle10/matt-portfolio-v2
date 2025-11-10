@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { cookies } from "next/headers"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
+import { ChatProvider } from "@/components/chat/chat-provider"
 import { GlobalStateProvider } from "@/components/context/GlobalStateContext"
 import { ThemeProvider as ClientThemeProvider } from "@/components/context/ThemeContext"
 import Footer from "@/components/layout/footer"
@@ -124,6 +125,7 @@ export default async function RootLayout({
             <main className="flex-grow min-h-[60vh]">{children}</main>
             <Footer />
             <Analytics />
+            <ChatProvider />
             {/* JSON-LD: Person */}
             <script
               type="application/ld+json"
