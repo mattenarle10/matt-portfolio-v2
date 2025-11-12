@@ -129,18 +129,10 @@ html {
 }
 
 /* Force chat icons to be white in light mode when on black background */
-button.bg-black svg,
-button.bg-black .lucide,
-button.bg-black svg.lucide,
-div.bg-black svg,
-div.bg-black .lucide,
-div.bg-black svg.lucide,
-.bg-black svg.lucide,
-.bg-black .lucide,
-button.bg-black * svg,
-button.bg-black * .lucide,
-div.bg-black * svg,
-div.bg-black * .lucide {
+/* Exclude orange icons (like Strava) from this rule */
+button.bg-black svg:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
+button.bg-black .lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
+button.bg-black svg.lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600) {
   color: white !important;
   stroke: white !important;
   fill: none !important;
@@ -193,18 +185,10 @@ html.dark button.chat-close-button .lucide path,
   fill: none !important;
 }
 
-.dark button.bg-white svg,
-.dark button.bg-white .lucide,
-.dark button.bg-white svg.lucide,
-.dark div.bg-white svg,
-.dark div.bg-white .lucide,
-.dark div.bg-white svg.lucide,
-.dark .bg-white svg.lucide,
-.dark .bg-white .lucide,
-.dark button.bg-white * svg,
-.dark button.bg-white * .lucide,
-.dark div.bg-white * svg,
-.dark div.bg-white * .lucide {
+/* Exclude orange icons (like Strava) from dark mode rule too */
+.dark button.bg-white svg:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
+.dark button.bg-white .lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
+.dark button.bg-white svg.lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600) {
   color: black !important;
   stroke: black !important;
   fill: none !important;
