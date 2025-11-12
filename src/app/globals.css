@@ -46,18 +46,29 @@ html {
   transition-duration: 200ms;
 }
 
-/* Ensure dark mode classes work properly - but exclude chat messages */
-.text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(
-    .bg-white p
-  ) {
+/* Ensure text-black class works properly */
+.text-black {
   color: black !important;
 }
 
-.dark
-  .text-black:not(.bg-gray-100 p):not(.bg-gray-800 p):not(.bg-black p):not(
-    .bg-white p
-  ) {
+.dark .text-black {
   color: white !important;
+}
+
+/* But preserve chat message text colors */
+.bg-gray-100 .text-black,
+.bg-gray-800 .text-black,
+.bg-black .text-black,
+.bg-white .text-black {
+  color: inherit !important;
+}
+
+.user-message-text.text-black {
+  color: white !important;
+}
+
+.dark .assistant-message-text.text-black {
+  color: rgb(243, 244, 246) !important;
 }
 
 /* Force white text in mobile menu */
