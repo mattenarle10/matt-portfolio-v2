@@ -128,16 +128,6 @@ html {
   color: black !important;
 }
 
-/* Force chat icons to be white in light mode when on black background */
-/* Exclude orange icons (like Strava) from this rule */
-button.bg-black svg:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
-button.bg-black .lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
-button.bg-black svg.lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600) {
-  color: white !important;
-  stroke: white !important;
-  fill: none !important;
-}
-
 /* Specific rule for chat button icons - only for the floating button */
 button[aria-label*="Open chat"] svg,
 button[aria-label*="Open chat"] .lucide {
@@ -182,15 +172,6 @@ html.dark button.chat-close-button .lucide path,
 .dark button.chat-close-button .lucide path {
   color: #ffffff !important;
   stroke: #ffffff !important;
-  fill: none !important;
-}
-
-/* Exclude orange icons (like Strava) from dark mode rule too */
-.dark button.bg-white svg:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
-.dark button.bg-white .lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600),
-.dark button.bg-white svg.lucide:not(.text-orange-500):not(.text-orange-400):not(.text-orange-600) {
-  color: black !important;
-  stroke: black !important;
   fill: none !important;
 }
 
