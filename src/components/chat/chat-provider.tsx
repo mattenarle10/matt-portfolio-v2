@@ -22,12 +22,21 @@ export function ChatProvider() {
     setIsLoading(true)
 
     try {
+      // Send last 5 messages as context for the AI
+      const recentHistory = messages.slice(-5).map((msg) => ({
+        role: msg.role,
+        content: msg.content,
+      }))
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: content }),
+        body: JSON.stringify({
+          message: content,
+          history: recentHistory,
+        }),
       })
 
       if (!response.ok) {
