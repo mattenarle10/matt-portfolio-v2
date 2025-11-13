@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const { message } = validation.data
+    const { message, history = [] } = validation.data
 
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
@@ -36,7 +36,13 @@ export async function POST(request: Request) {
       },
     })
 
-    const prompt = `${PORTFOLIO_CONTEXT}\n\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
+    // Build conversation context from history
+    const conversationContext =
+      history.length > 0
+        ? `\n\nPrevious conversation:\n${history.map((msg) => `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`).join("\n")}\n`
+        : ""
+
+    const prompt = `${PORTFOLIO_CONTEXT}${conversationContext}\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
 
     const result = await model.generateContent(prompt)
     const response = await result.response
