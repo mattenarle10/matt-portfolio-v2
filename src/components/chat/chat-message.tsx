@@ -44,7 +44,9 @@ export function ChatMessage({ message }: ChatMessageProps) {
       >
         <div
           className={`rounded-lg px-3 py-2 md:px-4 ${
-            isUser ? "bg-white border border-gray-700" : "bg-gray-100 dark:bg-gray-700"
+            isUser
+              ? "bg-white border border-gray-700"
+              : "bg-gray-100 dark:bg-gray-700"
           }`}
         >
           <p
