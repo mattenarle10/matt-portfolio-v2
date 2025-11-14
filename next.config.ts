@@ -3,11 +3,23 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   trailingSlash: false,
   images: {
-    domains: [
-      "i.scdn.co",
-      "mosaic.scdn.co",
-      "image-cdn-ak.spotifycdn.com",
-      "image-cdn-fa.spotifycdn.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.scdn.co",
+      },
+      {
+        protocol: "https",
+        hostname: "mosaic.scdn.co",
+      },
+      {
+        protocol: "https",
+        hostname: "image-cdn-ak.spotifycdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "image-cdn-fa.spotifycdn.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
   },
