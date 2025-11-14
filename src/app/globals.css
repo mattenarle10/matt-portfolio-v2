@@ -188,17 +188,13 @@ html.dark button.chat-close-button .lucide path,
 
 /* Chat message text colors */
 .user-message-text {
-  color: white !important;
-}
-
-.dark .user-message-text {
   color: black !important;
 }
 
 .assistant-message-text {
-  color: rgb(17, 24, 39) !important;
+  color: rgb(216, 216, 216) !important;
 }
 
 .dark .assistant-message-text {
-  color: rgb(243, 244, 246) !important;
+  color: rgb(216, 216, 216) !important;
 }

@@ -56,10 +56,10 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
           type="button"
           onClick={handleSend}
           disabled={!message.trim() || isLoading}
-          className="flex-shrink-0 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-lg bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex-shrink-0 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-lg bg-white hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Send message"
         >
-          <Send className="w-3.5 h-3.5 md:w-4 md:h-4 !text-white dark:!text-black" />
+          <Send className="w-3.5 h-3.5 md:w-4 md:h-4 !text-black" />
         </button>
       </div>
       <p className="text-[9px] md:text-[10px] opacity-50 mt-1.5 md:mt-2 text-gray-600 dark:text-gray-400">
