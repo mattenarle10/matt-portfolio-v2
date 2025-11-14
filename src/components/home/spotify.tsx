@@ -2,11 +2,11 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { Spotify } from "react-spotify-embed"
 import type { SpotifyTrack } from "@/app/api/spotify/useSpotify"
 import { useSpotify } from "@/app/api/spotify/useSpotify"
 import { useGlobalState } from "@/components/context/GlobalStateContext"
 import FadeIn from "../utils/FadeIn"
+import { SpotifyEmbed } from "../utils/spotify-embed"
 
 const SpotifyRecentlyPlayed = () => {
   // Get global state
@@ -196,7 +196,7 @@ const SpotifyRecentlyPlayed = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex flex-col h-full">
-                    <Spotify
+                    <SpotifyEmbed
                       link={displayTrack.externalUrl}
                       width="100%"
                       height={isMobile ? "172" : "352"}
@@ -226,7 +226,7 @@ const SpotifyRecentlyPlayed = () => {
                   )}
                   {tracksList.map((track, index) => (
                     <FadeIn key={`${track.id}-${index}`} delay={0.03 * index}>
-                      <Spotify
+                      <SpotifyEmbed
                         link={track.externalUrl}
                         width="100%"
                         height="80"
