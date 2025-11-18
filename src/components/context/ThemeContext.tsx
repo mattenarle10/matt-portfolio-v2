@@ -57,7 +57,12 @@ export const ThemeProvider: React.FC<{
       localStorage.setItem("theme", theme)
     } catch {}
     try {
-      document.cookie = `theme=${theme}; path=/; max-age=31536000; samesite=lax`
+      if (window.cookieStore?.set) {
+        void window.cookieStore.set("theme", theme).catch(() => {})
+      } else {
+        /* biome-ignore lint/suspicious/noDocumentCookie: Cookie Store API is not available in all browsers, so we fall back to a standard cookie write for theme persistence. */
+        document.cookie = `theme=${theme}; path=/; max-age=31536000; samesite=lax`
+      }
     } catch {}
   }, [theme])
 

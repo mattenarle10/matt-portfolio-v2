@@ -158,8 +158,8 @@ button[aria-label*="Open chat"] .lucide {
 button.chat-close-button svg,
 button.chat-close-button .lucide,
 button.chat-close-button svg.lucide,
-.chat-close-button > svg,
-.chat-close-button > .lucide,
+button.chat-close-button > svg,
+button.chat-close-button > .lucide,
 button.chat-close-button svg path,
 button.chat-close-button .lucide path {
   color: #ffffff !important;
