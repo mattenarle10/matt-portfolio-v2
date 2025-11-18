@@ -10,6 +10,7 @@ interface ChatMessageListProps {
   isLoading: boolean
   onSendMessage?: (message: string) => void
   showSuggestions?: boolean
+  suggestedPrompts?: string[]
 }
 
 export function ChatMessageList({
@@ -17,6 +18,7 @@ export function ChatMessageList({
   isLoading,
   onSendMessage,
   showSuggestions = true,
+  suggestedPrompts,
 }: ChatMessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -29,6 +31,15 @@ export function ChatMessageList({
   }, [messages, isLoading])
 
   if (messages.length === 0) {
+    const prompts =
+      suggestedPrompts && suggestedPrompts.length > 0
+        ? suggestedPrompts
+        : [
+            "What projects has Matt worked on?",
+            "Tell me about Matt's experience",
+            "What are Matt's hobbies?",
+          ]
+
     return (
       <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
         <div className="text-center max-w-sm">
@@ -41,31 +52,16 @@ export function ChatMessageList({
                 Try asking about his experience, projects, or hobbies
               </p>
               <div className="flex flex-col gap-2">
-                <button
-                  type="button"
-                  onClick={() =>
-                    onSendMessage?.("What projects has Matt worked on?")
-                  }
-                  className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
-                >
-                  What projects has Matt worked on?
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    onSendMessage?.("Tell me about Matt's experience")
-                  }
-                  className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
-                >
-                  Tell me about Matt's experience
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onSendMessage?.("What are Matt's hobbies?")}
-                  className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
-                >
-                  What are Matt's hobbies?
-                </button>
+                {prompts.map((prompt) => (
+                  <button
+                    key={prompt}
+                    type="button"
+                    onClick={() => onSendMessage?.(prompt)}
+                    className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
+                  >
+                    {prompt}
+                  </button>
+                ))}
               </div>
             </>
           )}

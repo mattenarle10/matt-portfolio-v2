@@ -17,6 +17,7 @@ export const ChatRequestSchema = z.object({
       })
     )
     .optional(),
+  page: z.string().optional(),
 })
 
 export const ChatResponseSchema = z.object({

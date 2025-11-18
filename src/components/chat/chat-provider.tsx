@@ -1,14 +1,50 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import type { Message } from "@/lib/chat/types"
 import { ChatButton } from "./chat-button"
 import { ChatDialog } from "./chat-dialog"
 
+function getSuggestedPrompts(pathname: string): string[] {
+  if (pathname.startsWith("/projects")) {
+    return [
+      "Which of Matt's projects best shows his cloud skills?",
+      "Tell me about Matt's most recent project.",
+      "Which project involves AI or machine learning?",
+    ]
+  }
+
+  if (pathname.startsWith("/about")) {
+    return [
+      "Summarize Matt's experience.",
+      "What is Matt's education background?",
+      "What are Matt's hobbies and interests?",
+    ]
+  }
+
+  if (pathname.startsWith("/contact")) {
+    return [
+      "How can I get in touch with Matt?",
+      "What's the best way to collaborate with Matt?",
+      "Can I book a call with Matt?",
+    ]
+  }
+
+  // Default for home or other routes
+  return [
+    "Give me a quick overview of who Matt is.",
+    "What is Matt working on right now?",
+    "How does Matt balance work, training, and MBA?",
+  ]
+}
+
 export function ChatProvider() {
+  const pathname = usePathname() || "/"
   const [messages, setMessages] = useState<Message[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const suggestedPrompts = getSuggestedPrompts(pathname)
 
   async function handleSendMessage(content: string) {
     const userMessage: Message = {
@@ -36,6 +72,7 @@ export function ChatProvider() {
         body: JSON.stringify({
           message: content,
           history: recentHistory,
+          page: pathname,
         }),
       })
 
@@ -86,6 +123,7 @@ export function ChatProvider() {
         messages={messages}
         isLoading={isLoading}
         onSendMessage={handleSendMessage}
+        suggestedPrompts={suggestedPrompts}
       />
     </>
   )

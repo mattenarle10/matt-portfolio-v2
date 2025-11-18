@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const { message, history = [] } = validation.data
+    const { message, history = [], page } = validation.data
 
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
@@ -36,13 +36,17 @@ export async function POST(request: Request) {
       },
     })
 
-    // Build conversation context from history
+    // Build page and conversation context
+    const pageContext = page
+      ? `\n\nCurrent page or section: ${page}. Focus your answer on what would be most helpful for a visitor on this page.`
+      : ""
+
     const conversationContext =
       history.length > 0
         ? `\n\nPrevious conversation:\n${history.map((msg) => `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`).join("\n")}\n`
         : ""
 
-    const prompt = `${PORTFOLIO_CONTEXT}${conversationContext}\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
+    const prompt = `${PORTFOLIO_CONTEXT}${pageContext}${conversationContext}\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
 
     const result = await model.generateContent(prompt)
     const response = await result.response

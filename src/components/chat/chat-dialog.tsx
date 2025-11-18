@@ -14,6 +14,7 @@ interface ChatDialogProps {
   messages: Message[]
   isLoading: boolean
   onSendMessage: (message: string) => void
+  suggestedPrompts?: string[]
 }
 
 export function ChatDialog({
@@ -22,6 +23,7 @@ export function ChatDialog({
   messages,
   isLoading,
   onSendMessage,
+  suggestedPrompts,
 }: ChatDialogProps) {
   const [showSuggestions, setShowSuggestions] = useState(true)
 
@@ -90,6 +92,7 @@ export function ChatDialog({
             isLoading={isLoading}
             onSendMessage={onSendMessage}
             showSuggestions={showSuggestions}
+            suggestedPrompts={suggestedPrompts}
           />
 
           {/* Input */}
