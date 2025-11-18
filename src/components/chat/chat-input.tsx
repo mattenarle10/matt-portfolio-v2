@@ -73,25 +73,32 @@ export function ChatInput({
         <p className="text-[9px] md:text-[10px] opacity-50 text-gray-600 dark:text-gray-400">
           Press Enter to send, Shift+Enter for new line
         </p>
-        <button
-          type="button"
-          onClick={onToggleSuggestions}
-          className={`relative inline-flex h-4 w-7 items-center rounded-full border border-black/20 dark:border-black/30 transition-colors ${
-            suggestionsEnabled ? "bg-black/80" : "bg-transparent"
-          }`}
-          aria-pressed={suggestionsEnabled}
-          aria-label={
-            suggestionsEnabled
-              ? "Disable suggested prompts"
-              : "Enable suggested prompts"
-          }
-        >
-          <span
-            className={`inline-block h-3 w-3 transform rounded-full bg-white dark:bg-gray-900 transition-transform ${
-              suggestionsEnabled ? "translate-x-3" : "translate-x-0"
+        <div className="flex items-center gap-1.5 md:gap-2">
+          <span className="text-[9px] md:text-[10px] text-gray-600 dark:text-gray-400">
+            Suggestions
+          </span>
+          <button
+            type="button"
+            onClick={onToggleSuggestions}
+            className={`relative inline-flex h-4 w-7 items-center rounded-full border border-black/15 dark:border-white/20 transition-colors ${
+              suggestionsEnabled
+                ? "bg-gray-900 dark:bg-gray-100"
+                : "bg-white/90 dark:bg-gray-800"
             }`}
-          />
-        </button>
+            aria-pressed={suggestionsEnabled}
+            aria-label={
+              suggestionsEnabled
+                ? "Disable suggested prompts"
+                : "Enable suggested prompts"
+            }
+          >
+            <span
+              className={`inline-block h-3 w-3 transform rounded-full bg-white dark:bg-gray-900 shadow transition-transform ${
+                suggestionsEnabled ? "translate-x-3" : "translate-x-0"
+              }`}
+            />
+          </button>
+        </div>
       </div>
     </div>
   )

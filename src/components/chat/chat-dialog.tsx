@@ -97,9 +97,7 @@ export function ChatDialog({
             onSend={onSendMessage}
             isLoading={isLoading}
             suggestionsEnabled={showSuggestions}
-            onToggleSuggestions={() =>
-              setShowSuggestions((prev) => !prev)
-            }
+            onToggleSuggestions={() => setShowSuggestions((prev) => !prev)}
           />
         </motion.div>
       )}
