@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 import type { Message } from "@/lib/chat/types"
 import { ChatButton } from "./chat-button"
 import { ChatDialog } from "./chat-dialog"
