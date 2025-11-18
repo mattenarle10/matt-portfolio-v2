@@ -5,7 +5,7 @@ import { StravaActivity } from "@/components/home/strava"
 import FadeIn from "@/components/utils/FadeIn"
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Home | Matt Enarle",
   description:
     "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
   openGraph: {
