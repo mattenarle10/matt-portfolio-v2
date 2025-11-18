@@ -6,9 +6,16 @@ import { type KeyboardEvent, useEffect, useRef, useState } from "react"
 interface ChatInputProps {
   onSend: (message: string) => void
   isLoading: boolean
+  suggestionsEnabled: boolean
+  onToggleSuggestions: () => void
 }
 
-export function ChatInput({ onSend, isLoading }: ChatInputProps) {
+export function ChatInput({
+  onSend,
+  isLoading,
+  suggestionsEnabled,
+  onToggleSuggestions,
+}: ChatInputProps) {
   const [message, setMessage] = useState("")
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -62,9 +69,30 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
           <Send className="w-3.5 h-3.5 md:w-4 md:h-4 !text-black" />
         </button>
       </div>
-      <p className="text-[9px] md:text-[10px] opacity-50 mt-1.5 md:mt-2 text-gray-600 dark:text-gray-400">
-        Press Enter to send, Shift+Enter for new line
-      </p>
+      <div className="mt-1.5 md:mt-2 flex items-center justify-between">
+        <p className="text-[9px] md:text-[10px] opacity-50 text-gray-600 dark:text-gray-400">
+          Press Enter to send, Shift+Enter for new line
+        </p>
+        <button
+          type="button"
+          onClick={onToggleSuggestions}
+          className={`relative inline-flex h-4 w-7 items-center rounded-full border border-black/20 dark:border-black/30 transition-colors ${
+            suggestionsEnabled ? "bg-black/80" : "bg-transparent"
+          }`}
+          aria-pressed={suggestionsEnabled}
+          aria-label={
+            suggestionsEnabled
+              ? "Disable suggested prompts"
+              : "Enable suggested prompts"
+          }
+        >
+          <span
+            className={`inline-block h-3 w-3 transform rounded-full bg-white dark:bg-gray-900 transition-transform ${
+              suggestionsEnabled ? "translate-x-3" : "translate-x-0"
+            }`}
+          />
+        </button>
+      </div>
     </div>
   )
 }

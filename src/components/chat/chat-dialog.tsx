@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import Image from "next/image"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import type { Message } from "@/lib/chat/types"
 import { ChatInput } from "./chat-input"
 import { ChatMessageList } from "./chat-message-list"
@@ -23,6 +23,8 @@ export function ChatDialog({
   isLoading,
   onSendMessage,
 }: ChatDialogProps) {
+  const [showSuggestions, setShowSuggestions] = useState(true)
+
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -87,10 +89,18 @@ export function ChatDialog({
             messages={messages}
             isLoading={isLoading}
             onSendMessage={onSendMessage}
+            showSuggestions={showSuggestions}
           />
 
           {/* Input */}
-          <ChatInput onSend={onSendMessage} isLoading={isLoading} />
+          <ChatInput
+            onSend={onSendMessage}
+            isLoading={isLoading}
+            suggestionsEnabled={showSuggestions}
+            onToggleSuggestions={() =>
+              setShowSuggestions((prev) => !prev)
+            }
+          />
         </motion.div>
       )}
     </AnimatePresence>
