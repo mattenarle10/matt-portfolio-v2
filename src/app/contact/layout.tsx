@@ -4,12 +4,12 @@ import type React from "react"
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "let's connect — get in touch with Matt Enarle via email, LinkedIn, GitHub, or book a call. Available for consulting and collaboration.",
+    "Get in touch with Matt Enarle for consulting, collaboration, or networking opportunities. Connect via email, LinkedIn, GitHub, or schedule a call directly.",
   alternates: { canonical: "https://mattenarle.com/contact" },
   openGraph: {
     title: "Contact | Matt Enarle",
     description:
-      "let's connect — get in touch with Matt Enarle via email, LinkedIn, GitHub, or book a call.",
+      "Get in touch with Matt Enarle via email, LinkedIn, GitHub, or schedule a call for consulting and collaboration opportunities.",
     url: "https://mattenarle.com/contact",
     images: [
       { url: "https://mattenarle.com/twitter-img.png", alt: "Matt Enarle" },

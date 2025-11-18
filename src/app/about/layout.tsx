@@ -4,12 +4,12 @@ import type React from "react"
 export const metadata: Metadata = {
   title: "About",
   description:
-    "matthew enarle, basically — cloud engineer at eCloudvalley, endurance athlete, and startup enthusiast. Experience, education, and hobbies.",
+    "Professional experience, education, and background of Matt Enarle. Cloud engineer at eCloudvalley, MBA graduate from DLSU, endurance athlete, and startup founder.",
   alternates: { canonical: "https://mattenarle.com/about" },
   openGraph: {
     title: "About | Matt Enarle",
     description:
-      "matthew enarle, basically — cloud engineer at eCloudvalley, DLSU alum, endurance athlete, and startup enthusiast.",
+      "Professional experience, education, and background of Matt Enarle. Cloud engineer, MBA graduate, and endurance athlete.",
     url: "https://mattenarle.com/about",
     images: [
       { url: "https://mattenarle.com/twitter-img.png", alt: "Matt Enarle" },

@@ -7,7 +7,7 @@ import FadeIn from "@/components/utils/FadeIn"
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.",
+    "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
   openGraph: {
     url: "https://mattenarle.com",
   },

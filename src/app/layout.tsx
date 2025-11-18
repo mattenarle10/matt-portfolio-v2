@@ -24,11 +24,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mattenarle.com"),
   title: {
-    default: "Matt Enarle | Cloud Engineer & Endurance Athlete",
+    default: "Home | Matt Enarle",
     template: "%s | Matt Enarle",
   },
   description:
-    "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest. also a @heartescaro stan.",
+    "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
   applicationName: "Matt Enarle",
   alternates: {
     canonical: "https://mattenarle.com",
@@ -64,9 +64,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Matt Enarle | Cloud Engineer & Endurance Athlete",
+    title: "Home | Matt Enarle",
     description:
-      "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between — the ultimate side quest.",
+      "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
     url: "https://mattenarle.com",
     siteName: "Matt Enarle",
     locale: "en_US",
@@ -80,9 +80,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Matt Enarle | Cloud Engineer & Endurance Athlete",
+    title: "Home | Matt Enarle",
     description:
-      "hello... Matt here!|. cloud engineer by day, endurance athlete by night, mba + startup in between.",
+      "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
     creator: "@yourtwitterhandle",
     images: ["https://mattenarle.com/twitter-img.png"],
   },
