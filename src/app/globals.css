@@ -198,3 +198,20 @@ html.dark button.chat-close-button .lucide path,
 .dark .assistant-message-text {
   color: rgb(216, 216, 216) !important;
 }
+
+/* Chat suggestions toggle colors (same in light and dark mode) */
+.chat-toggle-track-on {
+  background-color: #000000;
+}
+
+.chat-toggle-track-off {
+  background-color: #ffffff;
+}
+
+.chat-toggle-knob-on {
+  background-color: #ffffff;
+}
+
+.chat-toggle-knob-off {
+  background-color: #000000;
+}

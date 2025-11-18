@@ -81,7 +81,9 @@ export function ChatInput({
             type="button"
             onClick={onToggleSuggestions}
             className={`relative inline-flex h-4 w-7 items-center rounded-full border border-white/30 transition-colors ${
-              suggestionsEnabled ? "bg-white" : "bg-white/10"
+              suggestionsEnabled
+                ? "chat-toggle-track-on"
+                : "chat-toggle-track-off"
             }`}
             aria-pressed={suggestionsEnabled}
             aria-label={
@@ -91,8 +93,10 @@ export function ChatInput({
             }
           >
             <span
-              className={`inline-block h-3 w-3 transform rounded-full bg-black shadow transition-transform ${
-                suggestionsEnabled ? "translate-x-3" : "translate-x-0"
+              className={`inline-block h-3 w-3 transform rounded-full shadow transition-transform ${
+                suggestionsEnabled
+                  ? "chat-toggle-knob-on translate-x-3"
+                  : "chat-toggle-knob-off translate-x-0"
               }`}
             />
           </button>
