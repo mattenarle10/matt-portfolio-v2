@@ -43,12 +43,12 @@ export function ChatMessageList({
     return (
       <div className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
         <div className="text-center max-w-sm">
-          <h3 className="text-base md:text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">
+          <h3 className="chat-empty-title text-base md:text-lg font-medium mb-2">
             Ask me anything about Matt!
           </h3>
           {showSuggestions && (
             <>
-              <p className="text-xs md:text-sm opacity-70 mb-4 text-gray-700 dark:text-gray-300">
+              <p className="chat-empty-subtitle text-xs md:text-sm mb-4">
                 Try asking about his experience, projects, or hobbies
               </p>
               <div className="flex flex-col gap-2">
@@ -57,7 +57,7 @@ export function ChatMessageList({
                     key={prompt}
                     type="button"
                     onClick={() => onSendMessage?.(prompt)}
-                    className="text-xs px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-gray-100"
+                    className="chat-suggestion-button text-xs px-3 py-2 rounded-lg transition-colors"
                   >
                     {prompt}
                   </button>
