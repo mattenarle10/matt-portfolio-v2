@@ -35,17 +35,17 @@ function extractImageUrl(itemXml: string, htmlSource: string): string | null {
   const mediaMatch = itemXml.match(
     /<media:(?:thumbnail|content)[^>]*url="([^"]+)"[^>]*>/i
   )
-  if (mediaMatch && mediaMatch[1]) {
+  if (mediaMatch?.[1]) {
     return mediaMatch[1]
   }
 
   const imgMatch = htmlSource.match(/<img[^>]*src="([^"]+)"[^>]*>/i)
-  if (imgMatch && imgMatch[1]) {
+  if (imgMatch?.[1]) {
     return imgMatch[1]
   }
 
   const dataSrcMatch = htmlSource.match(/<img[^>]*data-src="([^"]+)"[^>]*>/i)
-  if (dataSrcMatch && dataSrcMatch[1]) {
+  if (dataSrcMatch?.[1]) {
     return dataSrcMatch[1]
   }
 
