@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Hello from "@/components/home/hello"
+import RecentMediumPosts from "@/components/home/medium"
 import SpotifyRecentlyPlayed from "@/components/home/spotify"
 import { StravaActivity } from "@/components/home/strava"
 import FadeIn from "@/components/utils/FadeIn"
@@ -19,9 +20,15 @@ export default function Home() {
       {/* Hero Section */}
       <Hello />
 
+      <FadeIn delay={1} y={24} duration={0.5}>
+        <div className="mt-6">
+          <RecentMediumPosts />
+        </div>
+      </FadeIn>
+
       {/* Strava Activities Section - Animated with faster delay */}
       <FadeIn delay={1.2} y={24} duration={0.5}>
-        <div className="mt-6">
+        <div className="mt-8 md:mt-6">
           <StravaActivity />
         </div>
       </FadeIn>
