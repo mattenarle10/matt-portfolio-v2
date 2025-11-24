@@ -213,10 +213,88 @@ html.dark button.chat-close-button .lucide path,
 /* Chat panel background - ensure consistent dark mode across devices */
 .chat-panel {
   background-color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.dark .chat-panel {
-  background-color: #0a0a0a;
+/* Chat header */
+.chat-header {
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+
+.chat-header-title {
+  color: #f9fafb;
+}
+
+.chat-header-status {
+  color: #4ade80;
+}
+
+.chat-header-button {
+  background-color: transparent;
+}
+
+.chat-header-button:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Chat empty state */
+.chat-empty-title {
+  color: #f9fafb;
+}
+
+.chat-empty-subtitle {
+  color: rgba(249, 250, 251, 0.75);
+}
+
+/* Suggested question buttons */
+.chat-suggestion-button {
+  background-color: rgba(31, 41, 55, 0.9);
+  color: #f9fafb;
+}
+
+.chat-suggestion-button:hover {
+  background-color: rgba(55, 65, 81, 0.95);
+}
+
+/* Typing indicator */
+.chat-typing-bubble {
+  background-color: rgba(31, 41, 55, 0.9);
+}
+
+.chat-typing-dot {
+  background-color: rgba(156, 163, 175, 1);
+}
+
+/* Chat input area */
+.chat-input-container {
+  border-top-color: rgba(255, 255, 255, 0.16);
+}
+
+.chat-input-field {
+  background-color: #111827;
+  border-color: rgba(75, 85, 99, 1);
+  color: #f9fafb;
+}
+
+.chat-input-field:focus {
+  border-color: #e5e7eb;
+}
+
+.chat-input-field::placeholder {
+  color: rgba(156, 163, 175, 1);
+}
+
+.chat-send-button {
+  background-color: #111827;
+}
+
+.chat-send-button:hover {
+  background-color: #1f2937;
+}
+
+.chat-send-button svg {
+  color: #f9fafb;
+  stroke: #f9fafb;
 }
 
 /* Chat suggestions toggle colors (same in light and dark mode) */

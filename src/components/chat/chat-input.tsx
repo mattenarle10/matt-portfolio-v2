@@ -46,7 +46,7 @@ export function ChatInput({
   }
 
   return (
-    <div className="border-t border-gray-200 dark:border-gray-800 p-3 md:p-4 flex-shrink-0">
+    <div className="chat-input-container border-t p-3 md:p-4 flex-shrink-0">
       <div className="flex gap-2">
         <textarea
           ref={textareaRef}
@@ -55,7 +55,7 @@ export function ChatInput({
           onKeyDown={handleKeyDown}
           placeholder="Ask me anything about Matt..."
           disabled={isLoading}
-          className="flex-1 resize-none rounded-lg px-3 py-2 md:px-4 text-xs md:text-sm bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-black dark:focus:border-white disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400"
+          className="chat-input-field flex-1 resize-none rounded-lg px-3 py-2 md:px-4 text-xs md:text-sm border focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           rows={1}
           maxLength={1000}
         />
@@ -63,10 +63,10 @@ export function ChatInput({
           type="button"
           onClick={handleSend}
           disabled={!message.trim() || isLoading}
-          className="flex-shrink-0 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-lg bg-white hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="chat-send-button flex-shrink-0 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Send message"
         >
-          <Send className="w-3.5 h-3.5 md:w-4 md:h-4 !text-black" />
+          <Send className="w-3.5 h-3.5 md:w-4 md:h-4" />
         </button>
       </div>
       <div className="mt-1.5 md:mt-2 flex items-center justify-between">
