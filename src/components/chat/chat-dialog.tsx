@@ -82,7 +82,7 @@ export function ChatDialog({
               className="chat-header-button w-7 h-7 md:w-8 md:h-8 flex items-center justify-center rounded-lg chat-close-button flex-shrink-0"
               aria-label="Close chat"
             >
-              <X className="w-4 h-4 md:w-5 md:h-5" />
+              <X className="chat-close-icon w-4 h-4 md:w-5 md:h-5" />
             </button>
           </div>
 

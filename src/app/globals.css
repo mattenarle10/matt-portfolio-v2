@@ -92,25 +92,11 @@ html {
   background-color: black !important;
 }
 
-/* Card border utility to guarantee consistent borders across themes */
-.card-border {
-  /* Light mode: softer light-gray look */
-  border-color: rgba(0, 0, 0, 0.22) !important;
-}
-.card-border:hover,
-.card-border:focus,
-.card-border:focus-visible {
-  border-color: rgba(0, 0, 0, 0.35) !important;
-  outline: none !important;
-}
-.dark .card-border {
-  border-color: rgba(255, 255, 255, 0.4) !important;
-}
-.dark .card-border:hover,
-.dark .card-border:focus,
-.dark .card-border:focus-visible {
-  border-color: rgba(255, 255, 255, 0.55) !important;
-  outline: none !important;
+/* Chat close icon - always white */
+.chat-close-icon {
+  color: #ffffff;
+  stroke: #ffffff;
+  fill: none;
 }
 
 /* Run stats tile background for Strava mobile card */
@@ -140,61 +126,6 @@ html {
 }
 .dark .image-border {
   border-color: rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Chat button text visibility in light mode */
-.chat-button-text {
-  color: white !important;
-}
-.dark .chat-button-text {
-  color: black !important;
-}
-
-/* Specific rule for chat button icons - only for the floating button */
-button[aria-label*="Open chat"] svg,
-button[aria-label*="Open chat"] .lucide {
-  color: white !important;
-  stroke: white !important;
-  fill: none !important;
-}
-
-.dark button[aria-label*="Open chat"] svg,
-.dark button[aria-label*="Open chat"] .lucide {
-  color: black !important;
-  stroke: black !important;
-  fill: none !important;
-}
-
-/* Make X button white always - highest priority */
-button.chat-close-button svg,
-button.chat-close-button .lucide,
-button.chat-close-button svg.lucide,
-button.chat-close-button > svg,
-button.chat-close-button > .lucide,
-button.chat-close-button svg path,
-button.chat-close-button .lucide path {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
-  fill: none !important;
-}
-
-html.dark button.chat-close-button svg,
-html.dark button.chat-close-button .lucide,
-html.dark button.chat-close-button svg.lucide,
-html.dark .chat-close-button > svg,
-html.dark .chat-close-button > .lucide,
-html.dark button.chat-close-button svg path,
-html.dark button.chat-close-button .lucide path,
-.dark button.chat-close-button svg,
-.dark button.chat-close-button .lucide,
-.dark button.chat-close-button svg.lucide,
-.dark .chat-close-button > svg,
-.dark .chat-close-button > .lucide,
-.dark button.chat-close-button svg path,
-.dark button.chat-close-button .lucide path {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
-  fill: none !important;
 }
 
 /* Chat message text colors */
@@ -235,34 +166,6 @@ html.dark button.chat-close-button .lucide path,
 
 .chat-header-button:hover {
   background-color: rgba(255, 255, 255, 0.06);
-}
-
-/* Chat empty state */
-.chat-empty-title {
-  color: #f9fafb;
-}
-
-.chat-empty-subtitle {
-  color: rgba(249, 250, 251, 0.75);
-}
-
-/* Suggested question buttons */
-.chat-suggestion-button {
-  background-color: rgba(31, 41, 55, 0.9);
-  color: #f9fafb;
-}
-
-.chat-suggestion-button:hover {
-  background-color: rgba(55, 65, 81, 0.95);
-}
-
-/* Typing indicator */
-.chat-typing-bubble {
-  background-color: rgba(31, 41, 55, 0.9);
-}
-
-.chat-typing-dot {
-  background-color: rgba(156, 163, 175, 1);
 }
 
 /* Chat input area */
