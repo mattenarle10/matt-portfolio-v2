@@ -210,6 +210,15 @@ html.dark button.chat-close-button .lucide path,
   color: rgb(216, 216, 216) !important;
 }
 
+/* Chat panel background - ensure consistent dark mode across devices */
+.chat-panel {
+  background-color: #0a0a0a;
+}
+
+.dark .chat-panel {
+  background-color: #0a0a0a;
+}
+
 /* Chat suggestions toggle colors (same in light and dark mode) */
 .chat-toggle-track-on {
   background-color: #000000;

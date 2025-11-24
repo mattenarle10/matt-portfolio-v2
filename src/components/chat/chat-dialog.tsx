@@ -53,7 +53,7 @@ export function ChatDialog({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="fixed bottom-4 right-4 md:bottom-24 md:right-6 w-full max-w-[calc(100vw-2rem)] md:w-[400px] h-[500px] md:h-[600px] max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-8rem)] bg-white dark:bg-[#0a0a0a] rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden border border-gray-200 dark:border-gray-800"
+          className="chat-panel fixed bottom-4 right-4 md:bottom-24 md:right-6 w-full max-w-[calc(100vw-2rem)] md:w-[400px] h-[500px] md:h-[600px] max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-8rem)] bg-white dark:bg-[#0a0a0a] rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden border border-gray-200 dark:border-gray-800"
         >
           {/* Header */}
           <div className="flex items-center justify-between p-3 md:p-4 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
