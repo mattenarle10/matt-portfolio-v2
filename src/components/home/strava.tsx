@@ -148,7 +148,7 @@ export function StravaActivity() {
                     Run Stats
                   </h3>
                   <div className="grid grid-cols-3 gap-1.5 text-[10px]">
-                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-md p-1.5 text-center">
+                    <div className="run-stats-tile rounded-md p-1.5 text-center">
                       <div className="flex items-center justify-center mb-0.5">
                         <Activity className="h-3 w-3 text-orange-500 dark:text-orange-400" />
                       </div>
@@ -160,7 +160,7 @@ export function StravaActivity() {
                         <span className="text-[8px]">km</span>
                       </p>
                     </div>
-                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-md p-1.5 text-center">
+                    <div className="run-stats-tile rounded-md p-1.5 text-center">
                       <div className="flex items-center justify-center mb-0.5">
                         <Calendar className="h-3 w-3 text-orange-500 dark:text-orange-400" />
                       </div>
@@ -172,7 +172,7 @@ export function StravaActivity() {
                         <span className="text-[8px]">km</span>
                       </p>
                     </div>
-                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-md p-1.5 text-center">
+                    <div className="run-stats-tile rounded-md p-1.5 text-center">
                       <div className="flex items-center justify-center mb-0.5">
                         <TrendingUp className="h-3 w-3 text-orange-500 dark:text-orange-400" />
                       </div>
