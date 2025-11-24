@@ -220,7 +220,7 @@ const SpotifyRecentlyPlayed = () => {
                       <SpotifyEmbed
                         link={track.externalUrl}
                         width="100%"
-                        height="80"
+                        height={isMobile ? "85" : "80"}
                         className="w-full rounded-md overflow-hidden"
                       />
                     </FadeIn>
