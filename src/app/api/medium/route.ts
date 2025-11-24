@@ -13,7 +13,7 @@ type MediumPost = {
 export const revalidate = 1800
 
 function extractTag(content: string, tag: string): string | null {
-  const regex = new RegExp(`<${tag}>([\\s\\S]*?)<\/${tag}>`, "i")
+  const regex = new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`, "i")
   const match = content.match(regex)
   if (!match || match.length < 2) return null
   return match[1].trim()
@@ -44,9 +44,7 @@ function extractImageUrl(itemXml: string, htmlSource: string): string | null {
     return imgMatch[1]
   }
 
-  const dataSrcMatch = htmlSource.match(
-    /<img[^>]*data-src="([^"]+)"[^>]*>/i
-  )
+  const dataSrcMatch = htmlSource.match(/<img[^>]*data-src="([^"]+)"[^>]*>/i)
   if (dataSrcMatch && dataSrcMatch[1]) {
     return dataSrcMatch[1]
   }

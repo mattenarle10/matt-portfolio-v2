@@ -23,26 +23,26 @@ const RecentMediumPosts = () => {
 
   return (
     <section>
+      <div className="mb-2 md:mb-3 flex items-center justify-between">
+        <h2 className="text-base md:text-lg font-light text-black dark:text-white">
+          Writing
+        </h2>
+        <a
+          href="https://medium.com/@mattenarle"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-black dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-1 outline-none focus:outline-none focus:ring-0"
+        >
+          View on Medium
+          <ArrowUpRight className="h-3 w-3" />
+        </a>
+      </div>
+
       <div
-        className="overflow-hidden rounded-md border border-black/10 dark:border-black/20 shadow-sm"
+        className="overflow-hidden rounded-md border border-black/10 dark:border-black/20"
         style={{ background: "var(--color-background)" }}
       >
         <div className="p-2.5 md:p-3">
-          <div className="mb-1.5 md:mb-2 flex items-center justify-between">
-            <h2 className="text-base md:text-lg font-light text-black dark:text-white">
-              Writing
-            </h2>
-            <a
-              href="https://medium.com/@mattenarle"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-black dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-1 outline-none focus:outline-none focus:ring-0"
-            >
-              View on Medium
-              <ArrowUpRight className="h-3 w-3" />
-            </a>
-          </div>
-
           {isLoading && (
             <div className="space-y-1.5 md:space-y-2 mt-1">
               <div className="h-4 bg-gray-100 dark:bg-black/80 rounded-sm w-5/6 animate-pulse" />
@@ -65,7 +65,7 @@ const RecentMediumPosts = () => {
                     href={post.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start gap-2.5 rounded-sm px-1.5 py-1.5 -mx-1.5 hover:bg-white/95 dark:hover:bg-black/70 transition-all duration-200 outline-none focus:outline-none focus:ring-0"
+                    className="group flex items-start gap-2.5 rounded-sm px-1.5 py-1.5 -mx-1.5 outline-none focus:outline-none focus:ring-0"
                   >
                     {post.imageUrl && (
                       <div className="h-10 w-10 md:h-11 md:w-11 flex-shrink-0 overflow-hidden rounded-sm border border-black/10 dark:border-black/30 bg-black/5">
@@ -81,14 +81,9 @@ const RecentMediumPosts = () => {
                       <p className="text-sm md:text-base font-light text-black dark:text-white truncate group-hover:underline group-hover:translate-x-0.5 transition-transform duration-150">
                         {post.title}
                       </p>
-                      <p className="mt-0.5 text-[11px] md:text-xs text-black/70 dark:text-white/70">
+                      <p className="mt-0.5 text-[11px] md:text-xs text-black dark:text-white/70">
                         {formatDate(post.publishedAt)}
                       </p>
-                      {post.excerpt && (
-                        <p className="mt-0.5 text-[11px] md:text-xs text-black/70 dark:text-white/70 line-clamp-2">
-                          {post.excerpt}
-                        </p>
-                      )}
                     </div>
                   </a>
                 </li>

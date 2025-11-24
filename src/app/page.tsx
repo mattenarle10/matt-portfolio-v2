@@ -28,14 +28,14 @@ export default function Home() {
 
       {/* Strava Activities Section - Animated with faster delay */}
       <FadeIn delay={1.2} y={24} duration={0.5}>
-        <div className="mt-8 md:mt-6">
+        <div className="mt-6 md:mt-6">
           <StravaActivity />
         </div>
       </FadeIn>
 
       {/* Spotify Recently Played Section - Animated with faster delay */}
       <FadeIn delay={1.5} y={24} duration={0.5}>
-        <div className="mt-8 md:mt-6">
+        <div className="mt-6 md:mt-6">
           <SpotifyRecentlyPlayed />
         </div>
       </FadeIn>
