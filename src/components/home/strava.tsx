@@ -107,7 +107,7 @@ export function StravaActivity() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-base md:text-lg font-light text-black dark:text-white">
-              Latest Stats
+              Training
             </h2>
           </div>
           <a
@@ -116,7 +116,7 @@ export function StravaActivity() {
             rel="noopener noreferrer"
             className="text-xs text-black dark:text-white/70 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 flex items-center gap-1"
           >
-            View My Strava
+            View on Strava
             <ArrowUpRight className="h-3 w-3" />
           </a>
         </div>
