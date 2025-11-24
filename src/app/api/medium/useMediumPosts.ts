@@ -7,41 +7,43 @@ export interface MediumPost {
   url: string
   publishedAt: string
   excerpt: string | null
+  imageUrl: string | null
 }
 
 const MEDIUM_POSTS_CACHE_KEY = "medium_recent_posts"
 const CACHE_EXPIRY = 1000 * 60 * 30
 
 export function useMediumPosts(limit = 3) {
-  const [posts, setPosts] = useState<MediumPost[]>(() => {
-    if (typeof window === "undefined") return []
+  const [posts, setPosts] = useState<MediumPost[]>([])
 
-    try {
-      const cached = localStorage.getItem(MEDIUM_POSTS_CACHE_KEY)
-      if (cached) {
-        const { data, timestamp } = JSON.parse(cached)
-        if (Date.now() - timestamp < CACHE_EXPIRY && Array.isArray(data)) {
-          return data as MediumPost[]
-        }
-      }
-    } catch (error) {
-      console.error("Error reading Medium posts cache:", error)
-    }
-
-    return []
-  })
-
-  const [isLoading, setIsLoading] = useState(!posts.length)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const isMounted = useRef(true)
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const loadFromCacheAndFetch = async () => {
       try {
-        if (!posts.length) {
-          setIsLoading(true)
-        }
         setError(null)
+
+        // Try to hydrate from cache on the client first
+        if (typeof window !== "undefined") {
+          try {
+            const cached = localStorage.getItem(MEDIUM_POSTS_CACHE_KEY)
+            if (cached) {
+              const { data, timestamp } = JSON.parse(cached)
+              if (
+                Date.now() - timestamp < CACHE_EXPIRY &&
+                Array.isArray(data) &&
+                isMounted.current
+              ) {
+                setPosts(data as MediumPost[])
+                setIsLoading(false)
+              }
+            }
+          } catch (cacheError) {
+            console.error("Error reading Medium posts cache:", cacheError)
+          }
+        }
 
         const response = await fetch("/api/medium")
 
@@ -58,16 +60,18 @@ export function useMediumPosts(limit = 3) {
         if (isMounted.current) {
           setPosts(data)
 
-          try {
-            localStorage.setItem(
-              MEDIUM_POSTS_CACHE_KEY,
-              JSON.stringify({
-                data,
-                timestamp: Date.now(),
-              })
-            )
-          } catch (cacheError) {
-            console.error("Error caching Medium posts:", cacheError)
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.setItem(
+                MEDIUM_POSTS_CACHE_KEY,
+                JSON.stringify({
+                  data,
+                  timestamp: Date.now(),
+                })
+              )
+            } catch (cacheError) {
+              console.error("Error caching Medium posts:", cacheError)
+            }
           }
         }
       } catch (err) {
@@ -82,7 +86,7 @@ export function useMediumPosts(limit = 3) {
       }
     }
 
-    fetchPosts()
+    loadFromCacheAndFetch()
 
     return () => {
       isMounted.current = false

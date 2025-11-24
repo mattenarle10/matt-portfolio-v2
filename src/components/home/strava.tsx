@@ -107,7 +107,7 @@ export function StravaActivity() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-base md:text-lg font-light text-black dark:text-white">
-              Latest Stats
+              Training
             </h2>
           </div>
           <a

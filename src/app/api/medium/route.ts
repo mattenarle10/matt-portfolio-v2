@@ -7,12 +7,13 @@ type MediumPost = {
   url: string
   publishedAt: string
   excerpt: string | null
+  imageUrl: string | null
 }
 
 export const revalidate = 1800
 
 function extractTag(content: string, tag: string): string | null {
-  const regex = new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, "i")
+  const regex = new RegExp(`<${tag}>([\\s\\S]*?)<\/${tag}>`, "i")
   const match = content.match(regex)
   if (!match || match.length < 2) return null
   return match[1].trim()
@@ -24,7 +25,33 @@ function stripCdata(value: string | null): string {
 }
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+}
+
+function extractImageUrl(itemXml: string, htmlSource: string): string | null {
+  const mediaMatch = itemXml.match(
+    /<media:(?:thumbnail|content)[^>]*url="([^"]+)"[^>]*>/i
+  )
+  if (mediaMatch && mediaMatch[1]) {
+    return mediaMatch[1]
+  }
+
+  const imgMatch = htmlSource.match(/<img[^>]*src="([^"]+)"[^>]*>/i)
+  if (imgMatch && imgMatch[1]) {
+    return imgMatch[1]
+  }
+
+  const dataSrcMatch = htmlSource.match(
+    /<img[^>]*data-src="([^"]+)"[^>]*>/i
+  )
+  if (dataSrcMatch && dataSrcMatch[1]) {
+    return dataSrcMatch[1]
+  }
+
+  return null
 }
 
 function parseMediumFeed(xml: string): MediumPost[] {
@@ -36,18 +63,27 @@ function parseMediumFeed(xml: string): MediumPost[] {
     const rawLink = extractTag(item, "link")
     const rawPubDate = extractTag(item, "pubDate")
     const rawDescription = extractTag(item, "description")
+    const rawContent = extractTag(item, "content:encoded")
 
     const title = stripCdata(rawTitle)
     const url = stripCdata(rawLink)
     const publishedAt = stripCdata(rawPubDate)
-    const cleanedDescription = stripHtml(stripCdata(rawDescription || ""))
+
+    const contentForExcerptSource = stripCdata(
+      rawDescription || rawContent || ""
+    )
+    const cleanedDescription = stripHtml(contentForExcerptSource)
     const excerpt = cleanedDescription ? cleanedDescription.slice(0, 200) : null
+
+    const htmlForImage = stripCdata(rawContent || rawDescription || "")
+    const imageUrl = extractImageUrl(item, htmlForImage)
 
     return {
       title,
       url,
       publishedAt,
       excerpt,
+      imageUrl,
     }
   })
 

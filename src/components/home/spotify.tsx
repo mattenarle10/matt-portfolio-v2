@@ -135,9 +135,7 @@ const SpotifyRecentlyPlayed = () => {
       {/* Improved header with better tab spacing */}
       <div className="mb-4 flex flex-col">
         <div className="flex justify-between items-center pb-1">
-          <h2 className="text-base font-normal">
-            {activeList === "top" ? "Top Tracks" : "Recently Played"}
-          </h2>
+          <h2 className="text-base font-normal">Listening</h2>
           <div className="flex space-x-4">
             <button
               onClick={() => handleTabClick("recent")}
