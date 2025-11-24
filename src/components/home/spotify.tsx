@@ -100,7 +100,7 @@ const SpotifyRecentlyPlayed = () => {
       // Small timeout to ensure state update and animation
       setTimeout(() => {
         setDisplayTrack(topTracks[0])
-        const trackCount = isMobile ? 3 : 5 // 2 tracks on mobile, 4 on desktop
+        const trackCount = isMobile ? 2 : 3
         setTracksList(topTracks.slice(1, trackCount))
       }, 50)
     } else if (recentTracks && recentTracks.length > 0) {
@@ -111,7 +111,7 @@ const SpotifyRecentlyPlayed = () => {
       // Small timeout to ensure state update and animation
       setTimeout(() => {
         setDisplayTrack(recentTracks[0])
-        const trackCount = isMobile ? 3 : 5 // 2 tracks on mobile, 4 on desktop
+        const trackCount = isMobile ? 2 : 3
         setTracksList(recentTracks.slice(1, trackCount))
       }, 50)
     }
@@ -197,7 +197,7 @@ const SpotifyRecentlyPlayed = () => {
                     <SpotifyEmbed
                       link={displayTrack.externalUrl}
                       width="100%"
-                      height={isMobile ? "172" : "352"}
+                      height={isMobile ? "140" : "260"}
                       className="w-full rounded-md overflow-hidden mb-0"
                     />
                   </div>
@@ -227,7 +227,7 @@ const SpotifyRecentlyPlayed = () => {
                       <SpotifyEmbed
                         link={track.externalUrl}
                         width="100%"
-                        height="80"
+                        height="64"
                         className="w-full rounded-md overflow-hidden"
                       />
                     </FadeIn>
