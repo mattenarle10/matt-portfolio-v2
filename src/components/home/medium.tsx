@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { useMediumPosts } from "@/app/api/medium/useMediumPosts"
 
@@ -69,10 +70,11 @@ const RecentMediumPosts = () => {
                   >
                     {post.imageUrl && (
                       <div className="h-10 w-10 md:h-11 md:w-11 flex-shrink-0 overflow-hidden rounded-sm border border-black/10 dark:border-black/30 bg-black/5">
-                        <img
+                        <Image
                           src={post.imageUrl}
                           alt={post.title}
-                          loading="lazy"
+                          width={44}
+                          height={44}
                           className="h-full w-full object-cover"
                         />
                       </div>
