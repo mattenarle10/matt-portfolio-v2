@@ -65,16 +65,10 @@ const Navbar = () => {
                 const isActive = pathname === href
                 return (
                   <div key={href} className="relative">
-                    <Link
-                      href={href}
-                      className="px-3 py-1.5 text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 font-light inline-block"
-                    >
-                      {label}
-                    </Link>
                     {isActive && (
                       <motion.div
-                        layoutId="nav-underline"
-                        className="absolute h-[1px] bg-blue-500 dark:bg-blue-400 left-0 right-0 bottom-0"
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full bg-neutral-300/90"
                         transition={{
                           type: "spring",
                           stiffness: 380,
@@ -82,6 +76,16 @@ const Navbar = () => {
                         }}
                       />
                     )}
+                    <Link
+                      href={href}
+                      className={`px-3 py-1.5 transition-colors duration-200 font-light inline-block relative z-10 ${
+                        isActive
+                          ? "text-white"
+                          : "text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300"
+                      }`}
+                    >
+                      {label}
+                    </Link>
                   </div>
                 )
               })}
