@@ -68,7 +68,7 @@ const Navbar = () => {
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-neutral-300/90"
+                        className="absolute inset-0 rounded-xl bg-neutral-300/80 dark:bg-neutral-500/70"
                         transition={{
                           type: "spring",
                           stiffness: 380,
@@ -78,9 +78,9 @@ const Navbar = () => {
                     )}
                     <Link
                       href={href}
-                      className={`px-3 py-1.5 transition-colors duration-200 font-light inline-block relative z-10 ${
+                      className={`px-3 py-1.5 text-sm transition-colors duration-200 font-light inline-block relative z-10 ${
                         isActive
-                          ? "text-white"
+                          ? "text-black dark:text-white"
                           : "text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300"
                       }`}
                     >
