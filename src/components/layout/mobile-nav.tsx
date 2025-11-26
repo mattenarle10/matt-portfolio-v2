@@ -157,18 +157,12 @@ const MobileNav = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
-                    className="relative"
+                    className="relative px-3 py-1"
                   >
-                    <Link
-                      href={href}
-                      className="px-3 py-1.5 text-lg font-light text-white hover:text-blue-400 transition-colors duration-200"
-                    >
-                      {label}
-                    </Link>
                     {isActive && (
                       <motion.div
-                        layoutId="mobile-nav-underline"
-                        className="absolute h-[1px] bg-blue-500 dark:bg-blue-400 left-0 right-0 bottom-0"
+                        layoutId="mobile-nav-pill"
+                        className="absolute inset-0 rounded-xl bg-white/10"
                         transition={{
                           type: "spring",
                           stiffness: 380,
@@ -176,6 +170,12 @@ const MobileNav = () => {
                         }}
                       />
                     )}
+                    <Link
+                      href={href}
+                      className="px-3 py-3 text-base font-light text-white hover:text-blue-400 transition-colors duration-200 relative z-10"
+                    >
+                      {label}
+                    </Link>
                   </motion.div>
                 )
               })}
