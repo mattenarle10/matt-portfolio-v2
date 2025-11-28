@@ -78,10 +78,10 @@ const Navbar = () => {
                     )}
                     <Link
                       href={href}
-                      className={`px-3 py-1.5 text-sm transition-colors duration-200 font-light inline-block relative z-10 ${
+                      className={`px-3 py-1.5 text-sm font-light inline-block relative z-10 transition-all duration-200 ease-out ${
                         isActive
                           ? "text-black dark:text-white"
-                          : "text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300"
+                          : "text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300 hover:translate-x-0.5"
                       }`}
                     >
                       {label}
