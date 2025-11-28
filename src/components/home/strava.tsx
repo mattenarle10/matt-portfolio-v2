@@ -334,7 +334,7 @@ export function StravaActivity() {
 
                   <div className="grid grid-cols-1 gap-1.5 md:gap-3 text-xs font-light mt-1 md:mt-3">
                     <div
-                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
+                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 ease-out hover:translate-x-0.5 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
                       style={{ background: "var(--color-background)" }}
                     >
                       <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
