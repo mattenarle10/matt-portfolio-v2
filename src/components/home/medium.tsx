@@ -32,7 +32,7 @@ const RecentMediumPosts = () => {
           href="https://medium.com/@mattenarle"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-black dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 flex items-center gap-1 outline-none focus:outline-none focus:ring-0"
+          className="text-xs text-black dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 outline-none focus:outline-none focus:ring-0 transition-all duration-200 ease-out hover:translate-x-0.5"
         >
           View on Medium
           <ArrowUpRight className="h-3 w-3" />
