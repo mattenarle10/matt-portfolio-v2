@@ -132,7 +132,7 @@ const SpotifyRecentlyPlayed = () => {
           <div className="flex space-x-4">
             <button
               onClick={() => handleTabClick("recent")}
-              className="text-xs py-0.5 px-1 transition-all relative"
+              className="text-xs py-0.5 px-1 transition-all duration-200 ease-out relative hover:translate-x-0.5"
             >
               <span className={activeList === "recent" ? "" : "text-gray-400"}>
                 Recent
@@ -143,7 +143,7 @@ const SpotifyRecentlyPlayed = () => {
             </button>
             <button
               onClick={() => handleTabClick("top")}
-              className="text-xs py-0.5 px-1 transition-all relative ml-2"
+              className="text-xs py-0.5 px-1 transition-all duration-200 ease-out relative ml-2 hover:translate-x-0.5"
             >
               <span className={activeList === "top" ? "" : "text-gray-400"}>
                 Top
