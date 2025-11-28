@@ -172,7 +172,7 @@ const MobileNav = () => {
                     )}
                     <Link
                       href={href}
-                      className="px-3 py-3 text-base font-light text-white hover:text-blue-400 transition-colors duration-200 relative z-10"
+                      className="px-3 py-3 text-base font-light text-white hover:text-blue-400 relative z-10 transition-all duration-200 ease-out hover:translate-x-0.5"
                     >
                       {label}
                     </Link>
