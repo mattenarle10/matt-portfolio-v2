@@ -1,18 +1,8 @@
-import type { Metadata } from "next"
 import Hello from "@/components/home/hello"
 import RecentMediumPosts from "@/components/home/medium"
 import SpotifyRecentlyPlayed from "@/components/home/spotify"
 import { StravaActivity } from "@/components/home/strava"
 import FadeIn from "@/components/utils/FadeIn"
-
-export const metadata: Metadata = {
-  title: "Home | Matt Enarle",
-  description:
-    "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
-  openGraph: {
-    url: "https://mattenarle.com",
-  },
-}
 
 export default function Home() {
   return (

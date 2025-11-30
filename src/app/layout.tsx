@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mattenarle.com"),
   title: {
-    default: "Home | Matt Enarle",
+    default: "Matt Enarle",
     template: "%s | Matt Enarle",
   },
   description:
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Home | Matt Enarle",
+    title: "Matt Enarle",
     description:
       "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
     url: "https://mattenarle.com",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Home | Matt Enarle",
+    title: "Matt Enarle",
     description:
       "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
     creator: "@yourtwitterhandle",
@@ -154,6 +154,7 @@ export default async function RootLayout({
                   "@context": "https://schema.org",
                   "@type": "WebSite",
                   name: "Matt Enarle",
+                  alternateName: "mattenarle.com",
                   url: "https://mattenarle.com",
                   potentialAction: {
                     "@type": "SearchAction",
