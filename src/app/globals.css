@@ -101,13 +101,13 @@ html {
 
 /* Run stats tile background for Strava mobile card */
 .run-stats-tile {
-  /* Soft orange tint in light mode */
-  background-color: rgba(249, 115, 22, 0.06);
+  /* Neutral background so orange accents match activity icons */
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .dark .run-stats-tile {
-  /* Darker orange-tinted background in dark mode */
-  background-color: rgba(249, 115, 22, 0.18);
+  /* Subtle neutral lift in dark mode, no extra orange tint */
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 /* Image backdrop shadow utility for profile images */

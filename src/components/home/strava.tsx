@@ -114,7 +114,7 @@ export function StravaActivity() {
             href="https://www.strava.com/athletes/mattenarle"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-black dark:text-white/70 hover:text-orange-600 dark:hover:text-orange-400 flex items-center gap-1 outline-none focus:outline-none focus:ring-0 transition-all duration-200 ease-out hover:translate-x-0.5"
+            className="text-xs text-black dark:text-white/70 hover:text-orange-500 dark:hover:text-orange-400 flex items-center gap-1 outline-none focus:outline-none focus:ring-0 transition-all duration-200 ease-out hover:translate-x-0.5"
           >
             View on Strava
             <ArrowUpRight className="h-3 w-3" />
@@ -155,7 +155,7 @@ export function StravaActivity() {
                       <p className="text-black dark:text-white/60 uppercase tracking-wider mb-0.5 text-[9px]">
                         8 Weeks
                       </p>
-                      <p className="text-orange-600 dark:text-orange-400 font-medium">
+                      <p className="text-orange-500 dark:text-orange-400 font-medium">
                         {stats.recentRuns.distance.toFixed(0)}
                         <span className="text-[8px]">km</span>
                       </p>
@@ -167,7 +167,7 @@ export function StravaActivity() {
                       <p className="text-black dark:text-white/60 uppercase tracking-wider mb-0.5 text-[9px]">
                         YTD
                       </p>
-                      <p className="text-orange-600 dark:text-orange-400 font-medium">
+                      <p className="text-orange-500 dark:text-orange-400 font-medium">
                         {stats.ytdRuns.distance.toFixed(0)}
                         <span className="text-[8px]">km</span>
                       </p>
@@ -179,7 +179,7 @@ export function StravaActivity() {
                       <p className="text-black dark:text-white/60 uppercase tracking-wider mb-0.5 text-[9px]">
                         All Time
                       </p>
-                      <p className="text-orange-600 dark:text-orange-400 font-medium">
+                      <p className="text-orange-500 dark:text-orange-400 font-medium">
                         {stats.allTimeRuns.distance.toFixed(0)}
                         <span className="text-[8px]">km</span>
                       </p>
@@ -293,7 +293,7 @@ export function StravaActivity() {
       </div>
 
       {/* Desktop: Separate Cards */}
-      <div className="hidden md:grid md:grid-cols-3 gap-4 md:gap-5">
+      <div className="hidden md:grid md:grid-cols-3 items-stretch gap-4 md:gap-5">
         {/* Stats card */}
         <div
           className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md md:h-full"
@@ -334,7 +334,7 @@ export function StravaActivity() {
 
                   <div className="grid grid-cols-1 gap-1.5 md:gap-3 text-xs font-light mt-1 md:mt-3">
                     <div
-                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 ease-out hover:translate-x-0.5 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
+                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 ease-out hover:translate-x-0.5 rounded-md p-1 md:p-2.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20"
                       style={{ background: "var(--color-background)" }}
                     >
                       <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
@@ -345,7 +345,7 @@ export function StravaActivity() {
                           Last 8 weeks
                         </p>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
+                          <span className="text-orange-500 dark:text-orange-400 text-sm font-medium">
                             {stats.recentRuns.distance.toFixed(1)}
                           </span>
                           <span className="text-black dark:text-white/70">
@@ -359,7 +359,7 @@ export function StravaActivity() {
                     </div>
 
                     <div
-                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 bg-white/90 dark:bg-black/60 rounded-md p-1 md:p-2.5"
+                      className="flex items-center gap-2 md:gap-3 group transition-all duration-200 hover:translate-x-1 rounded-md p-1 md:p-2.5 group-hover:bg-orange-50 dark:group-hover:bg-orange-950/20"
                       style={{ background: "var(--color-background)" }}
                     >
                       <div className="flex-shrink-0 h-5 w-5 md:h-6 md:w-6 rounded-full bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center">
@@ -370,7 +370,7 @@ export function StravaActivity() {
                           2025 Year to Date
                         </p>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
+                          <span className="text-orange-500 dark:text-orange-400 text-sm font-medium">
                             {stats.ytdRuns.distance.toFixed(1)}
                           </span>
                           <span className="text-black dark:text-white/70">
@@ -395,7 +395,7 @@ export function StravaActivity() {
                           All Time
                         </p>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-orange-600 dark:text-orange-400 text-xs font-light">
+                          <span className="text-orange-500 dark:text-orange-400 text-sm font-medium">
                             {stats.allTimeRuns.distance.toFixed(1)}
                           </span>
                           <span className="text-black dark:text-white/70">
@@ -416,7 +416,7 @@ export function StravaActivity() {
 
         {/* Recent activities */}
         <div
-          className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-2 transition-all duration-300 hover:shadow-md"
+          className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-2 transition-all duration-300 hover:shadow-md md:h-full"
           style={{ background: "var(--color-background)" }}
         >
           {" "}
@@ -504,7 +504,7 @@ export function StravaActivity() {
                           ) && (
                             <Activity className="h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
                           )}
-                          <h4 className="font-light text-xs md:text-sm text-black dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-200">
+                          <h4 className="font-light text-xs md:text-sm text-black dark:text-white group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors duration-200">
                             {activity.name}
                           </h4>
                         </div>
