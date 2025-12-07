@@ -67,7 +67,7 @@ const SpotifyRecentlyPlayed = () => {
   const isLoading = localIsLoading
   const error = localError
 
-  const [activeList, setActiveList] = useState<"recent" | "top">("recent")
+  const [activeList, setActiveList] = useState<"recent" | "top">("top")
   const [displayTrack, setDisplayTrack] = useState<SpotifyTrack | null>(null)
   const [tracksList, setTracksList] = useState<SpotifyTrack[]>([])
   const tracksRef = useRef<HTMLDivElement>(null)

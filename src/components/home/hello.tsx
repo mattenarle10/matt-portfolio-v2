@@ -2,8 +2,8 @@
 import { motion } from "framer-motion"
 import { ArrowUpRight, Heart } from "lucide-react"
 import Image from "next/image"
-import { GithubIcon } from "@/styles/icons"
 import { useEffect, useState } from "react"
+import { GithubIcon } from "@/styles/icons"
 
 const Hello = () => {
   const [text, setText] = useState("")
