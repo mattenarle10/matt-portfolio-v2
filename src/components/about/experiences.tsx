@@ -55,14 +55,14 @@ const Experiences = () => {
       dates: "April 2025 - May 2025",
       location: "eCloudvalley Philippines, Remote",
       description:
-        "Gained hands-on experience with AWS services and cloud infrastructure through intensive training program.",
+        "Gained hands-on experience with AWS services and cloud infrastructure through an intensive training program; Top Cloud Intern and Best Group Project.",
     },
     {
       company: "Software Engineer Intern",
       dates: "February 2025 - May 2025",
       location: "Spring Valley Tech Corp, Bago City",
       description:
-        "Participated in immersive on-the-job training designed for real-world client project readiness.",
+        "Participated in immersive on-the-job training designed for real-world client project readiness; Most awarded intern (Top Geek, OJT Excellence).",
     },
     {
       company: "Freelance Software Developer",
