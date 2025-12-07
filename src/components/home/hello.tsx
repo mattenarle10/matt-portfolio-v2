@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import { ArrowUpRight, Heart } from "lucide-react"
 import Image from "next/image"
+import { GithubIcon } from "@/styles/icons"
 import { useEffect, useState } from "react"
 
 const Hello = () => {
@@ -68,15 +69,15 @@ const Hello = () => {
             transition={{ delay: 2.2, duration: 0.8 }}
           >
             <motion.a
-              href="/projects"
-              className="text-blue-300 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-light text-sm md:text-base border-b border-transparent hover:border-blue-500 dark:hover:border-blue-400 pb-0.5 transition-all duration-200 flex items-center gap-0.5 md:gap-1"
+              href="https://github.com/mattenarle10"
+              className="text-black hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 font-light text-sm md:text-base border-b border-transparent hover:border-gray-600 dark:hover:border-gray-300 pb-0.5 transition-all duration-200 flex items-center gap-0.5 md:gap-1"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Projects
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              GitHub
+              <GithubIcon className="w-3.5 h-3.5" />
             </motion.a>
             <motion.a
               href="/resume.pdf"
