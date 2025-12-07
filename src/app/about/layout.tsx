@@ -4,7 +4,7 @@ import type React from "react"
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Professional experience, education, and background of Matt Enarle. Cloud engineer at eCloudvalley, MBA student from USLS, endurance athlete, and startup founder.",
+    "Professional experience, education, and background of Matt Enarle. Cloud engineer at eCloudvalley, MBA student from USLS, endurance athlete, and working on a startup.",
   alternates: { canonical: "https://mattenarle.com/about" },
   openGraph: {
     title: "About | Matt Enarle",

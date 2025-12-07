@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Matt Enarle",
   },
   description:
-    "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
+    "Cloud and software engineer who loves building apps. MBA student at the University of St. La Salle working on a startup. Passionate endurance athlete.",
   applicationName: "Matt Enarle",
   alternates: {
     canonical: "https://mattenarle.com",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Matt Enarle",
     description:
-      "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
+      "Cloud and software engineer who loves building apps. MBA student at the University of St. La Salle working on a startup. Passionate endurance athlete.",
     url: "https://mattenarle.com",
     siteName: "Matt Enarle",
     locale: "en_US",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Matt Enarle",
     description:
-      "Cloud Engineer specializing in AWS and infrastructure automation. MBA graduate building innovative startups. Passionate endurance athlete and software developer.",
+      "Cloud and software engineer who loves building apps. MBA student at the University of St. La Salle working on a startup. Passionate endurance athlete.",
     creator: "@yourtwitterhandle",
     images: ["https://mattenarle.com/twitter-img.png"],
   },
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     "eCloudvalley",
     "Portfolio",
     "Projects",
-    "MBA",
+    "MBA student",
     "Startup",
   ],
   authors: [{ name: "Matt Enarle", url: "https://mattenarle.com" }],

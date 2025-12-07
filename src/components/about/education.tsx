@@ -45,8 +45,8 @@ const Education = () => {
   const education = [
     {
       school: "University of St. La Salle",
-      degree: "Master of Business Administration - MBA",
-      date: "Jul 2025",
+      degree: "Master of Business Administration (MBA), student",
+      date: "In progress",
       details: "with Thesis",
     },
     {
