@@ -26,16 +26,6 @@ export async function POST(request: Request) {
       )
     }
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      generationConfig: {
-        maxOutputTokens: 350,
-        temperature: 0.5,
-        topP: 0.9,
-        topK: 32,
-      },
-    })
-
     // Build page and conversation context
     const pageContext = page
       ? `\n\nCurrent page or section: ${page}. Focus your answer on what would be most helpful for a visitor on this page.`
@@ -43,10 +33,25 @@ export async function POST(request: Request) {
 
     const conversationContext =
       history.length > 0
-        ? `\n\nPrevious conversation:\n${history.map((msg) => `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`).join("\n")}\n`
+        ? `\n\nPrevious conversation:\n${history
+            .map(
+              (msg) =>
+                `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`
+            )
+            .join("\n")}\n`
         : ""
 
     const prompt = `${PORTFOLIO_CONTEXT}${pageContext}${conversationContext}\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
+
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+      generationConfig: {
+        maxOutputTokens: 350,
+        temperature: 0.5,
+        topP: 0.9,
+        topK: 32,
+      },
+    })
 
     const result = await model.generateContent(prompt)
     const response = await result.response
@@ -63,12 +68,22 @@ export async function POST(request: Request) {
       console.error("Error stack:", error.stack)
     }
 
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error message"
+    const isRateLimit =
+      errorMessage.includes("429") ||
+      errorMessage.toLowerCase().includes("quota exceeded")
+    const statusCode = isRateLimit ? 429 : 500
+    const clientErrorMessage = isRateLimit
+      ? "Rate limited by Gemini API. Please retry shortly."
+      : "Failed to process message"
+
     return NextResponse.json(
       {
-        error: "Failed to process message",
-        details: error instanceof Error ? error.message : "Unknown error",
+        error: clientErrorMessage,
+        details: errorMessage,
       },
-      { status: 500 }
+      { status: statusCode }
     )
   }
 }
