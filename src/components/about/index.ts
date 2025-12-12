@@ -3,4 +3,3 @@ export { default as Education } from "./education"
 export { default as Experiences } from "./experiences"
 export { default as Gallery } from "./gallery"
 export { default as Hobbies } from "./hobbies"
-
