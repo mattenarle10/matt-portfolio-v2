@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import type { Message } from "@/lib/chat/types"
+import type { Message } from "@/schemas"
 import { ChatInput } from "./chat-input"
 import { ChatMessageList } from "./chat-message-list"
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef } from "react"
-import type { Message } from "@/lib/chat/types"
+import type { Message } from "@/schemas"
 import { ChatMessage } from "./chat-message"
 
 interface ChatMessageListProps {

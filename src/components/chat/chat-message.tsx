@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { User } from "lucide-react"
 import Image from "next/image"
-import type { Message } from "@/lib/chat/types"
+import type { Message } from "@/schemas"
 
 interface ChatMessageProps {
   message: Message

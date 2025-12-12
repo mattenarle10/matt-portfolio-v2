@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import type { Message } from "@/lib/chat/types"
+import type { Message } from "@/schemas"
 import { ChatButton } from "./chat-button"
 import { ChatDialog } from "./chat-dialog"
 

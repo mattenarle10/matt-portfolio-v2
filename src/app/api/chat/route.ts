@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import { NextResponse } from "next/server"
 import { PORTFOLIO_CONTEXT } from "@/lib/chat/context"
-import { ChatRequestSchema } from "@/lib/chat/types"
+import { ChatRequestSchema } from "@/schemas"
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "")
 
