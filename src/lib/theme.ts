@@ -9,3 +9,4 @@ export const theme = {
   text: "#18181b",
   accent: "#2563eb", // Blue accent color
 }
+
