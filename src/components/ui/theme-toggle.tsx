@@ -99,3 +99,4 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = "default" }) => {
 }
 
 export default ThemeToggle
+

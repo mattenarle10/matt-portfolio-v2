@@ -1,15 +1,14 @@
-export { projectData } from "./projects"
 export { PORTFOLIO_CONTEXT } from "./chat-context"
 export {
-  SunIcon,
-  MoonIcon,
-  MenuIcon,
   CloseIcon,
-  GithubIcon,
-  LinkedInIcon,
-  YoutubeIcon,
-  FitnessIcon,
   CodeIcon,
   CoffeeIcon,
+  FitnessIcon,
+  GithubIcon,
+  LinkedInIcon,
+  MenuIcon,
+  MoonIcon,
+  SunIcon,
+  YoutubeIcon,
 } from "./icons"
-
+export { projectData } from "./projects"

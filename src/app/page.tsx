@@ -2,7 +2,7 @@ import Hello from "@/components/home/hello"
 import RecentMediumPosts from "@/components/home/medium"
 import SpotifyRecentlyPlayed from "@/components/home/spotify"
 import { StravaActivity } from "@/components/home/strava"
-import FadeIn from "@/components/utils/FadeIn"
+import { FadeIn } from "@/components/ui"
 
 export default function Home() {
   return (

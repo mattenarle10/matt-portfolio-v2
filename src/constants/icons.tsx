@@ -196,4 +196,3 @@ export const CoffeeIcon: React.FC<IconProps> = ({ className = "" }) => (
     <line x1="14" y1="1" x2="14" y2="4" />
   </svg>
 )
-

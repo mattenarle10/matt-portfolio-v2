@@ -132,4 +132,3 @@ export const projectData: Project[] = [
     technologies: ["Next.js", "AWS Amplify", "S3", "DynamoDB", "Three.js"],
   },
 ]
-

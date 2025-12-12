@@ -10,4 +10,3 @@ export interface Project {
   manual?: string
   technologies: string[]
 }
-
