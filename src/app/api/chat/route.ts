@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     const prompt = `${PORTFOLIO_CONTEXT}${pageContext}${conversationContext}\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.5-flash-lite",
       generationConfig: {
         maxOutputTokens: 350,
         temperature: 0.5,
