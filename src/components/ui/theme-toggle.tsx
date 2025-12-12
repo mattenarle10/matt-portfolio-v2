@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useTheme } from "@/context"
 import { MoonIcon, SunIcon } from "@/constants"
+import { useTheme } from "@/context"
 
 interface ThemeToggleProps {
   variant?: "default" | "mobile"
@@ -99,4 +99,3 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ variant = "default" }) => {
 }
 
 export default ThemeToggle
-
