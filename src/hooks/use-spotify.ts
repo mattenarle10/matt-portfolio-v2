@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { useSpotifyAuth } from "./useSpotifyAuth"
+import { useSpotifyAuth } from "./use-spotify-auth"
 
 // Define types for Spotify API responses
 type SpotifyArtist = {
@@ -336,3 +336,4 @@ export function useSpotify() {
     error: error || tokenError,
   }
 }
+

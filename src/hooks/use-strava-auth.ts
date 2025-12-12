@@ -53,3 +53,4 @@ export const useStravaAuth = () => {
 
   return { token, isLoading, error }
 }
+

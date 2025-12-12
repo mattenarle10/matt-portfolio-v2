@@ -2,7 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
-import { useMediumPosts } from "@/app/api/medium/useMediumPosts"
+import { useMediumPosts } from "@/hooks"
 
 const RecentMediumPosts = () => {
   const { posts, isLoading, error } = useMediumPosts(3)

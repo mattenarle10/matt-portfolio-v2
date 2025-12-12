@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react"
 
 type TokenResponse = {
@@ -51,3 +53,4 @@ export const useSpotifyAuth = () => {
 
   return { token, isLoading, error }
 }
+

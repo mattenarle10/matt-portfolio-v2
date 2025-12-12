@@ -10,8 +10,7 @@ import {
   Waves,
 } from "lucide-react"
 import { useEffect, useState } from "react"
-import type { ActivityData, StatsData } from "@/app/api/strava/useStrava"
-import { useStrava } from "@/app/api/strava/useStrava"
+import { useStrava, type ActivityData, type StatsData } from "@/hooks"
 import { useGlobalState } from "@/components/context/GlobalStateContext"
 
 export function StravaActivity() {

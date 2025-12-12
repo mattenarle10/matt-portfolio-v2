@@ -1,8 +1,7 @@
 "use client"
 
 import { createContext, type ReactNode, useContext, useState } from "react"
-import type { SpotifyTrack } from "@/app/api/spotify/useSpotify"
-import type { ActivityData, StatsData } from "@/app/api/strava/useStrava"
+import type { SpotifyTrack, ActivityData, StatsData } from "@/hooks"
 
 // Define the shape of our global state
 interface GlobalState {
