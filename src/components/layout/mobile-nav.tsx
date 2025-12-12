@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { useTheme } from "@/components/context/ThemeContext"
+import { useTheme } from "@/context"
 import ThemeToggle from "@/components/utils/ThemeToggle"
 
 // Minimal hamburger menu icon component

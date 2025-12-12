@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, type ReactNode, useContext, useState } from "react"
-import type { SpotifyTrack, ActivityData, StatsData } from "@/hooks"
+import type { ActivityData, SpotifyTrack, StatsData } from "@/hooks"
 
 // Define the shape of our global state
 interface GlobalState {
@@ -83,3 +83,4 @@ export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
 
 // Custom hook to use the global state
 export const useGlobalState = () => useContext(GlobalStateContext)
+

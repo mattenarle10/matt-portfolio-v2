@@ -10,8 +10,8 @@ import {
   Waves,
 } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useStrava, type ActivityData, type StatsData } from "@/hooks"
-import { useGlobalState } from "@/components/context/GlobalStateContext"
+import { useGlobalState } from "@/context"
+import { type ActivityData, type StatsData, useStrava } from "@/hooks"
 
 export function StravaActivity() {
   // Get global state

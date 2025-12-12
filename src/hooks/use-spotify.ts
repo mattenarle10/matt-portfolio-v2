@@ -336,4 +336,3 @@ export function useSpotify() {
     error: error || tokenError,
   }
 }
-

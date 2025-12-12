@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useTheme } from "@/components/context/ThemeContext"
+import { useTheme } from "@/context"
 import { MoonIcon, SunIcon } from "@/styles/icons"
 
 interface ThemeToggleProps {

@@ -53,4 +53,3 @@ export const useSpotifyAuth = () => {
 
   return { token, isLoading, error }
 }
-
