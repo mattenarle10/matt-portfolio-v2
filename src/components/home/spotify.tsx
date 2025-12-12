@@ -2,9 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import { FadeIn, SpotifyEmbed } from "@/components/ui"
 import { useGlobalState } from "@/context"
 import { type SpotifyTrack, useSpotify } from "@/hooks"
-import { FadeIn, SpotifyEmbed } from "@/components/ui"
 
 const SpotifyRecentlyPlayed = () => {
   // Get global state
