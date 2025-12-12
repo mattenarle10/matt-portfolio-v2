@@ -83,4 +83,3 @@ export const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
 
 // Custom hook to use the global state
 export const useGlobalState = () => useContext(GlobalStateContext)
-

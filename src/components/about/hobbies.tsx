@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { CodeIcon, CoffeeIcon, FitnessIcon, YoutubeIcon } from "@/styles/icons"
+import { CodeIcon, CoffeeIcon, FitnessIcon, YoutubeIcon } from "@/constants"
 
 const Hobbies = () => {
   const [isMobile, setIsMobile] = useState(false)

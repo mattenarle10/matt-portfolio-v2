@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useTheme } from "@/context"
 import ThemeToggle from "@/components/utils/ThemeToggle"
+import { useTheme } from "@/context"
 import MobileNav from "./mobile-nav"
 
 const Navbar = () => {

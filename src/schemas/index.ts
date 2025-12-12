@@ -7,3 +7,5 @@ export {
   type Message,
   MessageSchema,
 } from "./chat"
+
+export type { Project } from "./project"

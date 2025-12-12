@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { GithubIcon, LinkedInIcon } from "@/styles/icons"
+import { GithubIcon, LinkedInIcon } from "@/constants"
 
 const Footer = () => {
   return (

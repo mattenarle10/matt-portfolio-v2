@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { projectData } from "@/lib/data"
-import type { Project } from "@/lib/project"
+import { projectData } from "@/constants"
+import type { Project } from "@/schemas"
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false)

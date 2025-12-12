@@ -4,9 +4,12 @@ import { cookies } from "next/headers"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { ChatProvider } from "@/components/chat/chat-provider"
-import { GlobalStateProvider, ThemeProvider as ClientThemeProvider } from "@/context"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
+import {
+  ThemeProvider as ClientThemeProvider,
+  GlobalStateProvider,
+} from "@/context"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

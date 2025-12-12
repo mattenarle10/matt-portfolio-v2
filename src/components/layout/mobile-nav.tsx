@@ -5,8 +5,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { useTheme } from "@/context"
 import ThemeToggle from "@/components/utils/ThemeToggle"
+import { useTheme } from "@/context"
 
 // Minimal hamburger menu icon component
 const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {

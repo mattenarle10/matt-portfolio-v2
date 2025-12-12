@@ -1,4 +1,4 @@
-import type { Project } from "@/lib/project"
+import type { Project } from "@/schemas"
 
 export const projectData: Project[] = [
   {
@@ -132,3 +132,4 @@ export const projectData: Project[] = [
     technologies: ["Next.js", "AWS Amplify", "S3", "DynamoDB", "Three.js"],
   },
 ]
+

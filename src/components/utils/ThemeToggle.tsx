@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useTheme } from "@/context"
-import { MoonIcon, SunIcon } from "@/styles/icons"
+import { MoonIcon, SunIcon } from "@/constants"
 
 interface ThemeToggleProps {
   variant?: "default" | "mobile"
