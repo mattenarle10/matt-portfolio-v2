@@ -77,17 +77,17 @@ const Education = () => {
             ></div>
 
             <h3
-              className={`text-sm font-medium transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-wide") ? "tracking-wide" : ""}`}
+              className={`text-xs md:text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
             >
               {item.school}
             </h3>
-            <div className="flex items-center space-x-1 mt-1">
-              <p className="text-xs font-light">{item.degree}</p>
-              <span className="text-xs opacity-50">•</span>
-              <p className="text-xs opacity-70">{item.date}</p>
+            <div className="flex items-center space-x-1 mt-0.5">
+              <p className="text-[10px] md:text-xs font-light opacity-80">{item.degree}</p>
+              <span className="text-[10px] md:text-xs opacity-50">•</span>
+              <p className="text-[10px] md:text-xs opacity-70 font-light">{item.date}</p>
             </div>
             <p
-              className={`text-xs mt-1 leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-80"}`}
+              className={`text-[11px] md:text-xs mt-1 leading-relaxed font-light transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
             >
               {item.details}
             </p>
