@@ -1,12 +1,58 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import { useIsMobile } from "@/hooks"
+
 export default function Certifications() {
+  const isMobile = useIsMobile()
+  const [isActive, setIsActive] = useState(false)
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest(".cert-item")) {
+        setIsActive(false)
+      }
+    }
+
+    if (isMobile) {
+      document.addEventListener("click", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [isMobile])
+
+  const handleClick = () => {
+    if (isMobile) {
+      setIsActive(!isActive)
+    }
+  }
+
   return (
     <section className="mb-10">
       <h2 className="text-lg font-medium mb-4">Certifications</h2>
       <div className="space-y-4">
-        <div className="group relative">
-          <div className="flex items-start justify-between gap-4 p-4 rounded-sm border border-black/[0.08] dark:border-black/[0.25] group-hover:border-black/[0.15] dark:group-hover:border-black/[0.35] transition-all duration-300">
+        <motion.div
+          className="cert-item group relative"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            x: isMobile && isActive ? 2 : 0,
+          }}
+          whileHover={!isMobile ? { x: 2 } : undefined}
+          onClick={handleClick}
+        >
+          <div
+            className={`flex items-start justify-between gap-4 p-4 rounded-sm border border-black/[0.08] dark:border-black/[0.25] transition-all duration-300 ${(isMobile && isActive) || (!isMobile && "group-hover:border-black/[0.15] dark:group-hover:border-black/[0.35]") ? "border-black/[0.15] dark:border-black/[0.35]" : ""}`}
+          >
             <div className="flex-1">
-              <h3 className="text-sm font-medium tracking-tight group-hover:tracking-normal transition-all duration-300">
+              <h3
+                className={`text-sm font-medium transition-all duration-300 ${(isMobile && isActive) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+              >
                 AWS Certified Cloud Practitioner
               </h3>
               <p className="text-xs opacity-60 mt-1">
@@ -38,7 +84,7 @@ export default function Certifications() {
               </svg>
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
