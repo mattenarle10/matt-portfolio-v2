@@ -33,7 +33,7 @@ export default function Certifications() {
 
   return (
     <section className="mb-10">
-      <h2 className="text-lg font-medium mb-4">Certifications</h2>
+      <h2 className="text-base font-medium mb-6 tracking-wide">Certifications</h2>
       <div className="space-y-4">
         <motion.div
           className="cert-item group relative"
