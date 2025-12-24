@@ -33,10 +33,10 @@ export default function Certifications() {
 
   return (
     <section className="mb-10">
-      <h2 className="text-base font-medium mb-4 tracking-wide">
+      <h2 className="text-base font-medium mb-3 tracking-wide">
         Certifications
       </h2>
-      <div className="space-y-4">
+      <div className="space-y-2">
         <motion.div
           className="cert-item group relative"
           initial={{ opacity: 0, y: 10 }}
@@ -49,7 +49,7 @@ export default function Certifications() {
           onClick={handleClick}
         >
           <div
-            className={`flex items-start justify-between gap-4 p-4 rounded-sm border border-black/[0.08] dark:border-black/[0.25] transition-all duration-300 ${(isMobile && isActive) || (!isMobile && "group-hover:border-black/[0.15] dark:group-hover:border-black/[0.35]") ? "border-black/[0.15] dark:border-black/[0.35]" : ""}`}
+            className={`flex items-start justify-between gap-4 p-3 rounded-sm border border-black/[0.08] dark:border-black/[0.25] transition-all duration-300 ${(isMobile && isActive) || (!isMobile && "group-hover:border-black/[0.15] dark:group-hover:border-black/[0.35]") ? "border-black/[0.15] dark:border-black/[0.35]" : ""}`}
           >
             <div className="flex-1">
               <h3

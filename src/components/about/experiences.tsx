@@ -94,7 +94,9 @@ const Experiences = () => {
                 >
                   {experience.company}
                 </h3>
-                <span className="text-[10px] md:text-[11px] font-light opacity-70">{experience.dates}</span>
+                <span className="text-[10px] md:text-[11px] font-light opacity-70">
+                  {experience.dates}
+                </span>
               </div>
               <div className="text-[10px] md:text-xs mb-1 font-light opacity-60">
                 <span>{experience.location}</span>
