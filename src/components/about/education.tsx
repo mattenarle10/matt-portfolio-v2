@@ -57,7 +57,7 @@ const Education = () => {
     <div className="mt-12 mb-12">
       <h2 className="text-base font-medium mb-4 tracking-wide">Education</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
         {education.map((item, index) => (
           <motion.div
             key={index}
@@ -68,33 +68,30 @@ const Education = () => {
               x: isMobile && activeEduIndex === index ? 2 : 0,
             }}
             transition={{ delay: index * 0.1 }}
-            className="education-item group relative pl-4 border-l border-gray-200 dark:border-gray-800"
+            className="education-item group"
             whileHover={!isMobile ? { x: 2 } : undefined}
             onClick={() => handleEduClick(index)}
           >
-            <div
-              className={`absolute -left-1 top-1 w-2 h-2 rounded-full bg-black dark:bg-white transition-transform duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:scale-125") ? "scale-125" : ""}`}
-            ></div>
-
-            <h3
-              className={`text-xs md:text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
-            >
-              {item.school}
-            </h3>
-            <div className="flex items-center space-x-1 mt-0.5">
-              <p className="text-[10px] md:text-xs font-light opacity-80">
+            <div className="p-3 md:p-4 rounded-sm border border-black/[0.06] dark:border-white/[0.06] hover:border-black/[0.10] dark:hover:border-white/[0.10] transition-all duration-300">
+              <div className="flex items-start justify-between gap-2 mb-1">
+                <h3
+                  className={`text-xs md:text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+                >
+                  {item.school}
+                </h3>
+                <span className="text-[9px] md:text-[10px] opacity-60 font-light whitespace-nowrap">
+                  {item.date}
+                </span>
+              </div>
+              <p className="text-[10px] md:text-xs font-light opacity-70 mb-1">
                 {item.degree}
               </p>
-              <span className="text-[10px] md:text-xs opacity-50">•</span>
-              <p className="text-[10px] md:text-xs opacity-70 font-light">
-                {item.date}
+              <p
+                className={`text-[10px] md:text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-60"}`}
+              >
+                {item.details}
               </p>
             </div>
-            <p
-              className={`text-[11px] md:text-xs mt-1 leading-relaxed font-light transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
-            >
-              {item.details}
-            </p>
           </motion.div>
         ))}
       </div>
