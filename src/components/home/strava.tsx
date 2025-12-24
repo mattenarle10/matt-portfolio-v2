@@ -294,15 +294,12 @@ export function StravaActivity() {
       {/* Desktop: Separate Cards */}
       <div className="hidden md:grid md:grid-cols-3 items-stretch gap-4 md:gap-5">
         {/* Stats card */}
-        <div
-          className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-1 transition-all duration-300 hover:shadow-md md:h-full"
-          style={{ background: "var(--color-background)" }}
-        >
+        <div className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08] md:col-span-1 transition-all duration-300 hover:border-black/[0.12] dark:hover:border-white/[0.12] md:h-full">
           {" "}
           <div className="p-2 md:p-3">
             {statsLoading ? (
               <>
-                <div className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+                <div className="font-light text-sm text-black dark:text-white border-b border-black/[0.08] dark:border-white/[0.08] pb-1 mb-4">
                   Run Stats
                 </div>
                 <div className="space-y-3 mt-3">
@@ -327,7 +324,7 @@ export function StravaActivity() {
             ) : (
               stats && (
                 <>
-                  <h3 className="font-light text-sm text-black dark:text-white border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+                  <h3 className="font-light text-sm text-black dark:text-white border-b border-black/[0.08] dark:border-white/[0.08] pb-1 mb-4">
                     Run Stats
                   </h3>
 
@@ -414,10 +411,7 @@ export function StravaActivity() {
         </div>
 
         {/* Recent activities */}
-        <div
-          className="overflow-hidden rounded-md border border-white/10 dark:border-black/10 shadow-sm md:col-span-2 transition-all duration-300 hover:shadow-md md:h-full"
-          style={{ background: "var(--color-background)" }}
-        >
+        <div className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08] md:col-span-2 transition-all duration-300 hover:border-black/[0.12] dark:hover:border-white/[0.12] md:h-full">
           {" "}
           <div className="p-2 md:p-3">
             {isLoading ? (
@@ -464,7 +458,7 @@ export function StravaActivity() {
               </p>
             ) : activities.length > 0 ? (
               <div className="divide-y divide-black/15 dark:divide-white/15">
-                <div className="flex items-center justify-between border-b border-white/10 dark:border-black/10 pb-1 mb-4">
+                <div className="flex items-center justify-between border-b border-black/[0.08] dark:border-white/[0.08] pb-1 mb-4">
                   <span className="font-light text-sm text-black dark:text-white">
                     Recent Activities
                   </span>
