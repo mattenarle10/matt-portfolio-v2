@@ -34,56 +34,64 @@ const Gallery = () => {
     },
   ]
 
-  // Auto-scroll effect
+  // Duplicate images for infinite scroll effect
+  const duplicatedImages = [...images, ...images, ...images]
+
+  // Auto-scroll effect - moves to the right, stops on hover
   useEffect(() => {
-    if (!isMobile && scrollRef.current) {
+    if (scrollRef.current) {
       const scrollContainer = scrollRef.current
-      let scrollInterval: NodeJS.Timeout
+      let animationFrameId: number
+      let isHovered = false
 
-      const startAutoScroll = () => {
-        scrollInterval = setInterval(() => {
-          if (scrollContainer) {
-            const maxScroll =
-              scrollContainer.scrollWidth - scrollContainer.clientWidth
-            const currentScroll = scrollContainer.scrollLeft
+      const scroll = () => {
+        if (scrollContainer && !isHovered) {
+          const maxScroll =
+            scrollContainer.scrollWidth - scrollContainer.clientWidth
+          const currentScroll = scrollContainer.scrollLeft
 
-            if (currentScroll >= maxScroll) {
-              scrollContainer.scrollLeft = 0
-            } else {
-              scrollContainer.scrollLeft += 1
-            }
+          // Reset to beginning when reaching the end for infinite effect
+          if (currentScroll >= maxScroll / 2) {
+            scrollContainer.scrollLeft = 0
+          } else {
+            scrollContainer.scrollLeft += 0.5
           }
-        }, 30)
+        }
+        animationFrameId = requestAnimationFrame(scroll)
       }
 
-      const stopAutoScroll = () => {
-        clearInterval(scrollInterval)
+      const handleMouseEnter = () => {
+        isHovered = true
       }
 
-      startAutoScroll()
+      const handleMouseLeave = () => {
+        isHovered = false
+      }
 
-      scrollContainer.addEventListener("mouseenter", stopAutoScroll)
-      scrollContainer.addEventListener("mouseleave", startAutoScroll)
+      animationFrameId = requestAnimationFrame(scroll)
+
+      scrollContainer.addEventListener("mouseenter", handleMouseEnter)
+      scrollContainer.addEventListener("mouseleave", handleMouseLeave)
 
       return () => {
-        clearInterval(scrollInterval)
-        scrollContainer.removeEventListener("mouseenter", stopAutoScroll)
-        scrollContainer.removeEventListener("mouseleave", startAutoScroll)
+        cancelAnimationFrame(animationFrameId)
+        scrollContainer.removeEventListener("mouseenter", handleMouseEnter)
+        scrollContainer.removeEventListener("mouseleave", handleMouseLeave)
       }
     }
-  }, [isMobile])
+  }, [])
 
   return (
     <div className="my-6 mb-10">
       <div
         ref={scrollRef}
-        className="flex gap-3 md:gap-4 overflow-x-auto pb-3 scrollbar-hide scroll-smooth"
+        className="flex gap-3 md:gap-4 overflow-x-auto pb-3 scrollbar-hide"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
       >
-        {images.map((image, index) => (
+        {duplicatedImages.map((image, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, x: 20 }}
