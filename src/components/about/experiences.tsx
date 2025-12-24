@@ -90,34 +90,34 @@ const Experiences = () => {
                 className={`absolute left-0 top-1.5 w-2 h-2 rounded-full bg-black dark:bg-white transition-transform duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:scale-150") ? "scale-150" : ""}`}
               ></div>
 
-            {/* Content */}
-            <div className="pb-2">
-              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-0.5">
-                <h3
-                  className={`font-light text-xs md:text-sm transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
-                >
-                  {experience.company}
-                </h3>
-                <span className="text-[10px] md:text-[11px] font-light opacity-70">
-                  {experience.dates}
-                </span>
+              {/* Content */}
+              <div className="pb-2">
+                <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-0.5">
+                  <h3
+                    className={`font-light text-xs md:text-sm transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+                  >
+                    {experience.company}
+                  </h3>
+                  <span className="text-[10px] md:text-[11px] font-light opacity-70">
+                    {experience.dates}
+                  </span>
+                </div>
+                <div className="text-[10px] md:text-xs mb-1 font-light opacity-60">
+                  <span>{experience.location}</span>
+                </div>
+                <div className="flex">
+                  <span
+                    className={`mr-2 mt-1 rounded-full bg-black dark:bg-white transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:w-1 group-hover:h-1") ? "w-1 h-1" : "w-0.5 h-0.5"}`}
+                  ></span>
+                  <p
+                    className={`text-[11px] md:text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
+                  >
+                    {experience.description}
+                  </p>
+                </div>
               </div>
-              <div className="text-[10px] md:text-xs mb-1 font-light opacity-60">
-                <span>{experience.location}</span>
-              </div>
-              <div className="flex">
-                <span
-                  className={`mr-2 mt-1 rounded-full bg-black dark:bg-white transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:w-1 group-hover:h-1") ? "w-1 h-1" : "w-0.5 h-0.5"}`}
-                ></span>
-                <p
-                  className={`text-[11px] md:text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
-                >
-                  {experience.description}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
