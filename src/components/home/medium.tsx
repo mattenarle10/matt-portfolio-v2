@@ -40,7 +40,7 @@ const RecentMediumPosts = () => {
       </div>
 
       <div
-        className="overflow-hidden rounded-md border border-black/10 dark:border-black/20"
+        className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08]"
         style={{ background: "var(--color-background)" }}
       >
         <div className="p-2.5 md:p-3">
@@ -69,7 +69,7 @@ const RecentMediumPosts = () => {
                     className="group flex items-start gap-2.5 rounded-sm px-1.5 py-1.5 -mx-1.5 outline-none focus:outline-none focus:ring-0"
                   >
                     {post.imageUrl && (
-                      <div className="h-10 w-10 md:h-11 md:w-11 flex-shrink-0 overflow-hidden rounded-sm border border-black/10 dark:border-black/30 bg-black/5">
+                      <div className="h-10 w-10 md:h-11 md:w-11 flex-shrink-0 overflow-hidden rounded-sm border border-black/[0.08] dark:border-white/[0.10] bg-black/5">
                         <Image
                           src={post.imageUrl}
                           alt={post.title}
