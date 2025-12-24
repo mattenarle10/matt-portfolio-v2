@@ -2,21 +2,11 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { useIsMobile } from "@/hooks"
 
 const Education = () => {
-  const [isMobile, setIsMobile] = useState(false)
+  const isMobile = useIsMobile()
   const [activeEduIndex, setActiveEduIndex] = useState<number | null>(null)
-
-  // Check if device is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
 
   // Handle click outside to reset active education item
   useEffect(() => {

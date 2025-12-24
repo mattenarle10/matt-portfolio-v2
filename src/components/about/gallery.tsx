@@ -3,9 +3,10 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { useIsMobile } from "@/hooks"
 
 const Gallery = () => {
-  const [isMobile, setIsMobile] = useState(false)
+  const isMobile = useIsMobile()
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null)
   const [imageOrder, setImageOrder] = useState([0, 1, 2, 3])
   const [isDragging, setIsDragging] = useState(false)
@@ -14,16 +15,6 @@ const Gallery = () => {
   // Refs for image elements to detect overlaps
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
 
   useEffect(() => {
     if (isMobile) {
