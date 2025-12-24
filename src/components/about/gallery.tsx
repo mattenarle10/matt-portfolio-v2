@@ -149,7 +149,7 @@ const Gallery = () => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[280px] md:h-[260px] my-4 mx-auto max-w-[340px] md:max-w-[600px]"
+      className="relative h-[280px] md:h-[260px] my-8 mx-auto max-w-[340px] md:max-w-[600px]"
     >
       {imageOrder.map((orderIndex, i) => {
         const image = images[orderIndex]

@@ -9,21 +9,10 @@ export default function About() {
       <h1 className="text-2xl md:text-2xl font-bold mb-1">About Me</h1>
       <p className="font-light">matthew enarle, basically</p>
 
-      <section className="mb-10">
-        <Gallery />
-      </section>
-
-      <section className="mt-30 md:mt-0">
-        <Experiences />
-      </section>
-
-      <section>
-        <Education />
-      </section>
-
-      <section>
-        <Certifications />
-      </section>
+      <Gallery />
+      <Experiences />
+      <Education />
+      <Certifications />
     </div>
   )
 }
