@@ -149,7 +149,7 @@ const Gallery = () => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[280px] md:h-[260px] my-8 mx-auto max-w-[340px] md:max-w-[600px]"
+      className="relative h-[200px] md:h-[220px] my-6 mb-12 mx-auto max-w-[340px] md:max-w-[600px]"
     >
       {imageOrder.map((orderIndex, i) => {
         const image = images[orderIndex]
@@ -175,8 +175,8 @@ const Gallery = () => {
                 ? {
                     top: image.mobilePosition.top,
                     left: image.mobilePosition.left,
-                    width: "65%",
-                    maxWidth: "180px",
+                    width: "55%",
+                    maxWidth: "140px",
                     transform:
                       activeImageIndex === orderIndex
                         ? "scale(1.05)"
