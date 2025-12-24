@@ -66,25 +66,29 @@ const Experiences = () => {
   return (
     <div className="mt-16 mb-12">
       <h2 className="text-base font-medium mb-4 tracking-wide">Experience</h2>
-      <div className="space-y-4 md:space-y-5">
-        {experiences.map((experience, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              x: isMobile && activeExpIndex === index ? 4 : 0,
-            }}
-            transition={{ delay: index * 0.1 }}
-            className="experience-item group relative pl-6 md:pl-8"
-            whileHover={!isMobile ? { x: 4 } : undefined}
-            onClick={() => handleExpClick(index)}
-          >
-            {/* Timeline dot */}
-            <div
-              className={`absolute left-0 top-1.5 w-2 h-2 rounded-full bg-black dark:bg-white transition-transform duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:scale-150") ? "scale-150" : ""}`}
-            ></div>
+      <div className="relative">
+        {/* Vertical timeline line - desktop only */}
+        <div className="hidden md:block absolute left-[3px] top-2 bottom-2 w-[1px] bg-black/10 dark:bg-white/10"></div>
+
+        <div className="space-y-4 md:space-y-6">
+          {experiences.map((experience, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                x: isMobile && activeExpIndex === index ? 4 : 0,
+              }}
+              transition={{ delay: index * 0.1 }}
+              className="experience-item group relative pl-6 md:pl-10"
+              whileHover={!isMobile ? { x: 4 } : undefined}
+              onClick={() => handleExpClick(index)}
+            >
+              {/* Timeline dot */}
+              <div
+                className={`absolute left-0 top-1.5 w-2 h-2 rounded-full bg-black dark:bg-white transition-transform duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:scale-150") ? "scale-150" : ""}`}
+              ></div>
 
             {/* Content */}
             <div className="pb-2">
@@ -114,6 +118,7 @@ const Experiences = () => {
             </div>
           </motion.div>
         ))}
+        </div>
       </div>
     </div>
   )
