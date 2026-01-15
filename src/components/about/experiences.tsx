@@ -34,6 +34,13 @@ const Experiences = () => {
   }
   const experiences = [
     {
+      company: "Founder",
+      dates: "January 2026 - Present",
+      location: "BetterBacolod.org, Remote",
+      description:
+        "Launched an open-source civic tech portal for Bacolod City. Built a community-powered platform with 45+ government services, transparency data, and barangay directory. Part of the BetterGov.ph initiative.",
+    },
+    {
       company: "Junior Cloud Engineer",
       dates: "July 2025 - Present",
       location: "eCloudvalley Philippines, Hybrid",
@@ -105,9 +112,9 @@ const Experiences = () => {
                 <div className="text-[10px] md:text-xs mb-1 font-light opacity-60">
                   <span>{experience.location}</span>
                 </div>
-                <div className="flex">
+                <div className="flex items-start">
                   <span
-                    className={`mr-2 mt-1 rounded-full bg-black dark:bg-white transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:w-1 group-hover:h-1") ? "w-1 h-1" : "w-0.5 h-0.5"}`}
+                    className={`mr-2 mt-[9px] rounded-full bg-black dark:bg-white transition-all duration-300 shrink-0 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:w-1 group-hover:h-1") ? "w-1 h-1" : "w-0.5 h-0.5"}`}
                   ></span>
                   <p
                     className={`text-[11px] md:text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
