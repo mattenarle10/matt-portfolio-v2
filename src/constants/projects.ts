@@ -2,6 +2,17 @@ import type { Project } from "@/schemas"
 
 export const projectData: Project[] = [
   {
+    title: "BetterBacolod.org",
+    slug: "betterbacolod",
+    date: "January 2026",
+    description:
+      "A community-powered civic tech portal for Bacolod City — 45+ government services, 61 barangays directory, and transparency data. Open source, built for ₱435.39.",
+    image: "/projects/Projects_BetterBacolod.png",
+    github: "https://github.com/betterbacolod/betterbacolod",
+    demo: "https://betterbacolod.org",
+    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+  },
+  {
     title: "Ark Institute",
     slug: "ark",
     date: "August 2025",
