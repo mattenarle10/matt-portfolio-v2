@@ -30,11 +30,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
-    {
-      url: `${base}/contact`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
   ]
 }

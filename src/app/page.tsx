@@ -1,6 +1,6 @@
 import Hello from "@/components/home/hello"
 import RecentMediumPosts from "@/components/home/medium"
-import SpotifyRecentlyPlayed from "@/components/home/spotify"
+import Socials from "@/components/home/socials"
 import { StravaActivity } from "@/components/home/strava"
 import { FadeIn } from "@/components/ui"
 
@@ -23,10 +23,10 @@ export default function Home() {
         </div>
       </FadeIn>
 
-      {/* Spotify Recently Played Section - Animated with faster delay */}
-      <FadeIn delay={1.5} y={24} duration={0.5}>
+      {/* Contact Section */}
+      <FadeIn delay={1.4} y={24} duration={0.5}>
         <div className="mt-6 md:mt-6">
-          <SpotifyRecentlyPlayed />
+          <Socials />
         </div>
       </FadeIn>
     </div>

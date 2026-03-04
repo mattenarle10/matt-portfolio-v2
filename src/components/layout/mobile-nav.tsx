@@ -49,7 +49,6 @@ const MobileNav = () => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
   ]
 
   // Close menu when route changes
