@@ -197,14 +197,6 @@ export default async function RootLayout({
                         "Cloud infrastructure and software engineering projects",
                       url: "https://mattenarle.com/projects",
                     },
-                    {
-                      "@type": "SiteNavigationElement",
-                      position: 4,
-                      name: "Contact",
-                      description:
-                        "Get in touch via email, LinkedIn, GitHub, or book a call",
-                      url: "https://mattenarle.com/contact",
-                    },
                   ],
                 }),
               }}
