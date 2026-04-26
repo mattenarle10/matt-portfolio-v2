@@ -13,7 +13,7 @@ export interface MediumPost {
 const MEDIUM_POSTS_CACHE_KEY = "medium_recent_posts"
 const CACHE_EXPIRY = 1000 * 60 * 30
 
-export function useMediumPosts(limit = 3) {
+export function useMediumPosts(limit?: number) {
   const [posts, setPosts] = useState<MediumPost[]>([])
 
   const [isLoading, setIsLoading] = useState(true)
@@ -94,10 +94,11 @@ export function useMediumPosts(limit = 3) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const limitedPosts = posts.slice(0, limit)
+  const limitedPosts = typeof limit === "number" ? posts.slice(0, limit) : posts
 
   return {
     posts: limitedPosts,
+    total: posts.length,
     isLoading,
     error,
   }

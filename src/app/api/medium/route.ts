@@ -93,7 +93,7 @@ function parseMediumFeed(xml: string): MediumPost[] {
     return bTime - aTime
   })
 
-  return validPosts.slice(0, 5)
+  return validPosts.slice(0, 10)
 }
 
 export async function GET() {

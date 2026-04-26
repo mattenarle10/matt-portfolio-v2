@@ -197,6 +197,13 @@ export default async function RootLayout({
                         "Cloud infrastructure and software engineering projects",
                       url: "https://mattenarle.com/projects",
                     },
+                    {
+                      "@type": "SiteNavigationElement",
+                      position: 4,
+                      name: "Writing",
+                      description: "Articles, notes, and learnings",
+                      url: "https://mattenarle.com/writing",
+                    },
                   ],
                 }),
               }}
