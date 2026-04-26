@@ -15,8 +15,11 @@ type Bubble = { id: number; text: string }
 const SAFE_PADDING = 48
 const CHAT_RESERVED_W = 96
 const FOOTER_RESERVED_H = 120
-const PET_W = 40
-const PROXIMITY_PX = 90
+const PET_W = 44
+const PROXIMITY_PX = 100
+
+const PINK = "#f8a5b4"
+const PINK_DARK = "#e87295"
 
 const QUIPS = [
   "hi!",
@@ -41,45 +44,113 @@ function pickWeighted<T>(choices: { value: T; weight: number }[]): T {
   return choices[0].value
 }
 
+type EyeState = "open" | "closed" | "heart"
+
 function PetSprite({
   frame,
   facing,
+  eyeState,
 }: {
   frame: 0 | 1
   facing: "left" | "right"
+  eyeState: EyeState
 }) {
   return (
     <svg
       width={PET_W}
       height={PET_W}
-      viewBox="0 0 12 12"
+      viewBox="0 0 16 16"
       shapeRendering="crispEdges"
       style={{
         imageRendering: "pixelated",
         transform: facing === "left" ? "scaleX(-1)" : undefined,
         display: "block",
+        filter: "drop-shadow(0 1px 0 rgba(0,0,0,0.25))",
       }}
       aria-hidden="true"
     >
-      <rect x="3" y="4" width="6" height="5" fill="currentColor" />
-      <rect x="2" y="5" width="1" height="3" fill="currentColor" />
-      <rect x="9" y="5" width="1" height="3" fill="currentColor" />
-      <rect x="3" y="3" width="1" height="1" fill="currentColor" />
-      <rect x="8" y="3" width="1" height="1" fill="currentColor" />
-      <rect x="4" y="6" width="1" height="1" fill="#fff" />
-      <rect x="7" y="6" width="1" height="1" fill="#fff" />
+      {/* Tail (drawn first so head/body cover its base) */}
+      <rect x="13" y="7" width="1" height="3" fill="currentColor" />
+      <rect x="14" y="6" width="1" height="2" fill="currentColor" />
+
+      {/* Ears */}
+      <rect x="3" y="1" width="2" height="1" fill="currentColor" />
+      <rect x="2" y="2" width="3" height="1" fill="currentColor" />
+      <rect x="11" y="1" width="2" height="1" fill="currentColor" />
+      <rect x="11" y="2" width="3" height="1" fill="currentColor" />
+
+      {/* Head (10x6) */}
+      <rect x="3" y="3" width="10" height="5" fill="currentColor" />
+      <rect x="2" y="4" width="1" height="3" fill="currentColor" />
+      <rect x="13" y="4" width="1" height="3" fill="currentColor" />
+
+      {/* Inner ear (pink hint) */}
+      <rect x="3" y="2" width="1" height="1" fill={PINK} />
+      <rect x="12" y="2" width="1" height="1" fill={PINK} />
+
+      {/* Cheek blush */}
+      <rect x="3" y="6" width="1" height="1" fill={PINK} opacity="0.5" />
+      <rect x="12" y="6" width="1" height="1" fill={PINK} opacity="0.5" />
+
+      {/* Eyes */}
+      {eyeState === "open" && (
+        <>
+          <rect x="5" y="4" width="2" height="2" fill="#fff" />
+          <rect x="9" y="4" width="2" height="2" fill="#fff" />
+          <rect x="6" y="5" width="1" height="1" fill="#000" />
+          <rect x="10" y="5" width="1" height="1" fill="#000" />
+        </>
+      )}
+      {eyeState === "closed" && (
+        <>
+          <rect x="5" y="5" width="2" height="1" fill={PINK_DARK} />
+          <rect x="9" y="5" width="2" height="1" fill={PINK_DARK} />
+        </>
+      )}
+      {eyeState === "heart" && (
+        <>
+          {/* left heart */}
+          <rect x="5" y="4" width="1" height="1" fill={PINK_DARK} />
+          <rect x="6" y="5" width="1" height="1" fill={PINK_DARK} />
+          <rect x="7" y="4" width="1" height="1" fill={PINK_DARK} />
+          <rect x="5" y="5" width="3" height="1" fill={PINK_DARK} />
+          {/* right heart */}
+          <rect x="9" y="4" width="1" height="1" fill={PINK_DARK} />
+          <rect x="10" y="5" width="1" height="1" fill={PINK_DARK} />
+          <rect x="11" y="4" width="1" height="1" fill={PINK_DARK} />
+          <rect x="9" y="5" width="3" height="1" fill={PINK_DARK} />
+        </>
+      )}
+
+      {/* Nose */}
+      <rect x="7" y="6" width="2" height="1" fill={PINK} />
+
+      {/* Body */}
+      <rect x="3" y="8" width="10" height="4" fill="currentColor" />
+      <rect x="4" y="12" width="8" height="1" fill="currentColor" />
+
+      {/* Belly highlight */}
+      <rect
+        x="6"
+        y="10"
+        width="4"
+        height="1"
+        fill="currentColor"
+        opacity="0.7"
+      />
+
+      {/* Legs (walk cycle) */}
       {frame === 0 ? (
         <>
-          <rect x="4" y="9" width="1" height="1" fill="currentColor" />
-          <rect x="7" y="9" width="1" height="1" fill="currentColor" />
+          <rect x="4" y="13" width="2" height="1" fill="currentColor" />
+          <rect x="10" y="13" width="2" height="1" fill="currentColor" />
         </>
       ) : (
         <>
-          <rect x="3" y="9" width="1" height="1" fill="currentColor" />
-          <rect x="8" y="9" width="1" height="1" fill="currentColor" />
+          <rect x="3" y="13" width="2" height="1" fill="currentColor" />
+          <rect x="11" y="13" width="2" height="1" fill="currentColor" />
         </>
       )}
-      <rect x="9" y="6" width="1" height="1" fill="currentColor" />
     </svg>
   )
 }
@@ -139,6 +210,7 @@ export default function Pet() {
   const [hearts, setHearts] = useState<Heart[]>([])
   const [bubble, setBubble] = useState<Bubble | null>(null)
   const [isDragging, setIsDragging] = useState(false)
+  const [blink, setBlink] = useState(false)
 
   const perchAnchorRef = useRef<HTMLElement | null>(null)
   const heartIdRef = useRef(0)
@@ -193,6 +265,26 @@ export default function Pet() {
       }
     }, 220)
     return () => window.clearInterval(id)
+  }, [visible, reducedMotion])
+
+  // Random blink during idle/perched
+  useEffect(() => {
+    if (!visible || reducedMotion) return
+    let timer: number | undefined
+    const scheduleBlink = () => {
+      const wait = 3000 + Math.random() * 5000
+      timer = window.setTimeout(() => {
+        if (modeRef.current === "idle" || modeRef.current === "perched") {
+          setBlink(true)
+          window.setTimeout(() => setBlink(false), 140)
+        }
+        scheduleBlink()
+      }, wait)
+    }
+    scheduleBlink()
+    return () => {
+      if (timer) window.clearTimeout(timer)
+    }
   }, [visible, reducedMotion])
 
   // Behavior loop
@@ -430,6 +522,13 @@ export default function Pet() {
 
   const showBubble = bubble && !isDragging
 
+  const eyeState: EyeState =
+    reaction === "burst"
+      ? "heart"
+      : reaction === "petting" || blink
+        ? "closed"
+        : "open"
+
   return (
     <>
       <motion.button
@@ -475,7 +574,7 @@ export default function Pet() {
         }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
-        <PetSprite frame={frame} facing={facing} />
+        <PetSprite frame={frame} facing={facing} eyeState={eyeState} />
       </motion.button>
 
       <AnimatePresence>
