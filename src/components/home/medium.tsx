@@ -7,6 +7,8 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useMediumPosts } from "@/hooks"
 
+const MEDIUM_RSS_CAP = 10
+
 function AnimatedCount({ value }: { value: number }) {
   const mv = useMotionValue(0)
   const [display, setDisplay] = useState(0)
@@ -18,7 +20,9 @@ function AnimatedCount({ value }: { value: number }) {
       onUpdate: (v) => setDisplay(Math.round(v)),
     })
     return () => controls.stop()
-  }, [value, mv])
+    // mv is a stable framer-motion ref; only `value` should trigger re-runs
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
 
   return <>{display}</>
 }
@@ -53,13 +57,15 @@ const RecentMediumPosts = () => {
             />
           )}
         </h2>
-        <Link
-          href="/writing"
-          className="text-xs text-black dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 outline-none focus:outline-none focus:ring-0 transition-all duration-200 ease-out hover:translate-x-0.5"
-        >
-          See all
-          <ArrowUpRight className="h-3 w-3" />
-        </Link>
+        {!isLoading && !error && hasPosts && (
+          <Link
+            href="/writing"
+            className="text-xs text-black dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 rounded-sm transition-all duration-200 ease-out hover:translate-x-0.5"
+          >
+            See all
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+        )}
       </div>
 
       <div
@@ -118,11 +124,12 @@ const RecentMediumPosts = () => {
 
               <Link
                 href="/writing"
-                className="group mt-2 -mx-2.5 md:-mx-3 -mb-2.5 md:-mb-3 px-2.5 md:px-3 py-2 flex items-center justify-center gap-1.5 border-t border-black/[0.06] dark:border-white/[0.06] text-xs font-light text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors duration-200"
+                className="group mt-2 -mx-2.5 md:-mx-3 -mb-2.5 md:-mb-3 px-2.5 md:px-3 py-2 flex items-center justify-center gap-1.5 border-t border-black/[0.06] dark:border-white/[0.06] text-xs font-light text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 transition-colors duration-200"
               >
                 <span>View all</span>
                 <span className="font-mono tabular-nums">
                   <AnimatedCount value={total} />
+                  {total >= MEDIUM_RSS_CAP && "+"}
                 </span>
                 <span>articles</span>
                 <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 export interface MediumPost {
   title: string
@@ -15,17 +15,16 @@ const CACHE_EXPIRY = 1000 * 60 * 30
 
 export function useMediumPosts(limit?: number) {
   const [posts, setPosts] = useState<MediumPost[]>([])
-
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const isMounted = useRef(true)
 
   useEffect(() => {
+    const controller = new AbortController()
+
     const loadFromCacheAndFetch = async () => {
       try {
         setError(null)
 
-        // Try to hydrate from cache on the client first
         if (typeof window !== "undefined") {
           try {
             const cached = localStorage.getItem(MEDIUM_POSTS_CACHE_KEY)
@@ -34,7 +33,7 @@ export function useMediumPosts(limit?: number) {
               if (
                 Date.now() - timestamp < CACHE_EXPIRY &&
                 Array.isArray(data) &&
-                isMounted.current
+                !controller.signal.aborted
               ) {
                 setPosts(data as MediumPost[])
                 setIsLoading(false)
@@ -45,7 +44,9 @@ export function useMediumPosts(limit?: number) {
           }
         }
 
-        const response = await fetch("/api/medium")
+        const response = await fetch("/api/medium", {
+          signal: controller.signal,
+        })
 
         if (!response.ok) {
           throw new Error(`Failed to fetch Medium posts: ${response.status}`)
@@ -57,30 +58,26 @@ export function useMediumPosts(limit?: number) {
           throw new Error("Medium posts response was not an array")
         }
 
-        if (isMounted.current) {
-          setPosts(data)
+        if (controller.signal.aborted) return
 
-          if (typeof window !== "undefined") {
-            try {
-              localStorage.setItem(
-                MEDIUM_POSTS_CACHE_KEY,
-                JSON.stringify({
-                  data,
-                  timestamp: Date.now(),
-                })
-              )
-            } catch (cacheError) {
-              console.error("Error caching Medium posts:", cacheError)
-            }
+        setPosts(data)
+
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem(
+              MEDIUM_POSTS_CACHE_KEY,
+              JSON.stringify({ data, timestamp: Date.now() })
+            )
+          } catch (cacheError) {
+            console.error("Error caching Medium posts:", cacheError)
           }
         }
       } catch (err) {
+        if (controller.signal.aborted) return
         console.error("Error fetching Medium posts:", err)
-        if (isMounted.current) {
-          setError("Could not load Medium posts")
-        }
+        setError("Could not load Medium posts")
       } finally {
-        if (isMounted.current) {
+        if (!controller.signal.aborted) {
           setIsLoading(false)
         }
       }
@@ -89,9 +86,8 @@ export function useMediumPosts(limit?: number) {
     loadFromCacheAndFetch()
 
     return () => {
-      isMounted.current = false
+      controller.abort()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const limitedPosts = typeof limit === "number" ? posts.slice(0, limit) : posts

@@ -46,11 +46,7 @@ export default function WritingPage() {
             {isLoading && (
               <ul className="space-y-3">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <li
-                    // biome-ignore lint/suspicious/noArrayIndexKey: skeleton placeholder
-                    key={i}
-                    className="flex items-start gap-3"
-                  >
+                  <li key={i} className="flex items-start gap-3">
                     <div className="h-12 w-12 md:h-14 md:w-14 flex-shrink-0 rounded-sm bg-gray-100 dark:bg-black/80 animate-pulse" />
                     <div className="flex-1 space-y-1.5">
                       <div className="h-4 bg-gray-100 dark:bg-black/80 rounded-sm w-5/6 animate-pulse" />
@@ -81,7 +77,7 @@ export default function WritingPage() {
                       href={post.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-start gap-3 rounded-sm px-2 py-2.5 -mx-2 outline-none focus:outline-none focus:ring-0 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] transition-colors duration-200"
+                      className="group flex items-start gap-3 rounded-sm px-2 py-2.5 -mx-2 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] transition-colors duration-200"
                     >
                       {post.imageUrl && (
                         <div className="h-12 w-12 md:h-14 md:w-14 flex-shrink-0 overflow-hidden rounded-sm border border-black/[0.08] dark:border-white/[0.10] bg-black/5">
@@ -128,7 +124,7 @@ export default function WritingPage() {
             href="https://medium.com/@mattenarle"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 outline-none focus:outline-none focus:ring-0 transition-all duration-200 ease-out hover:translate-x-0.5"
+            className="text-xs text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 rounded-sm transition-all duration-200 ease-out hover:translate-x-0.5"
           >
             Read more on Medium
             <ArrowUpRight className="h-3 w-3" />
