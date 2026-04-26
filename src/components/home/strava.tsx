@@ -294,7 +294,7 @@ export function StravaActivity() {
       {/* Desktop: Separate Cards */}
       <div className="hidden md:grid md:grid-cols-3 items-stretch gap-4 md:gap-5">
         {/* Stats card */}
-        <div className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08] md:col-span-1 transition-all duration-300 hover:border-black/[0.12] dark:hover:border-white/[0.12] md:h-full">
+        <div data-pet-anchor className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08] md:col-span-1 transition-all duration-300 hover:border-black/[0.12] dark:hover:border-white/[0.12] md:h-full">
           {" "}
           <div className="p-2 md:p-3">
             {statsLoading ? (

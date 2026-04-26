@@ -80,6 +80,7 @@ export default function Certifications() {
               onClick={() => handleClick(index)}
             >
               <div
+                data-pet-anchor
                 className={`flex items-center gap-3 p-3 md:p-4 rounded-sm border border-black/[0.08] dark:border-black/[0.25] transition-all duration-300 h-full ${isActive || (!isMobile && "group-hover:border-black/[0.15] dark:group-hover:border-black/[0.35]") ? "border-black/[0.15] dark:border-black/[0.35]" : ""}`}
               >
                 <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0">

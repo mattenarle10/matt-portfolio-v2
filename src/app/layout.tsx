@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ChatProvider } from "@/components/chat/chat-provider"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
+import { Pet } from "@/components/pet"
 import {
   ThemeProvider as ClientThemeProvider,
   GlobalStateProvider,
@@ -128,6 +129,7 @@ export default async function RootLayout({
             <Footer />
             <Analytics />
             <ChatProvider />
+            <Pet />
             {/* JSON-LD: Person */}
             <script
               type="application/ld+json"

@@ -72,7 +72,7 @@ const Education = () => {
             whileHover={!isMobile ? { x: 2 } : undefined}
             onClick={() => handleEduClick(index)}
           >
-            <div className="p-3 md:p-4 rounded-sm border border-black/[0.06] dark:border-white/[0.06] hover:border-black/[0.10] dark:hover:border-white/[0.10] transition-all duration-300">
+            <div data-pet-anchor className="p-3 md:p-4 rounded-sm border border-black/[0.06] dark:border-white/[0.06] hover:border-black/[0.10] dark:hover:border-white/[0.10] transition-all duration-300">
               <div className="flex items-start justify-between gap-2 mb-1">
                 <h3
                   className={`text-xs md:text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
