@@ -7,12 +7,29 @@ import { useIsMobile } from "@/hooks"
 const STORAGE_KEY = "mattagotchi_visible"
 const TOGGLE_EVENT = "mattagotchi:toggle"
 
-type Mode = "idle" | "wander" | "hop" | "perched" | "petting"
+type Mode = "idle" | "wander" | "hop" | "perched"
+type Reaction = null | "petting" | "burst" | "alerted"
 type Heart = { id: number; x: number; y: number }
+type Bubble = { id: number; text: string }
 
 const SAFE_PADDING = 48
 const CHAT_RESERVED_W = 96
 const FOOTER_RESERVED_H = 120
+const PET_W = 40
+const PROXIMITY_PX = 90
+
+const QUIPS = [
+  "hi!",
+  "*yawn*",
+  "boop?",
+  "hewwo",
+  "(=^･ω･^=)",
+  "matt's coding",
+  "any treats?",
+  "zzz",
+  "*purr*",
+  "good vibes",
+]
 
 function pickWeighted<T>(choices: { value: T; weight: number }[]): T {
   const total = choices.reduce((sum, c) => sum + c.weight, 0)
@@ -33,8 +50,8 @@ function PetSprite({
 }) {
   return (
     <svg
-      width="40"
-      height="40"
+      width={PET_W}
+      height={PET_W}
       viewBox="0 0 12 12"
       shapeRendering="crispEdges"
       style={{
@@ -44,17 +61,13 @@ function PetSprite({
       }}
       aria-hidden="true"
     >
-      {/* body */}
       <rect x="3" y="4" width="6" height="5" fill="currentColor" />
       <rect x="2" y="5" width="1" height="3" fill="currentColor" />
       <rect x="9" y="5" width="1" height="3" fill="currentColor" />
-      {/* ears */}
       <rect x="3" y="3" width="1" height="1" fill="currentColor" />
       <rect x="8" y="3" width="1" height="1" fill="currentColor" />
-      {/* eyes */}
       <rect x="4" y="6" width="1" height="1" fill="#fff" />
       <rect x="7" y="6" width="1" height="1" fill="#fff" />
-      {/* legs (frame swap) */}
       {frame === 0 ? (
         <>
           <rect x="4" y="9" width="1" height="1" fill="currentColor" />
@@ -66,7 +79,6 @@ function PetSprite({
           <rect x="8" y="9" width="1" height="1" fill="currentColor" />
         </>
       )}
-      {/* tail */}
       <rect x="9" y="6" width="1" height="1" fill="currentColor" />
     </svg>
   )
@@ -90,6 +102,28 @@ function HeartParticle({ x, y }: { x: number; y: number }) {
   )
 }
 
+function SpeechBubble({ x, y, text }: { x: number; y: number; text: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: y + 4, scale: 0.85 }}
+      animate={{ opacity: 1, y, scale: 1 }}
+      exit={{ opacity: 0, y: y - 4, scale: 0.85 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      style={{
+        position: "fixed",
+        left: x,
+        top: y,
+        pointerEvents: "none",
+        zIndex: 41,
+      }}
+    >
+      <div className="px-2 py-0.5 text-[10px] font-mono whitespace-nowrap rounded-sm bg-white dark:bg-neutral-900 text-black dark:text-white border border-black/10 dark:border-white/15 shadow-sm">
+        {text}
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Pet() {
   const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
@@ -99,23 +133,30 @@ export default function Pet() {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const [mode, setMode] = useState<Mode>("idle")
+  const [reaction, setReaction] = useState<Reaction>(null)
   const [facing, setFacing] = useState<"left" | "right">("right")
   const [frame, setFrame] = useState<0 | 1>(0)
   const [hearts, setHearts] = useState<Heart[]>([])
+  const [bubble, setBubble] = useState<Bubble | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
 
   const perchAnchorRef = useRef<HTMLElement | null>(null)
   const heartIdRef = useRef(0)
+  const bubbleIdRef = useRef(0)
   const modeRef = useRef<Mode>("idle")
+  const draggingRef = useRef(false)
+  const mouseRef = useRef({ x: -9999, y: -9999 })
   modeRef.current = mode
+  draggingRef.current = isDragging
 
   useEffect(() => {
     setMounted(true)
     if (typeof window === "undefined") return
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const onChange = () => setReducedMotion(mq.matches)
-    onChange()
-    mq.addEventListener("change", onChange)
+    const onMqChange = () => setReducedMotion(mq.matches)
+    onMqChange()
+    mq.addEventListener("change", onMqChange)
 
     const readVisible = () => {
       try {
@@ -132,12 +173,11 @@ export default function Pet() {
     const onToggle = () => readVisible()
     window.addEventListener(TOGGLE_EVENT, onToggle)
 
-    // initial position: bottom-left
     x.set(SAFE_PADDING)
     y.set(window.innerHeight - FOOTER_RESERVED_H)
 
     return () => {
-      mq.removeEventListener("change", onChange)
+      mq.removeEventListener("change", onMqChange)
       window.removeEventListener(TOGGLE_EVENT, onToggle)
     }
   }, [x, y])
@@ -210,8 +250,22 @@ export default function Pet() {
       setMode("perched")
     }
 
+    const maybeQuip = () => {
+      if (Math.random() > 0.35) return
+      const text = QUIPS[Math.floor(Math.random() * QUIPS.length)]
+      const id = bubbleIdRef.current++
+      setBubble({ id, text })
+      window.setTimeout(() => {
+        setBubble((prev) => (prev?.id === id ? null : prev))
+      }, 1800)
+    }
+
     const tick = async () => {
       if (cancelled) return
+      if (draggingRef.current) {
+        timeoutId = window.setTimeout(tick, 1000)
+        return
+      }
       const choice = pickWeighted<"wander" | "hop" | "idle">([
         { value: "wander", weight: 50 },
         { value: "hop", weight: 30 },
@@ -219,7 +273,10 @@ export default function Pet() {
       ])
       if (choice === "wander") await doWander()
       else if (choice === "hop") await doHop()
-      else setMode("idle")
+      else {
+        setMode("idle")
+        maybeQuip()
+      }
 
       if (cancelled) return
       const wait =
@@ -237,7 +294,7 @@ export default function Pet() {
     }
   }, [visible, reducedMotion, isMobile, x, y])
 
-  // Perch follow loop — pet sticks to anchor as page scrolls
+  // Perch follow loop
   useEffect(() => {
     if (mode !== "perched" || !perchAnchorRef.current) return
     let raf = 0
@@ -272,47 +329,114 @@ export default function Pet() {
     return () => window.removeEventListener("resize", onResize)
   }, [visible, x, y])
 
-  const handlePet = () => {
-    const px = x.get() + 20
-    const py = y.get() + 10
-    const count = 1 + Math.floor(Math.random() * 3)
+  // Mouse proximity tracking — pet "perks up" and faces cursor when near
+  useEffect(() => {
+    if (!visible || reducedMotion) return
+    const onMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY }
+      const px = x.get() + PET_W / 2
+      const py = y.get() + PET_W / 2
+      const dist = Math.hypot(e.clientX - px, e.clientY - py)
+      if (dist < PROXIMITY_PX) {
+        setReaction((prev) => (prev === null ? "alerted" : prev))
+        if (modeRef.current === "idle" || modeRef.current === "perched") {
+          setFacing(e.clientX < px ? "left" : "right")
+        }
+      } else {
+        setReaction((prev) => (prev === "alerted" ? null : prev))
+      }
+    }
+    window.addEventListener("mousemove", onMove)
+    return () => window.removeEventListener("mousemove", onMove)
+  }, [visible, reducedMotion, x, y])
+
+  const spawnHearts = (count: number, origin: { x: number; y: number }) => {
     const newHearts: Heart[] = []
     for (let i = 0; i < count; i++) {
       newHearts.push({
         id: heartIdRef.current++,
-        x: px - 8 + Math.random() * 16,
-        y: py - 4 + (Math.random() - 0.5) * 8,
+        x: origin.x - 8 + Math.random() * 16,
+        y: origin.y - 4 + (Math.random() - 0.5) * 8,
       })
     }
     setHearts((prev) => [...prev, ...newHearts])
-    setMode("petting")
     window.setTimeout(() => {
       setHearts((prev) =>
         prev.filter((h) => !newHearts.some((nh) => nh.id === h.id))
       )
-      if (modeRef.current === "petting") setMode("idle")
     }, 800)
   }
+
+  const handlePet = () => {
+    const origin = { x: x.get() + 20, y: y.get() + 10 }
+    spawnHearts(1 + Math.floor(Math.random() * 3), origin)
+    setReaction("petting")
+    window.setTimeout(() => {
+      setReaction((prev) => (prev === "petting" ? null : prev))
+    }, 700)
+  }
+
+  const handleBurst = () => {
+    const origin = { x: x.get() + 20, y: y.get() + 10 }
+    spawnHearts(6 + Math.floor(Math.random() * 4), origin)
+    setReaction("burst")
+    const id = bubbleIdRef.current++
+    setBubble({ id, text: "*spin*" })
+    window.setTimeout(() => {
+      setBubble((prev) => (prev?.id === id ? null : prev))
+      setReaction((prev) => (prev === "burst" ? null : prev))
+    }, 1000)
+  }
+
+  // Keyboard "p" → pet
+  useEffect(() => {
+    if (!visible) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "p" && e.key !== "P") return
+      const target = e.target as HTMLElement | null
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable)
+      ) {
+        return
+      }
+      handlePet()
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible])
 
   if (!mounted || !visible) return null
 
   const idleScale = reducedMotion
     ? { scale: 1 }
-    : {
-        scale: [1, 1.05, 1],
-        transition: {
-          duration: 1.6,
-          repeat: Infinity,
-          ease: "easeInOut" as const,
-        },
-      }
+    : reaction === "alerted"
+      ? { scale: 1.15 }
+      : reaction === "burst"
+        ? { rotate: 360, scale: 1.2 }
+        : reaction === "petting"
+          ? { scale: 1.2 }
+          : {
+              scale: [1, 1.05, 1],
+              transition: {
+                duration: 1.6,
+                repeat: Infinity,
+                ease: "easeInOut" as const,
+              },
+            }
+
+  const showBubble = bubble && !isDragging
 
   return (
     <>
       <motion.button
         type="button"
         onClick={handlePet}
-        aria-label="Pet the pixel pet"
+        onDoubleClick={handleBurst}
+        aria-label="Pet the pixel pet (press P)"
         className="fixed text-black dark:text-white outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 rounded-sm"
         style={{
           x,
@@ -321,9 +445,35 @@ export default function Pet() {
           padding: 0,
           border: "none",
           background: "transparent",
-          cursor: "pointer",
+          cursor: isDragging ? "grabbing" : "grab",
+          touchAction: "none",
         }}
-        animate={mode === "idle" ? idleScale : undefined}
+        animate={
+          mode === "idle" || mode === "perched" || reaction !== null
+            ? idleScale
+            : undefined
+        }
+        drag
+        dragMomentum={false}
+        dragElastic={0}
+        onDragStart={() => {
+          setIsDragging(true)
+          setReaction(null)
+          if (mode === "perched") {
+            perchAnchorRef.current = null
+            setMode("idle")
+          }
+        }}
+        onDragEnd={() => {
+          setIsDragging(false)
+          const maxX = window.innerWidth - SAFE_PADDING
+          const maxY = window.innerHeight - FOOTER_RESERVED_H
+          if (x.get() < 0) x.set(0)
+          if (x.get() > maxX) x.set(maxX)
+          if (y.get() < 0) y.set(0)
+          if (y.get() > maxY) y.set(maxY)
+        }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
         <PetSprite frame={frame} facing={facing} />
       </motion.button>
@@ -332,6 +482,17 @@ export default function Pet() {
         {hearts.map((h) => (
           <HeartParticle key={h.id} x={h.x} y={h.y} />
         ))}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showBubble && (
+          <SpeechBubble
+            key={bubble.id}
+            x={x.get() + PET_W / 2 - 20}
+            y={y.get() - 18}
+            text={bubble.text}
+          />
+        )}
       </AnimatePresence>
     </>
   )
