@@ -2,6 +2,20 @@ import type { Project } from "@/schemas"
 
 export const projectData: Project[] = [
   {
+    title: "marka.md",
+    slug: "markamd",
+    date: "May 2026",
+    description:
+      "Local-first markdown editor for the notes you ship to Claude. Native macOS app built with Tauri + React — live preview side-by-side, follows system dark mode, ~10MB bundle, no cloud. Open source.",
+    image: "/projects/Projects_Markamd.png",
+    github: [
+      "https://github.com/mattenarle10/markamd",
+      "https://github.com/mattenarle10/markamd-site",
+    ],
+    demo: "https://markamd.vercel.app",
+    technologies: ["Tauri", "Rust", "React", "TypeScript", "CodeMirror"],
+  },
+  {
     title: "BetterBacolod.org",
     slug: "betterbacolod",
     date: "January 2026",
