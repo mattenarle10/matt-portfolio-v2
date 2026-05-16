@@ -13,6 +13,7 @@ export const projectData: Project[] = [
       "https://github.com/mattenarle10/markamd-site",
     ],
     demo: "https://markamd.vercel.app",
+    producthunt: "https://www.producthunt.com/products/marka-md",
     technologies: ["Tauri", "Rust", "React", "TypeScript", "CodeMirror"],
   },
   {

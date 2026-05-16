@@ -8,5 +8,6 @@ export interface Project {
   demo?: string
   pdf?: string
   manual?: string
+  producthunt?: string
   technologies: string[]
 }
