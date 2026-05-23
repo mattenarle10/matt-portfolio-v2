@@ -1,3 +1,9 @@
+export interface ProjectStat {
+  icon?: string
+  label: string
+  value: string | number
+}
+
 export interface Project {
   title: string
   slug: string
@@ -10,4 +16,5 @@ export interface Project {
   manual?: string
   producthunt?: string
   technologies: string[]
+  stats?: ProjectStat[]
 }

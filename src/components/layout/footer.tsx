@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { PetToggle } from "@/components/pet"
 import { GithubIcon, LinkedInIcon } from "@/constants"
 
 const Footer = () => {
@@ -29,7 +28,6 @@ const Footer = () => {
             >
               <LinkedInIcon className="w-6 h-6" />
             </Link>
-            <PetToggle />
           </div>
 
           {/* Copyright */}

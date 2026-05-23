@@ -8,13 +8,14 @@ export const projectData: Project[] = [
     description:
       "Local-first markdown editor for the notes you ship to Claude. Native macOS app built with Tauri + React — live preview side-by-side, follows system dark mode, ~10MB bundle, no cloud. Open source.",
     image: "/projects/Projects_Markamd.png",
-    github: [
-      "https://github.com/mattenarle10/markamd",
-      "https://github.com/mattenarle10/markamd-site",
-    ],
+    github: "https://github.com/mattenarle10/markamd",
     demo: "https://markamd.vercel.app",
     producthunt: "https://www.producthunt.com/products/marka-md",
     technologies: ["Tauri", "Rust", "React", "TypeScript", "CodeMirror"],
+    stats: [
+      { icon: "↑", label: "on PH", value: "—" },
+      { icon: "⇣", label: "downloads", value: "—" },
+    ],
   },
   {
     title: "BetterBacolod.org",

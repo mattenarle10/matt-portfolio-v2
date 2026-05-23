@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import { ProjectStatsRow } from "@/components/projects"
 import { projectData } from "@/constants"
 import type { Project } from "@/schemas"
 
@@ -521,6 +522,9 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
+
+                  {/* Live + static project stats (★ stars, ⑂ forks, custom) */}
+                  <ProjectStatsRow project={project} />
                 </div>
               </div>
             </motion.div>

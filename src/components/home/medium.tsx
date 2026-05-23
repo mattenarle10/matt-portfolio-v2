@@ -69,7 +69,6 @@ const RecentMediumPosts = () => {
       </div>
 
       <div
-        data-pet-anchor
         className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08]"
         style={{ background: "var(--color-background)" }}
       >
