@@ -11,7 +11,6 @@ export const projectData: Project[] = [
     github: "https://github.com/mattenarle10/markamd",
     demo: "https://markamd.vercel.app",
     technologies: ["Tauri", "Rust", "React", "TypeScript", "CodeMirror"],
-    stats: [{ icon: "⬇", label: "downloads", value: "767+" }],
   },
   {
     title: "BetterBacolod.org",

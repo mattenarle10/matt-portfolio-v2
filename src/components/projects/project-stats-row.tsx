@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { parseRepo } from "@/lib/github"
 import type { Project } from "@/schemas"
 
-type LiveStats = { stars: number; forks: number } | null
+type LiveStats = { stars: number; forks: number; downloads?: number } | null
 
 export function ProjectStatsRow({ project }: { project: Project }) {
   const [live, setLive] = useState<LiveStats>(null)
@@ -43,6 +43,12 @@ export function ProjectStatsRow({ project }: { project: Project }) {
         <span className="whitespace-nowrap">
           <span aria-hidden>⑂</span> {formatNum(live.forks)}{" "}
           <span className="opacity-70">forks</span>
+        </span>
+      )}
+      {live && (live.downloads ?? 0) > 0 && (
+        <span className="whitespace-nowrap">
+          <span aria-hidden>⇣</span> {formatNum(live.downloads ?? 0)}
+          <span className="opacity-70"> downloads</span>
         </span>
       )}
       {project.stats?.map((s) => (

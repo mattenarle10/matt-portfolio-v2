@@ -14,17 +14,43 @@ export function parseRepo(
 export async function fetchStats(
   owner: string,
   repo: string
-): Promise<{ stars: number; forks: number } | null> {
+): Promise<{ stars: number; forks: number; downloads: number } | null> {
   try {
-    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-      headers: { Accept: "application/vnd.github+json" },
-      next: { revalidate: 3600 },
-    })
-    if (!res.ok) return null
-    const data = await res.json()
+    const headers = { Accept: "application/vnd.github+json" }
+    const [repoRes, releasesRes] = await Promise.all([
+      fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+        headers,
+        next: { revalidate: 3600 },
+      }),
+      fetch(
+        `https://api.github.com/repos/${owner}/${repo}/releases?per_page=20`,
+        {
+          headers,
+          next: { revalidate: 3600 },
+        }
+      ),
+    ])
+    if (!repoRes.ok) return null
+    const data = await repoRes.json()
+    const releases = releasesRes.ok ? await releasesRes.json() : []
+    const downloads = Array.isArray(releases)
+      ? releases.reduce(
+          (sum, release) =>
+            sum +
+            (Array.isArray(release.assets)
+              ? release.assets.reduce(
+                  (assetSum: number, asset: { download_count?: number }) =>
+                    assetSum + (asset.download_count ?? 0),
+                  0
+                )
+              : 0),
+          0
+        )
+      : 0
     return {
       stars: data.stargazers_count ?? 0,
       forks: data.forks_count ?? 0,
+      downloads,
     }
   } catch {
     return null
