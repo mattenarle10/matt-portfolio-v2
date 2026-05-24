@@ -10,12 +10,8 @@ export const projectData: Project[] = [
     image: "/projects/Projects_Markamd.png",
     github: "https://github.com/mattenarle10/markamd",
     demo: "https://markamd.vercel.app",
-    producthunt: "https://www.producthunt.com/products/marka-md",
     technologies: ["Tauri", "Rust", "React", "TypeScript", "CodeMirror"],
-    stats: [
-      { icon: "↑", label: "on PH", value: "—" },
-      { icon: "⇣", label: "downloads", value: "—" },
-    ],
+    stats: [{ icon: "⬇", label: "downloads", value: "767+" }],
   },
   {
     title: "BetterBacolod.org",
