@@ -1,7 +1,13 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useEffect, useState } from "react"
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react"
 
 // Theme values aligned with your preferred sleek, modern aesthetic
 const lightTheme = {
@@ -44,6 +50,12 @@ export const ThemeProvider: React.FC<{
   initialTheme?: ThemeMode
 }> = ({ children, initialTheme = "dark" }) => {
   const [theme, setTheme] = useState<ThemeMode>(initialTheme)
+
+  useLayoutEffect(() => {
+    setTheme(
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    )
+  }, [])
 
   // Sync document class and persistence whenever theme changes
   useEffect(() => {

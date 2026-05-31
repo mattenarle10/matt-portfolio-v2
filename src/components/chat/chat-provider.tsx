@@ -1,10 +1,15 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import type { Message } from "@/schemas"
 import { ChatButton } from "./chat-button"
-import { ChatDialog } from "./chat-dialog"
+
+const ChatDialog = dynamic(
+  () => import("./chat-dialog").then((mod) => mod.ChatDialog),
+  { ssr: false }
+)
 
 function getSuggestedPrompts(pathname: string): string[] {
   if (pathname.startsWith("/projects")) {
@@ -43,8 +48,18 @@ export function ChatProvider() {
   const pathname = usePathname() || "/"
   const [messages, setMessages] = useState<Message[]>([])
   const [isOpen, setIsOpen] = useState(false)
+  const [hasOpened, setHasOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const suggestedPrompts = getSuggestedPrompts(pathname)
+
+  function handleToggleChat() {
+    setIsOpen((current) => {
+      if (!current) {
+        setHasOpened(true)
+      }
+      return !current
+    })
+  }
 
   async function handleSendMessage(content: string) {
     const userMessage: Message = {
@@ -116,15 +131,17 @@ export function ChatProvider() {
 
   return (
     <>
-      <ChatButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-      <ChatDialog
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        messages={messages}
-        isLoading={isLoading}
-        onSendMessage={handleSendMessage}
-        suggestedPrompts={suggestedPrompts}
-      />
+      <ChatButton isOpen={isOpen} onClick={handleToggleChat} />
+      {hasOpened && (
+        <ChatDialog
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          messages={messages}
+          isLoading={isLoading}
+          onSendMessage={handleSendMessage}
+          suggestedPrompts={suggestedPrompts}
+        />
+      )}
     </>
   )
 }

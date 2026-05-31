@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
-import { cookies } from "next/headers"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { ChatProvider } from "@/components/chat/chat-provider"
@@ -22,6 +21,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
 })
+
+const themeScript = `
+(() => {
+  try {
+    const storedTheme = localStorage.getItem("theme")
+    const cookieTheme = document.cookie.match(/(?:^|; )theme=(light|dark)/)?.[1]
+    const theme = storedTheme || cookieTheme || "dark"
+    document.documentElement.classList.toggle("dark", theme !== "light")
+  } catch {}
+})()
+`
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mattenarle.com"),
@@ -107,21 +117,20 @@ export const metadata: Metadata = {
   authors: [{ name: "Matt Enarle", url: "https://mattenarle.com" }],
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookieStore = await cookies()
-  const cookieTheme =
-    cookieStore.get("theme")?.value === "light" ? "light" : "dark"
-  const isDark = cookieTheme === "dark"
   return (
-    <html lang="en" className={`scroll-smooth ${isDark ? "dark" : ""}`}>
+    <html lang="en" className="scroll-smooth dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}
       >
-        <ClientThemeProvider initialTheme={cookieTheme}>
+        <ClientThemeProvider>
           <GlobalStateProvider>
             <Navbar />
             <main className="flex-grow min-h-[60vh]">{children}</main>
