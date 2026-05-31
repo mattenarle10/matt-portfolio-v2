@@ -113,6 +113,8 @@ const Hello = () => {
               src="/about/matt-viet.png"
               alt="Matt"
               fill
+              priority
+              sizes="(max-width: 768px) 96px, 144px"
               className="object-cover scale-110"
             />
           </div>
