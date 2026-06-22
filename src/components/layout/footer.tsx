@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { GithubIcon, LinkedInIcon } from "@/constants"
 
@@ -27,6 +28,21 @@ const Footer = () => {
               aria-label="LinkedIn"
             >
               <LinkedInIcon className="w-6 h-6" />
+            </Link>
+            <Link
+              href="https://builder.aws.com/community/@mattenarle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="AWS Builder"
+            >
+              <Image
+                src="/about/aws-community-builder.png"
+                alt=""
+                width={24}
+                height={24}
+                className="h-6 w-6 rounded-full"
+              />
             </Link>
           </div>
 

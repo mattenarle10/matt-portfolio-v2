@@ -1,4 +1,4 @@
-import { Cloud, Github, Instagram, Linkedin, Mail } from "lucide-react"
+import { Github, Instagram, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 
 type SocialItem = {
@@ -16,9 +16,6 @@ const LinkedinIcon = (
 )
 const GithubIcon = (
   <Github className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-)
-const AwsBuilderIcon = (
-  <Cloud className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
 )
 const MailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
 
@@ -46,12 +43,6 @@ const socials: SocialItem[] = [
     href: "https://github.com/mattenarle10",
     icon: GithubIcon,
     subtext: "/mattenarle10",
-  },
-  {
-    label: "AWS Builder",
-    href: "https://builder.aws.com/community/@mattenarle",
-    icon: AwsBuilderIcon,
-    subtext: "@mattenarle",
   },
 ]
 
