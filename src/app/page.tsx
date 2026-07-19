@@ -1,7 +1,7 @@
 import Hello from "@/components/home/hello"
 import RecentMediumPosts from "@/components/home/medium"
 import Socials from "@/components/home/socials"
-import { StravaActivity } from "@/components/home/strava"
+// import { StravaActivity } from "@/components/home/strava"
 import { FadeIn } from "@/components/ui"
 
 export default function Home() {
@@ -16,15 +16,15 @@ export default function Home() {
         </div>
       </FadeIn>
 
-      {/* Strava Activities Section - Animated with faster delay */}
-      <FadeIn delay={1.2} y={24} duration={0.5}>
+      {/* Strava is disabled while API access is subscriber-only. */}
+      {/* <FadeIn delay={1.2} y={24} duration={0.5}>
         <div className="mt-6 md:mt-6">
           <StravaActivity />
         </div>
-      </FadeIn>
+      </FadeIn> */}
 
       {/* Contact Section */}
-      <FadeIn delay={1.4} y={24} duration={0.5}>
+      <FadeIn delay={1.2} y={24} duration={0.5}>
         <div className="mt-6 md:mt-6">
           <Socials />
         </div>
