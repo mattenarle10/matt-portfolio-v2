@@ -4,8 +4,6 @@ export {
   CodeIcon,
   CoffeeIcon,
   FitnessIcon,
-  GithubIcon,
-  LinkedInIcon,
   MenuIcon,
   MoonIcon,
   SunIcon,

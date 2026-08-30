@@ -3,7 +3,6 @@ import { motion } from "framer-motion"
 import { ArrowUpRight, Heart } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { GithubIcon } from "@/constants"
 
 const Hello = () => {
   const [text, setText] = useState("")
@@ -77,7 +76,7 @@ const Hello = () => {
               rel="noopener noreferrer"
             >
               GitHub
-              <GithubIcon className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </motion.a>
             <motion.a
               href="/resume.pdf"

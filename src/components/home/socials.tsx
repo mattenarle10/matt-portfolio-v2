@@ -1,5 +1,8 @@
-import { Github, Instagram, Linkedin, Mail } from "lucide-react"
-import Link from "next/link"
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub"
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin"
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons/faXTwitter"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Mail } from "lucide-react"
 
 type SocialItem = {
   label: string
@@ -8,40 +11,40 @@ type SocialItem = {
   subtext: string
 }
 
-const InstagramIcon = (
-  <Instagram className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+const xIcon = (
+  <FontAwesomeIcon icon={faXTwitter} className="w-5 h-5 md:w-6 md:h-6" />
 )
-const LinkedinIcon = (
-  <Linkedin className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+const linkedInIcon = (
+  <FontAwesomeIcon icon={faLinkedin} className="w-5 h-5 md:w-6 md:h-6" />
 )
-const GithubIcon = (
-  <Github className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+const githubIcon = (
+  <FontAwesomeIcon icon={faGithub} className="w-5 h-5 md:w-6 md:h-6" />
 )
-const MailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+const mailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
 
 const socials: SocialItem[] = [
   {
     label: "Email Me",
     href: "mailto:matthew.enarle@outlook.com",
-    icon: MailIcon,
+    icon: mailIcon,
     subtext: "Tap to email",
   },
   {
-    label: "Instagram",
-    href: "https://instagram.com/mattenarle",
-    icon: InstagramIcon,
+    label: "X",
+    href: "https://x.com/mattenarle",
+    icon: xIcon,
     subtext: "@mattenarle",
   },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/in/matthew-enarle",
-    icon: LinkedinIcon,
+    icon: linkedInIcon,
     subtext: "/matthew-enarle",
   },
   {
     label: "GitHub",
     href: "https://github.com/mattenarle10",
-    icon: GithubIcon,
+    icon: githubIcon,
     subtext: "/mattenarle10",
   },
 ]
@@ -58,7 +61,7 @@ export default function Socials() {
         <div className="p-2.5 md:p-3">
           <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
             {socials.map((item) => (
-              <Link
+              <a
                 key={item.label}
                 href={item.href}
                 target="_blank"
@@ -78,7 +81,7 @@ export default function Socials() {
                     {item.subtext}
                   </span>
                 </span>
-              </Link>
+              </a>
             ))}
           </div>
         </div>

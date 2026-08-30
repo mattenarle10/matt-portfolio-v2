@@ -5,10 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ChatProvider } from "@/components/chat/chat-provider"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
-import {
-  ThemeProvider as ClientThemeProvider,
-  GlobalStateProvider,
-} from "@/context"
+import { ThemeProvider as ClientThemeProvider } from "@/context/theme"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -131,93 +128,91 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}
       >
         <ClientThemeProvider>
-          <GlobalStateProvider>
-            <Navbar />
-            <main className="flex-grow min-h-[60vh]">{children}</main>
-            <Footer />
-            <Analytics />
-            <ChatProvider />
-            {/* JSON-LD: Person */}
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "Person",
-                  name: "Matt Enarle",
-                  url: "https://mattenarle.com",
-                  jobTitle: "Cloud Engineer",
-                  image: "https://mattenarle.com/about/matt-grad.png",
-                  sameAs: [
-                    "https://github.com/mattenarle",
-                    "https://www.linkedin.com/in/mattenarle",
-                  ],
-                  description:
-                    "Cloud Engineer and endurance athlete. Projects, resume, and contact.",
-                }),
-              }}
-            />
-            {/* JSON-LD: WebSite with SearchAction (helps sitelinks search box) */}
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "WebSite",
-                  name: "Matt Enarle",
-                  alternateName: "mattenarle.com",
-                  url: "https://mattenarle.com",
-                  potentialAction: {
-                    "@type": "SearchAction",
-                    target: "https://mattenarle.com/?q={search_term_string}",
-                    "query-input": "required name=search_term_string",
+          <Navbar />
+          <main className="flex-grow min-h-[60vh]">{children}</main>
+          <Footer />
+          <Analytics />
+          <ChatProvider />
+          {/* JSON-LD: Person */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Matt Enarle",
+                url: "https://mattenarle.com",
+                jobTitle: "Cloud Engineer",
+                image: "https://mattenarle.com/about/matt-grad.png",
+                sameAs: [
+                  "https://github.com/mattenarle",
+                  "https://www.linkedin.com/in/mattenarle",
+                ],
+                description:
+                  "Cloud Engineer and endurance athlete. Projects, resume, and contact.",
+              }),
+            }}
+          />
+          {/* JSON-LD: WebSite with SearchAction (helps sitelinks search box) */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Matt Enarle",
+                alternateName: "mattenarle.com",
+                url: "https://mattenarle.com",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: "https://mattenarle.com/?q={search_term_string}",
+                  "query-input": "required name=search_term_string",
+                },
+              }),
+            }}
+          />
+          {/* JSON-LD: ItemList for main navigation (helps sitelinks) */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                itemListElement: [
+                  {
+                    "@type": "SiteNavigationElement",
+                    position: 1,
+                    name: "Home",
+                    description:
+                      "Cloud engineer by day, endurance athlete by night",
+                    url: "https://mattenarle.com/",
                   },
-                }),
-              }}
-            />
-            {/* JSON-LD: ItemList for main navigation (helps sitelinks) */}
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "ItemList",
-                  itemListElement: [
-                    {
-                      "@type": "SiteNavigationElement",
-                      position: 1,
-                      name: "Home",
-                      description:
-                        "Cloud engineer by day, endurance athlete by night",
-                      url: "https://mattenarle.com/",
-                    },
-                    {
-                      "@type": "SiteNavigationElement",
-                      position: 2,
-                      name: "About",
-                      description: "Experience, education, and hobbies",
-                      url: "https://mattenarle.com/about",
-                    },
-                    {
-                      "@type": "SiteNavigationElement",
-                      position: 3,
-                      name: "Projects",
-                      description:
-                        "Cloud infrastructure and software engineering projects",
-                      url: "https://mattenarle.com/projects",
-                    },
-                    {
-                      "@type": "SiteNavigationElement",
-                      position: 4,
-                      name: "Writing",
-                      description: "Articles, notes, and learnings",
-                      url: "https://mattenarle.com/writing",
-                    },
-                  ],
-                }),
-              }}
-            />
-          </GlobalStateProvider>
+                  {
+                    "@type": "SiteNavigationElement",
+                    position: 2,
+                    name: "About",
+                    description: "Experience, education, and hobbies",
+                    url: "https://mattenarle.com/about",
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    position: 3,
+                    name: "Projects",
+                    description:
+                      "Cloud infrastructure and software engineering projects",
+                    url: "https://mattenarle.com/projects",
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    position: 4,
+                    name: "Writing",
+                    description: "Articles, notes, and learnings",
+                    url: "https://mattenarle.com/writing",
+                  },
+                ],
+              }),
+            }}
+          />
         </ClientThemeProvider>
       </body>
     </html>
