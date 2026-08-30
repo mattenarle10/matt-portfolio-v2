@@ -1,7 +1,7 @@
-"use client"
-
-import Link from "next/link"
-import { GithubIcon, LinkedInIcon, XIcon } from "@/constants"
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub"
+import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram"
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Footer = () => {
   return (
@@ -10,33 +10,33 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-center">
           {/* Social Links */}
           <div className="flex space-x-6 mb-4">
-            <Link
+            <a
               href="https://github.com/mattenarle10"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
               aria-label="GitHub"
             >
-              <GithubIcon className="w-6 h-6" />
-            </Link>
-            <Link
+              <FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
+            </a>
+            <a
               href="https://linkedin.com/in/matthew-enarle"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
               aria-label="LinkedIn"
             >
-              <LinkedInIcon className="w-6 h-6" />
-            </Link>
-            <Link
-              href="https://x.com/mattenarle"
+              <FontAwesomeIcon icon={faLinkedin} className="w-6 h-6" />
+            </a>
+            <a
+              href="https://instagram.com/mattenarle"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-              aria-label="X"
+              aria-label="Instagram"
             >
-              <XIcon className="w-6 h-6" />
-            </Link>
+              <FontAwesomeIcon icon={faInstagram} className="w-6 h-6" />
+            </a>
           </div>
 
           {/* Copyright */}

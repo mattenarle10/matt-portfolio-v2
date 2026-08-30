@@ -1,6 +1,8 @@
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub"
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin"
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons/faXTwitter"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Mail } from "lucide-react"
-import Link from "next/link"
-import { GithubIcon, InstagramIcon, LinkedInIcon } from "@/constants"
 
 type SocialItem = {
   label: string
@@ -9,9 +11,15 @@ type SocialItem = {
   subtext: string
 }
 
-const instagramIcon = <InstagramIcon className="w-5 h-5 md:w-6 md:h-6" />
-const linkedInIcon = <LinkedInIcon className="w-5 h-5 md:w-6 md:h-6" />
-const githubIcon = <GithubIcon className="w-5 h-5 md:w-6 md:h-6" />
+const xIcon = (
+  <FontAwesomeIcon icon={faXTwitter} className="w-5 h-5 md:w-6 md:h-6" />
+)
+const linkedInIcon = (
+  <FontAwesomeIcon icon={faLinkedin} className="w-5 h-5 md:w-6 md:h-6" />
+)
+const githubIcon = (
+  <FontAwesomeIcon icon={faGithub} className="w-5 h-5 md:w-6 md:h-6" />
+)
 const mailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
 
 const socials: SocialItem[] = [
@@ -22,9 +30,9 @@ const socials: SocialItem[] = [
     subtext: "Tap to email",
   },
   {
-    label: "Instagram",
-    href: "https://instagram.com/mattenarle",
-    icon: instagramIcon,
+    label: "X",
+    href: "https://x.com/mattenarle",
+    icon: xIcon,
     subtext: "@mattenarle",
   },
   {
@@ -53,7 +61,7 @@ export default function Socials() {
         <div className="p-2.5 md:p-3">
           <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
             {socials.map((item) => (
-              <Link
+              <a
                 key={item.label}
                 href={item.href}
                 target="_blank"
@@ -73,7 +81,7 @@ export default function Socials() {
                     {item.subtext}
                   </span>
                 </span>
-              </Link>
+              </a>
             ))}
           </div>
         </div>

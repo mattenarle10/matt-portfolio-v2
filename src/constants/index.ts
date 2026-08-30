@@ -4,13 +4,9 @@ export {
   CodeIcon,
   CoffeeIcon,
   FitnessIcon,
-  GithubIcon,
-  InstagramIcon,
-  LinkedInIcon,
   MenuIcon,
   MoonIcon,
   SunIcon,
-  XIcon,
   YoutubeIcon,
 } from "./icons"
 export { projectData } from "./projects"
