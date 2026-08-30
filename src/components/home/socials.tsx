@@ -1,5 +1,6 @@
-import { Github, Instagram, Linkedin, Mail } from "lucide-react"
+import { Mail } from "lucide-react"
 import Link from "next/link"
+import { GithubIcon, InstagramIcon, LinkedInIcon } from "@/constants"
 
 type SocialItem = {
   label: string
@@ -8,40 +9,34 @@ type SocialItem = {
   subtext: string
 }
 
-const InstagramIcon = (
-  <Instagram className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-)
-const LinkedinIcon = (
-  <Linkedin className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-)
-const GithubIcon = (
-  <Github className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-)
-const MailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+const instagramIcon = <InstagramIcon className="w-5 h-5 md:w-6 md:h-6" />
+const linkedInIcon = <LinkedInIcon className="w-5 h-5 md:w-6 md:h-6" />
+const githubIcon = <GithubIcon className="w-5 h-5 md:w-6 md:h-6" />
+const mailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
 
 const socials: SocialItem[] = [
   {
     label: "Email Me",
     href: "mailto:matthew.enarle@outlook.com",
-    icon: MailIcon,
+    icon: mailIcon,
     subtext: "Tap to email",
   },
   {
     label: "Instagram",
     href: "https://instagram.com/mattenarle",
-    icon: InstagramIcon,
+    icon: instagramIcon,
     subtext: "@mattenarle",
   },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/in/matthew-enarle",
-    icon: LinkedinIcon,
+    icon: linkedInIcon,
     subtext: "/matthew-enarle",
   },
   {
     label: "GitHub",
     href: "https://github.com/mattenarle10",
-    icon: GithubIcon,
+    icon: githubIcon,
     subtext: "/mattenarle10",
   },
 ]

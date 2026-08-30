@@ -1,8 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
-import { GithubIcon, LinkedInIcon } from "@/constants"
+import { GithubIcon, LinkedInIcon, XIcon } from "@/constants"
 
 const Footer = () => {
   return (
@@ -30,19 +29,13 @@ const Footer = () => {
               <LinkedInIcon className="w-6 h-6" />
             </Link>
             <Link
-              href="https://builder.aws.com/community/@mattenarle"
+              href="https://x.com/mattenarle"
               target="_blank"
               rel="noopener noreferrer"
-              className="opacity-70 hover:opacity-100 transition-opacity"
-              aria-label="AWS Builder"
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              aria-label="X"
             >
-              <Image
-                src="/about/aws-community-builder.png"
-                alt=""
-                width={24}
-                height={24}
-                className="h-6 w-6 rounded-full"
-              />
+              <XIcon className="w-6 h-6" />
             </Link>
           </div>
 
