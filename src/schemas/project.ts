@@ -15,6 +15,7 @@ export interface Project {
   pdf?: string
   manual?: string
   producthunt?: string
+  appstore?: string
   technologies: string[]
   stats?: ProjectStat[]
 }

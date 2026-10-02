@@ -98,7 +98,11 @@ export default function Projects() {
     try {
       const url = new URL(href)
       const host = url.hostname
-      if (host.includes("sites.google.com") || host.includes("amplifyapp.com"))
+      if (
+        host.includes("sites.google.com") ||
+        host.includes("amplifyapp.com") ||
+        host.includes("getpilly.app")
+      )
         return "Open site"
       return "Open demo"
     } catch {
@@ -352,6 +356,40 @@ export default function Projects() {
                         </svg>
                       </Link>
                     )}
+
+                    {project.appstore && (
+                      <Link
+                        href={project.appstore}
+                        target="_blank"
+                        className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                        onMouseEnter={(e) =>
+                          showTooltip(e, "Open in App Store")
+                        }
+                        onMouseMove={updateTooltip}
+                        onMouseLeave={hideTooltip}
+                        title="App Store"
+                      >
+                        <svg
+                          className="w-3 h-3"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect
+                            x="5"
+                            y="2"
+                            width="14"
+                            height="20"
+                            rx="2"
+                            ry="2"
+                          ></rect>
+                          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                      </Link>
+                    )}
                   </div>
 
                   {/* Title and date */}
@@ -501,6 +539,35 @@ export default function Projects() {
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M9 8h4a3 3 0 0 1 0 6H9"></path>
                             <line x1="9" y1="14" x2="9" y2="17"></line>
+                          </svg>
+                        </Link>
+                      )}
+
+                      {project.appstore && (
+                        <Link
+                          href={project.appstore}
+                          target="_blank"
+                          className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                          title="App Store"
+                        >
+                          <svg
+                            className="w-3.5 h-3.5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <rect
+                              x="5"
+                              y="2"
+                              width="14"
+                              height="20"
+                              rx="2"
+                              ry="2"
+                            ></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
                           </svg>
                         </Link>
                       )}

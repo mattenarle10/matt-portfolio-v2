@@ -2,6 +2,25 @@ import type { Project } from "@/schemas"
 
 export const projectData: Project[] = [
   {
+    title: "Pilly",
+    slug: "pilly",
+    date: "September 2026",
+    description:
+      "Local-first medicine tracker for iPhone. Private reminders, dose history, supply estimates, and Home Screen widgets — no account, everything stays on your phone. Built with Expo for RevenueCat Shipaton 2026. Free on the App Store.",
+    image: "/projects/Projects_Pilly.png",
+    demo: "https://getpilly.app",
+    appstore:
+      "https://apps.apple.com/us/app/pilly-medicine-tracker/id6801062753",
+    technologies: [
+      "Expo",
+      "React Native",
+      "TypeScript",
+      "SQLite",
+      "Drizzle",
+      "RevenueCat",
+    ],
+  },
+  {
     title: "marka.md",
     slug: "markamd",
     date: "May 2026",
