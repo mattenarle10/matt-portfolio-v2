@@ -2,6 +2,7 @@ import Certifications from "@/components/about/certifications"
 import Education from "@/components/about/education"
 import Experiences from "@/components/about/experiences"
 import Gallery from "@/components/about/gallery"
+import Volunteering from "@/components/about/volunteering"
 
 export default function About() {
   return (
@@ -13,6 +14,7 @@ export default function About() {
       <Experiences />
       <Education />
       <Certifications />
+      <Volunteering />
     </div>
   )
 }

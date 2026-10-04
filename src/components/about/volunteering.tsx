@@ -5,32 +5,39 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useIsMobile } from "@/hooks"
 
-type Certification = {
+type VolunteerRole = {
   title: string
-  issuer: string
+  organization: string
   period: string
   image: string
   url: string
 }
 
-const certifications: Certification[] = [
+const volunteering: VolunteerRole[] = [
   {
-    title: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    period: "Issued: Nov 2025 • Expires: Nov 2028",
-    image: "/about/aws-cloud-practitioner.png",
-    url: "https://www.credly.com/badges/d70e4cfb-6e4e-4274-8e94-9d2e03c65871/public_url",
+    title: "AWS Community Builder",
+    organization: "Amazon Web Services",
+    period: "Mar 2026 - Present",
+    image: "/about/aws-community-builder.png",
+    url: "https://aws.amazon.com/developer/community/community-builders/",
+  },
+  {
+    title: "Founder",
+    organization: "BetterBacolod.org",
+    period: "Jan 2026 - Present",
+    image: "/about/betterbacolod.png",
+    url: "https://betterbacolod.org",
   },
 ]
 
-export default function Certifications() {
+export default function Volunteering() {
   const isMobile = useIsMobile()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement
-      if (!target.closest(".cert-item")) {
+      if (!target.closest(".volunteer-item")) {
         setActiveIndex(null)
       }
     }
@@ -52,16 +59,14 @@ export default function Certifications() {
 
   return (
     <section className="mb-10">
-      <h2 className="text-base font-medium mb-4 tracking-wide">
-        Certifications
-      </h2>
+      <h2 className="text-base font-medium mb-4 tracking-wide">Volunteering</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-        {certifications.map((cert, index) => {
+        {volunteering.map((role, index) => {
           const isActive = isMobile && activeIndex === index
           return (
             <motion.div
-              key={cert.title}
-              className="cert-item group relative"
+              key={role.title}
+              className="volunteer-item group relative"
               initial={{ opacity: 0, y: 10 }}
               animate={{
                 opacity: 1,
@@ -77,8 +82,8 @@ export default function Certifications() {
               >
                 <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0">
                   <Image
-                    src={cert.image}
-                    alt={cert.title}
+                    src={role.image}
+                    alt={role.title}
                     fill
                     sizes="56px"
                     className="object-contain"
@@ -90,19 +95,19 @@ export default function Certifications() {
                       <h3
                         className={`text-xs md:text-sm font-light transition-all duration-300 ${isActive || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
                       >
-                        {cert.title}
+                        {role.title}
                       </h3>
                       <p className="text-[10px] md:text-xs opacity-60 mt-0.5 font-light">
-                        {cert.issuer}
+                        {role.organization}
                       </p>
                     </div>
                     <a
-                      href={cert.url}
+                      href={role.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
-                      title="View Certification"
+                      title="Open link"
                     >
                       <svg
                         className="w-3.5 h-3.5"
@@ -120,7 +125,7 @@ export default function Certifications() {
                     </a>
                   </div>
                   <p className="text-[10px] opacity-50 font-light mt-1">
-                    {cert.period}
+                    {role.period}
                   </p>
                 </div>
               </div>

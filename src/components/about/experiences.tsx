@@ -34,13 +34,6 @@ const Experiences = () => {
   }
   const experiences = [
     {
-      company: "Founder",
-      dates: "January 2026 - Present",
-      location: "BetterBacolod.org, Remote",
-      description:
-        "Launched an open-source civic tech portal for Bacolod City. Built a community-powered platform with 45+ government services, transparency data, and barangay directory. Part of the BetterGov.ph initiative.",
-    },
-    {
       company: "Junior Cloud Engineer",
       dates: "July 2025 - Present",
       location: "eCloudvalley Philippines, Hybrid",
