@@ -8,10 +8,35 @@ export interface MediumPost {
   publishedAt: string
   excerpt: string | null
   imageUrl: string | null
+  source?: "medium" | "builder-center"
 }
 
 const MEDIUM_POSTS_CACHE_KEY = "medium_recent_posts"
 const CACHE_EXPIRY = 1000 * 60 * 30
+const POST_SOURCES = [
+  { endpoint: "/api/medium", source: "medium" },
+  { endpoint: "/api/builder-center", source: "builder-center" },
+] as const
+
+async function fetchPosts(
+  endpoint: string,
+  source: MediumPost["source"],
+  signal: AbortSignal
+): Promise<MediumPost[]> {
+  const response = await fetch(endpoint, { signal })
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${source} posts: ${response.status}`)
+  }
+
+  const data = (await response.json()) as MediumPost[]
+
+  if (!Array.isArray(data)) {
+    throw new Error(`${source} posts response was not an array`)
+  }
+
+  return data.map((post) => ({ ...post, source }))
+}
 
 export function useMediumPosts(limit?: number) {
   const [posts, setPosts] = useState<MediumPost[]>([])
@@ -44,21 +69,31 @@ export function useMediumPosts(limit?: number) {
           }
         }
 
-        const response = await fetch("/api/medium", {
-          signal: controller.signal,
-        })
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch Medium posts: ${response.status}`)
-        }
-
-        const data = (await response.json()) as MediumPost[]
-
-        if (!Array.isArray(data)) {
-          throw new Error("Medium posts response was not an array")
-        }
+        const results = await Promise.allSettled(
+          POST_SOURCES.map(({ endpoint, source }) =>
+            fetchPosts(endpoint, source, controller.signal)
+          )
+        )
 
         if (controller.signal.aborted) return
+
+        const failed = results.filter((result) => result.status === "rejected")
+        for (const result of failed) {
+          console.error("Error fetching posts:", result.reason)
+        }
+        if (failed.length === results.length) {
+          throw new Error("Failed to fetch posts from every source")
+        }
+
+        const data = results
+          .flatMap((result) =>
+            result.status === "fulfilled" ? result.value : []
+          )
+          .sort(
+            (a, b) =>
+              new Date(b.publishedAt).getTime() -
+              new Date(a.publishedAt).getTime()
+          )
 
         setPosts(data)
 

@@ -60,7 +60,7 @@ export default function WritingPage() {
 
             {error && !isLoading && (
               <p className="text-xs text-gray-400 font-light">
-                Couldn&apos;t load Medium posts right now.
+                Couldn&apos;t load posts right now.
               </p>
             )}
 
@@ -96,6 +96,8 @@ export default function WritingPage() {
                         </p>
                         <p className="mt-0.5 text-[11px] md:text-xs text-black/60 dark:text-white/60">
                           {formatDate(post.publishedAt)}
+                          {post.source === "builder-center" &&
+                            " · AWS Builder Center"}
                         </p>
                         {post.excerpt && (
                           <p className="mt-1 text-xs md:text-sm font-light text-black/70 dark:text-white/70 line-clamp-2">
@@ -111,7 +113,7 @@ export default function WritingPage() {
 
             {!isLoading && !error && !hasPosts && (
               <p className="text-xs text-gray-400 font-light">
-                No Medium posts found.
+                No posts found.
               </p>
             )}
           </div>
@@ -119,7 +121,16 @@ export default function WritingPage() {
       </FadeIn>
 
       <FadeIn delay={0.2} y={16} duration={0.5}>
-        <div className="mt-4 md:mt-6 flex justify-end">
+        <div className="mt-4 md:mt-6 flex justify-end gap-4">
+          <a
+            href="https://builder.aws.com/community/@mattenarle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 rounded-sm transition-all duration-200 ease-out hover:translate-x-0.5"
+          >
+            Read more on Builder Center
+            <ArrowUpRight className="h-3 w-3" />
+          </a>
           <a
             href="https://medium.com/@mattenarle"
             target="_blank"

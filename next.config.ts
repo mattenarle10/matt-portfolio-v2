@@ -27,6 +27,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.medium.com",
       },
+      {
+        protocol: "https",
+        hostname: "prod-assets.cosmic.aws.dev",
+      },
     ],
     formats: ["image/avif", "image/webp"],
   },

@@ -83,7 +83,7 @@ const RecentMediumPosts = () => {
 
           {error && !isLoading && (
             <p className="text-xs text-gray-400 font-light mt-1">
-              Couldn&apos;t load Medium posts right now.
+              Couldn&apos;t load posts right now.
             </p>
           )}
 
@@ -139,7 +139,7 @@ const RecentMediumPosts = () => {
 
           {!isLoading && !error && !hasPosts && (
             <p className="text-xs text-gray-400 font-light mt-1">
-              No Medium posts found.
+              No posts found.
             </p>
           )}
         </div>
