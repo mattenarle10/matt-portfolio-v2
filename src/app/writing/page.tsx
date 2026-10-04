@@ -25,15 +25,11 @@ export default function WritingPage() {
   const hasPosts = posts.length > 0
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 transition-theme">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 transition-theme">
       <FadeIn delay={0} y={16} duration={0.5}>
-        <header className="mb-6 md:mb-8">
-          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-black dark:text-white">
-            Writing
-          </h1>
-          <p className="mt-1 text-sm font-light text-black/70 dark:text-white/70">
-            Notes, ideas, and learnings.
-          </p>
+        <header>
+          <h1 className="text-2xl md:text-2xl font-bold mb-1">Writing</h1>
+          <p className="font-light mb-6">notes, ideas, and learnings</p>
         </header>
       </FadeIn>
 
