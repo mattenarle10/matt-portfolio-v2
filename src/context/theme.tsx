@@ -50,15 +50,19 @@ export const ThemeProvider: React.FC<{
   initialTheme?: ThemeMode
 }> = ({ children, initialTheme = "dark" }) => {
   const [theme, setTheme] = useState<ThemeMode>(initialTheme)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useLayoutEffect(() => {
     setTheme(
       document.documentElement.classList.contains("dark") ? "dark" : "light"
     )
+    setIsHydrated(true)
   }, [])
 
   // Sync document class and persistence whenever theme changes
   useEffect(() => {
+    // Don't overwrite the saved theme before reading the initial document state.
+    if (!isHydrated) return
     const root = document.documentElement
     if (theme === "dark") {
       root.classList.add("dark")
@@ -76,7 +80,7 @@ export const ThemeProvider: React.FC<{
         document.cookie = `theme=${theme}; path=/; max-age=31536000; samesite=lax`
       }
     } catch {}
-  }, [theme])
+  }, [theme, isHydrated])
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"))

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { createContext, type ReactNode, useContext, useState } from "react"
 import type { Message } from "@/schemas"
 import { ChatButton } from "./chat-button"
 
@@ -44,13 +44,22 @@ function getSuggestedPrompts(pathname: string): string[] {
   ]
 }
 
-export function ChatProvider() {
+const ChatContext = createContext({ openChat: () => {}, closeChat: () => {} })
+
+export const useChat = () => useContext(ChatContext)
+
+export function ChatProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname() || "/"
   const [messages, setMessages] = useState<Message[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [hasOpened, setHasOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const suggestedPrompts = getSuggestedPrompts(pathname)
+
+  function openChat() {
+    setHasOpened(true)
+    setIsOpen(true)
+  }
 
   function handleToggleChat() {
     setIsOpen((current) => {
@@ -118,9 +127,7 @@ export function ChatProvider() {
         id: `error-${Date.now()}`,
         role: "assistant",
         content:
-          error instanceof Error
-            ? `Error: ${error.message}`
-            : "Sorry, I encountered an error. Please try again in a moment.",
+          "The assistant is unavailable right now. Try again shortly, or email me at matthew.enarle@outlook.com.",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -130,7 +137,10 @@ export function ChatProvider() {
   }
 
   return (
-    <>
+    <ChatContext.Provider
+      value={{ openChat, closeChat: () => setIsOpen(false) }}
+    >
+      {children}
       <ChatButton isOpen={isOpen} onClick={handleToggleChat} />
       {hasOpened && (
         <ChatDialog
@@ -142,6 +152,6 @@ export function ChatProvider() {
           suggestedPrompts={suggestedPrompts}
         />
       )}
-    </>
+    </ChatContext.Provider>
   )
 }

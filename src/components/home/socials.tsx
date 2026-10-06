@@ -3,6 +3,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin"
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons/faXTwitter"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Mail } from "lucide-react"
+import { TiltCard } from "@/components/ui/tilt-card"
 
 type SocialItem = {
   label: string
@@ -24,10 +25,10 @@ const mailIcon = <Mail className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
 
 const socials: SocialItem[] = [
   {
-    label: "Email Me",
+    label: "Email",
     href: "mailto:matthew.enarle@outlook.com",
     icon: mailIcon,
-    subtext: "Tap to email",
+    subtext: "say hello",
   },
   {
     label: "X",
@@ -57,7 +58,7 @@ export default function Socials() {
           Contact
         </h2>
       </div>
-      <div className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08]">
+      <TiltCard className="surface-card overflow-hidden">
         <div className="p-2.5 md:p-3">
           <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
             {socials.map((item) => (
@@ -66,7 +67,7 @@ export default function Socials() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2.5 md:gap-3 rounded-sm px-2 py-2 md:px-3 md:py-2.5 -mx-2 -my-2 outline-none focus:outline-none focus:ring-0 transition-all duration-200 ease-out hover:translate-x-0.5"
+                className="interactive-row group flex items-center gap-2.5 md:gap-3 rounded-sm px-2 py-2 md:px-3 md:py-2.5"
                 aria-label={item.label}
                 title={item.label}
               >
@@ -85,7 +86,7 @@ export default function Socials() {
             ))}
           </div>
         </div>
-      </div>
+      </TiltCard>
     </section>
   )
 }

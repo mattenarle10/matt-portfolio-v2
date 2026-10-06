@@ -2,49 +2,28 @@
 import { motion } from "framer-motion"
 import { ArrowUpRight, Heart } from "lucide-react"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { TiltCard } from "@/components/ui/tilt-card"
 
 const Hello = () => {
-  const [text, setText] = useState("")
-  const fullText = "hello... Matt here!"
-
-  useEffect(() => {
-    let currentIndex = 0
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setText(fullText.slice(0, currentIndex))
-        currentIndex++
-      } else {
-        clearInterval(typingInterval)
-      }
-    }, 100) // Speed of typing
-
-    return () => clearInterval(typingInterval)
-  }, [])
   return (
     <section className="pt-2 pb-6 md:pt-6 md:pb-8">
       <div className="flex flex-row gap-6 md:gap-8 items-start">
         {/* Text Content */}
         <div className="flex-1 text-left">
           <h1 className="text-2xl md:text-4xl font-light mb-2 md:mb-4 tracking-tight">
-            <span>{text}</span>
-            <motion.span
-              className="text-blue-500 inline-block"
-              animate={{ opacity: [1, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 0.8,
-                repeatType: "reverse",
-              }}
+            <span>hello... Matt here!</span>
+            <span
+              className="hello-cursor text-blue-500 inline-block"
+              aria-hidden="true"
             >
               |
-            </motion.span>
+            </span>
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
             className="text-xs md:text-base text-black dark:text-gray-300 mb-2 md:mb-4 leading-snug md:leading-relaxed font-light"
           >
             cloud engineer by day, endurance athlete by night, mba + startup in
@@ -65,7 +44,7 @@ const Hello = () => {
             className="mt-2 md:mt-5 flex space-x-3 md:space-x-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2, duration: 0.8 }}
+            transition={{ delay: 0.18, duration: 0.4 }}
           >
             <motion.a
               href="https://github.com/mattenarle10"
@@ -97,26 +76,30 @@ const Hello = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{
-            delay: 1.5,
+            delay: 0.05,
             duration: 0.6,
             type: "spring",
             stiffness: 150,
           }}
           className="relative w-24 h-24 md:w-36 md:h-36 flex-shrink-0"
         >
-          {/* 2D tilted drop backdrop (no blur shadow) */}
-          <div className="hidden md:block absolute inset-0 rounded-md md:rounded-lg image-backdrop translate-x-1.5 translate-y-1.5 md:translate-x-2 md:translate-y-2 rotate-[1.5deg] z-0 pointer-events-none select-none outline-none" />
-          {/* Foreground image card */}
-          <div className="relative z-10 w-full h-full overflow-hidden rounded-md md:rounded-lg border image-border ring-0 outline-none">
-            <Image
-              src="/about/matt-viet.png"
-              alt="Matt"
-              fill
-              priority
-              sizes="(max-width: 768px) 96px, 144px"
-              className="object-cover scale-110"
-            />
-          </div>
+          <TiltCard
+            strength={4}
+            className="profile-card relative w-full h-full"
+          >
+            <div className="hidden md:block absolute inset-0 rounded-md md:rounded-lg image-backdrop translate-x-1.5 translate-y-1.5 md:translate-x-2 md:translate-y-2 rotate-[1.5deg] z-0 pointer-events-none select-none outline-none" />
+            {/* Foreground image card */}
+            <div className="profile-card-front relative z-10 w-full h-full overflow-hidden rounded-md md:rounded-lg border image-border ring-0 outline-none">
+              <Image
+                src="/about/matt-viet.png"
+                alt="Matt"
+                fill
+                priority
+                sizes="(max-width: 768px) 96px, 144px"
+                className="object-cover scale-110"
+              />
+            </div>
+          </TiltCard>
         </motion.div>
       </div>
     </section>

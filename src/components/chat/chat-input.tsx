@@ -54,6 +54,7 @@ export function ChatInput({
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Ask me anything about Matt..."
+          aria-label="Message Matt's assistant"
           disabled={isLoading}
           className="chat-input-field flex-1 resize-none rounded-lg px-3 py-2 md:px-4 text-xs md:text-sm border focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           rows={1}
@@ -70,11 +71,11 @@ export function ChatInput({
         </button>
       </div>
       <div className="mt-1.5 md:mt-2 flex items-center justify-between">
-        <p className="text-[9px] md:text-[10px] opacity-70 text-white">
+        <p className="chat-hint text-[9px] md:text-[10px]">
           Press Enter to send, Shift+Enter for new line
         </p>
         <div className="flex items-center gap-1.5 md:gap-2">
-          <span className="text-[9px] md:text-[10px] text-white/80">
+          <span className="chat-hint text-[9px] md:text-[10px]">
             Suggestions
           </span>
           <button

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { TiltCard } from "@/components/ui/tilt-card"
 import { useIsMobile } from "@/hooks"
 
 type Certification = {
@@ -69,12 +70,9 @@ export default function Certifications() {
                 x: isActive ? 2 : 0,
               }}
               transition={{ delay: index * 0.1 }}
-              whileHover={!isMobile ? { x: 2 } : undefined}
               onClick={() => handleClick(index)}
             >
-              <div
-                className={`flex items-center gap-3 p-3 md:p-4 rounded-sm border border-black/[0.08] dark:border-black/[0.25] transition-all duration-300 h-full ${isActive || (!isMobile && "group-hover:border-black/[0.15] dark:group-hover:border-black/[0.35]") ? "border-black/[0.15] dark:border-black/[0.35]" : ""}`}
-              >
+              <TiltCard className="surface-card about-card flex items-center gap-3 p-4">
                 <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0">
                   <Image
                     src={cert.image}
@@ -88,11 +86,11 @@ export default function Certifications() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 min-w-0">
                       <h3
-                        className={`text-xs md:text-sm font-light transition-all duration-300 ${isActive || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+                        className={`text-sm font-light transition-all duration-300 ${isActive || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
                       >
                         {cert.title}
                       </h3>
-                      <p className="text-[10px] md:text-xs opacity-60 mt-0.5 font-light">
+                      <p className="text-xs opacity-60 mt-0.5 font-light">
                         {cert.issuer}
                       </p>
                     </div>
@@ -101,7 +99,7 @@ export default function Certifications() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
+                      className="icon-button text-neutral-500 dark:text-neutral-400 shrink-0"
                       title="View Certification"
                     >
                       <svg
@@ -123,7 +121,7 @@ export default function Certifications() {
                     {cert.period}
                   </p>
                 </div>
-              </div>
+              </TiltCard>
             </motion.div>
           )
         })}

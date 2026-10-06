@@ -64,7 +64,7 @@ const Experiences = () => {
   ]
 
   return (
-    <div className="mt-16 mb-12">
+    <div className="mt-10 mb-10">
       <h2 className="text-base font-medium mb-4 tracking-wide">Experience</h2>
       <div className="relative">
         {/* Vertical timeline line - desktop only */}
@@ -91,10 +91,10 @@ const Experiences = () => {
               ></div>
 
               {/* Content */}
-              <div className="pb-2">
+              <div className="pb-4 border-b border-black/[0.06] dark:border-white/[0.06]">
                 <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-0.5">
                   <h3
-                    className={`font-light text-xs md:text-sm transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+                    className={`font-light text-sm transition-all duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
                   >
                     {experience.company}
                   </h3>
@@ -102,7 +102,7 @@ const Experiences = () => {
                     {experience.dates}
                   </span>
                 </div>
-                <div className="text-[10px] md:text-xs mb-1 font-light opacity-60">
+                <div className="text-xs mb-1 font-light opacity-60">
                   <span>{experience.location}</span>
                 </div>
                 <div className="flex items-start">
@@ -110,7 +110,7 @@ const Experiences = () => {
                     className={`mr-2 mt-[9px] rounded-full bg-black dark:bg-white transition-all duration-300 shrink-0 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:w-1 group-hover:h-1") ? "w-1 h-1" : "w-0.5 h-0.5"}`}
                   ></span>
                   <p
-                    className={`text-[11px] md:text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
+                    className={`text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
                   >
                     {experience.description}
                   </p>

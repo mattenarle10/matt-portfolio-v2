@@ -1,5 +1,6 @@
 "use client"
 
+import { useReducedMotion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useRef } from "react"
 import type { Message } from "@/schemas"
@@ -21,9 +22,12 @@ export function ChatMessageList({
   suggestedPrompts,
 }: ChatMessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const reducedMotion = useReducedMotion()
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current?.scrollIntoView({
+      behavior: reducedMotion ? "instant" : "smooth",
+    })
   }
 
   useEffect(() => {
@@ -71,7 +75,12 @@ export function ChatMessageList({
   }
 
   return (
-    <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">
+    <div
+      role="log"
+      aria-label="Conversation"
+      aria-live="polite"
+      className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4"
+    >
       {messages.map((message) => (
         <ChatMessage key={message.id} message={message} />
       ))}

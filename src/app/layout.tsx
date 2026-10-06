@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { ChatProvider } from "@/components/chat/chat-provider"
+import { CommandMenuProvider } from "@/components/layout/command-menu"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
+import { MotionProvider } from "@/components/ui/motion-provider"
 import { ThemeProvider as ClientThemeProvider } from "@/context/theme"
 
 const geistSans = Geist({
@@ -120,7 +122,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scroll-smooth dark"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
@@ -128,11 +135,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}
       >
         <ClientThemeProvider>
-          <Navbar />
-          <main className="flex-grow min-h-[60vh]">{children}</main>
-          <Footer />
-          <Analytics />
-          <ChatProvider />
+          <MotionProvider>
+            <ChatProvider>
+              <CommandMenuProvider>
+                <Navbar />
+                <main className="flex-grow min-h-[60vh]">{children}</main>
+                <Footer />
+                <Analytics />
+              </CommandMenuProvider>
+            </ChatProvider>
+          </MotionProvider>
           {/* JSON-LD: Person */}
           <script
             type="application/ld+json"

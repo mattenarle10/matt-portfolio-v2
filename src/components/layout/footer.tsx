@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Footer = () => {
   return (
-    <footer className="mt-auto flex-shrink-0 py-6 md:py-8">
+    <footer className="site-footer mt-auto flex-shrink-0 pt-8 pb-24 md:pb-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-t border-black/[0.08] dark:border-white/[0.08] pt-6">
           {/* Social Links */}
-          <div className="flex space-x-6 mb-4">
+          <div className="flex gap-3 mb-3">
             <a
               href="https://github.com/mattenarle10"
               target="_blank"

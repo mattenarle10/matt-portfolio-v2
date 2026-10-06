@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { TiltCard } from "@/components/ui/tilt-card"
 import { useMediumPosts } from "@/hooks"
 
 const MEDIUM_RSS_CAP = 10
@@ -68,9 +69,9 @@ const RecentMediumPosts = () => {
         )}
       </div>
 
-      <div
-        className="overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08]"
-        style={{ background: "var(--color-background)" }}
+      <TiltCard
+        className="surface-card overflow-hidden rounded-md border border-black/[0.08] dark:border-white/[0.08]"
+        strength={1.5}
       >
         <div className="p-2.5 md:p-3">
           {isLoading && (
@@ -96,7 +97,7 @@ const RecentMediumPosts = () => {
                       href={post.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-start gap-2.5 rounded-sm px-1.5 py-1.5 -mx-1.5 outline-none focus:outline-none focus:ring-0"
+                      className="interactive-row group flex items-start gap-2.5 rounded-sm px-1.5 py-1.5 -mx-1.5"
                     >
                       {post.imageUrl && (
                         <div className="h-10 w-10 md:h-11 md:w-11 flex-shrink-0 overflow-hidden rounded-sm border border-black/[0.08] dark:border-white/[0.10] bg-black/5">
@@ -143,7 +144,7 @@ const RecentMediumPosts = () => {
             </p>
           )}
         </div>
-      </div>
+      </TiltCard>
     </section>
   )
 }

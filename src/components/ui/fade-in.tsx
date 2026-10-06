@@ -1,6 +1,11 @@
 "use client"
 
-import { motion, useAnimation, useInView } from "framer-motion"
+import {
+  motion,
+  useAnimation,
+  useInView,
+  useReducedMotion,
+} from "framer-motion"
 import type React from "react"
 import { useEffect, useRef } from "react"
 
@@ -24,6 +29,7 @@ const FadeIn: React.FC<FadeInProps> = ({
   once = true,
 }) => {
   const controls = useAnimation()
+  const reducedMotion = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once })
 
@@ -41,14 +47,18 @@ const FadeIn: React.FC<FadeInProps> = ({
       initial="hidden"
       animate={controls}
       variants={{
-        hidden: { opacity: 0, y, x },
+        hidden: {
+          opacity: 0,
+          y: reducedMotion ? 0 : y,
+          x: reducedMotion ? 0 : x,
+        },
         visible: {
           opacity: 1,
           y: 0,
           x: 0,
           transition: {
-            duration,
-            delay,
+            duration: reducedMotion ? 0 : duration,
+            delay: reducedMotion ? 0 : delay,
             ease: [0.25, 0.1, 0.25, 1.0], // Custom easing for subtle, refined motion
           },
         },

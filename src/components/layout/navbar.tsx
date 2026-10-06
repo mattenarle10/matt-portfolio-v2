@@ -6,6 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "@/components/ui"
 import { useTheme } from "@/context"
+import { CommandTrigger } from "./command-menu"
 import MobileNav from "./mobile-nav"
 
 const Navbar = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
+    { href: "/writing", label: "Writing" },
   ]
 
   return (
@@ -26,7 +28,10 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Navigation - Hidden on mobile */}
-      <nav className="hidden md:block w-full z-50 bg-transparent transition-colors duration-300 pt-3 pb-1">
+      <nav
+        aria-label="Main navigation"
+        className="hidden md:block w-full z-50 bg-transparent transition-colors duration-300 pt-3 pb-1"
+      >
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 w-full">
             {/* Logo - different image based on theme */}
@@ -59,7 +64,7 @@ const Navbar = () => {
             </div>
 
             {/* Centered Nav Links with animated underline */}
-            <div className="flex-1 flex justify-center items-center space-x-8">
+            <div className="flex-1 flex justify-center items-center gap-2">
               {navLinks.map(({ href, label }) => {
                 const isActive = pathname === href
                 return (
@@ -67,7 +72,7 @@ const Navbar = () => {
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 rounded-xl bg-neutral-300/80 dark:bg-neutral-500/70"
+                        className="nav-active-surface absolute inset-0 rounded-md"
                         transition={{
                           type: "spring",
                           stiffness: 380,
@@ -77,6 +82,7 @@ const Navbar = () => {
                     )}
                     <Link
                       href={href}
+                      aria-current={isActive ? "page" : undefined}
                       className={`px-3 py-1.5 text-sm font-light inline-block relative z-10 transition-all duration-200 ease-out ${
                         isActive
                           ? "text-black dark:text-white"
@@ -91,7 +97,8 @@ const Navbar = () => {
             </div>
 
             {/* Theme Toggle */}
-            <div className="flex items-center flex-none">
+            <div className="flex items-center flex-none gap-4">
+              <CommandTrigger compact />
               <ThemeToggle />
             </div>
           </div>

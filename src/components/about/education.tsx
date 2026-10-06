@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { TiltCard } from "@/components/ui/tilt-card"
 import { useIsMobile } from "@/hooks"
 
 const Education = () => {
@@ -54,7 +55,7 @@ const Education = () => {
   ]
 
   return (
-    <div className="mt-12 mb-12">
+    <div className="mt-10 mb-10">
       <h2 className="text-base font-medium mb-4 tracking-wide">Education</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
@@ -69,13 +70,12 @@ const Education = () => {
             }}
             transition={{ delay: index * 0.1 }}
             className="education-item group"
-            whileHover={!isMobile ? { x: 2 } : undefined}
             onClick={() => handleEduClick(index)}
           >
-            <div className="p-3 md:p-4 rounded-sm border border-black/[0.06] dark:border-white/[0.06] hover:border-black/[0.10] dark:hover:border-white/[0.10] transition-all duration-300">
+            <TiltCard className="surface-card about-card p-4">
               <div className="flex items-start justify-between gap-2 mb-1">
                 <h3
-                  className={`text-xs md:text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+                  className={`text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
                 >
                   {item.school}
                 </h3>
@@ -83,15 +83,15 @@ const Education = () => {
                   {item.date}
                 </span>
               </div>
-              <p className="text-[10px] md:text-xs font-light opacity-70 mb-1">
+              <p className="text-xs font-light opacity-70 mb-1">
                 {item.degree}
               </p>
               <p
-                className={`text-[10px] md:text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-60"}`}
+                className={`text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-60"}`}
               >
                 {item.details}
               </p>
-            </div>
+            </TiltCard>
           </motion.div>
         ))}
       </div>
