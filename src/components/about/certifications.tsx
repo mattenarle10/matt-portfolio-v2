@@ -9,12 +9,18 @@ import { useIsMobile } from "@/hooks"
 type Certification = {
   title: string
   issuer: string
-  period: string
+  period?: string
   image: string
   url: string
 }
 
 const certifications: Certification[] = [
+  {
+    title: "HashiCorp Certified: Terraform Associate (004)",
+    issuer: "IBM Professional Certification",
+    image: "/about/hashicorp-certified-terraform-associate-004.png",
+    url: "https://www.credly.com/badges/265e59b4-eb9d-45a9-b8ca-026e8f7bcd32/public_url",
+  },
   {
     title: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
@@ -117,9 +123,11 @@ export default function Certifications() {
                       </svg>
                     </a>
                   </div>
-                  <p className="text-[10px] opacity-50 font-light mt-1">
-                    {cert.period}
-                  </p>
+                  {cert.period && (
+                    <p className="text-[10px] opacity-50 font-light mt-1">
+                      {cert.period}
+                    </p>
+                  )}
                 </div>
               </TiltCard>
             </motion.div>
