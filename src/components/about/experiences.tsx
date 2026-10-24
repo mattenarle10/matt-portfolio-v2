@@ -98,7 +98,7 @@ const Experiences = () => {
                   >
                     {experience.company}
                   </h3>
-                  <span className="text-[10px] md:text-[11px] font-light opacity-70">
+                  <span className="text-xs font-light opacity-70">
                     {experience.dates}
                   </span>
                 </div>
@@ -110,7 +110,7 @@ const Experiences = () => {
                     className={`mr-2 mt-[9px] rounded-full bg-black dark:bg-white transition-all duration-300 shrink-0 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:w-1 group-hover:h-1") ? "w-1 h-1" : "w-0.5 h-0.5"}`}
                   ></span>
                   <p
-                    className={`text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
+                    className={`text-base font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeExpIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-70"}`}
                   >
                     {experience.description}
                   </p>

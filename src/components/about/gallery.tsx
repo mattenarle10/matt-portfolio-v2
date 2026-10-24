@@ -30,7 +30,7 @@ const images = [
 ]
 
 export default function Gallery() {
-  const scroller = useRef<HTMLDivElement>(null)
+  const scroller = useRef<HTMLElement>(null)
   const reducedMotion = useReducedMotion()
 
   function scroll(direction: number) {
@@ -42,7 +42,13 @@ export default function Gallery() {
 
   return (
     <section className="my-7 mb-10" aria-label="A few moments from my life">
-      <div ref={scroller} className="gallery-grid">
+      <section
+        ref={scroller}
+        className="gallery-grid"
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: The scrollable gallery needs focus for native keyboard scrolling.
+        tabIndex={0}
+        aria-label="Photo gallery. Scroll horizontally to view more photos."
+      >
         {images.map((image) => (
           <figure key={image.src} className="gallery-photo">
             <TiltCard
@@ -57,12 +63,12 @@ export default function Gallery() {
                 className="object-cover"
               />
             </TiltCard>
-            <figcaption className="mt-2 text-[11px] text-neutral-500 dark:text-neutral-400">
+            <figcaption className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
               {image.description}
             </figcaption>
           </figure>
         ))}
-      </div>
+      </section>
       <div className="flex justify-end gap-2 mt-2 sm:hidden">
         <button
           type="button"

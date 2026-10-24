@@ -24,13 +24,13 @@ const Hello = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="text-xs md:text-base text-black dark:text-gray-300 mb-2 md:mb-4 leading-snug md:leading-relaxed font-light"
+            className="text-base text-black dark:text-gray-300 mb-2 md:mb-4 leading-relaxed font-light"
           >
             cloud engineer by day, endurance athlete by night, mba + startup in
             between — also a{" "}
             <a
               href="https://www.instagram.com/heartescaro/"
-              className="text-pink-500 hover:text-pink-600 dark:text-pink-400 dark:hover:text-pink-300 inline-flex items-center gap-0.5 border-b border-transparent hover:border-pink-500 dark:hover:border-pink-400 transition-colors duration-200"
+              className="text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 inline-flex items-center gap-0.5 border-b border-transparent hover:border-pink-500 dark:hover:border-pink-400 transition-colors duration-200"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -41,7 +41,7 @@ const Hello = () => {
           </motion.p>
 
           <motion.div
-            className="mt-2 md:mt-5 flex flex-wrap gap-x-3 gap-y-2 md:gap-x-6"
+            className="hero-links mt-2 md:mt-5 flex flex-wrap gap-x-3 gap-y-2 md:gap-x-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 0.4 }}

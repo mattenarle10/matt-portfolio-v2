@@ -140,6 +140,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} site-shell antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}
       >
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <ClientThemeProvider>
           <MotionProvider>
             <ChatProvider>
@@ -147,6 +150,7 @@ export default function RootLayout({
                 <Navbar />
                 <main
                   id="main-content"
+                  tabIndex={-1}
                   className="min-w-0 flex-grow min-h-[60svh]"
                 >
                   {children}

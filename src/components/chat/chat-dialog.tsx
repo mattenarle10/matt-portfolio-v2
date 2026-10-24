@@ -76,7 +76,7 @@ export function ChatDialog({
                 >
                   Matt&apos;s assistant
                 </h2>
-                <p className="chat-header-status text-[11px]">
+                <p className="chat-header-status text-xs">
                   AI guide to my work & life
                 </p>
               </div>

@@ -38,7 +38,7 @@ const Navbar = () => {
             <div className="flex items-center flex-none">
               <Link
                 href="/"
-                className="flex items-center h-8 w-24"
+                className="flex items-center min-h-11 w-24"
                 aria-label="Home"
               >
                 {theme === "dark" ? (
@@ -83,7 +83,7 @@ const Navbar = () => {
                     <Link
                       href={href}
                       aria-current={isActive ? "page" : undefined}
-                      className={`px-3 py-1.5 text-sm font-light inline-block relative z-10 transition-all duration-200 ease-out ${
+                      className={`min-h-11 px-3 py-1.5 text-sm font-light inline-flex items-center justify-center relative z-10 transition-all duration-200 ease-out ${
                         isActive
                           ? "text-black dark:text-white"
                           : "text-black dark:text-white hover:text-blue-700 dark:hover:text-blue-300 hover:translate-x-0.5"

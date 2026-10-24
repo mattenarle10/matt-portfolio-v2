@@ -21,7 +21,11 @@ export default function MobileNav() {
   return (
     <header className="px-4 sm:px-6 pt-3 pb-1">
       <div className="flex items-center justify-between h-12">
-        <Link href="/" aria-label="Home" className="flex items-center h-8">
+        <Link
+          href="/"
+          aria-label="Home"
+          className="flex items-center min-h-11 min-w-11"
+        >
           <Image
             src={theme === "dark" ? "/2.png" : "/1.png"}
             alt="Matt Enarle Logo"
@@ -42,7 +46,7 @@ export default function MobileNav() {
             key={href}
             href={href}
             aria-current={pathname === href ? "page" : undefined}
-            className="relative py-2.5 text-center text-xs"
+            className="relative min-h-11 flex items-center justify-center px-1 py-2.5 text-center text-sm"
           >
             {pathname === href && (
               <motion.span

@@ -39,7 +39,7 @@ export function ChatInput({
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault()
       handleSend()
     }
@@ -56,7 +56,7 @@ export function ChatInput({
           placeholder="Ask me anything about Matt..."
           aria-label="Message Matt's assistant"
           disabled={isLoading}
-          className="chat-input-field flex-1 resize-none rounded-lg px-3 py-2 md:px-4 text-xs md:text-sm border focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="chat-input-field min-w-0 min-h-11 flex-1 resize-none rounded-lg px-3 py-2 md:px-4 text-base border disabled:opacity-50 disabled:cursor-not-allowed"
           rows={1}
           maxLength={1000}
         />
@@ -64,28 +64,22 @@ export function ChatInput({
           type="button"
           onClick={handleSend}
           disabled={!message.trim() || isLoading}
-          className="chat-send-button flex-shrink-0 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="chat-send-button flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Send message"
         >
           <Send className="w-3.5 h-3.5 md:w-4 md:h-4" />
         </button>
       </div>
-      <div className="mt-1.5 md:mt-2 flex items-center justify-between">
-        <p className="chat-hint text-[9px] md:text-[10px]">
+      <div className="mt-2 flex flex-wrap gap-x-3 items-center justify-between">
+        <p className="chat-hint hidden md:block text-xs">
           Press Enter to send, Shift+Enter for new line
         </p>
-        <div className="flex items-center gap-1.5 md:gap-2">
-          <span className="chat-hint text-[9px] md:text-[10px]">
-            Suggestions
-          </span>
+        <div className="flex items-center gap-2">
+          <span className="chat-hint text-xs">Suggestions</span>
           <button
             type="button"
             onClick={onToggleSuggestions}
-            className={`relative inline-flex h-4 w-7 items-center rounded-full border border-white/30 transition-colors ${
-              suggestionsEnabled
-                ? "chat-toggle-track-on"
-                : "chat-toggle-track-off"
-            }`}
+            className="suggestions-toggle relative inline-flex h-11 w-11 items-center justify-center"
             aria-pressed={suggestionsEnabled}
             aria-label={
               suggestionsEnabled
@@ -94,12 +88,13 @@ export function ChatInput({
             }
           >
             <span
-              className={`inline-block h-3 w-3 transform rounded-full shadow transition-transform ${
-                suggestionsEnabled
-                  ? "chat-toggle-knob-on translate-x-3"
-                  : "chat-toggle-knob-off translate-x-0"
-              }`}
-            />
+              aria-hidden="true"
+              className={`inline-flex h-5 w-8 items-center rounded-full border ${suggestionsEnabled ? "chat-toggle-track-on" : "chat-toggle-track-off"}`}
+            >
+              <span
+                className={`inline-block h-3 w-3 rounded-full shadow transition-transform ${suggestionsEnabled ? "chat-toggle-knob-on translate-x-4" : "chat-toggle-knob-off translate-x-0.5"}`}
+              />
+            </span>
           </button>
         </div>
       </div>

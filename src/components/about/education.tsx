@@ -79,15 +79,15 @@ const Education = () => {
                 >
                   {item.school}
                 </h3>
-                <span className="text-[9px] md:text-[10px] opacity-60 font-light whitespace-nowrap">
+                <span className="text-xs opacity-60 font-light whitespace-nowrap">
                   {item.date}
                 </span>
               </div>
-              <p className="text-xs font-light opacity-70 mb-1">
+              <p className="text-base font-light opacity-70 mb-1">
                 {item.degree}
               </p>
               <p
-                className={`text-xs font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-60"}`}
+                className={`text-base font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-60"}`}
               >
                 {item.details}
               </p>

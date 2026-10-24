@@ -17,6 +17,7 @@
   --surface-hover: #f5f5f5;
   --surface-border: rgba(0, 0, 0, 0.09);
   --muted: #737373;
+  --control-border: #858585;
   --activity-0: #ebedf0;
   --activity-1: #c2d4ee;
   --activity-2: #8cacd5;
@@ -35,6 +36,7 @@
   --surface-hover: #191919;
   --surface-border: rgba(255, 255, 255, 0.1);
   --muted: #a3a3a3;
+  --control-border: #777777;
   --activity-0: #202124;
   --activity-1: #2c405a;
   --activity-2: #43628a;
@@ -220,7 +222,7 @@ html {
 }
 .chat-input-field {
   background: var(--surface);
-  border-color: var(--surface-border);
+  border-color: var(--control-border);
   color: var(--foreground);
 }
 .chat-input-field:focus {
@@ -258,9 +260,50 @@ html {
 }
 
 /* A little depth, with the same quiet palette. */
-:where(a, button, input, textarea, [tabindex]):focus-visible {
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 200;
+  top: calc(8px + var(--safe-top));
+  left: calc(16px + var(--safe-left));
+  padding: 12px 16px;
+  background: var(--foreground);
+  color: var(--background);
+  border-radius: 6px;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  width: 48px;
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.theme-switch-track {
+  position: absolute;
+  inset: 10px 0;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--surface-hover);
+}
+.theme-switch-knob {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 :where(button),
@@ -358,6 +401,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  min-height: 44px;
   color: var(--muted);
   transition: color 180ms;
 }
@@ -386,12 +430,13 @@ html {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  min-height: 36px;
+  min-height: 44px;
+  min-width: 44px;
   padding: 7px 10px;
   border: 1px solid var(--surface-border);
   border-radius: 6px;
   background: var(--surface);
-  font-size: 12px;
+  font-size: 0.8125rem;
   font-family: var(--font-geist-mono), monospace;
   color: var(--muted);
   box-shadow: 0 2px 0 rgb(0 0 0 / 0.04);
@@ -418,15 +463,15 @@ html {
 
 .command-trigger-compact {
   padding: 5px 7px;
-  min-width: 36px;
+  min-width: 44px;
 }
 kbd {
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: 0.75rem;
 }
 .command-badge {
   font-family: var(--font-geist-mono), monospace;
-  font-size: 9px;
+  font-size: 0.75rem;
   color: var(--muted);
   border: 1px solid var(--surface-border);
   border-radius: 3px;
@@ -465,9 +510,9 @@ kbd {
   min-width: 0;
 }
 .activity-month {
-  height: 17px;
-  font-size: 9px;
-  line-height: 12px;
+  height: 20px;
+  font-size: 0.75rem;
+  line-height: 1.25;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -504,6 +549,38 @@ button.activity-cell:focus-visible {
 .activity-key {
   width: 9px;
   height: 9px;
+}
+.activity-browser {
+  margin-top: 12px;
+  color: var(--muted);
+}
+.activity-browser summary {
+  width: fit-content;
+  min-height: 44px;
+  padding-block: 12px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.activity-date-controls {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  gap: 8px;
+}
+.activity-date-controls input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--control-border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 1rem;
+}
+.icon-button:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 .activity-skeleton {
   height: 128px;
@@ -559,11 +636,14 @@ button.activity-cell:focus-visible {
   color: var(--muted);
   border-bottom: 1px solid var(--surface-border);
 }
+.command-search:focus-within {
+  box-shadow: inset 0 -2px var(--accent);
+}
 [cmdk-input] {
   flex: 1;
   width: 0;
   min-width: 0;
-  font-size: 14px;
+  font-size: 1rem;
   color: var(--foreground);
   background: transparent;
   border: 0;
@@ -575,8 +655,9 @@ button.activity-cell:focus-visible {
 .command-close {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   border-radius: 4px;
 }
 .command-close:hover {
@@ -594,7 +675,7 @@ button.activity-cell:focus-visible {
 [cmdk-group-heading] {
   padding: 10px 8px 6px;
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 [cmdk-item] {
@@ -604,7 +685,7 @@ button.activity-cell:focus-visible {
   min-height: 44px;
   padding: 10px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 0.875rem;
   transition: background-color 100ms;
 }
 [cmdk-item] > svg {
@@ -623,7 +704,7 @@ button.activity-cell:focus-visible {
   gap: 2px;
 }
 .command-item-copy small {
-  font-size: 11px;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 .command-trailing,
@@ -634,7 +715,7 @@ button.activity-cell:focus-visible {
   padding: 32px 16px;
   text-align: center;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 0.875rem;
 }
 .command-footer {
   display: flex;
@@ -642,7 +723,7 @@ button.activity-cell:focus-visible {
   border-top: 1px solid var(--surface-border);
   padding: 10px 16px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 0.75rem;
 }
 .command-footer span {
   display: inline-flex;
@@ -669,7 +750,7 @@ button.activity-cell:focus-visible {
   border-radius: 8px;
   box-shadow: 0 4px 24px rgb(0 0 0 / 0.15);
   background: var(--surface);
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 @keyframes command-fade {
   from {
@@ -694,8 +775,8 @@ button.activity-cell:focus-visible {
   }
   .quick-action,
   .command-trigger {
-    min-height: 40px;
-    font-size: 11px;
+    min-height: 44px;
+    font-size: 0.8125rem;
     padding-inline: 8px;
   }
   .activity-card {
@@ -728,13 +809,13 @@ button.activity-cell:focus-visible {
 }
 
 .page-title {
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: 300;
   letter-spacing: -0.035em;
   margin-bottom: 4px;
 }
 .page-subtitle {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 300;
   color: var(--muted);
 }
@@ -745,21 +826,28 @@ button.activity-cell:focus-visible {
 }
 .mobile-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 4rem), 1fr));
   gap: 4px;
   margin-block: 8px;
   color: var(--muted);
 }
+.hero-links a,
+.writing-links a {
+  min-height: 44px;
+}
 .mobile-links [aria-current="page"] {
   color: var(--foreground);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }
 .icon-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  min-width: 36px;
-  min-height: 36px;
-  border: 1px solid var(--surface-border);
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--control-border);
   border-radius: 6px;
   transition: background-color 150ms;
 }
@@ -790,15 +878,14 @@ button.activity-cell:focus-visible {
   padding: 16px;
 }
 .project-card h2 {
-  padding-right: 110px;
   overflow-wrap: anywhere;
 }
 .project-card a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
-  min-height: 24px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 4px;
 }
 .project-card a:hover {
@@ -815,6 +902,10 @@ button.activity-cell:focus-visible {
 .site-footer a {
   display: inline-flex;
   padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
   border-radius: 8px;
   transition:
     color 180ms,
@@ -838,10 +929,6 @@ button.activity-cell:focus-visible {
   }
   .project-card h2 {
     padding-right: 0;
-  }
-  .project-card a {
-    min-width: 32px;
-    min-height: 32px;
   }
 }
 @media (max-width: 639px) {

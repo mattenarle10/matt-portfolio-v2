@@ -89,7 +89,7 @@ export default function Projects() {
       {/* Tooltip for action icons */}
       {tooltip.show && (
         <motion.div
-          className="fixed z-50 pointer-events-none px-2 py-1 text-[10px] rounded-sm border border-black/[0.08] dark:border-black/[0.25] bg-white/80 dark:bg-black/60 backdrop-blur-sm shadow-sm whitespace-nowrap max-w-[200px] ring-0 outline-none"
+          className="fixed z-50 pointer-events-none px-2 py-1 text-xs rounded-sm border border-black/[0.08] dark:border-black/[0.25] bg-white/80 dark:bg-black/60 backdrop-blur-sm shadow-sm whitespace-nowrap max-w-[200px] ring-0 outline-none"
           style={{ left: tooltip.x, top: tooltip.y }}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -137,7 +137,7 @@ export default function Projects() {
                   {/* Content */}
                   <div className="min-w-0 w-full md:flex-1 relative">
                     {/* Links - positioned differently on mobile vs desktop */}
-                    <div className="hidden md:flex absolute -top-1 right-0 gap-2">
+                    <div className="hidden md:flex flex-wrap justify-end gap-1 mb-2">
                       {project.github &&
                         (Array.isArray(project.github) ? (
                           <div className="flex gap-1">
@@ -146,12 +146,13 @@ export default function Projects() {
                                 key={i}
                                 href={link}
                                 target="_blank"
-                                className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                                className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                                 onMouseEnter={(e) =>
                                   showTooltip(e, "Open project in GitHub")
                                 }
                                 onMouseMove={updateTooltip}
                                 onMouseLeave={hideTooltip}
+                                aria-label={`${project.title}: GitHub repository ${i + 1}`}
                                 title={`GitHub Repository ${i + 1}`}
                               >
                                 <svg
@@ -172,12 +173,13 @@ export default function Projects() {
                           <Link
                             href={project.github}
                             target="_blank"
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                             onMouseEnter={(e) =>
                               showTooltip(e, "Open project in GitHub")
                             }
                             onMouseMove={updateTooltip}
                             onMouseLeave={hideTooltip}
+                            aria-label={`${project.title}: GitHub repository`}
                             title="GitHub Repository"
                           >
                             <svg
@@ -198,12 +200,13 @@ export default function Projects() {
                         <Link
                           href={project.demo}
                           target="_blank"
-                          className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                          className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                           onMouseEnter={(e) =>
                             showTooltip(e, getDemoLabel(project.demo as string))
                           }
                           onMouseMove={updateTooltip}
                           onMouseLeave={hideTooltip}
+                          aria-label={`${project.title}: Live demo`}
                           title="Live Demo"
                         >
                           <svg
@@ -225,10 +228,11 @@ export default function Projects() {
                         <Link
                           href={project.pdf}
                           target="_blank"
-                          className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                          className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                           onMouseEnter={(e) => showTooltip(e, "Open PDF")}
                           onMouseMove={updateTooltip}
                           onMouseLeave={hideTooltip}
+                          aria-label={`${project.title}: PDF document`}
                           title="PDF Document"
                         >
                           <svg
@@ -253,7 +257,7 @@ export default function Projects() {
                         <Link
                           href={project.manual}
                           target="_blank"
-                          className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                          className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                           onMouseEnter={(e) => showTooltip(e, "Open manual")}
                           onMouseMove={updateTooltip}
                           onMouseLeave={hideTooltip}
@@ -278,12 +282,13 @@ export default function Projects() {
                         <Link
                           href={project.producthunt}
                           target="_blank"
-                          className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                          className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                           onMouseEnter={(e) =>
                             showTooltip(e, "Featured on Product Hunt")
                           }
                           onMouseMove={updateTooltip}
                           onMouseLeave={hideTooltip}
+                          aria-label={`${project.title}: Product Hunt`}
                           title="Product Hunt"
                         >
                           <svg
@@ -306,12 +311,13 @@ export default function Projects() {
                         <Link
                           href={project.appstore}
                           target="_blank"
-                          className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                          className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                           onMouseEnter={(e) =>
                             showTooltip(e, "Open in App Store")
                           }
                           onMouseMove={updateTooltip}
                           onMouseLeave={hideTooltip}
+                          aria-label={`${project.title}: App Store`}
                           title="App Store"
                         >
                           <svg
@@ -338,18 +344,18 @@ export default function Projects() {
                     </div>
 
                     {/* Title and date */}
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex flex-col items-start gap-2 md:block">
                       <div className="flex-1">
-                        <h2 className="text-sm font-medium tracking-tight">
+                        <h2 className="text-base font-medium tracking-tight">
                           {project.title}
                         </h2>
-                        <span className="text-[10px] opacity-60">
+                        <span className="text-xs opacity-60">
                           {project.date}
                         </span>
                       </div>
 
                       {/* Mobile action links - shown on mobile only */}
-                      <div className="flex md:hidden gap-2 flex-shrink-0">
+                      <div className="flex flex-wrap md:hidden gap-1">
                         {project.github &&
                           (Array.isArray(project.github) ? (
                             <div className="flex gap-1.5">
@@ -358,7 +364,8 @@ export default function Projects() {
                                   key={i}
                                   href={link}
                                   target="_blank"
-                                  className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                                  className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                                  aria-label={`${project.title}: GitHub repository ${i + 1}`}
                                   title={`GitHub Repository ${i + 1}`}
                                 >
                                   <svg
@@ -379,7 +386,8 @@ export default function Projects() {
                             <Link
                               href={project.github}
                               target="_blank"
-                              className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                              className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                              aria-label={`${project.title}: GitHub repository`}
                               title="GitHub Repository"
                             >
                               <svg
@@ -400,7 +408,8 @@ export default function Projects() {
                           <Link
                             href={project.demo}
                             target="_blank"
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            aria-label={`${project.title}: Live demo`}
                             title="Live Demo"
                           >
                             <svg
@@ -422,7 +431,8 @@ export default function Projects() {
                           <Link
                             href={project.pdf}
                             target="_blank"
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            aria-label={`${project.title}: PDF document`}
                             title="PDF Document"
                           >
                             <svg
@@ -447,7 +457,7 @@ export default function Projects() {
                           <Link
                             href={project.manual}
                             target="_blank"
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                             title="Manual"
                           >
                             <svg
@@ -469,7 +479,8 @@ export default function Projects() {
                           <Link
                             href={project.producthunt}
                             target="_blank"
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            aria-label={`${project.title}: Product Hunt`}
                             title="Product Hunt"
                           >
                             <svg
@@ -492,7 +503,8 @@ export default function Projects() {
                           <Link
                             href={project.appstore}
                             target="_blank"
-                            className="text-[10px] opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            className="text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            aria-label={`${project.title}: App Store`}
                             title="App Store"
                           >
                             <svg
@@ -519,7 +531,7 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    <p className="text-xs mt-2 opacity-80 leading-relaxed">
+                    <p className="text-base mt-2 opacity-80 leading-relaxed">
                       {project.description}
                     </p>
 
@@ -528,7 +540,7 @@ export default function Projects() {
                       {project.technologies.map((tech: string) => (
                         <span
                           key={tech}
-                          className="text-[10px] px-1.5 py-0.5 rounded-full ring-0 outline-none transition-colors border border-black/[0.12] dark:border-black/[0.36] group-hover:border-black/[0.20] dark:group-hover:border-black/[0.44] dark:bg-white/[0.04] dark:hover:bg-white/[0.07] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)]"
+                          className="text-xs px-1.5 py-0.5 rounded-full ring-0 outline-none transition-colors border border-black/[0.12] dark:border-black/[0.36] group-hover:border-black/[0.20] dark:group-hover:border-black/[0.44] dark:bg-white/[0.04] dark:hover:bg-white/[0.07] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)]"
                         >
                           {tech}
                         </span>

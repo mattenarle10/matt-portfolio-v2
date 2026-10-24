@@ -74,11 +74,11 @@ export default function Socials() {
                 <span className="text-black dark:text-white/60 group-hover:text-black dark:group-hover:text-white transition-colors duration-200">
                   {item.icon}
                 </span>
-                <span className="flex flex-col leading-tight">
+                <span className="min-w-0 flex flex-col leading-tight break-words">
                   <span className="text-sm md:text-base font-light text-black dark:text-white group-hover:underline">
                     {item.label}
                   </span>
-                  <span className="text-[11px] md:text-xs text-black dark:text-white/70">
+                  <span className="text-xs text-black dark:text-white/70">
                     {item.subtext}
                   </span>
                 </span>

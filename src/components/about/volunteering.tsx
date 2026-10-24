@@ -106,6 +106,7 @@ export default function Volunteering() {
                       onClick={(e) => e.stopPropagation()}
                       className="icon-button text-neutral-500 dark:text-neutral-400 shrink-0"
                       title="Open link"
+                      aria-label={`Learn about ${role.organization}`}
                     >
                       <svg
                         className="w-3.5 h-3.5"
@@ -122,7 +123,7 @@ export default function Volunteering() {
                       </svg>
                     </a>
                   </div>
-                  <p className="text-[10px] opacity-50 font-light mt-1">
+                  <p className="text-xs text-[var(--muted)] font-light mt-1">
                     {role.period}
                   </p>
                 </div>

@@ -48,14 +48,14 @@ export function ChatMessage({ message }: ChatMessageProps) {
           }`}
         >
           <p
-            className={`text-xs md:text-sm leading-relaxed whitespace-pre-wrap break-words ${
+            className={`text-base leading-relaxed whitespace-pre-wrap break-words ${
               isUser ? "user-message-text" : "assistant-message-text"
             }`}
           >
             {message.content}
           </p>
         </div>
-        <span className="text-[9px] md:text-[10px] text-gray-600 dark:text-gray-400 opacity-50 mt-1">
+        <span className="text-xs text-[var(--muted)] mt-1">
           {message.timestamp.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",

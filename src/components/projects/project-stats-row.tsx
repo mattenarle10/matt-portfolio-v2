@@ -32,23 +32,21 @@ export function ProjectStatsRow({ project }: { project: Project }) {
   if (!hasLive && !hasStatic) return null
 
   return (
-    <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[10.5px] md:text-[11px] font-mono opacity-80 md:opacity-60 md:group-hover:opacity-100 transition-opacity leading-relaxed">
+    <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs font-mono text-[var(--muted)] transition-opacity leading-relaxed">
       {live && live.stars > 0 && (
         <span className="whitespace-nowrap">
-          <span aria-hidden>★</span> {formatNum(live.stars)}{" "}
-          <span className="opacity-70">stars</span>
+          <span aria-hidden>★</span> {formatNum(live.stars)} <span>stars</span>
         </span>
       )}
       {live && live.forks > 0 && (
         <span className="whitespace-nowrap">
-          <span aria-hidden>⑂</span> {formatNum(live.forks)}{" "}
-          <span className="opacity-70">forks</span>
+          <span aria-hidden>⑂</span> {formatNum(live.forks)} <span>forks</span>
         </span>
       )}
       {live && (live.downloads ?? 0) > 0 && (
         <span className="whitespace-nowrap">
           <span aria-hidden>⇣</span> {formatNum(live.downloads ?? 0)}
-          <span className="opacity-70"> downloads</span>
+          <span> downloads</span>
         </span>
       )}
       {project.stats?.map((s) => (
@@ -58,7 +56,7 @@ export function ProjectStatsRow({ project }: { project: Project }) {
               {s.icon}
             </span>
           )}
-          {s.value} <span className="opacity-70">{s.label}</span>
+          {s.value} <span>{s.label}</span>
         </span>
       ))}
     </div>

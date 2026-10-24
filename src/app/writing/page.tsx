@@ -53,7 +53,7 @@ export default function WritingPage() {
             )}
 
             {error && !isLoading && (
-              <p className="text-xs text-gray-400 font-light">
+              <p className="text-sm text-[var(--muted)] font-light">
                 Couldn&apos;t load posts right now.
               </p>
             )}
@@ -86,16 +86,16 @@ export default function WritingPage() {
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm md:text-base font-light text-black dark:text-white group-hover:underline group-hover:translate-x-0.5 transition-transform duration-200 ease-out">
+                          <p className="text-base font-light text-black dark:text-white group-hover:underline group-hover:translate-x-0.5 transition-transform duration-200 ease-out">
                             {post.title}
                           </p>
-                          <p className="mt-0.5 text-[11px] md:text-xs text-black/60 dark:text-white/60">
+                          <p className="mt-0.5 text-xs text-black/60 dark:text-white/60">
                             {formatDate(post.publishedAt)}
                             {post.source === "builder-center" &&
                               " · AWS Builder Center"}
                           </p>
                           {post.excerpt && (
-                            <p className="mt-1 text-xs md:text-sm font-light text-black/70 dark:text-white/70 line-clamp-1">
+                            <p className="mt-1 text-base font-light text-black/70 dark:text-white/70 line-clamp-1">
                               {post.excerpt}
                             </p>
                           )}
@@ -108,7 +108,7 @@ export default function WritingPage() {
             )}
 
             {!isLoading && !error && !hasPosts && (
-              <p className="text-xs text-gray-400 font-light">
+              <p className="text-sm text-[var(--muted)] font-light">
                 No posts found.
               </p>
             )}
@@ -117,7 +117,7 @@ export default function WritingPage() {
       </FadeIn>
 
       <FadeIn delay={0.2} y={16} duration={0.5}>
-        <div className="mt-4 md:mt-6 flex justify-end gap-4">
+        <div className="writing-links mt-4 md:mt-6 flex flex-wrap justify-end gap-4">
           <a
             href="https://builder.aws.com/community/@mattenarle"
             target="_blank"

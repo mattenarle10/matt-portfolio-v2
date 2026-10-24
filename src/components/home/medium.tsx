@@ -114,7 +114,7 @@ const RecentMediumPosts = () => {
                         <p className="text-sm md:text-base font-light text-black dark:text-white truncate group-hover:underline group-hover:translate-x-0.5 transition-transform duration-200 ease-out">
                           {post.title}
                         </p>
-                        <p className="mt-0.5 text-[11px] md:text-xs text-black dark:text-white/70">
+                        <p className="mt-0.5 text-xs text-black dark:text-white/70">
                           {formatDate(post.publishedAt)}
                         </p>
                       </div>
