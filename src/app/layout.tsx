@@ -7,6 +7,7 @@ import { CommandMenuProvider } from "@/components/layout/command-menu"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
 import { MotionProvider } from "@/components/ui/motion-provider"
+import { ViewportObserver } from "@/components/ui/viewport-observer"
 import { ThemeProvider as ClientThemeProvider } from "@/context/theme"
 
 const geistSans = Geist({
@@ -145,6 +146,7 @@ export default function RootLayout({
         </a>
         <ClientThemeProvider>
           <MotionProvider>
+            <ViewportObserver />
             <ChatProvider>
               <CommandMenuProvider>
                 <Navbar />

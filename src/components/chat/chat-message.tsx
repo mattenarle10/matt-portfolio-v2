@@ -40,7 +40,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
       </div>
 
       <div
-        className={`flex flex-col max-w-[80%] md:max-w-[75%] ${isUser ? "items-end" : "items-start"}`}
+        className={`min-w-0 flex flex-col max-w-[80%] md:max-w-[75%] ${isUser ? "items-end" : "items-start"}`}
       >
         <div
           className={`rounded-lg px-3 py-2 md:px-4 ${

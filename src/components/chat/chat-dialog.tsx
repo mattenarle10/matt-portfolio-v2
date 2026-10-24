@@ -36,6 +36,7 @@ export function ChatDialog({
       document.body.style.overflow = "hidden"
       return () => {
         document.body.style.overflow = overflow
+        if (dialog?.open) dialog.close()
       }
     }
     dialog?.close()
@@ -56,7 +57,7 @@ export function ChatDialog({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
-          className="flex flex-col h-full"
+          className="min-h-0 flex flex-col h-full"
         >
           <div className="chat-header flex items-center justify-between p-4 border-b shrink-0">
             <div className="flex items-center gap-3">
