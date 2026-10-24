@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
@@ -20,6 +20,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
 })
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+}
 
 const themeScript = `
 (() => {
@@ -132,14 +138,19 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}
+        className={`${geistSans.variable} ${geistMono.variable} site-shell antialiased bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200`}
       >
         <ClientThemeProvider>
           <MotionProvider>
             <ChatProvider>
               <CommandMenuProvider>
                 <Navbar />
-                <main className="flex-grow min-h-[60vh]">{children}</main>
+                <main
+                  id="main-content"
+                  className="min-w-0 flex-grow min-h-[60svh]"
+                >
+                  {children}
+                </main>
                 <Footer />
                 <Analytics />
               </CommandMenuProvider>

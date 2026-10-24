@@ -4,6 +4,10 @@
 
 :root {
   color-scheme: light;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
   --background: #ffffff;
   --foreground: #171717;
   --accent: #2563eb;
@@ -59,6 +63,11 @@ body {
 /* Reserve scrollbar gutter to prevent horizontal layout shift on first paint */
 html {
   scrollbar-gutter: stable;
+}
+
+.site-shell {
+  min-height: 100svh;
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
 }
 
 /* Refined transitions for theme switching */
@@ -260,6 +269,7 @@ html {
 }
 
 .surface-card {
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: 8px;
@@ -436,6 +446,8 @@ kbd {
   padding: 16px;
 }
 .activity-scroll {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--surface-border) transparent;
@@ -644,7 +656,7 @@ button.activity-cell:focus-visible {
 }
 .action-notice {
   position: fixed;
-  bottom: 28px;
+  bottom: calc(28px + var(--safe-bottom));
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -672,9 +684,6 @@ button.activity-cell:focus-visible {
 }
 
 @media (max-width: 767px) {
-  .quick-actions {
-    flex-wrap: nowrap;
-  }
   .quick-actions .command-trigger span,
   .quick-actions .command-badge,
   .quick-actions .quick-action > svg:last-child {
@@ -758,6 +767,7 @@ button.activity-cell:focus-visible {
   background: var(--surface-hover);
 }
 .gallery-grid {
+  max-width: 100%;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: calc((100% - 36px) / 4);
@@ -781,6 +791,7 @@ button.activity-cell:focus-visible {
 }
 .project-card h2 {
   padding-right: 110px;
+  overflow-wrap: anywhere;
 }
 .project-card a {
   display: inline-flex;
@@ -796,6 +807,10 @@ button.activity-cell:focus-visible {
 }
 .about-card {
   height: 100%;
+}
+.about-card h3,
+.site-footer {
+  overflow-wrap: anywhere;
 }
 .site-footer a {
   display: inline-flex;
@@ -832,6 +847,12 @@ button.activity-cell:focus-visible {
 @media (max-width: 639px) {
   .gallery-grid {
     grid-auto-columns: 44%;
+  }
+}
+@media (max-width: 374px) {
+  .hero-layout {
+    flex-direction: column-reverse;
+    gap: 20px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

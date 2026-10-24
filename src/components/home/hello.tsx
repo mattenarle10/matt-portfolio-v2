@@ -7,9 +7,9 @@ import { TiltCard } from "@/components/ui/tilt-card"
 const Hello = () => {
   return (
     <section className="pt-2 pb-6 md:pt-6 md:pb-8">
-      <div className="flex flex-row gap-6 md:gap-8 items-start">
+      <div className="hero-layout flex flex-row gap-6 md:gap-8 items-start">
         {/* Text Content */}
-        <div className="flex-1 text-left">
+        <div className="min-w-0 flex-1 text-left">
           <h1 className="text-2xl md:text-4xl font-light mb-2 md:mb-4 tracking-tight">
             <span>hello... Matt here!</span>
             <span
@@ -41,7 +41,7 @@ const Hello = () => {
           </motion.p>
 
           <motion.div
-            className="mt-2 md:mt-5 flex space-x-3 md:space-x-6"
+            className="mt-2 md:mt-5 flex flex-wrap gap-x-3 gap-y-2 md:gap-x-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 0.4 }}

@@ -135,7 +135,7 @@ export default function Projects() {
                   </div>
 
                   {/* Content */}
-                  <div className="w-full md:flex-1 relative">
+                  <div className="min-w-0 w-full md:flex-1 relative">
                     {/* Links - positioned differently on mobile vs desktop */}
                     <div className="hidden md:flex absolute -top-1 right-0 gap-2">
                       {project.github &&
