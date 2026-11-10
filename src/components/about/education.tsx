@@ -73,22 +73,20 @@ const Education = () => {
             onClick={() => handleEduClick(index)}
           >
             <TiltCard className="surface-card about-card p-4">
-              <div className="flex items-start justify-between gap-2 mb-1">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 mb-1">
                 <h3
-                  className={`text-sm font-light transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
+                  className={`text-sm font-medium transition-all duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:tracking-normal") ? "tracking-normal" : "tracking-tight"}`}
                 >
                   {item.school}
                 </h3>
-                <span className="text-xs opacity-60 font-light whitespace-nowrap">
+                <span className="text-xs text-[var(--muted)] whitespace-nowrap">
                   {item.date}
                 </span>
               </div>
-              <p className="text-base font-light opacity-70 mb-1">
+              <p className="text-sm text-[var(--muted)] leading-relaxed mb-1">
                 {item.degree}
               </p>
-              <p
-                className={`text-base font-light leading-relaxed transition-opacity duration-300 ${(isMobile && activeEduIndex === index) || (!isMobile && "group-hover:opacity-100") ? "opacity-100" : "opacity-60"}`}
-              >
+              <p className="text-xs text-[var(--muted)] leading-relaxed">
                 {item.details}
               </p>
             </TiltCard>

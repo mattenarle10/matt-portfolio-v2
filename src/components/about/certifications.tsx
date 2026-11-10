@@ -105,7 +105,7 @@ export default function Certifications() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="icon-button text-neutral-500 dark:text-neutral-400 shrink-0"
+                      className="icon-button card-open-link text-neutral-500 dark:text-neutral-400 shrink-0"
                       title="View Certification"
                       aria-label={`View ${cert.title} on Credly`}
                     >

@@ -585,34 +585,6 @@ button.activity-cell:focus-visible {
   width: 9px;
   height: 9px;
 }
-.activity-browser {
-  margin-top: 12px;
-  color: var(--muted);
-}
-.activity-browser summary {
-  width: fit-content;
-  min-height: 44px;
-  padding-block: 12px;
-  font-size: 0.875rem;
-  cursor: pointer;
-}
-.activity-date-controls {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 44px;
-  gap: 8px;
-}
-.activity-date-controls input {
-  width: 100%;
-  min-width: 0;
-  min-height: 44px;
-  padding: 8px;
-  border: 1px solid var(--control-border);
-  border-radius: 6px;
-  background: var(--surface);
-  color: var(--foreground);
-  font: inherit;
-  font-size: 1rem;
-}
 .icon-button:disabled {
   opacity: 0.45;
   cursor: default;
@@ -939,6 +911,21 @@ button.activity-cell:focus-visible {
 }
 .about-card {
   height: 100%;
+}
+.card-open-link {
+  border-color: transparent;
+  transition:
+    opacity 150ms,
+    background-color 150ms;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-open-link {
+    opacity: 0;
+  }
+  .about-card:hover .card-open-link,
+  .about-card:focus-within .card-open-link {
+    opacity: 1;
+  }
 }
 .about-card h3,
 .site-footer {

@@ -1,13 +1,8 @@
 "use client"
 
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  GitCommitHorizontal,
-  RotateCcw,
-} from "lucide-react"
+import { ArrowUpRight, GitCommitHorizontal, RotateCcw } from "lucide-react"
 import { type KeyboardEvent, useEffect, useRef, useState } from "react"
+import GitHubOpenSource from "@/components/home/github-open-source"
 import { TiltCard } from "@/components/ui/tilt-card"
 import {
   type Contribution,
@@ -36,7 +31,6 @@ export default function GitHubActivity() {
   const [attempt, setAttempt] = useState(0)
   const [activeDay, setActiveDay] = useState<Contribution | null>(null)
   const [focusDate, setFocusDate] = useState("")
-  const [browseDate, setBrowseDate] = useState("")
   const scroller = useRef<HTMLElement>(null)
   const buttons = useRef(new Map<string, HTMLButtonElement>())
 
@@ -55,7 +49,6 @@ export default function GitHubActivity() {
         )
         setDays(sorted)
         setFocusDate(sorted[sorted.length - 1].date)
-        setBrowseDate(sorted[sorted.length - 1].date)
         setState("ready")
       } catch {
         if (!controller.signal.aborted) setState("error")
@@ -74,9 +67,6 @@ export default function GitHubActivity() {
   const weeks = getContributionWeeks(days)
   const total = days.reduce((sum, day) => sum + day.count, 0)
   const activeDays = days.filter((day) => day.count > 0).length
-  const selectedDay = days.find((day) => day.date === browseDate)
-  const previousDay = days.findLast((day) => day.date < browseDate)
-  const nextDay = days.find((day) => day.date > browseDate)
 
   function navigate(
     event: KeyboardEvent<HTMLButtonElement>,
@@ -236,58 +226,9 @@ export default function GitHubActivity() {
                 <span className="ml-1">More</span>
               </div>
             </div>
-            <details className="activity-browser">
-              <summary>Browse activity</summary>
-              <label
-                htmlFor="activity-date"
-                className="block text-xs mt-2 mb-1"
-              >
-                Date
-              </label>
-              <div className="activity-date-controls">
-                <button
-                  type="button"
-                  className="icon-button"
-                  aria-label="Previous activity day"
-                  disabled={!previousDay}
-                  onClick={() => previousDay && setBrowseDate(previousDay.date)}
-                >
-                  <ArrowLeft size={16} aria-hidden="true" />
-                </button>
-                <input
-                  id="activity-date"
-                  type="date"
-                  value={browseDate}
-                  min={days[0].date}
-                  max={days[days.length - 1].date}
-                  onChange={(event) => setBrowseDate(event.target.value)}
-                  aria-describedby="activity-date-result"
-                />
-                <button
-                  type="button"
-                  className="icon-button"
-                  aria-label="Next activity day"
-                  disabled={!nextDay}
-                  onClick={() => nextDay && setBrowseDate(nextDay.date)}
-                >
-                  <ArrowRight size={16} aria-hidden="true" />
-                </button>
-              </div>
-              <p
-                id="activity-date-result"
-                className="text-sm mt-2"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                {selectedDay
-                  ? describeDay(selectedDay)
-                  : browseDate
-                    ? "No activity data for this date."
-                    : "Choose a date to view activity."}
-              </p>
-            </details>
           </>
         )}
+        <GitHubOpenSource />
       </TiltCard>
     </section>
   )
