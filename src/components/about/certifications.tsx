@@ -16,8 +16,22 @@ type Certification = {
 
 const certifications: Certification[] = [
   {
+    title: "AWS Certified Solutions Architect - Associate",
+    issuer: "Amazon Web Services",
+    period: "Issued: Nov 2026",
+    image: "/about/aws-certified-solutions-architect-associate.png",
+    url: "https://www.credly.com/badges/9fe42bba-8dd7-401e-85a6-249b13928b4e/public_url",
+  },
+  {
+    title: "GitLab Solutions Architect Core Verified Associate",
+    issuer: "GitLab",
+    image: "/about/gitlab-solutions-architect-core-verified-associate.png",
+    url: "https://www.credly.com/badges/9f1e71f0-9055-4f79-8eb4-5444a8da65fc",
+  },
+  {
     title: "HashiCorp Certified: Terraform Associate (004)",
     issuer: "IBM Professional Certification",
+    period: "Issued: Oct 2026",
     image: "/about/hashicorp-certified-terraform-associate-004.png",
     url: "https://www.credly.com/badges/265e59b4-eb9d-45a9-b8ca-026e8f7bcd32/public_url",
   },

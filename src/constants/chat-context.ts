@@ -41,6 +41,20 @@ Matt is a cloud engineer by day, endurance athlete by night, currently pursuing 
 
 ## Certifications
 
+**AWS Certified Solutions Architect - Associate**
+- Issuer: Amazon Web Services Training and Certification
+- Issued: November 2026
+- Credential: https://www.credly.com/badges/9fe42bba-8dd7-401e-85a6-249b13928b4e/public_url
+
+**GitLab Solutions Architect Core Verified Associate**
+- Issuer: GitLab
+- Credential: https://www.credly.com/badges/9f1e71f0-9055-4f79-8eb4-5444a8da65fc
+
+**HashiCorp Certified: Terraform Associate (004)**
+- Issuer: IBM Professional Certification
+- Issued: October 2026
+- Credential: https://www.credly.com/badges/265e59b4-eb9d-45a9-b8ca-026e8f7bcd32/public_url
+
 **AWS Certified Cloud Practitioner**
 - Issuer: Amazon Web Services Training and Certification
 - Issued: November 02, 2025
@@ -129,7 +143,7 @@ Won Best Group • Awarded Top Cloud Intern.
 
 ## Skills & Technologies
 
-**Cloud & Infrastructure:** AWS (Certified Cloud Practitioner), AWS Amplify, S3, DynamoDB, serverless architecture
+**Cloud & Infrastructure:** AWS (Certified Solutions Architect - Associate and Certified Cloud Practitioner), AWS Amplify, S3, DynamoDB, serverless architecture
 
 **Web Development:** Next.js, React, TypeScript, HTML, CSS, PHP, GSAP, Framer Motion, Three.js
 
