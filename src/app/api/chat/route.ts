@@ -1,89 +1,76 @@
-import { GoogleGenerativeAI } from "@google/generative-ai"
 import { NextResponse } from "next/server"
+import OpenAI from "openai"
 import { PORTFOLIO_CONTEXT } from "@/constants"
 import { ChatRequestSchema } from "@/schemas"
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "")
-
 export async function POST(request: Request) {
+  let body: unknown
   try {
-    const body = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid request format" },
+      { status: 400 }
+    )
+  }
 
-    const validation = ChatRequestSchema.safeParse(body)
-    if (!validation.success) {
-      return NextResponse.json(
-        { error: "Invalid request format" },
-        { status: 400 }
-      )
-    }
+  const validation = ChatRequestSchema.safeParse(body)
+  if (!validation.success) {
+    return NextResponse.json(
+      { error: "Invalid request format" },
+      { status: 400 }
+    )
+  }
 
-    const { message, history = [], page } = validation.data
+  const apiKey = process.env.OPENAI_API_KEY
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "The assistant is unavailable right now." },
+      { status: 503 }
+    )
+  }
 
-    if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json(
-        { error: "API key not configured" },
-        { status: 500 }
-      )
-    }
+  const { message, history = [], page } = validation.data
 
-    // Build page and conversation context
-    const pageContext = page
-      ? `\n\nCurrent page or section: ${page}. Focus your answer on what would be most helpful for a visitor on this page.`
-      : ""
-
-    const conversationContext =
-      history.length > 0
-        ? `\n\nPrevious conversation:\n${history
-            .map(
-              (msg) =>
-                `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`
-            )
-            .join("\n")}\n`
-        : ""
-
-    const prompt = `${PORTFOLIO_CONTEXT}${pageContext}${conversationContext}\nUser question: ${message}\n\nPlease provide a helpful response about Matt Enarle based on the context above.`
-
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash-lite",
-      generationConfig: {
-        maxOutputTokens: 350,
-        temperature: 0.5,
-        topP: 0.9,
-        topK: 32,
-      },
+  try {
+    const client = new OpenAI({ apiKey, timeout: 15_000, maxRetries: 0 })
+    const response = await client.responses.create({
+      model: "gpt-6-luna",
+      instructions: PORTFOLIO_CONTEXT,
+      input: [
+        ...history,
+        {
+          role: "user",
+          content: page ? `Portfolio page: ${page}\n\n${message}` : message,
+        },
+      ],
+      reasoning: { effort: "none" },
+      text: { verbosity: "low" },
+      max_output_tokens: 350,
+      store: false,
     })
 
-    const result = await model.generateContent(prompt)
-    const response = await result.response
-    const text = response.text()
+    const text = response.output_text.trim()
+    if (!text) {
+      return NextResponse.json(
+        { error: "The assistant could not answer. Please try again." },
+        { status: 502 }
+      )
+    }
 
     return NextResponse.json({ message: text })
   } catch (error) {
-    console.error("Chat API error:", error)
-
-    // Log detailed error information
-    if (error instanceof Error) {
-      console.error("Error name:", error.name)
-      console.error("Error message:", error.message)
-      console.error("Error stack:", error.stack)
-    }
-
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error message"
-    const isRateLimit =
-      errorMessage.includes("429") ||
-      errorMessage.toLowerCase().includes("quota exceeded")
-    const statusCode = isRateLimit ? 429 : 500
-    const clientErrorMessage = isRateLimit
-      ? "Rate limited by Gemini API. Please retry shortly."
-      : "Failed to process message"
+    const status = error instanceof OpenAI.APIError ? error.status : undefined
+    console.error("Chat API request failed", { status })
 
     return NextResponse.json(
       {
-        error: clientErrorMessage,
-        details: errorMessage,
+        error:
+          status === 429
+            ? "The assistant is busy right now. Please try again later."
+            : "The assistant is unavailable right now.",
       },
-      { status: statusCode }
+      { status: status === 429 ? 429 : 503 }
     )
   }
 }

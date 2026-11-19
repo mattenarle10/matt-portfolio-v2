@@ -17,12 +17,12 @@
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
     "@fortawesome/react-fontawesome": "^3.5.0",
-    "@google/generative-ai": "^0.24.1",
     "@vercel/analytics": "^2.0.1",
     "cmdk": "^1.1.1",
     "framer-motion": "^13.1.1",
     "lucide-react": "^1.37.0",
     "next": "^16.3.3",
+    "openai": "^7.60.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "zod": "^4.5.4"

@@ -8,16 +8,17 @@ export const MessageSchema = z.object({
 })
 
 export const ChatRequestSchema = z.object({
-  message: z.string().min(1).max(1000),
+  message: z.string().trim().min(1).max(1000),
   history: z
     .array(
       z.object({
         role: z.enum(["user", "assistant"]),
-        content: z.string(),
+        content: z.string().min(1).max(4000),
       })
     )
+    .max(5)
     .optional(),
-  page: z.string().optional(),
+  page: z.string().max(200).optional(),
 })
 
 export const ChatResponseSchema = z.object({
