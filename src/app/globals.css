@@ -955,7 +955,8 @@ button.activity-cell:focus-visible {
     inset: var(--overlay-top) max(16px, var(--safe-right)) auto
       max(16px, var(--safe-left));
     width: auto;
-    height: min(560px, var(--overlay-height));
+    height: min(680px, var(--overlay-height));
+    border-radius: 16px;
   }
   .project-card {
     padding: 12px;

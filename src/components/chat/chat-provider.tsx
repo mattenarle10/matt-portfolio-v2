@@ -2,7 +2,15 @@
 
 import dynamic from "next/dynamic"
 import { usePathname } from "next/navigation"
-import { createContext, type ReactNode, useContext, useState } from "react"
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
+import { ChatRequestError, sendChatRequest } from "@/lib/chat-client"
 import type { Message } from "@/schemas"
 import { ChatButton } from "./chat-button"
 
@@ -54,7 +62,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [hasOpened, setHasOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const pendingRequest = useRef<AbortController | null>(null)
   const suggestedPrompts = getSuggestedPrompts(pathname)
+
+  useEffect(() => () => pendingRequest.current?.abort(), [])
 
   function openChat() {
     setHasOpened(true)
@@ -71,6 +82,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }
 
   async function handleSendMessage(content: string) {
+    content = content.trim()
+    if (pendingRequest.current || !content || content.length > 1000) return
+    const controller = new AbortController()
+    pendingRequest.current = controller
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       role: "user",
@@ -83,55 +98,47 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
     try {
       // Send last 5 messages as context for the AI
-      const recentHistory = messages.slice(-5).map((msg) => ({
-        role: msg.role,
-        content: msg.content,
-      }))
+      const recentHistory = messages
+        .filter((msg) => !msg.isError)
+        .slice(-5)
+        .map((msg) => ({
+          role: msg.role,
+          content: msg.content,
+        }))
 
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const reply = await sendChatRequest(
+        {
           message: content,
           history: recentHistory,
           page: pathname,
-        }),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new Error(
-          errorData.error || errorData.details || `HTTP ${response.status}`
-        )
-      }
-
-      const data = await response.json()
-
-      if (data.error) {
-        throw new Error(data.error || data.details || "API returned an error")
-      }
+        },
+        controller.signal
+      )
+      if (controller.signal.aborted) return
 
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
         role: "assistant",
-        content: data.message || "Sorry, I couldn't process that request.",
+        content: reply,
         timestamp: new Date(),
       }
 
       setMessages((prev) => [...prev, assistantMessage])
     } catch (error) {
-      console.error("Chat error:", error)
+      if (controller.signal.aborted) return
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: "assistant",
         content:
-          "The assistant is unavailable right now. Try again shortly, or email me at matthew.enarle@outlook.com.",
+          error instanceof ChatRequestError
+            ? error.message
+            : "The assistant is unavailable right now. Please try again.",
         timestamp: new Date(),
+        isError: true,
       }
       setMessages((prev) => [...prev, errorMessage])
     } finally {
+      pendingRequest.current = null
       setIsLoading(false)
     }
   }
@@ -149,6 +156,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           messages={messages}
           isLoading={isLoading}
           onSendMessage={handleSendMessage}
+          onStop={() => pendingRequest.current?.abort()}
+          onReset={() => setMessages([])}
           suggestedPrompts={suggestedPrompts}
         />
       )}

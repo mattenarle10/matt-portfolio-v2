@@ -1,7 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { X } from "lucide-react"
+import { motion, useReducedMotion } from "framer-motion"
+import { RotateCcw, X } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import type { Message } from "@/schemas"
@@ -14,6 +14,8 @@ interface ChatDialogProps {
   messages: Message[]
   isLoading: boolean
   onSendMessage: (message: string) => void
+  onStop: () => void
+  onReset: () => void
   suggestedPrompts?: string[]
 }
 
@@ -23,10 +25,13 @@ export function ChatDialog({
   messages,
   isLoading,
   onSendMessage,
+  onStop,
+  onReset,
   suggestedPrompts,
 }: ChatDialogProps) {
   const [showSuggestions, setShowSuggestions] = useState(true)
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -54,9 +59,9 @@ export function ChatDialog({
     >
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: reducedMotion ? 0 : 0.2 }}
           className="min-h-0 flex flex-col h-full"
         >
           <div className="chat-header flex items-center justify-between p-4 border-b shrink-0">
@@ -77,19 +82,31 @@ export function ChatDialog({
                 >
                   Matt&apos;s assistant
                 </h2>
-                <p className="chat-header-status text-xs">
-                  AI guide to my work & life
-                </p>
+                <p className="chat-header-status text-xs">Portfolio guide</p>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="chat-header-button icon-button"
-              aria-label="Close chat"
-            >
-              <X size={17} />
-            </button>
+            <div className="flex items-center gap-1 shrink-0">
+              {messages.length > 0 && (
+                <button
+                  type="button"
+                  onClick={onReset}
+                  disabled={isLoading}
+                  className="chat-header-button icon-button disabled:opacity-40"
+                  aria-label="New chat"
+                  title="New chat"
+                >
+                  <RotateCcw size={16} />
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={onClose}
+                className="chat-header-button icon-button"
+                aria-label="Close chat"
+              >
+                <X size={17} />
+              </button>
+            </div>
           </div>
           <ChatMessageList
             messages={messages}
@@ -100,6 +117,7 @@ export function ChatDialog({
           />
           <ChatInput
             onSend={onSendMessage}
+            onStop={onStop}
             isLoading={isLoading}
             suggestionsEnabled={showSuggestions}
             onToggleSuggestions={() => setShowSuggestions((prev) => !prev)}

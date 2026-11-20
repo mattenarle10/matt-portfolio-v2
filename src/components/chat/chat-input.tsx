@@ -1,10 +1,11 @@
 "use client"
 
-import { Send } from "lucide-react"
+import { Send, Square } from "lucide-react"
 import { type KeyboardEvent, useEffect, useRef, useState } from "react"
 
 interface ChatInputProps {
   onSend: (message: string) => void
+  onStop: () => void
   isLoading: boolean
   suggestionsEnabled: boolean
   onToggleSuggestions: () => void
@@ -12,6 +13,7 @@ interface ChatInputProps {
 
 export function ChatInput({
   onSend,
+  onStop,
   isLoading,
   suggestionsEnabled,
   onToggleSuggestions,
@@ -53,26 +55,31 @@ export function ChatInput({
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask me anything about Matt..."
+          placeholder={isLoading ? "Write a follow-up..." : "Ask about Matt..."}
           aria-label="Message Matt's assistant"
-          disabled={isLoading}
           className="chat-input-field min-w-0 min-h-11 flex-1 resize-none rounded-lg px-3 py-2 md:px-4 text-base border disabled:opacity-50 disabled:cursor-not-allowed"
           rows={1}
           maxLength={1000}
         />
         <button
           type="button"
-          onClick={handleSend}
-          disabled={!message.trim() || isLoading}
+          onClick={isLoading ? onStop : handleSend}
+          disabled={!isLoading && !message.trim()}
           className="chat-send-button flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          aria-label="Send message"
+          aria-label={isLoading ? "Stop reply" : "Send message"}
         >
-          <Send className="w-3.5 h-3.5 md:w-4 md:h-4" />
+          {isLoading ? (
+            <Square size={15} />
+          ) : (
+            <Send className="w-3.5 h-3.5 md:w-4 md:h-4" />
+          )}
         </button>
       </div>
       <div className="mt-2 flex flex-wrap gap-x-3 items-center justify-between">
-        <p className="chat-hint hidden md:block text-xs">
-          Press Enter to send, Shift+Enter for new line
+        <p className="chat-hint text-xs">
+          {message.length >= 800
+            ? `${message.length}/1,000`
+            : "AI guide · Public portfolio facts"}
         </p>
         <div className="flex items-center gap-2">
           <span className="chat-hint text-xs">Suggestions</span>

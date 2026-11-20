@@ -22,6 +22,9 @@ export function ChatMessageList({
   suggestedPrompts,
 }: ChatMessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
+  const nearBottom = useRef(true)
+  const listHeight = useRef(0)
   const reducedMotion = useReducedMotion()
 
   const scrollToBottom = () => {
@@ -31,8 +34,29 @@ export function ChatMessageList({
   }
 
   useEffect(() => {
-    scrollToBottom()
+    if (messages.at(-1)?.role === "user") nearBottom.current = true
+    if (!nearBottom.current) return
+    const frame = requestAnimationFrame(scrollToBottom)
+    return () => cancelAnimationFrame(frame)
   }, [messages, isLoading])
+
+  useEffect(() => {
+    const list = listRef.current
+    if (!list) return
+    let frame = 0
+    const observer = new ResizeObserver(() => {
+      listHeight.current = list.clientHeight
+      if (nearBottom.current) {
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(scrollToBottom)
+      }
+    })
+    observer.observe(list)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+    }
+  }, [messages.length > 0, reducedMotion])
 
   if (messages.length === 0) {
     const prompts =
@@ -76,9 +100,17 @@ export function ChatMessageList({
 
   return (
     <div
+      ref={listRef}
       role="log"
       aria-label="Conversation"
       aria-live="polite"
+      onScroll={(event) => {
+        const list = event.currentTarget
+        // Resizing is not a visitor choosing to scroll away from the latest reply.
+        if (list.clientHeight !== listHeight.current) return
+        nearBottom.current =
+          list.scrollHeight - list.scrollTop - list.clientHeight < 80
+      }}
       className="chat-messages min-h-0 min-w-0 flex-1 overflow-y-auto"
     >
       <div className="p-3 md:p-4 space-y-3 md:space-y-4">
@@ -97,11 +129,15 @@ export function ChatMessageList({
               />
             </div>
             <div className="flex items-center">
-              <div className="rounded-lg px-3 py-2 md:px-4 bg-gray-100 dark:bg-gray-700">
-                <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                  <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                  <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></span>
+              <div
+                className="chat-bubble-assistant rounded-lg px-3 py-2 md:px-4"
+                role="status"
+              >
+                <span className="sr-only">Preparing a reply</span>
+                <div className="flex gap-1" aria-hidden="true">
+                  <span className="w-1.5 h-1.5 bg-current opacity-40 rounded-full motion-safe:animate-pulse [animation-delay:-0.3s]"></span>
+                  <span className="w-1.5 h-1.5 bg-current opacity-40 rounded-full motion-safe:animate-pulse [animation-delay:-0.15s]"></span>
+                  <span className="w-1.5 h-1.5 bg-current opacity-40 rounded-full motion-safe:animate-pulse"></span>
                 </div>
               </div>
             </div>

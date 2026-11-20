@@ -4,32 +4,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { TiltCard } from "@/components/ui/tilt-card"
+import { volunteering } from "@/constants/portfolio"
 import { useIsMobile } from "@/hooks"
-
-type VolunteerRole = {
-  title: string
-  organization: string
-  period: string
-  image: string
-  url: string
-}
-
-const volunteering: VolunteerRole[] = [
-  {
-    title: "AWS Community Builder",
-    organization: "Amazon Web Services",
-    period: "Mar 2026 - Present",
-    image: "/about/aws-community-builder.png",
-    url: "https://aws.amazon.com/developer/community/community-builders/",
-  },
-  {
-    title: "Founder",
-    organization: "BetterBacolod.org",
-    period: "Jan 2026 - Present",
-    image: "/about/betterbacolod.png",
-    url: "https://betterbacolod.org",
-  },
-]
 
 export default function Volunteering() {
   const isMobile = useIsMobile()

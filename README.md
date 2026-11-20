@@ -33,7 +33,7 @@ Spotify and Strava need their own credentials for the connected sections.
 
 The existing Ask Matt dialog uses the [OpenAI Responses API](https://developers.openai.com/api/docs/quickstart)
 with `gpt-6-luna`. It sends Matt's public portfolio context and the last five
-messages, caps replies at 350 tokens, and disables response storage with
+messages, checks questions and replies with moderation, caps replies at 350 tokens, and disables response storage with
 `store: false`. This does not disable OpenAI's separate abuse-monitoring logs.
 
 1. Check the receiving organization's credit grants in [API Platform billing](https://platform.openai.com/settings/organization/billing/overview).
@@ -57,3 +57,6 @@ The app needs no ChatGPT login, Gemini key, agents, or vector database.
 Without the key, the chat returns a temporary-unavailable response.
 Request limits bound individual calls, not total spend. Check API project usage
 and billing settings before making the endpoint public.
+
+See [chat guardrails](docs/chat-guardrails.md) for the request flow, shared
+knowledge sources, cache refresh intervals, evaluation cases, and limitations.

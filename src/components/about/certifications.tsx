@@ -4,45 +4,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { TiltCard } from "@/components/ui/tilt-card"
+import { certifications } from "@/constants/portfolio"
 import { useIsMobile } from "@/hooks"
-
-type Certification = {
-  title: string
-  issuer: string
-  period?: string
-  image: string
-  url: string
-}
-
-const certifications: Certification[] = [
-  {
-    title: "AWS Certified Solutions Architect - Associate",
-    issuer: "Amazon Web Services",
-    period: "Issued: Nov 2026",
-    image: "/about/aws-certified-solutions-architect-associate.png",
-    url: "https://www.credly.com/badges/9fe42bba-8dd7-401e-85a6-249b13928b4e/public_url",
-  },
-  {
-    title: "GitLab Solutions Architect Core Verified Associate",
-    issuer: "GitLab",
-    image: "/about/gitlab-solutions-architect-core-verified-associate.png",
-    url: "https://www.credly.com/badges/9f1e71f0-9055-4f79-8eb4-5444a8da65fc",
-  },
-  {
-    title: "HashiCorp Certified: Terraform Associate (004)",
-    issuer: "IBM Professional Certification",
-    period: "Issued: Oct 2026",
-    image: "/about/hashicorp-certified-terraform-associate-004.png",
-    url: "https://www.credly.com/badges/265e59b4-eb9d-45a9-b8ca-026e8f7bcd32/public_url",
-  },
-  {
-    title: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    period: "Issued: Nov 2025 • Expires: Nov 2028",
-    image: "/about/aws-cloud-practitioner.png",
-    url: "https://www.credly.com/badges/d70e4cfb-6e4e-4274-8e94-9d2e03c65871/public_url",
-  },
-]
 
 export default function Certifications() {
   const isMobile = useIsMobile()

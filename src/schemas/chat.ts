@@ -5,6 +5,7 @@ export const MessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
   content: z.string(),
   timestamp: z.date(),
+  isError: z.boolean().optional(),
 })
 
 export const ChatRequestSchema = z.object({

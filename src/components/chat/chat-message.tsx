@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { User } from "lucide-react"
 import Image from "next/image"
 import type { Message } from "@/schemas"
@@ -11,12 +11,15 @@ interface ChatMessageProps {
 
 export function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.role === "user"
+  const reducedMotion = useReducedMotion()
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10, x: isUser ? 20 : -20 }}
+      initial={
+        reducedMotion ? false : { opacity: 0, y: 10, x: isUser ? 20 : -20 }
+      }
       animate={{ opacity: 1, y: 0, x: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: reducedMotion ? 0 : 0.3 }}
       className={`flex gap-2 md:gap-3 ${isUser ? "flex-row-reverse" : "flex-row"}`}
     >
       <div
@@ -43,7 +46,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         className={`min-w-0 flex flex-col max-w-[80%] md:max-w-[75%] ${isUser ? "items-end" : "items-start"}`}
       >
         <div
-          className={`rounded-lg px-3 py-2 md:px-4 ${
+          className={`rounded-lg px-3 py-2 md:px-4 ${message.isError ? "border border-[var(--control-border)]" : ""} ${
             isUser ? "chat-bubble-user" : "chat-bubble-assistant"
           }`}
         >

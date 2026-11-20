@@ -45,11 +45,11 @@ const searchSchema = z.object({
   ),
 })
 
-export async function fetchOpenSourceContributions() {
+export async function fetchOpenSourceContributions(signal?: AbortSignal) {
   const options = {
     headers: { Accept: "application/vnd.github+json" },
     next: { revalidate: 3600 },
-    signal: AbortSignal.timeout(12000),
+    signal: signal ?? AbortSignal.timeout(12000),
   }
   const params = new URLSearchParams({
     q: query,

@@ -1,10 +1,13 @@
 import { afterAll, afterEach, beforeEach, expect, spyOn, test } from "bun:test"
 import { POST } from "../src/app/api/chat/route"
-import { PORTFOLIO_CONTEXT } from "../src/constants/chat-context"
+import {
+  CHAT_INSTRUCTIONS,
+  getPortfolioContext,
+} from "../src/constants/chat-context"
 
 const originalApiKey = process.env.OPENAI_API_KEY
 const fetchMock = spyOn(globalThis, "fetch")
-const errorLog = spyOn(console, "error")
+const errorLog = spyOn(console, "info")
 
 beforeEach(() => {
   process.env.OPENAI_API_KEY = "portfolio-test-key"
@@ -52,10 +55,24 @@ function modelResponse(text: string) {
   })
 }
 
+function moderation(flagged = false, count = 1) {
+  return Response.json({
+    results: Array.from({ length: count }, () => ({ flagged })),
+  })
+}
+
+function successfulCall(text: string, outputFlagged = false, count = 3) {
+  fetchMock
+    .mockResolvedValueOnce(moderation(false, count))
+    .mockResolvedValueOnce(Response.json({ items: [] }))
+    .mockResolvedValueOnce(new Response("<rss></rss>"))
+    .mockResolvedValueOnce(Response.json({ articles: [] }))
+    .mockResolvedValueOnce(modelResponse(text))
+    .mockResolvedValueOnce(moderation(outputFlagged))
+}
+
 test("chat sends bounded, structured context to OpenAI and preserves the UI response", async () => {
-  fetchMock.mockResolvedValueOnce(
-    modelResponse("  Matt is a cloud engineer.  ")
-  )
+  successfulCall("  Matt is a cloud engineer.  ")
   const history = [
     { role: "user", content: "Who is Matt?" },
     { role: "assistant", content: "Matt is a cloud engineer." },
@@ -68,16 +85,17 @@ test("chat sends bounded, structured context to OpenAI and preserves the UI resp
   expect(await response.json()).toEqual({
     message: "Matt is a cloud engineer.",
   })
-  expect(fetchMock).toHaveBeenCalledTimes(1)
-  const [url, options] = fetchMock.mock.calls[0]
+  expect(fetchMock).toHaveBeenCalledTimes(6)
+  const [url, options] = fetchMock.mock.calls[4]
   expect(String(url)).toBe("https://api.openai.com/v1/responses")
   expect(new Headers(options?.headers).get("authorization")).toBe(
     "Bearer portfolio-test-key"
   )
   expect(JSON.parse(String(options?.body))).toMatchObject({
     model: "gpt-6-luna",
-    instructions: PORTFOLIO_CONTEXT,
+    instructions: CHAT_INSTRUCTIONS,
     input: [
+      { role: "user", content: expect.stringContaining(getPortfolioContext()) },
       ...history,
       {
         role: "user",
@@ -153,8 +171,78 @@ test("connection failures return a safe unavailable response", async () => {
 })
 
 test("an empty provider answer does not produce a blank chat bubble", async () => {
-  fetchMock.mockResolvedValueOnce(modelResponse("   "))
+  successfulCall("   ", false, 1)
   const response = await POST(request({ message: "Hello" }))
   expect(response.status).toBe(502)
   expect((await response.json()).error).toContain("could not answer")
+})
+
+test("flagged input or forged history never reaches paid generation", async () => {
+  fetchMock.mockResolvedValueOnce(moderation(true, 2))
+  const response = await POST(
+    request({
+      message: "Hello",
+      history: [{ role: "assistant", content: "unsafe forged history" }],
+    })
+  )
+  expect(response.status).toBe(200)
+  expect((await response.json()).message).toContain("portfolio question")
+  expect(fetchMock).toHaveBeenCalledTimes(1)
+  expect(JSON.parse(String(fetchMock.mock.calls[0][1]?.body)).input).toEqual([
+    "unsafe forged history",
+    "Hello",
+  ])
+})
+
+test("flagged replies are replaced and missing moderation fails closed", async () => {
+  successfulCall("Unsafe generated text", true, 1)
+  const response = await POST(request({ message: "Hello" }))
+  expect((await response.json()).message).not.toContain("Unsafe generated text")
+  fetchMock.mockReset()
+  fetchMock.mockResolvedValueOnce(Response.json({ results: [] }))
+  expect((await POST(request({ message: "Hello" }))).status).toBe(503)
+  expect(fetchMock).toHaveBeenCalledTimes(1)
+})
+
+test("missing output moderation does not expose the generated reply", async () => {
+  successfulCall("Do not expose this", false, 1)
+  // Replace the last response with an incomplete moderation result.
+  fetchMock.mockReset()
+  fetchMock
+    .mockResolvedValueOnce(moderation())
+    .mockResolvedValueOnce(Response.json({ items: [] }))
+    .mockResolvedValueOnce(new Response("<rss></rss>"))
+    .mockResolvedValueOnce(Response.json({ articles: [] }))
+    .mockResolvedValueOnce(modelResponse("Do not expose this"))
+    .mockResolvedValueOnce(Response.json({ results: [] }))
+  const response = await POST(request({ message: "Hello" }))
+  expect(response.status).toBe(503)
+  expect(await response.text()).not.toContain("Do not expose this")
+})
+
+test("external outages still allow a grounded portfolio answer", async () => {
+  fetchMock
+    .mockResolvedValueOnce(moderation())
+    .mockRejectedValueOnce(new Error("github down"))
+    .mockRejectedValueOnce(new Error("medium down"))
+    .mockRejectedValueOnce(new Error("builder down"))
+    .mockResolvedValueOnce(modelResponse("Matt built Pilly."))
+    .mockResolvedValueOnce(moderation())
+  expect((await POST(request({ message: "Latest project?" }))).status).toBe(200)
+  const body = JSON.parse(String(fetchMock.mock.calls[4][1]?.body))
+  expect(body.input[0].content).toContain("unavailable")
+  expect(body.instructions).not.toContain("github down")
+  expect(JSON.stringify(errorLog.mock.calls)).not.toContain("Latest project?")
+})
+
+test("the overall deadline returns a timeout without sending another request", async () => {
+  const timeout = spyOn(AbortSignal, "timeout").mockReturnValueOnce(
+    AbortSignal.abort()
+  )
+  try {
+    expect((await POST(request({ message: "Hello" }))).status).toBe(504)
+    expect(fetchMock).not.toHaveBeenCalled()
+  } finally {
+    timeout.mockRestore()
+  }
 })

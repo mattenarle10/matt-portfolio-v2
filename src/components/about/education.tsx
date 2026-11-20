@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { TiltCard } from "@/components/ui/tilt-card"
+import { education } from "@/constants/portfolio"
 import { useIsMobile } from "@/hooks"
 
 const Education = () => {
@@ -33,26 +34,6 @@ const Education = () => {
       setActiveEduIndex(activeEduIndex === index ? null : index)
     }
   }
-  const education = [
-    {
-      school: "University of St. La Salle",
-      degree: "Master of Business Administration (MBA), student",
-      date: "In progress",
-      details: "with Thesis",
-    },
-    {
-      school: "West Visayas State University",
-      degree: "Bachelor's degree, Computer Science",
-      date: "2021 - 2025",
-      details: "Grade: 1.34 (Magna Cum Laude)",
-    },
-    {
-      school: "University of St. La Salle",
-      degree: "High School Diploma",
-      date: "2008 - 2020",
-      details: "That fun, High-School Life",
-    },
-  ]
 
   return (
     <div className="mt-10 mb-10">

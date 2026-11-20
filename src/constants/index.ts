@@ -1,4 +1,3 @@
-export { PORTFOLIO_CONTEXT } from "./chat-context"
 export {
   CloseIcon,
   CodeIcon,
