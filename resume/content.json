@@ -1,0 +1,180 @@
+{
+  "name": "Matthew Ariel A. Enarle",
+  "location": "Bacolod, Negros Occidental",
+  "email": "enarlem10@gmail.com",
+  "links": [
+    {
+      "label": "linkedin.com/in/matthew-enarle",
+      "url": "https://www.linkedin.com/in/matthew-enarle"
+    },
+    {
+      "label": "mattenarle.com",
+      "url": "https://mattenarle.com"
+    },
+    {
+      "label": "github.com/mattenarle10",
+      "url": "https://github.com/mattenarle10"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Contact.xyz",
+      "url": "https://contact.xyz",
+      "roles": [
+        {
+          "title": "Software Lead",
+          "period": "September 2026 - Present",
+          "bullets": [
+            "Lead software development for Contact, delivering new platform features and bug fixes through GitHub repositories."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Lakbaygo Tech Digital Platforms (Contract)",
+      "roles": [
+        {
+          "title": "Full Stack Developer",
+          "period": "February 2026 - June 2026",
+          "bullets": [
+            "Led development of a ride-hailing MVP using Expo React Native and AWS cloud-native services. Built mobile and web admin features and supported backend work for bookings, dispatch, and platform operations."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "eCloudvalley Philippines",
+      "roles": [
+        {
+          "title": "Cloud Engineer",
+          "period": "July 2025 - Present",
+          "bullets": [
+            "Support AWS infrastructure and applications for major Philippine conglomerates under managed services. Deploy, improve, and troubleshoot cloud systems serving millions of users, helping keep platforms stable, secure, and efficient."
+          ]
+        },
+        {
+          "title": "Cloud Engineer Intern",
+          "period": "April 2025 - May 2025",
+          "bullets": [
+            "Built a serverless TypeScript/AWS Lambda backend and Vue.js/Quasar frontend with S3, SES, and SQS."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Spring Valley Tech Corp (Bago City, Philippines)",
+      "roles": [
+        {
+          "title": "Software Engineer Intern",
+          "period": "February 2025 - May 2025",
+          "bullets": [
+            "Completed immersive on-the-job training at Spring Valley Academy, preparing for software delivery to local and international clients."
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "label": "Cloud & Infrastructure",
+      "value": "AWS, Terraform, AWS CDK, CloudFormation, Linux"
+    },
+    {
+      "label": "DevOps & Containers",
+      "value": "Kubernetes, Docker, GitHub Actions, AWS CodePipeline, Vercel"
+    },
+    {
+      "label": "Software Development",
+      "value": "TypeScript, JavaScript, Python, Rust; React, Next.js, Vue.js, React Native (Expo), Flutter, Tauri"
+    },
+    {
+      "label": "Data & AI",
+      "value": "PostgreSQL, MySQL, DynamoDB, Amazon RDS, Firestore; TensorFlow, Keras, PyTorch"
+    },
+    {
+      "label": "Technical Writing",
+      "value": "AWS blogs, tutorials, and architecture guides (Medium, AWS Builder Center)"
+    }
+  ],
+  "projects": [
+    {
+      "title": "marka.md (Open Source)",
+      "url": "https://markamd.vercel.app/",
+      "period": "May 2026",
+      "description": "Built a cross-platform, local-first Markdown editor for macOS, Windows, and Linux using Tauri, React, and Rust. Features live preview, diagrams, and AI context bundles while keeping notes on the user's device.",
+      "metrics": "40k+ GitHub release downloads | 500+ GitHub stars"
+    },
+    {
+      "title": "BetterBacolod.org",
+      "url": "https://www.betterbacolod.org/",
+      "period": "January 2026",
+      "description": "Launched an open-source civic tech portal for Bacolod City with 45+ government services, transparency data, and a barangay directory. Part of the BetterGov.ph initiative.",
+      "metrics": "2,000+ monthly active users (MAU)"
+    }
+  ],
+  "open_source": {
+    "title": "AWS Open Source",
+    "url": "https://github.com/aws/aws-lambda-web-adapter",
+    "period": "2026",
+    "bullets": [
+      {
+        "text": "Contributed deployment examples and Rust dependency security updates",
+        "references": [
+          {
+            "label": "#875",
+            "url": "https://github.com/aws/aws-lambda-web-adapter/pull/875"
+          },
+          {
+            "label": "#876",
+            "url": "https://github.com/aws/aws-lambda-web-adapter/pull/876"
+          },
+          {
+            "label": "#914",
+            "url": "https://github.com/aws/aws-lambda-web-adapter/pull/914"
+          }
+        ]
+      }
+    ]
+  },
+  "certifications": [
+    {
+      "title": "AWS Certified Solutions Architect - Associate",
+      "period": "Nov 2026",
+      "url": "https://www.credly.com/badges/9fe42bba-8dd7-401e-85a6-249b13928b4e/public_url"
+    },
+    {
+      "title": "GitLab Solutions Architect Core Verified Associate",
+      "period": "Nov 2026",
+      "url": "https://www.credly.com/badges/9f1e71f0-9055-4f79-8eb4-5444a8da65fc"
+    },
+    {
+      "title": "HashiCorp Certified: Terraform Associate (004)",
+      "period": "Oct 2026",
+      "url": "https://www.credly.com/badges/265e59b4-eb9d-45a9-b8ca-026e8f7bcd32/public_url"
+    },
+    {
+      "title": "AWS Certified Cloud Practitioner",
+      "period": "Nov 2025",
+      "url": "https://www.credly.com/badges/d70e4cfb-6e4e-4274-8e94-9d2e03c65871/public_url"
+    }
+  ],
+  "community": "AWS Community Builder (Serverless)",
+  "education": [
+    {
+      "school": "University of St. La Salle",
+      "period": "2025 - Present",
+      "degree": "Master of Business Administration (MBA)"
+    },
+    {
+      "school": "West Visayas State University",
+      "period": "2021 - 2025",
+      "degree": "BS in Computer Science, Major in Artificial Intelligence",
+      "details": "GWA: 1.34 (Magna Cum Laude)"
+    },
+    {
+      "school": "University of St. La Salle - Prep to Senior High",
+      "period": "2008 - 2020",
+      "degree": "With High Honors"
+    }
+  ]
+}
