@@ -3,7 +3,6 @@ import Hello from "@/components/home/hello"
 import RecentMediumPosts from "@/components/home/medium"
 import { QuickActions } from "@/components/home/quick-actions"
 import Socials from "@/components/home/socials"
-// import { StravaActivity } from "@/components/home/strava"
 import { FadeIn } from "@/components/ui"
 
 export default function Home() {
@@ -24,13 +23,6 @@ export default function Home() {
           <RecentMediumPosts />
         </div>
       </FadeIn>
-
-      {/* Strava is disabled while API access is subscriber-only. */}
-      {/* <FadeIn delay={1.2} y={24} duration={0.5}>
-        <div className="mt-6 md:mt-6">
-          <StravaActivity />
-        </div>
-      </FadeIn> */}
 
       {/* Contact Section */}
       <FadeIn delay={0.2} y={12} duration={0.4}>

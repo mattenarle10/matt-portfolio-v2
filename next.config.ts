@@ -10,22 +10,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "i.scdn.co",
-      },
-      {
-        protocol: "https",
-        hostname: "mosaic.scdn.co",
-      },
-      {
-        protocol: "https",
-        hostname: "image-cdn-ak.spotifycdn.com",
-      },
-      {
-        protocol: "https",
-        hostname: "image-cdn-fa.spotifycdn.com",
-      },
-      {
-        protocol: "https",
         hostname: "**.medium.com",
       },
       {
@@ -77,7 +61,7 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: https: blob:; " +
               "font-src 'self' data:; " +
               "connect-src 'self' https://*.vercel-insights.com https://vitals.vercel-insights.com; " +
-              "frame-src 'self' https://open.spotify.com; " +
+              "frame-src 'self'; " +
               "object-src 'none'; " +
               "base-uri 'self'; " +
               "form-action 'self'; " +

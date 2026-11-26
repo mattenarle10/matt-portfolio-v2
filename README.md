@@ -3,7 +3,7 @@
 My personal portfolio.
 
 Built with Next.js, React, TypeScript, Tailwind CSS, and Bun. It pulls in a few
-things I care about: projects, writing, music, training, and a small chat helper.
+things I care about: projects, writing, GitHub activity, and a small chat helper.
 
 ## Run it
 
@@ -26,8 +26,6 @@ Open [localhost:3000](http://localhost:3000).
 | `bun run format`    | Biome format only                        |
 
 ## Env
-
-Spotify and Strava need their own credentials for the connected sections.
 
 ### OpenAI chat
 
