@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { GET as getToken } from "../token/route"
+import { getSpotifyAccessToken } from "../access-token"
 
 // Define types for Spotify API responses
 type SpotifyArtist = {
@@ -41,20 +41,14 @@ type SpotifyRecentlyPlayedResponse = {
 
 export async function GET() {
   try {
-    // Get the access token using our token endpoint
-    const tokenResponse = await getToken()
-    const tokenData = await tokenResponse.json()
-
-    if (!tokenData.access_token) {
-      throw new Error("Failed to obtain Spotify access token")
-    }
+    const token = await getSpotifyAccessToken()
 
     // Fetch recently played tracks from Spotify API
     const response = await fetch(
       "https://api.spotify.com/v1/me/player/recently-played?limit=10",
       {
         headers: {
-          Authorization: `Bearer ${tokenData.access_token}`,
+          Authorization: `Bearer ${token}`,
         },
         cache: "no-store",
       }

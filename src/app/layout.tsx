@@ -182,7 +182,7 @@ export default function RootLayout({
               }),
             }}
           />
-          {/* JSON-LD: WebSite with SearchAction (helps sitelinks search box) */}
+          {/* JSON-LD: WebSite */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -192,11 +192,6 @@ export default function RootLayout({
                 name: "Matt Enarle",
                 alternateName: "mattenarle.com",
                 url: "https://mattenarle.com",
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: "https://mattenarle.com/?q={search_term_string}",
-                  "query-input": "required name=search_term_string",
-                },
               }),
             }}
           />

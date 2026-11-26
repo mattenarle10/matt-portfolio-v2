@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { GET as getToken } from "../token/route"
+import { getSpotifyAccessToken } from "../access-token"
 
 // Define types for Spotify API responses
 type SpotifyArtist = {
@@ -41,13 +41,7 @@ type SpotifyTopTracksResponse = {
 
 export async function GET() {
   try {
-    // Get the access token using our token endpoint
-    const tokenResponse = await getToken()
-    const tokenData = await tokenResponse.json()
-
-    if (!tokenData.access_token) {
-      throw new Error("Failed to obtain Spotify access token")
-    }
+    const token = await getSpotifyAccessToken()
 
     // If the user doesn't have top tracks, we'll use a fallback time range
     // Try short_term first (4 weeks), then medium_term (6 months), then long_term (years)
@@ -61,7 +55,7 @@ export async function GET() {
         `https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=${timeRange}`,
         {
           headers: {
-            Authorization: `Bearer ${tokenData.access_token}`,
+            Authorization: `Bearer ${token}`,
           },
           cache: "no-store",
         }
@@ -96,7 +90,7 @@ export async function GET() {
         "https://api.spotify.com/v1/me/player/recently-played?limit=10",
         {
           headers: {
-            Authorization: `Bearer ${tokenData.access_token}`,
+            Authorization: `Bearer ${token}`,
           },
           cache: "no-store",
         }

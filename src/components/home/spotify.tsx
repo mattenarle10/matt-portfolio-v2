@@ -13,7 +13,6 @@ const SpotifyRecentlyPlayed = () => {
   // Initialize local state
   const [localRecentTracks, setLocalRecentTracks] = useState<SpotifyTrack[]>([])
   const [localTopTracks, setLocalTopTracks] = useState<SpotifyTrack[]>([])
-  const [localIsLoading, setLocalIsLoading] = useState(true)
   const [localError, setLocalError] = useState<string | null>(null)
 
   // Initialize from global state if available
@@ -21,7 +20,6 @@ const SpotifyRecentlyPlayed = () => {
     if (globalState.spotifyLoaded) {
       setLocalRecentTracks(globalState.recentTracks)
       setLocalTopTracks(globalState.topTracks)
-      setLocalIsLoading(false)
     }
   }, [
     globalState.spotifyLoaded,
@@ -33,6 +31,7 @@ const SpotifyRecentlyPlayed = () => {
   const {
     recentTracks: apiRecentTracks,
     topTracks: apiTopTracks,
+    isLoading: apiIsLoading,
     error: apiError,
   } = useSpotify()
 
@@ -41,12 +40,10 @@ const SpotifyRecentlyPlayed = () => {
     // Update local state whenever we get new API data
     if (apiRecentTracks.length > 0) {
       setLocalRecentTracks(apiRecentTracks)
-      setLocalIsLoading(false)
     }
 
     if (apiTopTracks.length > 0) {
       setLocalTopTracks(apiTopTracks)
-      setLocalIsLoading(false)
     }
 
     // Save to global state if we have both types of data
@@ -62,7 +59,7 @@ const SpotifyRecentlyPlayed = () => {
   // Use local state for component rendering
   const recentTracks = localRecentTracks
   const topTracks = localTopTracks
-  const isLoading = localIsLoading
+  const isLoading = apiIsLoading && !recentTracks.length && !topTracks.length
   const error = localError
 
   const [activeList, setActiveList] = useState<"recent" | "top">("top")
