@@ -25,7 +25,10 @@ export async function POST(request: Request) {
       durationMs: Date.now() - started,
       providerStatus,
     })
-    return NextResponse.json(body, { status })
+    return NextResponse.json(body, {
+      status,
+      headers: { "Cache-Control": "no-store" },
+    })
   }
 
   let body: unknown

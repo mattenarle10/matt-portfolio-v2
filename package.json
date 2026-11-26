@@ -2,7 +2,7 @@
   "name": "mattenarle-portfolio-v2",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "bun@1.4.0",
+  "packageManager": "bun@1.4.5",
   "scripts": {
     "dev": "bun --bun next dev --turbo",
     "build": "bun --bun next build",
@@ -19,23 +19,23 @@
     "@fortawesome/react-fontawesome": "^3.5.0",
     "@vercel/analytics": "^2.0.1",
     "cmdk": "^1.1.1",
-    "framer-motion": "^13.1.1",
-    "lucide-react": "^1.37.0",
-    "next": "^16.3.3",
-    "openai": "^7.60.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "zod": "^4.5.4"
+    "framer-motion": "^14.14.0",
+    "lucide-react": "^1.81.0",
+    "next": "^16.4.6",
+    "openai": "^7.65.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.11",
-    "@tailwindcss/postcss": "^4.3.3",
-    "@types/bun": "^1.4.0",
-    "@types/node": "^26.4.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
+    "@biomejs/biome": "^2.6.9",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/bun": "^1.4.5",
+    "@types/node": "^26.6.11",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
     "husky": "^9.1.7",
-    "tailwindcss": "^4.3.3",
+    "tailwindcss": "^4.3.5",
     "typescript": "^7.0.2"
   }
 }

@@ -1,6 +1,7 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   trailingSlash: false,
   turbopack: {
     root: process.cwd(),
@@ -71,11 +72,11 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value:
               "default-src 'self'; " +
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.vercel-insights.com https://va.vercel-scripts.com; " +
+              `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://cdn.vercel-insights.com https://va.vercel-scripts.com; ` +
               "style-src 'self' 'unsafe-inline'; " +
               "img-src 'self' data: https: blob:; " +
               "font-src 'self' data:; " +
-              "connect-src 'self' https://api.spotify.com https://*.vercel-insights.com https://vitals.vercel-insights.com; " +
+              "connect-src 'self' https://*.vercel-insights.com https://vitals.vercel-insights.com; " +
               "frame-src 'self' https://open.spotify.com; " +
               "object-src 'none'; " +
               "base-uri 'self'; " +
